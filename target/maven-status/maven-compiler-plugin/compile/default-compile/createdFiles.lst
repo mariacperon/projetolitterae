@@ -1,0 +1,4 @@
+com\cedup\projetolitterae\enums\TipoPerfil.class
+com\cedup\projetolitterae\ProjetolitteraeApplication.class
+com\cedup\projetolitterae\entities\Usuario.class
+com\cedup\projetolitterae\resources\UsuarioResource.class
