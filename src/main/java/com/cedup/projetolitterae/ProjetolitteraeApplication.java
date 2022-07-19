@@ -1,13 +1,42 @@
 package com.cedup.projetolitterae;
 
+import com.cedup.projetolitterae.entities.Usuario;
+import com.cedup.projetolitterae.enums.TipoPerfil;
+import com.cedup.projetolitterae.repositories.UsuarioRepository;
+import com.cedup.projetolitterae.services.UsuarioService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.List;
+
 @SpringBootApplication
-public class ProjetolitteraeApplication {
+public class ProjetolitteraeApplication implements CommandLineRunner {
+
+	@Autowired
+	UsuarioService usuarioService;
+
+	@Autowired
+	UsuarioRepository usuarioRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjetolitteraeApplication.class, args);
+	}
+
+	@Override
+	public void run(String... args) throws Exception {
+
+		Usuario u1 = new Usuario(1, "12345678945", "Maria Clara", "Peron Gonçalves",
+				"edereco", "skjdfa", "13231", TipoPerfil.LEITOR,
+				"mariaclara", "1234");
+		Usuario u2 = new Usuario(1, "65432198745", "Joca Luis", "Peron Gonçalves",
+				"sdfgsd", "fgd", "dfasd", TipoPerfil.LEITOR,
+				"jocaluis", "1234");
+		Usuario u3 = new Usuario(1, "12345678945", "Lucas", "Testoni",
+				"adfasdf", "dfghfgh", "13231", TipoPerfil.ADMIN,
+				"lucastestoni", "1234");
+		usuarioRepository.saveAll(List.of(u1, u2, u3));
 	}
 
 }

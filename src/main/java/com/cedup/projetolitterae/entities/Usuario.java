@@ -1,18 +1,35 @@
 package com.cedup.projetolitterae.entities;
 
 import com.cedup.projetolitterae.enums.TipoPerfil;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
 
+@Entity
 public class Usuario {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(columnDefinition ="varchar(11)")
     private String cpf;
+
+    @Column(columnDefinition ="varchar(20)")
     private String nome;
+    @Column(columnDefinition ="varchar(50)")
     private String sobrenome;
+
     private String endereco;
     private String telefone;
     private String metodoPagto;
-    private TipoPerfil tipoPerfil;
+    private Integer tipoPerfil;
+
+    @Column(columnDefinition ="varchar(25)")
     private String nomeUsuario;
     private String senha;
 
@@ -27,7 +44,7 @@ public class Usuario {
         this.endereco = endereco;
         this.telefone = telefone;
         this.metodoPagto = metodoPagto;
-        this.tipoPerfil = tipoPerfil;
+        this.tipoPerfil = (tipoPerfil == null) ? null : tipoPerfil.getCod();
         this.nomeUsuario = nomeUsuario;
         this.senha = senha;
     }
@@ -89,11 +106,11 @@ public class Usuario {
     }
 
     public TipoPerfil getTipoPerfil() {
-        return tipoPerfil;
+        return TipoPerfil.toEnum(tipoPerfil);
     }
 
     public void setTipoPerfil(TipoPerfil tipoPerfil) {
-        this.tipoPerfil = tipoPerfil;
+        this.tipoPerfil = tipoPerfil.getCod();
     }
 
     public String getNomeUsuario() {
