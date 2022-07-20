@@ -27,13 +27,16 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Usuario u1 = new Usuario(1, "12345678945", "Maria Clara", "Peron Gonçalves",
+		Usuario u1 = new Usuario("12345678945", "Maria Clara", "Peron Gonçalves",
 				"edereco", "skjdfa", "13231", TipoPerfil.LEITOR,
 				"mariaclara", "1234");
-		Usuario u2 = new Usuario(1, "65432198745", "Joca Luis", "Peron Gonçalves",
+		Usuario u2 = new Usuario("65432198745", "Joca Luis", "Peron Gonçalves",
 				"sdfgsd", "fgd", "dfasd", TipoPerfil.LEITOR,
 				"jocaluis", "1234");
-		Usuario u3 = new Usuario(1, "12345678945", "Lucas", "Testoni",
+		Usuario u3 = new Usuario("12345678945", "Lucas", "Testoni",
+				"adfasdf", "dfghfgh", "13231", TipoPerfil.ADMIN,
+				"lucastestoni", "1234");
+		Usuario u4 = new Usuario("12345678945", "Veri", "Berti",
 				"adfasdf", "dfghfgh", "13231", TipoPerfil.ADMIN,
 				"lucastestoni", "1234");
 		usuarioRepository.saveAll(List.of(u1, u2, u3));

@@ -11,12 +11,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/usuario")
 public class UsuarioResource {
 
     @Autowired
     UsuarioService usuarioService;
+
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<List<Usuario>> pesquisarTodos(){
+        List<Usuario> usuarios = usuarioService.pesquisarTodos();
+        return ResponseEntity.ok().body(usuarios);
+    }
+
+    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
+    public ResponseEntity<Usuario> pesquisarPorId(@PathVariable int id){
+        Usuario usuario = usuarioService.pesquisarPorId(id);
+        return ResponseEntity.ok().body(usuario);
+    }
 
     @RequestMapping(value = "/cadastrar",method = RequestMethod.POST)
     public ResponseEntity<Usuario> cadastrar(@Validated @RequestBody Usuario usuario){

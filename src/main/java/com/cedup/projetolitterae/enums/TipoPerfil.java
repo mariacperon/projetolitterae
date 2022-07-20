@@ -2,11 +2,11 @@ package com.cedup.projetolitterae.enums;
 
 public enum TipoPerfil {
 
-    ADMIN(1, "Admin"),
-    LEITOR(2, "Leitor");
+    ADMIN(0, "Admin"),
+    LEITOR(1, "Leitor");
 
-    private int cod;
-    private String descricao;
+    private final int cod;
+    private final String descricao;
 
     TipoPerfil(int cod, String descricao) {
         this.cod = cod;

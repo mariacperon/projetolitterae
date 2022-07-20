@@ -4,6 +4,8 @@ import com.cedup.projetolitterae.enums.TipoPerfil;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,7 +29,9 @@ public class Usuario {
     private String endereco;
     private String telefone;
     private String metodoPagto;
-    private Integer tipoPerfil;
+
+
+    private int tipoPerfil;
 
     @Column(columnDefinition ="varchar(25)")
     private String nomeUsuario;
@@ -36,8 +40,7 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(int id, String cpf, String nome, String sobrenome, String endereco, String telefone, String metodoPagto, TipoPerfil tipoPerfil, String nomeUsuario, String senha) {
-        this.id = id;
+    public Usuario(String cpf, String nome, String sobrenome, String endereco, String telefone, String metodoPagto, TipoPerfil tipoPerfil, String nomeUsuario, String senha) {
         this.cpf = cpf;
         this.nome = nome;
         this.sobrenome = sobrenome;
