@@ -1,6 +1,7 @@
 package com.cedup.projetolitterae.services;
 
 import com.cedup.projetolitterae.entities.Usuario;
+import com.cedup.projetolitterae.repositories.EnderecoRepository;
 import com.cedup.projetolitterae.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,8 @@ public class UsuarioService {
 
     @Autowired
     private UsuarioRepository repository;
+    @Autowired
+    private EnderecoRepository enderecoRepository;
 
     public Usuario pesquisarPorId(Integer id){
         return (repository.findById(id)).get();
@@ -23,12 +26,17 @@ public class UsuarioService {
 
     @Transactional
     public Usuario cadastrarUsuario(Usuario usuario){
-        return repository.save(usuario);
+        usuario.setId(null);
+        Usuario usuarioCadastrado = repository.save(usuario);
+        usuario.getEndereco().setUsuario(usuario);
+        enderecoRepository.save(usuario.getEndereco());
+        return usuarioCadastrado;
     }
 
     public Usuario alterarUsuario(Usuario novoUsuario){
         Usuario oldUsuario = pesquisarPorId(novoUsuario.getId());
         alteraDados(novoUsuario, oldUsuario);
+        enderecoRepository.save(novoUsuario.getEndereco());
         repository.save(oldUsuario);
         return oldUsuario;
     }
