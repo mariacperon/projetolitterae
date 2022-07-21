@@ -35,25 +35,27 @@ public class UsuarioService {
 
     public Usuario alterarUsuario(Usuario novoUsuario){
         Usuario oldUsuario = pesquisarPorId(novoUsuario.getId());
-        alteraDados(novoUsuario, oldUsuario);
+        //alteraDados(novoUsuario, oldUsuario);
+        novoUsuario.getEndereco().setId(oldUsuario.getEndereco().getId());
         enderecoRepository.save(novoUsuario.getEndereco());
-        repository.save(oldUsuario);
-        return oldUsuario;
+        repository.save(novoUsuario);
+        return novoUsuario;
     }
 
     public void excluirUsuario(Integer id){
+        enderecoRepository.deleteById((repository.findById(id).get().getEndereco().getId()));
         repository.deleteById(id);
     }
 
     private void alteraDados(Usuario novoUsuario, Usuario oldUsuario){
-        oldUsuario.setCpf(novoUsuario.getCpf());
-        oldUsuario.setNome(novoUsuario.getNome());
-        oldUsuario.setSobrenome(novoUsuario.getSobrenome());
-        oldUsuario.setEndereco(novoUsuario.getEndereco());
-        oldUsuario.setTelefone(novoUsuario.getTelefone());
-        oldUsuario.setMetodoPagto(novoUsuario.getMetodoPagto());
-        oldUsuario.setTipoPerfil(novoUsuario.getTipoPerfil());
-        oldUsuario.setNomeUsuario(novoUsuario.getNomeUsuario());
-        oldUsuario.setSenha(novoUsuario.getSenha());
+        novoUsuario.setCpf(oldUsuario.getCpf());
+        novoUsuario.setNome(oldUsuario.getNome());
+        novoUsuario.setSobrenome(oldUsuario.getSobrenome());
+        novoUsuario.getEndereco().setId(oldUsuario.getEndereco().getId());
+        novoUsuario.setTelefone(oldUsuario.getTelefone());
+        novoUsuario.setMetodoPagto(oldUsuario.getMetodoPagto());
+        novoUsuario.setTipoPerfil(oldUsuario.getTipoPerfil());
+        novoUsuario.setNomeUsuario(oldUsuario.getNomeUsuario());
+        novoUsuario.setSenha(oldUsuario.getSenha());
     }
 }
