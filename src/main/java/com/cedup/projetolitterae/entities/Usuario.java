@@ -20,6 +20,7 @@ public class Usuario {
 
     @Column(columnDefinition ="varchar(11)")
     private String cpf;
+    private String email;
 
     @Column(columnDefinition ="varchar(20)")
     private String nome;
@@ -30,7 +31,6 @@ public class Usuario {
     private String telefone;
     private String metodoPagto;
 
-
     private int tipoPerfil;
 
     @Column(columnDefinition ="varchar(25)")
@@ -40,8 +40,9 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(String cpf, String nome, String sobrenome, String endereco, String telefone, String metodoPagto, TipoPerfil tipoPerfil, String nomeUsuario, String senha) {
+    public Usuario(String cpf, String email, String nome, String sobrenome, String endereco, String telefone, String metodoPagto, TipoPerfil tipoPerfil, String nomeUsuario, String senha) {
         this.cpf = cpf;
+        this.email = email;
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.endereco = endereco;
@@ -66,6 +67,14 @@ public class Usuario {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getNome() {
