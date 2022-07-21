@@ -1,20 +1,30 @@
 package com.cedup.projetolitterae.entities;
 
 import com.cedup.projetolitterae.enums.TipoPerfil;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(columnDefinition ="varchar(11)")
     private String cpf;
@@ -24,10 +34,14 @@ public class Usuario {
     @Column(columnDefinition ="varchar(50)")
     private String sobrenome;
 
-    private String endereco;
+    @OneToOne
+    @JoinColumn(name = "endereco_id")
+    private Endereco endereco;
+
     private String telefone;
     private String metodoPagto;
-    private Integer tipoPerfil;
+
+    private int tipoPerfil;
 
     @Column(columnDefinition ="varchar(25)")
     private String nomeUsuario;
@@ -36,12 +50,10 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(int id, String cpf, String nome, String sobrenome, String endereco, String telefone, String metodoPagto, TipoPerfil tipoPerfil, String nomeUsuario, String senha) {
-        this.id = id;
+    public Usuario(String cpf, String nome, String sobrenome, String telefone, String metodoPagto, TipoPerfil tipoPerfil, String nomeUsuario, String senha) {
         this.cpf = cpf;
         this.nome = nome;
         this.sobrenome = sobrenome;
-        this.endereco = endereco;
         this.telefone = telefone;
         this.metodoPagto = metodoPagto;
         this.tipoPerfil = (tipoPerfil == null) ? null : tipoPerfil.getCod();
@@ -49,11 +61,11 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -81,11 +93,11 @@ public class Usuario {
         this.sobrenome = sobrenome;
     }
 
-    public String getEndereco() {
+    public Endereco getEndereco() {
         return endereco;
     }
 
-    public void setEndereco(String endereco) {
+    public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
 
