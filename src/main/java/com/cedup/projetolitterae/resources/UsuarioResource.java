@@ -20,7 +20,7 @@ public class UsuarioResource {
     @Autowired
     UsuarioService usuarioService;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ResponseEntity<List<Usuario>> pesquisarTodos(){
         List<Usuario> usuarios = usuarioService.pesquisarTodos();
         return ResponseEntity.ok().body(usuarios);
@@ -44,7 +44,7 @@ public class UsuarioResource {
         return ResponseEntity.ok().body(usuarioAlterado);
     }
 
-    @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
+    @RequestMapping(value = "/excluir/{id}",method = RequestMethod.DELETE)
     public ResponseEntity<Void> excluir(@PathVariable Integer id){
         usuarioService.excluirUsuario(id);
         return ResponseEntity.noContent().build();

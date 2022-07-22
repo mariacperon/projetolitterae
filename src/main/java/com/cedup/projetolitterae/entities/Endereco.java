@@ -2,6 +2,7 @@ package com.cedup.projetolitterae.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.net.ssl.SSLSessionBindingListener;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,7 +18,8 @@ public class Endereco {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
+
     private String cep;
     private String estado;
     private String cidade;
@@ -25,10 +27,6 @@ public class Endereco {
     private String rua;
     private String numero;
     private String complemento;
-
-    @JsonIgnore
-    @OneToOne(mappedBy = "endereco", cascade = CascadeType.ALL)
-    private Usuario usuario;
 
     public Endereco() {
     }
@@ -43,11 +41,11 @@ public class Endereco {
         this.complemento = complemento;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -107,11 +105,4 @@ public class Endereco {
         this.complemento = complemento;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
 }

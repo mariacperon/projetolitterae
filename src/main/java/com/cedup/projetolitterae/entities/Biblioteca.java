@@ -1,22 +1,19 @@
 package com.cedup.projetolitterae.entities;
 
 import com.cedup.projetolitterae.enums.TipoPerfil;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerator;
+import com.fasterxml.jackson.annotation.JsonView;
+import org.springframework.boot.autoconfigure.web.servlet.WebMvcProperties;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import java.io.Serializable;
@@ -24,50 +21,49 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Usuario implements Serializable{
+public class Biblioteca implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(columnDefinition ="varchar(11)")
-    private String cpf;
+    @Column(columnDefinition ="varchar(16)")
+    private String cnpj;
 
-    @Column(columnDefinition ="varchar(20)")
     private String nome;
-    @Column(columnDefinition ="varchar(50)")
-    private String sobrenome;
+    private String email;
+    private String contaBancaria;
 
     @OneToOne
-    @JoinColumn(name = "enderecoUsuario_id")
-    private Endereco enderecoUsuario;
+    @JoinColumn(name = "endereco_id")
+    private Endereco enderecoBiblioteca;
 
     private String telefone;
-    private String metodoPagto;
 
-    private int tipoPerfil;
+    private String livro;
+
+    @OneToMany(mappedBy = "biblioteca", cascade = CascadeType.ALL)
+    private List<Usuario> usuarios = new ArrayList<>();
+
+    private Integer tipoPerfil;
 
     @Column(columnDefinition ="varchar(25)")
     private String nomeUsuario;
     private String senha;
 
-    @ManyToOne
-    @JoinColumn(name = "idbiblioteca")
-    private Biblioteca biblioteca;
-
-    public Usuario() {
+    public Biblioteca() {
     }
 
-    public Usuario(String cpf, String nome, String sobrenome, String telefone, String metodoPagto, TipoPerfil tipoPerfil, String nomeUsuario, String senha, Biblioteca biblioteca) {
-        this.cpf = cpf;
+    public Biblioteca(String cnpj, String nome, String email, String contaBancaria, String telefone, String livro, TipoPerfil tipoPerfil, String nomeUsuario, String senha) {
+        this.cnpj = cnpj;
         this.nome = nome;
-        this.sobrenome = sobrenome;
+        this.email = email;
+        this.contaBancaria = contaBancaria;
         this.telefone = telefone;
-        this.metodoPagto = metodoPagto;
+        this.livro = livro;
         this.tipoPerfil = (tipoPerfil == null) ? null : tipoPerfil.getCod();
         this.nomeUsuario = nomeUsuario;
         this.senha = senha;
-        this.biblioteca = biblioteca;
     }
 
     public Integer getId() {
@@ -78,12 +74,12 @@ public class Usuario implements Serializable{
         this.id = id;
     }
 
-    public String getCpf() {
-        return cpf;
+    public String getCnpj() {
+        return cnpj;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
     }
 
     public String getNome() {
@@ -94,20 +90,28 @@ public class Usuario implements Serializable{
         this.nome = nome;
     }
 
-    public String getSobrenome() {
-        return sobrenome;
+    public String getEmail() {
+        return email;
     }
 
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public Endereco getEnderecoUsuario() {
-        return enderecoUsuario;
+    public String getContaBancaria() {
+        return contaBancaria;
     }
 
-    public void setEnderecoUsuario(Endereco enderecoUsuario) {
-        this.enderecoUsuario = enderecoUsuario;
+    public void setContaBancaria(String contaBancaria) {
+        this.contaBancaria = contaBancaria;
+    }
+
+    public Endereco getEnderecoBiblioteca() {
+        return enderecoBiblioteca;
+    }
+
+    public void setEnderecoBiblioteca(Endereco enderecoBiblioteca) {
+        this.enderecoBiblioteca = enderecoBiblioteca;
     }
 
     public String getTelefone() {
@@ -118,12 +122,12 @@ public class Usuario implements Serializable{
         this.telefone = telefone;
     }
 
-    public String getMetodoPagto() {
-        return metodoPagto;
+    public String getLivros() {
+        return livro;
     }
 
-    public void setMetodoPagto(String metodoPagto) {
-        this.metodoPagto = metodoPagto;
+    public void setLivros(String livro) {
+        this.livro = livro;
     }
 
     public TipoPerfil getTipoPerfil() {
@@ -148,13 +152,5 @@ public class Usuario implements Serializable{
 
     public void setSenha(String senha) {
         this.senha = senha;
-    }
-
-    public Biblioteca getBiblioteca() {
-        return biblioteca;
-    }
-
-    public void setBiblioteca(Biblioteca biblioteca) {
-        this.biblioteca = biblioteca;
     }
 }

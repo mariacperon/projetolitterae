@@ -24,38 +24,28 @@ public class UsuarioService {
         return repository.findAll() ;
     }
 
+    public List<Usuario> pesquisarUsuariosBiblioteca(Integer id){
+        return repository.findUsuarioByBibliotecaId(id);
+    }
+
     @Transactional
     public Usuario cadastrarUsuario(Usuario usuario){
         usuario.setId(null);
-        Usuario usuarioCadastrado = repository.save(usuario);
-        usuario.getEndereco().setUsuario(usuario);
-        enderecoRepository.save(usuario.getEndereco());
-        return usuarioCadastrado;
+        enderecoRepository.save(usuario.getEnderecoUsuario());
+        return repository.save(usuario);
     }
 
     public Usuario alterarUsuario(Usuario novoUsuario){
         Usuario oldUsuario = pesquisarPorId(novoUsuario.getId());
-        //alteraDados(novoUsuario, oldUsuario);
-        novoUsuario.getEndereco().setId(oldUsuario.getEndereco().getId());
-        enderecoRepository.save(novoUsuario.getEndereco());
+        novoUsuario.getEnderecoUsuario().setId(oldUsuario.getEnderecoUsuario().getId());
+        enderecoRepository.save(novoUsuario.getEnderecoUsuario());
         repository.save(novoUsuario);
         return novoUsuario;
     }
 
     public void excluirUsuario(Integer id){
-        enderecoRepository.deleteById((repository.findById(id).get().getEndereco().getId()));
+        Integer idEndereco = repository.findById(id).get().getEnderecoUsuario().getId();
         repository.deleteById(id);
-    }
-
-    private void alteraDados(Usuario novoUsuario, Usuario oldUsuario){
-        novoUsuario.setCpf(oldUsuario.getCpf());
-        novoUsuario.setNome(oldUsuario.getNome());
-        novoUsuario.setSobrenome(oldUsuario.getSobrenome());
-        novoUsuario.getEndereco().setId(oldUsuario.getEndereco().getId());
-        novoUsuario.setTelefone(oldUsuario.getTelefone());
-        novoUsuario.setMetodoPagto(oldUsuario.getMetodoPagto());
-        novoUsuario.setTipoPerfil(oldUsuario.getTipoPerfil());
-        novoUsuario.setNomeUsuario(oldUsuario.getNomeUsuario());
-        novoUsuario.setSenha(oldUsuario.getSenha());
+        enderecoRepository.deleteById(idEndereco);
     }
 }
