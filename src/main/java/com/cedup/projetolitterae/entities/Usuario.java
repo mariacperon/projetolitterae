@@ -52,7 +52,7 @@ public class Usuario implements Serializable{
     private String senha;
 
     @ManyToOne
-    @JoinColumn(name = "idbiblioteca")
+    @JoinColumn(name = "id_biblioteca")
     private Biblioteca biblioteca;
 
     public Usuario() {
