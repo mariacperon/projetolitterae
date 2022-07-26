@@ -2,10 +2,13 @@ package com.cedup.projetolitterae;
 
 import com.cedup.projetolitterae.entities.Biblioteca;
 import com.cedup.projetolitterae.entities.Endereco;
+import com.cedup.projetolitterae.entities.Livro;
 import com.cedup.projetolitterae.entities.Usuario;
+import com.cedup.projetolitterae.enums.GeneroLivro;
 import com.cedup.projetolitterae.enums.TipoPerfil;
 import com.cedup.projetolitterae.repositories.BibliotecaRepository;
 import com.cedup.projetolitterae.repositories.EnderecoRepository;
+import com.cedup.projetolitterae.repositories.LivroRepository;
 import com.cedup.projetolitterae.repositories.UsuarioRepository;
 import com.cedup.projetolitterae.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +29,8 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 	EnderecoRepository enderecoRepository;
 	@Autowired
 	BibliotecaRepository bibliotecaRepository;
+	@Autowired
+	LivroRepository livroRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjetolitteraeApplication.class, args);
@@ -56,20 +61,45 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 				"87", "perto da casa do caralho");
 
 		Biblioteca b1 = new Biblioteca("554", "Cheiro de livro", "asdfad@", "8521",
-				"45987412365", "ghdfg", TipoPerfil.ADMIN, "livrosCheiro", "1234");
+				"45987412365",  TipoPerfil.ADMIN, "livrosCheiro", "1234");
 		b1.setEnderecoBiblioteca(e1);
 		Biblioteca b2 = new Biblioteca("645657", "Saraiva", "sad@", "321321",
-				"852221", "jhbjh", TipoPerfil.ADMIN, "livros3", "1234");
+				"852221", TipoPerfil.ADMIN, "livros3", "1234");
 		b2.setEnderecoBiblioteca(e2);
 		Biblioteca b3 = new Biblioteca("789", "Catarinense", "fghdfgh@", "7889",
-				"5546", "sfg", TipoPerfil.ADMIN, "livro5", "1234");
+				"5546", TipoPerfil.ADMIN, "livro5", "1234");
 		b3.setEnderecoBiblioteca(e3);
 		Biblioteca b4 = new Biblioteca("678", "BluLivros", "AaE@", "654",
-				"5154", "jhsdgsdfbjh", TipoPerfil.ADMIN, "livrso2", "1234");
+				"5154", TipoPerfil.ADMIN, "livrso2", "1234");
 		b4.setEnderecoBiblioteca(e4);
 		Biblioteca b5 = new Biblioteca("5645", "BookCenter", "hryty@", " 7858",
-				"548454", "sdf", TipoPerfil.ADMIN, "cheiro", "1234");
+				"548454", TipoPerfil.ADMIN, "cheiro", "1234");
 		b5.setEnderecoBiblioteca(e5);
+
+		Livro l1 = new Livro("Rainha Vermelha", "Victoria Aveyard", "ansdjbf",
+				"portugues", 3, "asdfasdfa");
+		l1.setBiblioteca(b1);
+		l1.setGeneros(List.of(GeneroLivro.FICCAO, GeneroLivro.AVENTURA));
+		Livro l2 = new Livro("Espada de Vidro", "Victoria Aveyard", "ansdjbf",
+				"portugues", 2, "asdfasdfa");
+		l2.setGeneros(List.of(GeneroLivro.FICCAO, GeneroLivro.AVENTURA));
+		l2.setBiblioteca(b1);
+		Livro l3 = new Livro("A Sombra do Vento", "aquele cara la", "ansdjbf",
+				"portugues", 4, "asdfasdfa");
+		l3.setBiblioteca(b2);
+		l3.setGeneros(List.of(GeneroLivro.DRAMA, GeneroLivro.FICCAO));
+		Livro l4 = new Livro("Jogos Vorazes", "Suzzane Collins", "ansdjbf",
+				"portugues", 5, "asdfasdfa");
+		l4.setBiblioteca(b3);
+		l4.setGeneros(List.of(GeneroLivro.FICCAO, GeneroLivro.AVENTURA));
+		Livro l5 = new Livro("Os Sete Maridos de Evelyn Hugo", "Taylor Jenkins Reid", "ansdjbf",
+				"portugues", 3, "asdfasdfa");
+		l5.setBiblioteca(b4);
+		l5.setGeneros(List.of(GeneroLivro.ROMANCE));
+		Livro l6 = new Livro("Daisy Jones & The Six", "Taylor Jenkins Reid", "ansdjbf",
+				"portugues", 1, "asdfasdfa");
+		l6.setBiblioteca(b5);
+		l6.setGeneros(List.of(GeneroLivro.DRAMA, GeneroLivro.ROMANCE));
 
 		Usuario u1 = new Usuario("12345678945", "Maria Clara", "Peron Gonçalves",
 				"skjdfa", "13231", TipoPerfil.LEITOR,
@@ -90,6 +120,7 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 
 		enderecoRepository.saveAll(List.of(e1, e2, e3, e4, e5, e6, e7, e8, e9, e10));
 		bibliotecaRepository.saveAll(List.of(b1, b2, b3, b4, b5));
+		livroRepository.saveAll(List.of(l1, l2, l3, l4, l5, l6));
 		usuarioRepository.saveAll(List.of(u1, u2, u3, u4));
 
 	}

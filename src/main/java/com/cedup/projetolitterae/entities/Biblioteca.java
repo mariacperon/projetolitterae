@@ -40,7 +40,8 @@ public class Biblioteca implements Serializable {
 
     private String telefone;
 
-    private String livro;
+    @OneToMany(mappedBy = "biblioteca", cascade = CascadeType.ALL)
+    private List<Livro> livros = new ArrayList<>();
 
     @OneToMany(mappedBy = "biblioteca", cascade = CascadeType.ALL)
     private List<Usuario> usuarios = new ArrayList<>();
@@ -54,13 +55,12 @@ public class Biblioteca implements Serializable {
     public Biblioteca() {
     }
 
-    public Biblioteca(String cnpj, String nome, String email, String contaBancaria, String telefone, String livro, TipoPerfil tipoPerfil, String nomeUsuario, String senha) {
+    public Biblioteca(String cnpj, String nome, String email, String contaBancaria, String telefone, TipoPerfil tipoPerfil, String nomeUsuario, String senha) {
         this.cnpj = cnpj;
         this.nome = nome;
         this.email = email;
         this.contaBancaria = contaBancaria;
         this.telefone = telefone;
-        this.livro = livro;
         this.tipoPerfil = (tipoPerfil == null) ? null : tipoPerfil.getCod();
         this.nomeUsuario = nomeUsuario;
         this.senha = senha;
@@ -120,14 +120,6 @@ public class Biblioteca implements Serializable {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
-    }
-
-    public String getLivros() {
-        return livro;
-    }
-
-    public void setLivros(String livro) {
-        this.livro = livro;
     }
 
     public TipoPerfil getTipoPerfil() {
