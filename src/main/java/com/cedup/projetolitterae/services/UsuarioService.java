@@ -24,10 +24,6 @@ public class UsuarioService {
         return repository.findAll() ;
     }
 
-    public List<Usuario> pesquisarUsuariosBiblioteca(Integer id){
-        return repository.findUsuarioByBibliotecaId(id);
-    }
-
     @Transactional
     public Usuario cadastrarUsuario(Usuario usuario){
         usuario.setId(null);

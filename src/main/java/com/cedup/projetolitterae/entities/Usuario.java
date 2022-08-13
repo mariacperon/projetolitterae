@@ -51,14 +51,10 @@ public class Usuario implements Serializable{
     private String nomeUsuario;
     private String senha;
 
-    @ManyToOne
-    @JoinColumn(name = "id_biblioteca")
-    private Biblioteca biblioteca;
-
     public Usuario() {
     }
 
-    public Usuario(String cpf, String nome, String sobrenome, String telefone, String metodoPagto, TipoPerfil tipoPerfil, String nomeUsuario, String senha, Biblioteca biblioteca) {
+    public Usuario(String cpf, String nome, String sobrenome, String telefone, String metodoPagto, TipoPerfil tipoPerfil, String nomeUsuario, String senha) {
         this.cpf = cpf;
         this.nome = nome;
         this.sobrenome = sobrenome;
@@ -67,7 +63,6 @@ public class Usuario implements Serializable{
         this.tipoPerfil = (tipoPerfil == null) ? null : tipoPerfil.getCod();
         this.nomeUsuario = nomeUsuario;
         this.senha = senha;
-        this.biblioteca = biblioteca;
     }
 
     public Integer getId() {
@@ -150,11 +145,4 @@ public class Usuario implements Serializable{
         this.senha = senha;
     }
 
-    public Biblioteca getBiblioteca() {
-        return biblioteca;
-    }
-
-    public void setBiblioteca(Biblioteca biblioteca) {
-        this.biblioteca = biblioteca;
-    }
 }

@@ -34,18 +34,6 @@ public class BibliotecaResource {
         return ResponseEntity.ok().body(biblioteca);
     }
 
-    @RequestMapping(value = "/usuarios/{id}", method = RequestMethod.GET)
-    public ResponseEntity<List<Usuario>> pesquisarUsuarios(@PathVariable int id){
-        List<Usuario> usuarios = bibliotecaService.pesquisarUsuarios(id);
-        return ResponseEntity.ok().body(usuarios);
-    }
-
-    @RequestMapping(value = "/livros/{id}", method = RequestMethod.GET)
-    public ResponseEntity<List<Livro>> pesquisarLivros(@PathVariable int id){
-        List<Livro> livros = bibliotecaService.pesquisarLivros(id);
-        return ResponseEntity.ok().body(livros);
-    }
-
     @RequestMapping(value = "/cadastrar",method = RequestMethod.POST)
     public ResponseEntity<Biblioteca> cadastrar(@Validated @RequestBody Biblioteca biblioteca){
         Biblioteca bibliotecaCadastrado = bibliotecaService.cadastrarBiblioteca(biblioteca);

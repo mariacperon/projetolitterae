@@ -26,6 +26,12 @@ public class LivroResource {
         return ResponseEntity.ok().body(livro);
     }
 
+    @RequestMapping(value = "/{id}/livros", method = RequestMethod.GET)
+    public ResponseEntity<List<Livro>> pesquisarLivros(@PathVariable int id){
+        List<Livro> livros = livroService.pesquisarLivrosBiblioteca(id);
+        return ResponseEntity.ok().body(livros);
+    }
+
     @RequestMapping(value = "/cadastrar",method = RequestMethod.POST)
     public ResponseEntity<Livro> cadastrar(@Validated @RequestBody Livro livro){
         Livro livroCadastrado = livroService.cadastrarLivro(livro);
