@@ -25,6 +25,7 @@ public class LivroUsuarioService {
     public LivroUsuario alterarLocacao(LivroUsuario novoLivroUsuario){
         LivroUsuario oldLivroUsuario = pesquisarPorId(novoLivroUsuario.getId());
         repository.save(oldLivroUsuario);
+
         return oldLivroUsuario;
     }
 
