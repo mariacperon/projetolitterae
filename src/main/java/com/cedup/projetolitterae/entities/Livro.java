@@ -1,6 +1,7 @@
 package com.cedup.projetolitterae.entities;
 
 import com.cedup.projetolitterae.enums.GeneroLivro;
+import com.cedup.projetolitterae.enums.TipoPerfil;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -22,12 +23,15 @@ public class Livro {
     private Integer id;
 
     private String nome;
-    private String autor;
+
+    @ManyToOne
+    @JoinColumn(name = "id_autor")
+    private Autor autor;
 
     @ElementCollection
-    @CollectionTable(name = "genero")
+    @CollectionTable(name = "livro_genero")
     @Column(name = "genero")
-    private List<GeneroLivro> generos = new ArrayList<>();
+    private List<Integer> generos = new ArrayList<>();
 
     private String resumo;
     private String idioma;
@@ -41,9 +45,8 @@ public class Livro {
     public Livro() {
     }
 
-    public Livro(String nome, String autor, String resumo, String idioma, int quantidadeEstoque, String resenhas) {
+    public Livro(String nome, String resumo, String idioma, int quantidadeEstoque, String resenhas) {
         this.nome = nome;
-        this.autor = autor;
         this.resumo = resumo;
         this.idioma = idioma;
         this.quantidadeEstoque = quantidadeEstoque;
@@ -66,20 +69,24 @@ public class Livro {
         this.nome = nome;
     }
 
-    public String getAutor() {
+    public Autor getAutor() {
         return autor;
     }
 
-    public void setAutor(String autor) {
+    public void setAutor(Autor autor) {
         this.autor = autor;
     }
 
-    public List<GeneroLivro> getGeneros() {
+    public List<Integer> getGeneros() {
         return generos;
     }
 
     public void setGeneros(List<GeneroLivro> generos) {
-        this.generos = generos;
+        List<Integer> codGeneros = new ArrayList<>();
+        for(GeneroLivro g : generos) {
+            codGeneros.add(g.getCod());
+        }
+        this.generos = codGeneros;
     }
 
     public String getResumo() {

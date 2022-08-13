@@ -2,6 +2,7 @@ package com.cedup.projetolitterae.services;
 
 import com.cedup.projetolitterae.entities.Livro;
 import com.cedup.projetolitterae.entities.Usuario;
+import com.cedup.projetolitterae.repositories.AutorRepository;
 import com.cedup.projetolitterae.repositories.EnderecoRepository;
 import com.cedup.projetolitterae.repositories.LivroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,8 @@ public class LivroService {
 
     @Autowired
     private LivroRepository repository;
+    @Autowired
+    private AutorRepository autorRepository;
 
     public Livro pesquisarPorId(Integer id){
         return (repository.findById(id)).get();

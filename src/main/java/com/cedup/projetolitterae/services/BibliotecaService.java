@@ -1,19 +1,13 @@
 package com.cedup.projetolitterae.services;
 
 import com.cedup.projetolitterae.entities.Biblioteca;
-import com.cedup.projetolitterae.entities.Endereco;
-import com.cedup.projetolitterae.entities.Livro;
-import com.cedup.projetolitterae.entities.Usuario;
-import com.cedup.projetolitterae.repositories.EnderecoRepository;
 import com.cedup.projetolitterae.repositories.BibliotecaRepository;
-import com.cedup.projetolitterae.repositories.UsuarioRepository;
+import com.cedup.projetolitterae.repositories.EnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 @Service
 public class BibliotecaService {
@@ -22,23 +16,9 @@ public class BibliotecaService {
     private BibliotecaRepository repository;
     @Autowired
     private EnderecoRepository enderecoRepository;
-    @Autowired
-    private UsuarioRepository usuarioRepository;
-    @Autowired
-    private UsuarioService usuarioService;
-    @Autowired
-    private LivroService livroService;
 
     public Biblioteca pesquisarPorId(Integer id){
         return (repository.findById(id)).get();
-    }
-
-    public List<Usuario> pesquisarUsuarios(Integer id){
-        return usuarioService.pesquisarUsuariosBiblioteca(id);
-    }
-
-    public List<Livro> pesquisarLivros(Integer id){
-        return livroService.pesquisarLivrosBiblioteca(id);
     }
 
     public List<Biblioteca> pesquisarTodas() {
@@ -64,8 +44,6 @@ public class BibliotecaService {
 
     public void excluirBiblioteca(Integer id){
         Integer idEndereco = repository.findById(id).get().getEnderecoBiblioteca().getId();
-        List<Usuario> usuarios = usuarioService.pesquisarUsuariosBiblioteca(id);
-        usuarioRepository.deleteAll(usuarios);
         repository.deleteById(id);
         enderecoRepository.deleteById(idEndereco);
     }

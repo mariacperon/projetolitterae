@@ -27,22 +27,11 @@ public class EnderecoService {
 
     public Endereco alterarEndereco(Endereco novoEndereco){
         Endereco oldEndereco = pesquisarPorId(novoEndereco.getId());
-        alteraDados(novoEndereco, oldEndereco);
         repository.save(oldEndereco);
         return oldEndereco;
     }
 
     public void excluirEndereco(Integer id){
         repository.deleteById(id);
-    }
-
-    private void alteraDados(Endereco novoEndereco, Endereco oldEndereco){
-        oldEndereco.setCep(novoEndereco.getCep());
-        oldEndereco.setEstado(novoEndereco.getEstado());
-        oldEndereco.setCidade(novoEndereco.getCidade());
-        oldEndereco.setBairro(novoEndereco.getBairro());
-        oldEndereco.setRua(novoEndereco.getRua());
-        oldEndereco.setNumero(novoEndereco.getNumero());
-        oldEndereco.setComplemento(novoEndereco.getComplemento());
     }
 }

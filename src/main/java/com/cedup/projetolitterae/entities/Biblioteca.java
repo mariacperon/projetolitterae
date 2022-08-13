@@ -43,9 +43,6 @@ public class Biblioteca implements Serializable {
     @OneToMany(mappedBy = "biblioteca", cascade = CascadeType.ALL)
     private List<Livro> livros = new ArrayList<>();
 
-    @OneToMany(mappedBy = "biblioteca", cascade = CascadeType.ALL)
-    private List<Usuario> usuarios = new ArrayList<>();
-
     private Integer tipoPerfil;
 
     @Column(columnDefinition ="varchar(25)")
