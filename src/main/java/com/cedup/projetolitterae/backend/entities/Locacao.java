@@ -1,6 +1,7 @@
 package com.cedup.projetolitterae.backend.entities;
 
 import com.cedup.projetolitterae.backend.enums.StatusLocacao;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,10 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
-public class LivroUsuario {
+public class Locacao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,23 +21,26 @@ public class LivroUsuario {
 
     @ManyToOne
     @JoinColumn(name = "id_livro")
-    private Livro livro;
+    private LivroBiblioteca livro;
 
     @ManyToOne
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
-    private Date dataLocacao;
-    private Date dataDevolucao;
-    private Date dataDevolvida;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate dataLocacao;
+
+    private LocalDate dataDevolucao;
+    private LocalDate dataDevolvida;
 
     private Integer statusLocacao;
 
-    public LivroUsuario() {
+    public Locacao() {
     }
 
-    public LivroUsuario(Date dataLocacao, StatusLocacao statusLocacao) {
+    public Locacao(LocalDate dataLocacao, LocalDate dataDevolucao, StatusLocacao statusLocacao) {
         this.dataLocacao = dataLocacao;
+        this.dataDevolucao = dataDevolucao;
         this.statusLocacao = (statusLocacao == null) ? null : statusLocacao.getCod();
     }
 
@@ -47,11 +52,11 @@ public class LivroUsuario {
         this.id = id;
     }
 
-    public Livro getLivro() {
+    public LivroBiblioteca getLivro() {
         return livro;
     }
 
-    public void setLivro(Livro livro) {
+    public void setLivro(LivroBiblioteca livro) {
         this.livro = livro;
     }
 
@@ -63,27 +68,27 @@ public class LivroUsuario {
         this.usuario = usuario;
     }
 
-    public Date getDataLocacao() {
+    public LocalDate getDataLocacao() {
         return dataLocacao;
     }
 
-    public void setDataLocacao(Date dataLocacao) {
+    public void setDataLocacao(LocalDate dataLocacao) {
         this.dataLocacao = dataLocacao;
     }
 
-    public Date getDataDevolucao() {
+    public LocalDate getDataDevolucao() {
         return dataDevolucao;
     }
 
-    public void setDataDevolucao(Date dataDevolucao) {
+    public void setDataDevolucao(LocalDate dataDevolucao) {
         this.dataDevolucao = dataDevolucao;
     }
 
-    public Date getDataDevolvida() {
+    public LocalDate getDataDevolvida() {
         return dataDevolvida;
     }
 
-    public void setDataDevolvida(Date dataDevolvida) {
+    public void setDataDevolvida(LocalDate dataDevolvida) {
         this.dataDevolvida = dataDevolvida;
     }
 

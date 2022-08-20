@@ -25,10 +25,6 @@ public class LivroService {
         return repository.findAll() ;
     }
 
-    public List<Livro> pesquisarLivrosBiblioteca(Integer id){
-        return repository.findLivroByBibliotecaId(id);
-    }
-
     @Transactional
     public Livro cadastrarLivro(Livro livro){
         livro.setId(null);

@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import java.io.Serializable;
 
@@ -30,6 +31,10 @@ public class Usuario implements Serializable{
     @JoinColumn(name = "enderecoUsuario_id")
     private Endereco enderecoUsuario;
 
+    @ManyToOne
+    @JoinColumn(name = "bibliotecaUsuario_id")
+    private Biblioteca biliotecaUsuario;
+
     private String telefone;
     private String metodoPagto;
 
@@ -39,10 +44,12 @@ public class Usuario implements Serializable{
     private String nomeUsuario;
     private String senha;
 
+    private boolean ativo;
+
     public Usuario() {
     }
 
-    public Usuario(String cpf, String nome, String sobrenome, String telefone, String metodoPagto, TipoPerfil tipoPerfil, String nomeUsuario, String senha) {
+    public Usuario(String cpf, String nome, String sobrenome, String telefone, String metodoPagto, TipoPerfil tipoPerfil, String nomeUsuario, String senha, boolean ativo) {
         this.cpf = cpf;
         this.nome = nome;
         this.sobrenome = sobrenome;
@@ -51,6 +58,7 @@ public class Usuario implements Serializable{
         this.tipoPerfil = (tipoPerfil == null) ? null : tipoPerfil.getCod();
         this.nomeUsuario = nomeUsuario;
         this.senha = senha;
+        this.ativo = ativo;
     }
 
     public Integer getId() {
@@ -133,4 +141,19 @@ public class Usuario implements Serializable{
         this.senha = senha;
     }
 
+    public Biblioteca getBiliotecaUsuario() {
+        return biliotecaUsuario;
+    }
+
+    public void setBiliotecaUsuario(Biblioteca biliotecaUsuario) {
+        this.biliotecaUsuario = biliotecaUsuario;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
 }

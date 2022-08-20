@@ -26,9 +26,9 @@ public class LivroResource {
         return ResponseEntity.ok().body(livro);
     }
 
-    @RequestMapping(value = "/{id}/livros", method = RequestMethod.GET)
-    public ResponseEntity<List<Livro>> pesquisarLivros(@PathVariable int id){
-        List<Livro> livros = livroService.pesquisarLivrosBiblioteca(id);
+    @RequestMapping(value = "/all",method = RequestMethod.GET)
+    public ResponseEntity<List<Livro>> pesquisarTodos(){
+        List<Livro> livros = livroService.pesquisarTodos();
         return ResponseEntity.ok().body(livros);
     }
 

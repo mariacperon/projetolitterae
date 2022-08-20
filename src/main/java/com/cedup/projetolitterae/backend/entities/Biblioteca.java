@@ -35,19 +35,18 @@ public class Biblioteca implements Serializable {
 
     private String telefone;
 
-    @OneToMany(mappedBy = "biblioteca", cascade = CascadeType.ALL)
-    private List<Livro> livros = new ArrayList<>();
-
     private Integer tipoPerfil;
 
     @Column(columnDefinition ="varchar(25)")
     private String nomeUsuario;
     private String senha;
 
+    private boolean ativo;
+
     public Biblioteca() {
     }
 
-    public Biblioteca(String cnpj, String nome, String email, String contaBancaria, String telefone, TipoPerfil tipoPerfil, String nomeUsuario, String senha) {
+    public Biblioteca(String cnpj, String nome, String email, String contaBancaria, String telefone, TipoPerfil tipoPerfil, String nomeUsuario, String senha, boolean ativo) {
         this.cnpj = cnpj;
         this.nome = nome;
         this.email = email;
@@ -56,6 +55,7 @@ public class Biblioteca implements Serializable {
         this.tipoPerfil = (tipoPerfil == null) ? null : tipoPerfil.getCod();
         this.nomeUsuario = nomeUsuario;
         this.senha = senha;
+        this.ativo = ativo;
     }
 
     public Integer getId() {
@@ -136,5 +136,13 @@ public class Biblioteca implements Serializable {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 }

@@ -34,21 +34,15 @@ public class Livro {
 
     private String resumo;
     private String idioma;
-    private int quantidadeEstoque;
     private String resenhas;
-
-    @ManyToOne
-    @JoinColumn(name = "id_biblioteca")
-    private Biblioteca biblioteca;
 
     public Livro() {
     }
 
-    public Livro(String nome, String resumo, String idioma, int quantidadeEstoque, String resenhas) {
+    public Livro(String nome, String resumo, String idioma, String resenhas) {
         this.nome = nome;
         this.resumo = resumo;
         this.idioma = idioma;
-        this.quantidadeEstoque = quantidadeEstoque;
         this.resenhas = resenhas;
     }
 
@@ -104,27 +98,11 @@ public class Livro {
         this.idioma = idioma;
     }
 
-    public int getQuantidadeEstoque() {
-        return quantidadeEstoque;
-    }
-
-    public void setQuantidadeEstoque(int quantidadeEstoque) {
-        this.quantidadeEstoque = quantidadeEstoque;
-    }
-
     public String getResenhas() {
         return resenhas;
     }
 
     public void setResenhas(String resenhas) {
         this.resenhas = resenhas;
-    }
-
-    public Biblioteca getBiblioteca() {
-        return biblioteca;
-    }
-
-    public void setBiblioteca(Biblioteca biblioteca) {
-        this.biblioteca = biblioteca;
     }
 }

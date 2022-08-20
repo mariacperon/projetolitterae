@@ -32,6 +32,12 @@ public class UsuarioResource {
         return ResponseEntity.ok().body(usuario);
     }
 
+    @RequestMapping(value = "/biblioteca/{id}",method = RequestMethod.GET)
+    public ResponseEntity<List<Usuario>> pesquisarUsuarioPorBiblioteca(@PathVariable int id){
+        List<Usuario> usuarios = usuarioService.pesquisarUsuariosPorBiblioteca(id);
+        return ResponseEntity.ok().body(usuarios);
+    }
+
     @RequestMapping(value = "/cadastrar",method = RequestMethod.POST)
     public ResponseEntity<Usuario> cadastrar(@Validated @RequestBody Usuario usuario){
         Usuario usuarioCadastrado = usuarioService.cadastrarUsuario(usuario);
