@@ -35,29 +35,23 @@ public class Usuario implements Serializable{
     @JoinColumn(name = "id_biblioteca")
     private Biblioteca biblioteca;
 
-    private String telefone;
-    private String metodoPagto;
+    private String telefone1;
+    private String telefone2;
 
     private int tipoPerfil;
-
-    @Column(columnDefinition ="varchar(25)")
-    private String nomeUsuario;
-    private String senha;
 
     private boolean ativo;
 
     public Usuario() {
     }
 
-    public Usuario(String cpf, String nome, String sobrenome, String telefone, String metodoPagto, TipoPerfil tipoPerfil, String nomeUsuario, String senha, boolean ativo) {
+    public Usuario(String cpf, String nome, String sobrenome, String telefone1, String telefone2, TipoPerfil tipoPerfil, boolean ativo) {
         this.cpf = cpf;
         this.nome = nome;
         this.sobrenome = sobrenome;
-        this.telefone = telefone;
-        this.metodoPagto = metodoPagto;
+        this.telefone1 = telefone1;
+        this.telefone2 = telefone2;
         this.tipoPerfil = (tipoPerfil == null) ? null : tipoPerfil.getCod();
-        this.nomeUsuario = nomeUsuario;
-        this.senha = senha;
         this.ativo = ativo;
     }
 
@@ -101,20 +95,20 @@ public class Usuario implements Serializable{
         this.enderecoUsuario = enderecoUsuario;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public String getTelefone1() {
+        return telefone1;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setTelefone1(String telefone1) {
+        this.telefone1 = telefone1;
     }
 
-    public String getMetodoPagto() {
-        return metodoPagto;
+    public String getTelefone2() {
+        return telefone2;
     }
 
-    public void setMetodoPagto(String metodoPagto) {
-        this.metodoPagto = metodoPagto;
+    public void setTelefone2(String telefone2) {
+        this.telefone2 = telefone2;
     }
 
     public TipoPerfil getTipoPerfil() {
@@ -123,22 +117,6 @@ public class Usuario implements Serializable{
 
     public void setTipoPerfil(TipoPerfil tipoPerfil) {
         this.tipoPerfil = tipoPerfil.getCod();
-    }
-
-    public String getNomeUsuario() {
-        return nomeUsuario;
-    }
-
-    public void setNomeUsuario(String nomeUsuario) {
-        this.nomeUsuario = nomeUsuario;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
     }
 
     public Biblioteca getBiblioteca() {

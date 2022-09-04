@@ -16,6 +16,7 @@ import com.cedup.projetolitterae.backend.repositories.BibliotecaRepository;
 import com.cedup.projetolitterae.backend.repositories.EnderecoRepository;
 import com.cedup.projetolitterae.backend.repositories.LivroBibliotecaRepository;
 import com.cedup.projetolitterae.backend.repositories.LivroRepository;
+import com.cedup.projetolitterae.backend.repositories.LocacaoRepository;
 import com.cedup.projetolitterae.backend.repositories.ResenhaRepository;
 import com.cedup.projetolitterae.backend.repositories.UsuarioRepository;
 import com.cedup.projetolitterae.backend.services.UsuarioService;
@@ -48,6 +49,8 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 	ResenhaRepository resenhaRepository;
 	@Autowired
 	LivroBibliotecaRepository livroBibliotecaRepository;
+	@Autowired
+	LocacaoRepository locacaoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjetolitteraeApplication.class, args);
@@ -59,7 +62,7 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 	}
 
 	private void initializeDatabase(){
-		/*//CADASTRO DE ENDEREÇOS
+		//CADASTRO DE ENDEREÇOS
 		Endereco e1 = new Endereco("123489", "sc", "blumenau", "velha", "rua pipipororo",
 				"87", "perto da casa do caralho");
 
@@ -151,23 +154,19 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 
 		//CADASTRO DE USUARIOS
 		Usuario u1 = new Usuario("12345678945", "Maria Clara", "Peron Gonçalves",
-				"skjdfa", "13231", TipoPerfil.LEITOR,
-				"mariaclara", "1234", true);
+				"1474147", "13231", TipoPerfil.LEITOR, true);
 		u1.setEnderecoUsuario(e6);
 
 		Usuario u2 = new Usuario("65432198745", "Joca Luis", "Peron Gonçalves",
-				"fgd", "dfasd", TipoPerfil.LEITOR,
-				"jocaluis", "1234", true);
+				"4561234", "dfasd", TipoPerfil.LEITOR,true);
 		u2.setEnderecoUsuario(e7);
 
 		Usuario u3 = new Usuario("12345678945", "Lucas", "Testoni",
-				"dfghfgh", "13231", TipoPerfil.LEITOR,
-				"lucastestoni", "1234", true);
+				"4564897", "13231", TipoPerfil.LEITOR, true);
 		u3.setEnderecoUsuario(e8);
 
 		Usuario u4 = new Usuario("12345678945", "Veri", "Berti",
-				"dfghfgh", "13231", TipoPerfil.LEITOR,
-				"lucastestoni", "1234", true);
+				"4715457", "13231", TipoPerfil.LEITOR, true);
 		u4.setEnderecoUsuario(e9);
 
 		//CADASTRO DE LIVROS DA BIBLIOTECA
@@ -190,7 +189,25 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 		LivroBiblioteca lb15 = new LivroBiblioteca(l5, b4, 6);
 
 		//CDASTRO DE LOCACOES
-		Locacao loc1 = new Locacao(Date.valueOf("19/02/2023"), Date.valueOf("19/02/2023"), StatusLocacao.ANDAMENTO);
+		Locacao loc1 = new Locacao(new Date(2022-1900,2-1,19), new Date(2022-1900,4-1,19),
+				StatusLocacao.ANDAMENTO);
+		loc1.setLivro(lb1);
+		loc1.setUsuario(u1);
+
+		Locacao loc2 = new Locacao(new Date(2023-1900,2-1,19), new Date(2023-1900,2-1,19),
+				StatusLocacao.ANDAMENTO);
+		loc2.setLivro(lb3);
+		loc2.setUsuario(u2);
+
+		Locacao loc3 = new Locacao(new Date(2023-1900,2-1,19), new Date(2023-1900,2-1,19),
+				StatusLocacao.ENCERRADO);
+		loc3.setLivro(lb5);
+		loc3.setUsuario(u3);
+
+		Locacao loc4 = new Locacao(new Date(2023-1900,2-1,19), new Date(2023-1900,2-1,19),
+				StatusLocacao.ANDAMENTO);
+		loc4.setLivro(lb6);
+		loc4.setUsuario(u4);
 
 		//CADASTRO DE RESENHAS
 		Resenha r1 = new Resenha("muito bom");
@@ -220,7 +237,8 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 		livroRepository.saveAll(List.of(l1, l2, l3, l4, l5, l6));
 		usuarioRepository.saveAll(List.of(u1, u2, u3, u4));
 		resenhaRepository.saveAll(List.of(r1, r2, r3, r4, r5));
-		livroBibliotecaRepository.saveAll(List.of(lb1, lb2, lb3, lb4, lb5, lb6, lb7, lb8, lb9, lb10, lb11, lb12, lb13, lb14, lb15));*/
+		livroBibliotecaRepository.saveAll(List.of(lb1, lb2, lb3, lb4, lb5, lb6, lb7, lb8, lb9, lb10, lb11, lb12, lb13, lb14, lb15));
+		locacaoRepository.saveAll(List.of(loc1, loc2, loc3, loc4));
 	}
 
 }

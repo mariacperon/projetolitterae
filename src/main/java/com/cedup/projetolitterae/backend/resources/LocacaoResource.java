@@ -26,13 +26,13 @@ public class LocacaoResource {
         return ResponseEntity.ok().body(locacao);
     }
 
-    @RequestMapping(value = "usuario/{id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/usuario/{id}",method = RequestMethod.GET)
     public ResponseEntity<List<Locacao>> pesquisarPorUsuarioId(@PathVariable Integer id){
         List<Locacao> locacoes = locacaoService.pesquisarPorUsuario(id);
         return ResponseEntity.ok().body(locacoes);
     }
 
-    @RequestMapping(value = "livro/{id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/livro/{id}",method = RequestMethod.GET)
     public ResponseEntity<List<Locacao>> pesquisarPorLivroId(@PathVariable Integer id){
         List<Locacao> locacoes = locacaoService.pesquisarPorLivro(id);
         return ResponseEntity.ok().body(locacoes);
@@ -53,6 +53,12 @@ public class LocacaoResource {
     @RequestMapping(value = "/excluir/{id}",method = RequestMethod.DELETE)
     public ResponseEntity<Void> excluir(@PathVariable Integer id){
         locacaoService.excluirLocacao(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @RequestMapping(value = "/devolver/{id}",method = RequestMethod.POST)
+    public ResponseEntity<Void> devolver(@PathVariable Integer id){
+        locacaoService.devolver(id);
         return ResponseEntity.noContent().build();
     }
 }

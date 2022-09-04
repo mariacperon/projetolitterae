@@ -1,7 +1,7 @@
 package com.cedup.projetolitterae.backend.entities;
 
 import com.cedup.projetolitterae.backend.enums.StatusLocacao;
-import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.sql.Date;
-import java.time.LocalDate;
 
 @Entity
 public class Locacao {
@@ -27,8 +26,11 @@ public class Locacao {
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date dataLocacao;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date dataDevolucao;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date dataDevolvida;
 
     private Integer statusLocacao;
