@@ -9,8 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import java.sql.Date;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 public class Locacao {
@@ -27,18 +27,16 @@ public class Locacao {
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate dataLocacao;
-
-    private LocalDate dataDevolucao;
-    private LocalDate dataDevolvida;
+    private Date dataLocacao;
+    private Date dataDevolucao;
+    private Date dataDevolvida;
 
     private Integer statusLocacao;
 
     public Locacao() {
     }
 
-    public Locacao(LocalDate dataLocacao, LocalDate dataDevolucao, StatusLocacao statusLocacao) {
+    public Locacao(Date dataLocacao, Date dataDevolucao, StatusLocacao statusLocacao) {
         this.dataLocacao = dataLocacao;
         this.dataDevolucao = dataDevolucao;
         this.statusLocacao = (statusLocacao == null) ? null : statusLocacao.getCod();
@@ -68,27 +66,27 @@ public class Locacao {
         this.usuario = usuario;
     }
 
-    public LocalDate getDataLocacao() {
+    public Date getDataLocacao() {
         return dataLocacao;
     }
 
-    public void setDataLocacao(LocalDate dataLocacao) {
+    public void setDataLocacao(Date dataLocacao) {
         this.dataLocacao = dataLocacao;
     }
 
-    public LocalDate getDataDevolucao() {
+    public Date getDataDevolucao() {
         return dataDevolucao;
     }
 
-    public void setDataDevolucao(LocalDate dataDevolucao) {
+    public void setDataDevolucao(Date dataDevolucao) {
         this.dataDevolucao = dataDevolucao;
     }
 
-    public LocalDate getDataDevolvida() {
+    public Date getDataDevolvida() {
         return dataDevolvida;
     }
 
-    public void setDataDevolvida(LocalDate dataDevolvida) {
+    public void setDataDevolvida(Date dataDevolvida) {
         this.dataDevolvida = dataDevolvida;
     }
 

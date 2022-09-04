@@ -28,12 +28,12 @@ public class Usuario implements Serializable{
     private String sobrenome;
 
     @OneToOne
-    @JoinColumn(name = "enderecoUsuario_id")
+    @JoinColumn(name = "id_endereco")
     private Endereco enderecoUsuario;
 
     @ManyToOne
-    @JoinColumn(name = "bibliotecaUsuario_id")
-    private Biblioteca biliotecaUsuario;
+    @JoinColumn(name = "id_biblioteca")
+    private Biblioteca biblioteca;
 
     private String telefone;
     private String metodoPagto;
@@ -141,12 +141,12 @@ public class Usuario implements Serializable{
         this.senha = senha;
     }
 
-    public Biblioteca getBiliotecaUsuario() {
-        return biliotecaUsuario;
+    public Biblioteca getBiblioteca() {
+        return biblioteca;
     }
 
-    public void setBiliotecaUsuario(Biblioteca biliotecaUsuario) {
-        this.biliotecaUsuario = biliotecaUsuario;
+    public void setBiblioteca(Biblioteca bilioteca) {
+        this.biblioteca = bilioteca;
     }
 
     public boolean isAtivo() {

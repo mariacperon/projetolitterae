@@ -14,6 +14,7 @@ import com.cedup.projetolitterae.backend.enums.TipoPerfil;
 import com.cedup.projetolitterae.backend.repositories.AutorRepository;
 import com.cedup.projetolitterae.backend.repositories.BibliotecaRepository;
 import com.cedup.projetolitterae.backend.repositories.EnderecoRepository;
+import com.cedup.projetolitterae.backend.repositories.LivroBibliotecaRepository;
 import com.cedup.projetolitterae.backend.repositories.LivroRepository;
 import com.cedup.projetolitterae.backend.repositories.ResenhaRepository;
 import com.cedup.projetolitterae.backend.repositories.UsuarioRepository;
@@ -23,9 +24,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @SpringBootApplication
@@ -45,6 +46,8 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 	AutorRepository autorRepository;
 	@Autowired
 	ResenhaRepository resenhaRepository;
+	@Autowired
+	LivroBibliotecaRepository livroBibliotecaRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjetolitteraeApplication.class, args);
@@ -56,7 +59,7 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 	}
 
 	private void initializeDatabase(){
-		//CADASTRO DE ENDEREÇOS
+		/*//CADASTRO DE ENDEREÇOS
 		Endereco e1 = new Endereco("123489", "sc", "blumenau", "velha", "rua pipipororo",
 				"87", "perto da casa do caralho");
 
@@ -186,6 +189,9 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 		LivroBiblioteca lb14 = new LivroBiblioteca(l4, b4, 6);
 		LivroBiblioteca lb15 = new LivroBiblioteca(l5, b4, 6);
 
+		//CDASTRO DE LOCACOES
+		Locacao loc1 = new Locacao(Date.valueOf("19/02/2023"), Date.valueOf("19/02/2023"), StatusLocacao.ANDAMENTO);
+
 		//CADASTRO DE RESENHAS
 		Resenha r1 = new Resenha("muito bom");
 		r1.setLivro(l1);
@@ -214,6 +220,7 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 		livroRepository.saveAll(List.of(l1, l2, l3, l4, l5, l6));
 		usuarioRepository.saveAll(List.of(u1, u2, u3, u4));
 		resenhaRepository.saveAll(List.of(r1, r2, r3, r4, r5));
+		livroBibliotecaRepository.saveAll(List.of(lb1, lb2, lb3, lb4, lb5, lb6, lb7, lb8, lb9, lb10, lb11, lb12, lb13, lb14, lb15));*/
 	}
 
 }
