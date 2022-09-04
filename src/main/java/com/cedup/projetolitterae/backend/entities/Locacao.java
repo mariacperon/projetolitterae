@@ -1,6 +1,7 @@
 package com.cedup.projetolitterae.backend.entities;
 
 import com.cedup.projetolitterae.backend.enums.StatusLocacao;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,10 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import java.util.Date;
+import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
-public class LivroUsuario {
+public class Locacao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +21,7 @@ public class LivroUsuario {
 
     @ManyToOne
     @JoinColumn(name = "id_livro")
-    private Livro livro;
+    private LivroBiblioteca livro;
 
     @ManyToOne
     @JoinColumn(name = "id_usuario")
@@ -31,11 +33,12 @@ public class LivroUsuario {
 
     private Integer statusLocacao;
 
-    public LivroUsuario() {
+    public Locacao() {
     }
 
-    public LivroUsuario(Date dataLocacao, StatusLocacao statusLocacao) {
+    public Locacao(Date dataLocacao, Date dataDevolucao, StatusLocacao statusLocacao) {
         this.dataLocacao = dataLocacao;
+        this.dataDevolucao = dataDevolucao;
         this.statusLocacao = (statusLocacao == null) ? null : statusLocacao.getCod();
     }
 
@@ -47,11 +50,11 @@ public class LivroUsuario {
         this.id = id;
     }
 
-    public Livro getLivro() {
+    public LivroBiblioteca getLivro() {
         return livro;
     }
 
-    public void setLivro(Livro livro) {
+    public void setLivro(LivroBiblioteca livro) {
         this.livro = livro;
     }
 

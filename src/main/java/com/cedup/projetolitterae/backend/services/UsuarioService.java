@@ -20,6 +20,10 @@ public class UsuarioService {
         return (repository.findById(id)).get();
     }
 
+    public List<Usuario> pesquisarUsuariosPorBiblioteca(Integer id){
+        return repository.findUsuarioByBibliotecaId(id);
+    }
+
     public List<Usuario> pesquisarTodos(){
         return repository.findAll() ;
     }
