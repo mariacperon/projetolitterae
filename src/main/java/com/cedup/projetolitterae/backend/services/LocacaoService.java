@@ -1,11 +1,13 @@
 package com.cedup.projetolitterae.backend.services;
 
 import com.cedup.projetolitterae.backend.entities.Locacao;
+import com.cedup.projetolitterae.backend.enums.StatusLocacao;
 import com.cedup.projetolitterae.backend.repositories.LocacaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -13,6 +15,8 @@ public class LocacaoService {
 
     @Autowired
     private LocacaoRepository repository;
+    @Autowired
+    private LivroBibliotecaService livroBibliotecaService;
 
     public Locacao pesquisarPorId(Integer id){
         return (repository.findById(id)).get();
@@ -27,8 +31,11 @@ public class LocacaoService {
     }
 
     @Transactional
-    public Locacao locarLivro(Locacao livroUsuario){
-        return repository.save(livroUsuario);
+    public Locacao locarLivro(Locacao locacao){
+        locacao.setId(null);
+        locacao.setLivro(livroBibliotecaService.pesquisarPorId(locacao.getLivro().getId()));
+        validarLocacao(locacao);
+        return repository.save(locacao);
     }
 
     public Locacao alterarLocacao(Locacao novoLivroUsuario){
@@ -38,14 +45,29 @@ public class LocacaoService {
         return oldLivroUsuario;
     }
 
+    public void devolver(Integer id){
+        Locacao locacao = pesquisarPorId(id);
+        locacao.setDataDevolvida((java.sql.Date) new Date());
+        validaDevolucao(locacao);
+    }
+
     public void excluirLocacao(Integer id){
         repository.deleteById(id);
     }
 
-    public boolean validarLocacao(){
+    private void validarLocacao(Locacao locacao) {
+        List<Locacao> locacoes = pesquisarPorUsuario(locacao.getUsuario().getId());
+        for (Locacao l : locacoes) {
+            if(new Date().after(l.getDataDevolucao()) || l.getStatusLocacao().equals(StatusLocacao.ANDAMENTO)){
+                throw new RuntimeException("Teste");
+            }
+        }
+    }
 
+    private void validaDevolucao(Locacao locacao){
+        if(locacao.getDataDevolvida().after(locacao.getDataDevolucao())){
 
-        return true;
+        }
     }
 
 }

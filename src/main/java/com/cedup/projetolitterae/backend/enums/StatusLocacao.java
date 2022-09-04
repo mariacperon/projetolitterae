@@ -3,7 +3,8 @@ package com.cedup.projetolitterae.backend.enums;
 public enum StatusLocacao {
 
     ANDAMENTO(0, "Em andamento"),
-    ENCERRADO(1, "Encerrado");
+    ENCERRADO(1, "Encerrado"),
+    PENDENTE(2, "Pendente");
 
     private final int cod;
     private final String descricao;
