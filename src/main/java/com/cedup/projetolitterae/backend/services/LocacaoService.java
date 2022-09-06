@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.Period;
 import java.util.Date;
 import java.util.List;
 
@@ -66,7 +67,12 @@ public class LocacaoService {
 
     private void validaDevolucao(Locacao locacao){
         if(locacao.getDataDevolvida().after(locacao.getDataDevolucao())){
+            Double taxaAtraso = locacao.getLivro().getBiblioteca().getTaxaAtraso();
+            Double taxaPorDia = locacao.getLivro().getBiblioteca().getTaxaPorDia();
 
+            long diasEmAtraso = Math.abs(locacao.getDataDevolvida().getTime() - locacao.getDataDevolucao().getTime());
+
+            Double multa = (diasEmAtraso * taxaPorDia) + taxaAtraso;
         }
     }
 
