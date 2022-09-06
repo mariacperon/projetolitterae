@@ -95,23 +95,23 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 
 		//CADASTRO DE BIBLIOTECAS
 		Biblioteca b1 = new Biblioteca("554", "Cheiro de livro", "asdfad@", "8521",
-				"45987412365",  TipoPerfil.ADMIN, "livrosCheiro", "1234", true);
+				"45987412365",  TipoPerfil.ADMIN, "livrosCheiro", "1234", true, 10.00,2.00);
 		b1.setEnderecoBiblioteca(e1);
 
 		Biblioteca b2 = new Biblioteca("645657", "Saraiva", "sad@", "321321",
-				"852221", TipoPerfil.ADMIN, "livros3", "1234", true);
+				"852221", TipoPerfil.ADMIN, "livros3", "1234", true, 10.00,2.00);
 		b2.setEnderecoBiblioteca(e2);
 
 		Biblioteca b3 = new Biblioteca("789", "Catarinense", "fghdfgh@", "7889",
-				"5546", TipoPerfil.ADMIN, "livro5", "1234", true);
+				"5546", TipoPerfil.ADMIN, "livro5", "1234", true, 10.00,2.00);
 		b3.setEnderecoBiblioteca(e3);
 
 		Biblioteca b4 = new Biblioteca("678", "BluLivros", "AaE@", "654",
-				"5154", TipoPerfil.ADMIN, "livrso2", "1234", true);
+				"5154", TipoPerfil.ADMIN, "livrso2", "1234", true, 10.00,2.00);
 		b4.setEnderecoBiblioteca(e4);
 
 		Biblioteca b5 = new Biblioteca("5645", "BookCenter", "hryty@", " 7858",
-				"548454", TipoPerfil.ADMIN, "cheiro", "1234", true);
+				"548454", TipoPerfil.ADMIN, "cheiro", "1234", true, 10.00,2.00);
 		b5.setEnderecoBiblioteca(e5);
 
 		//CADASTRO DE AUTORES

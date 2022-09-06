@@ -2,18 +2,14 @@ package com.cedup.projetolitterae.backend.entities;
 
 import com.cedup.projetolitterae.backend.enums.TipoPerfil;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class Biblioteca implements Serializable {
@@ -33,6 +29,9 @@ public class Biblioteca implements Serializable {
     @JoinColumn(name = "endereco_id")
     private Endereco enderecoBiblioteca;
 
+    private Double taxaAtraso;
+    private Double taxaPorDia;
+
     private String telefone;
 
     private Integer tipoPerfil;
@@ -46,7 +45,7 @@ public class Biblioteca implements Serializable {
     public Biblioteca() {
     }
 
-    public Biblioteca(String cnpj, String nome, String email, String contaBancaria, String telefone, TipoPerfil tipoPerfil, String nomeUsuario, String senha, boolean ativo) {
+    public Biblioteca(String cnpj, String nome, String email, String contaBancaria, String telefone, TipoPerfil tipoPerfil, String nomeUsuario, String senha, boolean ativo, Double taxaAtraso, Double taxaPorDia) {
         this.cnpj = cnpj;
         this.nome = nome;
         this.email = email;
@@ -56,6 +55,8 @@ public class Biblioteca implements Serializable {
         this.nomeUsuario = nomeUsuario;
         this.senha = senha;
         this.ativo = ativo;
+        this.taxaAtraso = taxaAtraso;
+        this.taxaPorDia = taxaPorDia;
     }
 
     public Integer getId() {
@@ -144,5 +145,21 @@ public class Biblioteca implements Serializable {
 
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
+    }
+
+    public Double getTaxaAtraso() {
+        return taxaAtraso;
+    }
+
+    public void setTaxaAtraso(Double taxaAtraso) {
+        this.taxaAtraso = taxaAtraso;
+    }
+
+    public Double getTaxaPorDia() {
+        return taxaPorDia;
+    }
+
+    public void setTaxaPorDia(Double taxaPorDia) {
+        this.taxaPorDia = taxaPorDia;
     }
 }
