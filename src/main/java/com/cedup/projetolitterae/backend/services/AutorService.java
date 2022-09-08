@@ -1,6 +1,7 @@
 package com.cedup.projetolitterae.backend.services;
 
 import com.cedup.projetolitterae.backend.entities.Autor;
+import com.cedup.projetolitterae.backend.entities.MensagemRetorno;
 import com.cedup.projetolitterae.backend.repositories.AutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

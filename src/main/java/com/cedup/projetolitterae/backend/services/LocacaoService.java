@@ -1,6 +1,8 @@
 package com.cedup.projetolitterae.backend.services;
 
 import com.cedup.projetolitterae.backend.entities.Locacao;
+import com.cedup.projetolitterae.backend.entities.MensagemRetorno;
+import com.cedup.projetolitterae.backend.entities.MensagemRetornoException;
 import com.cedup.projetolitterae.backend.enums.StatusLocacao;
 import com.cedup.projetolitterae.backend.repositories.LocacaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +51,15 @@ public class LocacaoService {
     public void devolver(Integer id){
         Locacao locacao = pesquisarPorId(id);
         locacao.setDataDevolvida((java.sql.Date) new Date());
-        validaDevolucao(locacao);
+
+        Boolean pendencia = validaDevolucao(locacao);
+        repository.save(locacao);
+
+        if(!pendencia){
+            throw new MensagemRetornoException(new MensagemRetorno("PENDÊNCIA ABERTA",
+                    "O livro foi devolvido, mas uma pendência foi aberta pelo atraso na devolução. Este usuário deve pagar R$"+
+                    calculaMulta(locacao)+" de multa."));
+        }
     }
 
     public void excluirLocacao(Integer id){
@@ -60,20 +70,30 @@ public class LocacaoService {
         List<Locacao> locacoes = pesquisarPorUsuario(locacao.getUsuario().getId());
         for (Locacao l : locacoes) {
             if(new Date().after(l.getDataDevolucao()) || l.getStatusLocacao().equals(StatusLocacao.ANDAMENTO)){
-                throw new RuntimeException("Teste");
+                throw new MensagemRetornoException(new MensagemRetorno("ERRO",
+                        "Erro ao locar livro, este usuário possui pendências."));
             }
         }
     }
 
-    private void validaDevolucao(Locacao locacao){
+    private Boolean validaDevolucao(Locacao locacao){
         if(locacao.getDataDevolvida().after(locacao.getDataDevolucao())){
-            Double taxaAtraso = locacao.getLivro().getBiblioteca().getTaxaAtraso();
-            Double taxaPorDia = locacao.getLivro().getBiblioteca().getTaxaPorDia();
-
-            long diasEmAtraso = Math.abs(locacao.getDataDevolvida().getTime() - locacao.getDataDevolucao().getTime());
-
-            Double multa = (diasEmAtraso * taxaPorDia) + taxaAtraso;
+            locacao.setStatusLocacao(StatusLocacao.PENDENTE);
+            return false;
         }
+        locacao.setStatusLocacao(StatusLocacao.DEVOLVIDO);
+        return true;
+    }
+
+    private Double calculaMulta(Locacao locacao){
+        Double taxaAtraso = locacao.getLivro().getBiblioteca().getTaxaAtraso();
+        Double taxaPorDia = locacao.getLivro().getBiblioteca().getTaxaPorDia();
+
+        long diasEmAtraso = Math.abs(locacao.getDataDevolvida().getTime() - locacao.getDataDevolucao().getTime());
+
+        Double multa = (diasEmAtraso * taxaPorDia) + taxaAtraso;
+
+        return multa;
     }
 
 }

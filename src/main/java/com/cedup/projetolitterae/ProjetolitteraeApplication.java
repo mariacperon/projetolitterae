@@ -156,18 +156,22 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 		Usuario u1 = new Usuario("12345678945", "Maria Clara", "Peron Gonçalves",
 				"1474147", "13231", TipoPerfil.LEITOR, true);
 		u1.setEnderecoUsuario(e6);
+		u1.setBiblioteca(b1);
 
 		Usuario u2 = new Usuario("65432198745", "Joca Luis", "Peron Gonçalves",
 				"4561234", "dfasd", TipoPerfil.LEITOR,true);
 		u2.setEnderecoUsuario(e7);
+		u2.setBiblioteca(b2);
 
 		Usuario u3 = new Usuario("12345678945", "Lucas", "Testoni",
 				"4564897", "13231", TipoPerfil.LEITOR, true);
 		u3.setEnderecoUsuario(e8);
+		u3.setBiblioteca(b3);
 
 		Usuario u4 = new Usuario("12345678945", "Veri", "Berti",
 				"4715457", "13231", TipoPerfil.LEITOR, true);
 		u4.setEnderecoUsuario(e9);
+		u4.setBiblioteca(b4);
 
 		//CADASTRO DE LIVROS DA BIBLIOTECA
 		LivroBiblioteca lb1 = new LivroBiblioteca(l1, b1, 6);
@@ -200,7 +204,7 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 		loc2.setUsuario(u2);
 
 		Locacao loc3 = new Locacao(new Date(2023-1900,2-1,19), new Date(2023-1900,2-1,19),
-				StatusLocacao.ENCERRADO);
+				StatusLocacao.PENDENTE);
 		loc3.setLivro(lb5);
 		loc3.setUsuario(u3);
 

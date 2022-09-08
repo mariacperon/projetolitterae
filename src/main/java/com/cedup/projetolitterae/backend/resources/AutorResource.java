@@ -1,6 +1,7 @@
 package com.cedup.projetolitterae.backend.resources;
 
 import com.cedup.projetolitterae.backend.entities.Autor;
+import com.cedup.projetolitterae.backend.entities.MensagemRetorno;
 import com.cedup.projetolitterae.backend.services.AutorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
