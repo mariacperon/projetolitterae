@@ -2,16 +2,18 @@ package com.cedup.projetolitterae.backend.services;
 
 import com.cedup.projetolitterae.backend.entities.Locacao;
 import com.cedup.projetolitterae.backend.entities.MensagemRetorno;
-import com.cedup.projetolitterae.backend.entities.MensagemRetornoException;
+import com.cedup.projetolitterae.backend.entities.Usuario;
+import com.cedup.projetolitterae.backend.exceptions.MensagemRetornoException;
 import com.cedup.projetolitterae.backend.enums.StatusLocacao;
 import com.cedup.projetolitterae.backend.repositories.LocacaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.time.Period;
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class LocacaoService {
@@ -48,9 +50,13 @@ public class LocacaoService {
         return oldLivroUsuario;
     }
 
-    public void devolver(Integer id){
+    public void devolver(Integer id) {
         Locacao locacao = pesquisarPorId(id);
-        locacao.setDataDevolvida((java.sql.Date) new Date());
+        Date dataDdevolvida = new Date();
+        Integer dia = dataDdevolvida.getDate();
+        Integer mes = dataDdevolvida.getMonth();
+        Integer ano = dataDdevolvida.getYear();
+        locacao.setDataDevolvida(new java.sql.Date(ano, mes, dia));
 
         Boolean pendencia = validaDevolucao(locacao);
         repository.save(locacao);
@@ -64,6 +70,17 @@ public class LocacaoService {
 
     public void excluirLocacao(Integer id){
         repository.deleteById(id);
+    }
+
+    public Double pesquisaMulta(Integer id){
+        Locacao locacao = pesquisarPorId(id);
+
+        if(StatusLocacao.PENDENTE.equals(locacao.getStatusLocacao())){
+            throw new MensagemRetornoException(new MensagemRetorno("ERRO",
+                    "Esta locação não está pendente."));
+        }
+
+        return calculaMulta(locacao);
     }
 
     private void validarLocacao(Locacao locacao) {
@@ -89,7 +106,7 @@ public class LocacaoService {
         Double taxaAtraso = locacao.getLivro().getBiblioteca().getTaxaAtraso();
         Double taxaPorDia = locacao.getLivro().getBiblioteca().getTaxaPorDia();
 
-        long diasEmAtraso = Math.abs(locacao.getDataDevolvida().getTime() - locacao.getDataDevolucao().getTime());
+        long diasEmAtraso = TimeUnit.MILLISECONDS.toDays(Math.abs(locacao.getDataDevolvida().getTime() - locacao.getDataDevolucao().getTime()));
 
         Double multa = (diasEmAtraso * taxaPorDia) + taxaAtraso;
 

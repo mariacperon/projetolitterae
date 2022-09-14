@@ -62,4 +62,10 @@ public class LocacaoResource {
         locacaoService.devolver(id);
         return ResponseEntity.noContent().build();
     }
+
+    @RequestMapping(value = "/multa/{id}",method = RequestMethod.POST)
+    public ResponseEntity<Double> pesquisaMulta(@PathVariable Integer id){
+        Double multa = locacaoService.pesquisaMulta(id);
+        return ResponseEntity.ok().body(multa);
+    }
 }

@@ -194,14 +194,14 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 
 		//CDASTRO DE LOCACOES
 		Locacao loc1 = new Locacao(new Date(2022-1900,2-1,19), new Date(2022-1900,4-1,19),
-				StatusLocacao.ANDAMENTO);
+				StatusLocacao.PENDENTE);
 		loc1.setLivro(lb1);
-		loc1.setUsuario(u1);
+		loc1.setUsuario(u2);
 
-		Locacao loc2 = new Locacao(new Date(2023-1900,2-1,19), new Date(2023-1900,2-1,19),
+		Locacao loc2 = new Locacao(new Date(2022-1900,2-1,19), new Date(2022-1900,5-1,19),
 				StatusLocacao.ANDAMENTO);
 		loc2.setLivro(lb3);
-		loc2.setUsuario(u2);
+		loc2.setUsuario(u1);
 
 		Locacao loc3 = new Locacao(new Date(2023-1900,2-1,19), new Date(2023-1900,2-1,19),
 				StatusLocacao.PENDENTE);
