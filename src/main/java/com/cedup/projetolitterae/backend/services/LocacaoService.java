@@ -52,19 +52,24 @@ public class LocacaoService {
 
     public void devolver(Integer id) {
         Locacao locacao = pesquisarPorId(id);
-        Date dataDdevolvida = new Date();
-        Integer dia = dataDdevolvida.getDate();
-        Integer mes = dataDdevolvida.getMonth();
-        Integer ano = dataDdevolvida.getYear();
-        locacao.setDataDevolvida(new java.sql.Date(ano, mes, dia));
+        if(StatusLocacao.ANDAMENTO.equals(locacao.getStatusLocacao())){
+            Date dataDdevolvida = new Date();
+            Integer dia = dataDdevolvida.getDate();
+            Integer mes = dataDdevolvida.getMonth();
+            Integer ano = dataDdevolvida.getYear();
+            locacao.setDataDevolvida(new java.sql.Date(ano, mes, dia));
 
-        Boolean pendencia = validaDevolucao(locacao);
-        repository.save(locacao);
+            Boolean pendencia = validaDevolucao(locacao);
+            repository.save(locacao);
 
-        if(!pendencia){
-            throw new MensagemRetornoException(new MensagemRetorno("PENDÊNCIA ABERTA",
-                    "O livro foi devolvido, mas uma pendência foi aberta pelo atraso na devolução. Este usuário deve pagar R$"+
-                    calculaMulta(locacao)+" de multa."));
+            if(!pendencia){
+                throw new MensagemRetornoException(new MensagemRetorno("PENDÊNCIA ABERTA",
+                        "O livro foi devolvido, mas uma pendência foi aberta pelo atraso na devolução. Este usuário deve pagar R$"+
+                                calculaMulta(locacao)+" de multa."));
+            }
+        }else{
+            throw new MensagemRetornoException(new MensagemRetorno("ERRO",
+                    "Esta locação não pode ser devolvida, pois seu status é "+ locacao.getStatusLocacao()));
         }
     }
 
