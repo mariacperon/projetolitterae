@@ -1,7 +1,6 @@
 package com.cedup.projetolitterae.backend.services;
 
 import com.cedup.projetolitterae.backend.entities.LivroBiblioteca;
-import com.cedup.projetolitterae.backend.repositories.AutorRepository;
 import com.cedup.projetolitterae.backend.repositories.LivroBibliotecaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
