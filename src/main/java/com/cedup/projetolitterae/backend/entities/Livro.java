@@ -25,10 +25,7 @@ public class Livro {
     private Integer id;
 
     private String nome;
-
-    @ManyToOne
-    @JoinColumn(name = "id_autor")
-    private Autor autor;
+    private String autor;
 
     @ElementCollection
     @CollectionTable(name = "livro_genero")
@@ -52,8 +49,9 @@ public class Livro {
     public Livro() {
     }
 
-    public Livro(String nome, String sinopse, String idioma, String classificacaoEtaria, String editora, String ISDB, String edicao, Date dataLancamento) {
+    public Livro(String nome, String autor, String sinopse, String idioma, String classificacaoEtaria, String editora, String ISDB, String edicao, Date dataLancamento) {
         this.nome = nome;
+        this.autor = autor;
         this.sinopse = sinopse;
         this.idioma = idioma;
         this.classificacaoEtaria = classificacaoEtaria;
@@ -79,11 +77,11 @@ public class Livro {
         this.nome = nome;
     }
 
-    public Autor getAutor() {
+    public String getAutor() {
         return autor;
     }
 
-    public void setAutor(Autor autor) {
+    public void setAutor(String autor) {
         this.autor = autor;
     }
 

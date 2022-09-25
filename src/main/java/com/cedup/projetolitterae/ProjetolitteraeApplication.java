@@ -1,6 +1,5 @@
 package com.cedup.projetolitterae;
 
-import com.cedup.projetolitterae.backend.entities.Autor;
 import com.cedup.projetolitterae.backend.entities.Biblioteca;
 import com.cedup.projetolitterae.backend.entities.Endereco;
 import com.cedup.projetolitterae.backend.entities.Livro;
@@ -26,8 +25,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.sql.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 @SpringBootApplication
@@ -114,42 +111,29 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 				"548454", TipoPerfil.ADMIN, "cheiro", "1234", true, 10.00,2.00);
 		b5.setEnderecoBiblioteca(e5);
 
-		//CADASTRO DE AUTORES
-		Autor a1 = new Autor("Victoria", "Aveyard", "Estadunidense e milennial, escreveu vários livros de " +
-				"sucesso como a saga da Rainha Vermelha e Destruidor de Mundos.");
-		Autor a2 = new Autor("Carlos Luis", "Zafon", "Autor espanhol e não sei mais oq.");
-		Autor a3 = new Autor("Suzanne", "Collins", "Escritora da saga jogos vorazes.");
-		Autor a4 = new Autor("Taylor", "Jenkins Reid", "Autora de sucesos gays.");
-
 		//CADASTRO DE LIVROS
-		Livro l1 = new Livro("Rainha Vermelha", "ansdjbf",
+		Livro l1 = new Livro("Rainha Vermelha","victoria aveyard", "ansdjbf",
 				"portugues", "livre", "seila", "sdfasdf", "1º", new Date(1999-1900,2-1,19));
-		l1.setAutor(a1);
 		l1.setGeneros(List.of(GeneroLivro.FICCAO, GeneroLivro.AVENTURA));
 
-		Livro l2 = new Livro("Espada de Vidro","ansdjbf",
+		Livro l2 = new Livro("Espada de Vidro","victoria aveyard","ansdjbf",
 				"portugues", "livre", "seila", "sdfasdf", "1º", new Date(1999-1900,2-1,19));
 		l2.setGeneros(List.of(GeneroLivro.FICCAO, GeneroLivro.AVENTURA));
-		l2.setAutor(a1);
 
-		Livro l3 = new Livro("A Sombra do Vento","ansdjbf",
+		Livro l3 = new Livro("A Sombra do Vento","luis carlos zafon","ansdjbf",
 				"portugues", "livre", "seila", "sdfasdf", "1º", new Date(1999-1900,2-1,19));
-		l3.setAutor(a2);
 		l3.setGeneros(List.of(GeneroLivro.DRAMA, GeneroLivro.FICCAO));
 
-		Livro l4 = new Livro("Jogos Vorazes", "ansdjbf",
+		Livro l4 = new Livro("Jogos Vorazes","suzanne collins", "ansdjbf",
 				"portugues", "livre", "seila", "sdfasdf", "1º", new Date(1999-1900,2-1,19));
-		l4.setAutor(a3);
 		l4.setGeneros(List.of(GeneroLivro.FICCAO, GeneroLivro.AVENTURA));
 
-		Livro l5 = new Livro("Os Sete Maridos de Evelyn Hugo", "ansdjbf",
+		Livro l5 = new Livro("Os Sete Maridos de Evelyn Hugo","tyalor jenkins", "ansdjbf",
 				"portugues", "livre", "seila", "sdfasdf", "1º", new Date(1999-1900,2-1,19));
-		l5.setAutor(a4);
 		l5.setGeneros(List.of(GeneroLivro.ROMANCE));
 
-		Livro l6 = new Livro("Daisy Jones & The Six", "ansdjbf",
+		Livro l6 = new Livro("Daisy Jones & The Six","taylor jenkis", "ansdjbf",
 				"portugues", "livre", "seila", "sdfasdf", "1º", new Date(1999-1900,2-1,19));
-		l6.setAutor(a4);
 		l6.setGeneros(List.of(GeneroLivro.DRAMA, GeneroLivro.ROMANCE));
 
 		//CADASTRO DE USUARIOS
@@ -237,7 +221,6 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 		//SALVANDO NO BANCO
 		enderecoRepository.saveAll(List.of(e1, e2, e3, e4, e5, e6, e7, e8, e9, e10));
 		bibliotecaRepository.saveAll(List.of(b1, b2, b3, b4, b5));
-		autorRepository.saveAll(List.of(a1, a2, a3, a4));
 		livroRepository.saveAll(List.of(l1, l2, l3, l4, l5, l6));
 		usuarioRepository.saveAll(List.of(u1, u2, u3, u4));
 		resenhaRepository.saveAll(List.of(r1, r2, r3, r4, r5));
