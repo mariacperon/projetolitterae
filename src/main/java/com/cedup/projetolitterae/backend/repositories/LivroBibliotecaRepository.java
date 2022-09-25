@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface LivroBibliotecaRepository extends JpaRepository<LivroBiblioteca, Integer> {
 
-    List<LivroBiblioteca> findLivroBibliotecaByBibliotecaId(Integer id);
+    List<LivroBiblioteca> findLivroBibliotecaByBibliotecaId(Long id);
 }

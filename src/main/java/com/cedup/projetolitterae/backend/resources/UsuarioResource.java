@@ -35,7 +35,7 @@ public class UsuarioResource {
     }
 
     @RequestMapping(value = "/biblioteca/{id}",method = RequestMethod.GET)
-    public ResponseEntity<List<Usuario>> pesquisarUsuarioPorBiblioteca(@PathVariable Integer id){
+    public ResponseEntity<List<Usuario>> pesquisarUsuarioPorBiblioteca(@PathVariable Long id){
         List<Usuario> usuarios = usuarioService.pesquisarUsuariosPorBiblioteca(id);
         return ResponseEntity.ok().body(usuarios);
     }

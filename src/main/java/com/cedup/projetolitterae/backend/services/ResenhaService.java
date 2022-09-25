@@ -15,14 +15,14 @@ public class ResenhaService {
     private ResenhaRepository repository;
 
     public Resenha pesquisarPorId(Integer id){
-        return (repository.findById(id)).get();
+        return (repository.findById(id)).orElse(null);
     }
 
     public List<Resenha> pesquisarResenhaPorIdLivro(Integer id){
         return repository.findResenhaByLivroId(id);
     }
 
-    public List<Resenha> pesquisarResenhaPorIdUsuario(Integer id){
+    public List<Resenha> pesquisarResenhaPorIdUsuario(Long id){
         return repository.findResenhaByUsuarioId(id);
     }
 

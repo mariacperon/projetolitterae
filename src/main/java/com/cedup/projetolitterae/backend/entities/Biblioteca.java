@@ -15,15 +15,13 @@ import java.io.Serializable;
 public class Biblioteca implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(columnDefinition ="varchar(16)")
     private String cnpj;
 
     private String nome;
     private String email;
-    private String contaBancaria;
 
     @OneToOne
     @JoinColumn(name = "endereco_id")
@@ -36,8 +34,6 @@ public class Biblioteca implements Serializable {
 
     private Integer tipoPerfil;
 
-    @Column(columnDefinition ="varchar(25)")
-    private String nomeUsuario;
     private String senha;
 
     private boolean ativo;
@@ -45,25 +41,23 @@ public class Biblioteca implements Serializable {
     public Biblioteca() {
     }
 
-    public Biblioteca(String cnpj, String nome, String email, String contaBancaria, String telefone, TipoPerfil tipoPerfil, String nomeUsuario, String senha, boolean ativo, Double taxaAtraso, Double taxaPorDia) {
+    public Biblioteca(String cnpj, String nome, String email, String telefone, TipoPerfil tipoPerfil, String senha, boolean ativo, Double taxaAtraso, Double taxaPorDia) {
         this.cnpj = cnpj;
         this.nome = nome;
         this.email = email;
-        this.contaBancaria = contaBancaria;
         this.telefone = telefone;
         this.tipoPerfil = (tipoPerfil == null) ? null : tipoPerfil.getCod();
-        this.nomeUsuario = nomeUsuario;
         this.senha = senha;
         this.ativo = ativo;
         this.taxaAtraso = taxaAtraso;
         this.taxaPorDia = taxaPorDia;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -91,14 +85,6 @@ public class Biblioteca implements Serializable {
         this.email = email;
     }
 
-    public String getContaBancaria() {
-        return contaBancaria;
-    }
-
-    public void setContaBancaria(String contaBancaria) {
-        this.contaBancaria = contaBancaria;
-    }
-
     public Endereco getEnderecoBiblioteca() {
         return enderecoBiblioteca;
     }
@@ -121,14 +107,6 @@ public class Biblioteca implements Serializable {
 
     public void setTipoPerfil(TipoPerfil tipoPerfil) {
         this.tipoPerfil = tipoPerfil.getCod();
-    }
-
-    public String getNomeUsuario() {
-        return nomeUsuario;
-    }
-
-    public void setNomeUsuario(String nomeUsuario) {
-        this.nomeUsuario = nomeUsuario;
     }
 
     public String getSenha() {

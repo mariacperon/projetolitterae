@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
-    List<Usuario> findUsuarioByBibliotecaId(Integer id);
+    List<Usuario> findUsuarioByBibliotecaId(Long id);
 }
