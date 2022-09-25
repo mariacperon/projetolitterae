@@ -10,6 +10,6 @@ import java.util.List;
 public interface LocacaoRepository extends JpaRepository<Locacao, Integer> {
 
     List<Locacao> findLocacaoByLivroId(Integer id);
-    List<Locacao> findLocacaoByUsuarioId(Integer id);
+    List<Locacao> findLocacaoByUsuarioId(Long id);
 
 }

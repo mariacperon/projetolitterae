@@ -1,5 +1,6 @@
 package com.cedup.projetolitterae.backend.resources;
 
+import com.cedup.projetolitterae.backend.dto.LoginDto;
 import com.cedup.projetolitterae.backend.entities.Usuario;
 import com.cedup.projetolitterae.backend.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -27,13 +29,13 @@ public class UsuarioResource {
     }
 
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
-    public ResponseEntity<Usuario> pesquisarPorId(@PathVariable int id){
+    public ResponseEntity<Usuario> pesquisarPorId(@PathVariable Long id){
         Usuario usuario = usuarioService.pesquisarPorId(id);
         return ResponseEntity.ok().body(usuario);
     }
 
     @RequestMapping(value = "/biblioteca/{id}",method = RequestMethod.GET)
-    public ResponseEntity<List<Usuario>> pesquisarUsuarioPorBiblioteca(@PathVariable int id){
+    public ResponseEntity<List<Usuario>> pesquisarUsuarioPorBiblioteca(@PathVariable Integer id){
         List<Usuario> usuarios = usuarioService.pesquisarUsuariosPorBiblioteca(id);
         return ResponseEntity.ok().body(usuarios);
     }
@@ -51,8 +53,14 @@ public class UsuarioResource {
     }
 
     @RequestMapping(value = "/excluir/{id}",method = RequestMethod.DELETE)
-    public ResponseEntity<Void> excluir(@PathVariable Integer id){
+    public ResponseEntity<Void> excluir(@PathVariable Long id){
         usuarioService.excluirUsuario(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    public ResponseEntity<Usuario> login(@RequestBody LoginDto login){
+        Usuario usuario = usuarioService.login(login);
+        return ResponseEntity.ok().body(usuario);
     }
 }

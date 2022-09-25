@@ -31,7 +31,7 @@ public class LocacaoService {
         return repository.findLocacaoByLivroId(id);
     }
 
-    public List<Locacao> pesquisarPorUsuario(Integer id){
+    public List<Locacao> pesquisarPorUsuario(Long id){
         return repository.findLocacaoByUsuarioId(id);
     }
 

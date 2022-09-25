@@ -13,13 +13,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.Random;
 
 @Entity
 public class Usuario implements Serializable{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(columnDefinition ="varchar(11)")
     private String cpf;
@@ -61,11 +61,11 @@ public class Usuario implements Serializable{
         this.dataNascimento = dataNascimento;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

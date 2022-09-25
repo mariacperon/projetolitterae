@@ -10,7 +10,6 @@ import com.cedup.projetolitterae.backend.entities.Usuario;
 import com.cedup.projetolitterae.backend.enums.GeneroLivro;
 import com.cedup.projetolitterae.backend.enums.StatusLocacao;
 import com.cedup.projetolitterae.backend.enums.TipoPerfil;
-import com.cedup.projetolitterae.backend.repositories.AutorRepository;
 import com.cedup.projetolitterae.backend.repositories.BibliotecaRepository;
 import com.cedup.projetolitterae.backend.repositories.EnderecoRepository;
 import com.cedup.projetolitterae.backend.repositories.LivroBibliotecaRepository;
@@ -26,6 +25,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Random;
 
 @SpringBootApplication
 public class ProjetolitteraeApplication implements CommandLineRunner {
@@ -41,13 +41,13 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 	@Autowired
 	LivroRepository livroRepository;
 	@Autowired
-	AutorRepository autorRepository;
-	@Autowired
 	ResenhaRepository resenhaRepository;
 	@Autowired
 	LivroBibliotecaRepository livroBibliotecaRepository;
 	@Autowired
 	LocacaoRepository locacaoRepository;
+
+	Random random = new Random();
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjetolitteraeApplication.class, args);
@@ -141,21 +141,25 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 				"1474147", "13231", TipoPerfil.LEITOR, true, new Date(1999-1900,2-1,19));
 		u1.setEnderecoUsuario(e6);
 		u1.setBiblioteca(b1);
+		u1.setId(random.nextLong(10000, 100000000));
 
 		Usuario u2 = new Usuario("65432198745", "Joca Luis", "Peron Gonçalves",
 				"4561234", "dfasd", TipoPerfil.LEITOR,true, new Date(1999-1900,2-1,19));
 		u2.setEnderecoUsuario(e7);
 		u2.setBiblioteca(b2);
+		u2.setId(random.nextLong(10000, 100000000));
 
 		Usuario u3 = new Usuario("12345678945", "Lucas", "Testoni",
 				"4564897", "13231", TipoPerfil.LEITOR, true, new Date(1999-1900,2-1,19));
 		u3.setEnderecoUsuario(e8);
 		u3.setBiblioteca(b3);
+		u3.setId(random.nextLong(10000, 100000000));
 
 		Usuario u4 = new Usuario("12345678945", "Veri", "Berti",
 				"4715457", "13231", TipoPerfil.LEITOR, true, new Date(1999-1900,2-1,19));
 		u4.setEnderecoUsuario(e9);
 		u4.setBiblioteca(b4);
+		u4.setId(random.nextLong(10000, 100000000));
 
 		//CADASTRO DE LIVROS DA BIBLIOTECA
 		LivroBiblioteca lb1 = new LivroBiblioteca(l1, b1, 6);

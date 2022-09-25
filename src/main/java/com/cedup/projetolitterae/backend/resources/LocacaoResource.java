@@ -28,7 +28,7 @@ public class LocacaoResource {
     }
 
     @RequestMapping(value = "/usuario/{id}",method = RequestMethod.GET)
-    public ResponseEntity<List<Locacao>> pesquisarPorUsuarioId(@PathVariable Integer id){
+    public ResponseEntity<List<Locacao>> pesquisarPorUsuarioId(@PathVariable Long id){
         List<Locacao> locacoes = locacaoService.pesquisarPorUsuario(id);
         return ResponseEntity.ok().body(locacoes);
     }
