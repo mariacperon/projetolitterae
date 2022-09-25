@@ -1,6 +1,7 @@
 package com.cedup.projetolitterae.backend.entities;
 
 import com.cedup.projetolitterae.backend.enums.TipoPerfil;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import java.io.Serializable;
+import java.sql.Date;
 
 @Entity
 public class Usuario implements Serializable{
@@ -35,6 +37,9 @@ public class Usuario implements Serializable{
     @JoinColumn(name = "id_biblioteca")
     private Biblioteca biblioteca;
 
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private Date dataNascimento;
+
     private String telefone1;
     private String telefone2;
 
@@ -45,7 +50,7 @@ public class Usuario implements Serializable{
     public Usuario() {
     }
 
-    public Usuario(String cpf, String nome, String sobrenome, String telefone1, String telefone2, TipoPerfil tipoPerfil, boolean ativo) {
+    public Usuario(String cpf, String nome, String sobrenome, String telefone1, String telefone2, TipoPerfil tipoPerfil, boolean ativo, Date dataNascimento) {
         this.cpf = cpf;
         this.nome = nome;
         this.sobrenome = sobrenome;
@@ -53,6 +58,7 @@ public class Usuario implements Serializable{
         this.telefone2 = telefone2;
         this.tipoPerfil = (tipoPerfil == null) ? null : tipoPerfil.getCod();
         this.ativo = ativo;
+        this.dataNascimento = dataNascimento;
     }
 
     public Integer getId() {
@@ -133,5 +139,13 @@ public class Usuario implements Serializable{
 
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
+    }
+
+    public Date getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 }

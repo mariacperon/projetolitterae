@@ -1,6 +1,7 @@
 package com.cedup.projetolitterae.backend.entities;
 
 import com.cedup.projetolitterae.backend.enums.GeneroLivro;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -10,7 +11,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,28 +25,40 @@ public class Livro {
     private Integer id;
 
     private String nome;
-
-    @ManyToOne
-    @JoinColumn(name = "id_autor")
-    private Autor autor;
+    private String autor;
 
     @ElementCollection
     @CollectionTable(name = "livro_genero")
     @Column(name = "genero")
     private List<Integer> generos = new ArrayList<>();
 
-    private String resumo;
+    private String sinopse;
     private String idioma;
-    private String resenhas;
+    private String classificacaoEtaria;
+    private String editora;
+    private String ISDB;
+    private String edicao;
+
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private Date dataLancamento;
+
+    @Lob
+    @Column(name="imagem", columnDefinition="mediumblob")
+    private byte[] imagem;
 
     public Livro() {
     }
 
-    public Livro(String nome, String resumo, String idioma, String resenhas) {
+    public Livro(String nome, String autor, String sinopse, String idioma, String classificacaoEtaria, String editora, String ISDB, String edicao, Date dataLancamento) {
         this.nome = nome;
-        this.resumo = resumo;
+        this.autor = autor;
+        this.sinopse = sinopse;
         this.idioma = idioma;
-        this.resenhas = resenhas;
+        this.classificacaoEtaria = classificacaoEtaria;
+        this.editora = editora;
+        this.ISDB = ISDB;
+        this.edicao = edicao;
+        this.dataLancamento = dataLancamento;
     }
 
     public Integer getId() {
@@ -62,11 +77,11 @@ public class Livro {
         this.nome = nome;
     }
 
-    public Autor getAutor() {
+    public String getAutor() {
         return autor;
     }
 
-    public void setAutor(Autor autor) {
+    public void setAutor(String autor) {
         this.autor = autor;
     }
 
@@ -82,12 +97,12 @@ public class Livro {
         this.generos = codGeneros;
     }
 
-    public String getResumo() {
-        return resumo;
+    public String getSinopse() {
+        return sinopse;
     }
 
-    public void setResumo(String resumo) {
-        this.resumo = resumo;
+    public void setSinopse(String sinopse) {
+        this.sinopse = sinopse;
     }
 
     public String getIdioma() {
@@ -98,11 +113,11 @@ public class Livro {
         this.idioma = idioma;
     }
 
-    public String getResenhas() {
-        return resenhas;
+    public byte[] getImagem() {
+        return imagem;
     }
 
-    public void setResenhas(String resenhas) {
-        this.resenhas = resenhas;
+    public void setImagem(byte[] imagem) {
+        this.imagem = imagem;
     }
 }
