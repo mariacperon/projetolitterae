@@ -33,7 +33,7 @@ public class ResenhaResource {
     }
 
     @RequestMapping(value = "/usuario/{id}",method = RequestMethod.GET)
-    public ResponseEntity<List<Resenha>> pesquisarResenhasPorIdUsuario(@PathVariable int id){
+    public ResponseEntity<List<Resenha>> pesquisarResenhasPorIdUsuario(@PathVariable Long id){
         List<Resenha> resenha = resenhaService.pesquisarResenhaPorIdUsuario(id);
         return ResponseEntity.ok().body(resenha);
     }

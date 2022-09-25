@@ -10,6 +10,6 @@ import java.util.List;
 public interface ResenhaRepository extends JpaRepository<Resenha, Integer> {
 
     List<Resenha> findResenhaByLivroId(Integer id);
-    List<Resenha> findResenhaByUsuarioId(Integer id);
+    List<Resenha> findResenhaByUsuarioId(Long id);
 
 }

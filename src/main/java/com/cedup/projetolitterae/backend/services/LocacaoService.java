@@ -24,7 +24,7 @@ public class LocacaoService {
     private LivroBibliotecaService livroBibliotecaService;
 
     public Locacao pesquisarPorId(Integer id){
-        return (repository.findById(id)).get();
+        return (repository.findById(id)).orElse(null);
     }
 
     public List<Locacao> pesquisarPorLivro(Integer id){

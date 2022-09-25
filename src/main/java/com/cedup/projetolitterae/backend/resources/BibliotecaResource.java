@@ -1,5 +1,6 @@
 package com.cedup.projetolitterae.backend.resources;
 
+import com.cedup.projetolitterae.backend.dto.SenhaDto;
 import com.cedup.projetolitterae.backend.entities.Biblioteca;
 import com.cedup.projetolitterae.backend.services.BibliotecaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class BibliotecaResource {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Biblioteca> pesquisarPorId(@PathVariable int id){
+    public ResponseEntity<Biblioteca> pesquisarPorId(@PathVariable Long id){
         Biblioteca biblioteca = bibliotecaService.pesquisarPorId(id);
         return ResponseEntity.ok().body(biblioteca);
     }
@@ -45,8 +46,13 @@ public class BibliotecaResource {
     }
 
     @RequestMapping(value = "/excluir/{id}",method = RequestMethod.DELETE)
-    public ResponseEntity<Void> excluir(@PathVariable Integer id){
+    public ResponseEntity<Void> excluir(@PathVariable Long id){
         bibliotecaService.excluirBiblioteca(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @RequestMapping(value = "/alterar-senha",method = RequestMethod.PUT)
+    public ResponseEntity<Boolean> alterarSenha(@Validated @RequestBody SenhaDto senhaDto){
+        return ResponseEntity.ok().body(bibliotecaService.alterarSenha(senhaDto));
     }
 }

@@ -27,7 +27,7 @@ public class UsuarioService {
         return repository.findById(id).orElse(null);
     }
 
-    public List<Usuario> pesquisarUsuariosPorBiblioteca(Integer id){
+    public List<Usuario> pesquisarUsuariosPorBiblioteca(Long id){
         return repository.findUsuarioByBibliotecaId(id);
     }
 

@@ -15,10 +15,10 @@ public class LivroBibliotecaService {
     private LivroBibliotecaRepository repository;
 
     public LivroBiblioteca pesquisarPorId(Integer id){
-        return (repository.findById(id)).get();
+        return (repository.findById(id)).orElse(null);
     }
 
-    public List<LivroBiblioteca> pesquisarLivroBibliotecasBiblioteca(Integer id){
+    public List<LivroBiblioteca> pesquisarLivroBibliotecasBiblioteca(Long id){
         return repository.findLivroBibliotecaByBibliotecaId(id);
     }
 

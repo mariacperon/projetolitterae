@@ -15,7 +15,7 @@ public class LivroService {
     private LivroRepository repository;
 
     public Livro pesquisarPorId(Integer id){
-        return (repository.findById(id)).get();
+        return (repository.findById(id)).orElse(null);
     }
 
     public List<Livro> pesquisarTodos(){
