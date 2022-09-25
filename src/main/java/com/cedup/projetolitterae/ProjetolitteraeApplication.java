@@ -123,53 +123,53 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 
 		//CADASTRO DE LIVROS
 		Livro l1 = new Livro("Rainha Vermelha", "ansdjbf",
-				"portugues", "asdfasdfa");
+				"portugues", "livre", "seila", "sdfasdf", "1º", new Date(1999-1900,2-1,19));
 		l1.setAutor(a1);
 		l1.setGeneros(List.of(GeneroLivro.FICCAO, GeneroLivro.AVENTURA));
 
 		Livro l2 = new Livro("Espada de Vidro","ansdjbf",
-				"portugues", "asdfasdfa");
+				"portugues", "livre", "seila", "sdfasdf", "1º", new Date(1999-1900,2-1,19));
 		l2.setGeneros(List.of(GeneroLivro.FICCAO, GeneroLivro.AVENTURA));
 		l2.setAutor(a1);
 
 		Livro l3 = new Livro("A Sombra do Vento","ansdjbf",
-				"portugues", "asdfasdfa");
+				"portugues", "livre", "seila", "sdfasdf", "1º", new Date(1999-1900,2-1,19));
 		l3.setAutor(a2);
 		l3.setGeneros(List.of(GeneroLivro.DRAMA, GeneroLivro.FICCAO));
 
 		Livro l4 = new Livro("Jogos Vorazes", "ansdjbf",
-				"portugues", "asdfasdfa");
+				"portugues", "livre", "seila", "sdfasdf", "1º", new Date(1999-1900,2-1,19));
 		l4.setAutor(a3);
 		l4.setGeneros(List.of(GeneroLivro.FICCAO, GeneroLivro.AVENTURA));
 
 		Livro l5 = new Livro("Os Sete Maridos de Evelyn Hugo", "ansdjbf",
-				"portugues", "asdfasdfa");
+				"portugues", "livre", "seila", "sdfasdf", "1º", new Date(1999-1900,2-1,19));
 		l5.setAutor(a4);
 		l5.setGeneros(List.of(GeneroLivro.ROMANCE));
 
 		Livro l6 = new Livro("Daisy Jones & The Six", "ansdjbf",
-				"portugues", "asdfasdfa");
+				"portugues", "livre", "seila", "sdfasdf", "1º", new Date(1999-1900,2-1,19));
 		l6.setAutor(a4);
 		l6.setGeneros(List.of(GeneroLivro.DRAMA, GeneroLivro.ROMANCE));
 
 		//CADASTRO DE USUARIOS
 		Usuario u1 = new Usuario("12345678945", "Maria Clara", "Peron Gonçalves",
-				"1474147", "13231", TipoPerfil.LEITOR, true);
+				"1474147", "13231", TipoPerfil.LEITOR, true, new Date(1999-1900,2-1,19));
 		u1.setEnderecoUsuario(e6);
 		u1.setBiblioteca(b1);
 
 		Usuario u2 = new Usuario("65432198745", "Joca Luis", "Peron Gonçalves",
-				"4561234", "dfasd", TipoPerfil.LEITOR,true);
+				"4561234", "dfasd", TipoPerfil.LEITOR,true, new Date(1999-1900,2-1,19));
 		u2.setEnderecoUsuario(e7);
 		u2.setBiblioteca(b2);
 
 		Usuario u3 = new Usuario("12345678945", "Lucas", "Testoni",
-				"4564897", "13231", TipoPerfil.LEITOR, true);
+				"4564897", "13231", TipoPerfil.LEITOR, true, new Date(1999-1900,2-1,19));
 		u3.setEnderecoUsuario(e8);
 		u3.setBiblioteca(b3);
 
 		Usuario u4 = new Usuario("12345678945", "Veri", "Berti",
-				"4715457", "13231", TipoPerfil.LEITOR, true);
+				"4715457", "13231", TipoPerfil.LEITOR, true, new Date(1999-1900,2-1,19));
 		u4.setEnderecoUsuario(e9);
 		u4.setBiblioteca(b4);
 
