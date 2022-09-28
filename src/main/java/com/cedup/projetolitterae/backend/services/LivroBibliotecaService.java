@@ -18,10 +18,6 @@ public class LivroBibliotecaService {
         return (repository.findById(id)).orElse(null);
     }
 
-    public List<LivroBiblioteca> pesquisarLivroBibliotecasBiblioteca(Long id){
-        return repository.findLivroBibliotecaByBibliotecaId(id);
-    }
-
     @Transactional
     public LivroBiblioteca cadastrarLivroBiblioteca(LivroBiblioteca livroBiblioteca){
         livroBiblioteca.setId(null);
