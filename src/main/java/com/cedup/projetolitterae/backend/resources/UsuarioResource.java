@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -59,7 +59,7 @@ public class UsuarioResource {
     }
 
     @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public ResponseEntity<Usuario> login(@RequestBody LoginDto login){
+    public ResponseEntity<Usuario> login(@RequestBody LoginDto login, @RequestParam(value = "id") Long id){
         Usuario usuario = usuarioService.login(login);
         return ResponseEntity.ok().body(usuario);
     }
