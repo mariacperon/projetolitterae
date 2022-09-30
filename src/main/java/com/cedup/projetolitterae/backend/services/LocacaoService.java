@@ -1,4 +1,4 @@
-package com.cedup.projetolitterae.backend.resources.services;
+package com.cedup.projetolitterae.backend.services;
 
 import com.cedup.projetolitterae.backend.entities.Locacao;
 import com.cedup.projetolitterae.backend.entities.MensagemRetorno;

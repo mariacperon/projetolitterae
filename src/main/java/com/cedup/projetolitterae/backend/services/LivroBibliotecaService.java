@@ -1,4 +1,4 @@
-package com.cedup.projetolitterae.backend.resources.services;
+package com.cedup.projetolitterae.backend.services;
 
 import com.cedup.projetolitterae.backend.entities.LivroBiblioteca;
 import com.cedup.projetolitterae.backend.repositories.LivroBibliotecaRepository;
@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
 @Service
 public class LivroBibliotecaService {

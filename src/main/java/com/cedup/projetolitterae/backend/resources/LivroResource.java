@@ -1,7 +1,7 @@
 package com.cedup.projetolitterae.backend.resources;
 
 import com.cedup.projetolitterae.backend.entities.Livro;
-import com.cedup.projetolitterae.backend.resources.services.LivroService;
+import com.cedup.projetolitterae.backend.services.LivroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
