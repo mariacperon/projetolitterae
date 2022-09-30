@@ -3,7 +3,7 @@ package com.cedup.projetolitterae.backend.dto;
 
 import java.sql.Date;
 
-public class LoginDto {
+public class LoginUsuarioDto {
 
     private Long id;
     private Date dataNascimento;
