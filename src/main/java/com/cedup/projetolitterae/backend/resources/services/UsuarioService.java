@@ -1,5 +1,6 @@
-package com.cedup.projetolitterae.backend.resources.services;
+package com.cedup.projetolitterae.backend.services;
 
+import com.cedup.projetolitterae.backend.dto.LoginUsuarioDto;
 import com.cedup.projetolitterae.backend.entities.MensagemRetorno;
 import com.cedup.projetolitterae.backend.entities.Usuario;
 import com.cedup.projetolitterae.backend.exceptions.MensagemRetornoException;
@@ -33,7 +34,7 @@ public class UsuarioService {
         return repository.findAll();
     }
 
-    public Usuario login(EnderecoRepository.LoginDto login){
+    public Usuario login(LoginUsuarioDto login){
         login.getDataNascimento().setDate(login.getDataNascimento().getDate() + 1);
         Usuario usuario = pesquisarPorId(login.getId());
 
