@@ -1,6 +1,6 @@
 package com.cedup.projetolitterae.backend.resources;
 
-import com.cedup.projetolitterae.backend.dto.LoginDto;
+import com.cedup.projetolitterae.backend.dto.LoginUsuarioDto;
 import com.cedup.projetolitterae.backend.entities.Usuario;
 import com.cedup.projetolitterae.backend.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +59,7 @@ public class UsuarioResource {
     }
 
     @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public ResponseEntity<Usuario> login(@RequestBody LoginDto login, @RequestParam(value = "id") Long id){
+    public ResponseEntity<Usuario> login(@RequestBody LoginUsuarioDto login){
         Usuario usuario = usuarioService.login(login);
         return ResponseEntity.ok().body(usuario);
     }

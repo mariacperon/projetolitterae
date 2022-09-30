@@ -1,15 +1,17 @@
 package com.cedup.projetolitterae.backend.resources;
 
-import com.cedup.projetolitterae.backend.dto.SenhaDto;
+import com.cedup.projetolitterae.backend.dto.LoginBibliotecaDto;
 import com.cedup.projetolitterae.backend.entities.Biblioteca;
 import com.cedup.projetolitterae.backend.services.BibliotecaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -52,7 +54,13 @@ public class BibliotecaResource {
     }
 
     @RequestMapping(value = "/alterar-senha",method = RequestMethod.PUT)
-    public ResponseEntity<Boolean> alterarSenha(@Validated @RequestBody SenhaDto senhaDto){
-        return ResponseEntity.ok().body(bibliotecaService.alterarSenha(senhaDto));
+    public ResponseEntity<Boolean> alterarSenha(@RequestParam(value = "id") Long id, @RequestParam(value = "novaSenha") String senha){
+        return ResponseEntity.ok().body(bibliotecaService.alterarSenha(id, senha));
+    }
+
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    public ResponseEntity<Biblioteca> login(@RequestBody LoginBibliotecaDto login){
+        Biblioteca biblioteca = bibliotecaService.login(login.getId(), login.getSenha());
+        return ResponseEntity.ok().body(biblioteca);
     }
 }
