@@ -1,6 +1,5 @@
-package com.cedup.projetolitterae.backend.services;
+package com.cedup.projetolitterae.backend.resources.services;
 
-import com.cedup.projetolitterae.backend.dto.LoginDto;
 import com.cedup.projetolitterae.backend.entities.MensagemRetorno;
 import com.cedup.projetolitterae.backend.entities.Usuario;
 import com.cedup.projetolitterae.backend.exceptions.MensagemRetornoException;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -35,7 +33,7 @@ public class UsuarioService {
         return repository.findAll();
     }
 
-    public Usuario login(LoginDto login){
+    public Usuario login(EnderecoRepository.LoginDto login){
         login.getDataNascimento().setDate(login.getDataNascimento().getDate() + 1);
         Usuario usuario = pesquisarPorId(login.getId());
 

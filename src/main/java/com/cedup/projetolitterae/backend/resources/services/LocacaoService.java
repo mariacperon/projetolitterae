@@ -1,8 +1,7 @@
-package com.cedup.projetolitterae.backend.services;
+package com.cedup.projetolitterae.backend.resources.services;
 
 import com.cedup.projetolitterae.backend.entities.Locacao;
 import com.cedup.projetolitterae.backend.entities.MensagemRetorno;
-import com.cedup.projetolitterae.backend.entities.Usuario;
 import com.cedup.projetolitterae.backend.exceptions.MensagemRetornoException;
 import com.cedup.projetolitterae.backend.enums.StatusLocacao;
 import com.cedup.projetolitterae.backend.repositories.LocacaoRepository;
@@ -10,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;

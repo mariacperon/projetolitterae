@@ -1,4 +1,4 @@
-package com.cedup.projetolitterae.backend.services;
+package com.cedup.projetolitterae.backend.resources.services;
 
 import com.cedup.projetolitterae.backend.entities.Endereco;
 import com.cedup.projetolitterae.backend.repositories.EnderecoRepository;
