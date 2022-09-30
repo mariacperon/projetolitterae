@@ -2,7 +2,7 @@ package com.cedup.projetolitterae.backend.resources;
 
 import com.cedup.projetolitterae.backend.dto.LoginBibliotecaDto;
 import com.cedup.projetolitterae.backend.entities.Biblioteca;
-import com.cedup.projetolitterae.backend.services.BibliotecaService;
+import com.cedup.projetolitterae.backend.resources.services.BibliotecaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;

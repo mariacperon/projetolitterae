@@ -17,7 +17,7 @@ import com.cedup.projetolitterae.backend.repositories.LivroRepository;
 import com.cedup.projetolitterae.backend.repositories.LocacaoRepository;
 import com.cedup.projetolitterae.backend.repositories.ResenhaRepository;
 import com.cedup.projetolitterae.backend.repositories.UsuarioRepository;
-import com.cedup.projetolitterae.backend.services.UsuarioService;
+import com.cedup.projetolitterae.backend.resources.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
