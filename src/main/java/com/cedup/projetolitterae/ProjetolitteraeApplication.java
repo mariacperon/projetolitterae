@@ -94,27 +94,27 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 		Biblioteca b1 = new Biblioteca("554", "Cheiro de livro", "asdfad@",
 				"45987412365",  TipoPerfil.ADMIN, "1234", true, 10.00,2.00);
 		b1.setEnderecoBiblioteca(e1);
-		b1.setId(random.nextLong(10000, 100000000));
+		b1.setId(10001L);
 
 		Biblioteca b2 = new Biblioteca("645657", "Saraiva", "sad@",
 				"852221", TipoPerfil.ADMIN, "1234", true, 10.00,2.00);
 		b2.setEnderecoBiblioteca(e2);
-		b2.setId(random.nextLong(10000, 100000000));
+		b2.setId(10002L);
 
 		Biblioteca b3 = new Biblioteca("789", "Catarinense", "fghdfgh@",
 				"5546", TipoPerfil.ADMIN, "1234", true, 10.00,2.00);
 		b3.setEnderecoBiblioteca(e3);
-		b3.setId(random.nextLong(10000, 100000000));
+		b3.setId(10003L);
 
 		Biblioteca b4 = new Biblioteca("678", "BluLivros", "AaE@",
 				"5154", TipoPerfil.ADMIN, "1234", true, 10.00,2.00);
 		b4.setEnderecoBiblioteca(e4);
-		b4.setId(random.nextLong(10000, 100000000));
+		b4.setId(10004L);
 
 		Biblioteca b5 = new Biblioteca("5645", "BookCenter", "hryty@",
 				"548454", TipoPerfil.ADMIN, "1234", true, 10.00,2.00);
 		b5.setEnderecoBiblioteca(e5);
-		b5.setId(random.nextLong(10000, 100000000));
+		b5.setId(10005L);
 
 		//CADASTRO DE LIVROS
 		Livro l1 = new Livro("Rainha Vermelha","victoria aveyard", "ansdjbf",
@@ -146,25 +146,25 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 				"1474147", "13231", TipoPerfil.LEITOR, true, new Date(1999-1900,2-1,19));
 		u1.setEnderecoUsuario(e6);
 		u1.setBiblioteca(b1);
-		u1.setId(random.nextLong(10000, 100000000));
+		u1.setId(10001L);
 
 		Usuario u2 = new Usuario("65432198745", "Joca Luis", "Peron Gonçalves",
 				"4561234", "dfasd", TipoPerfil.LEITOR,true, new Date(1999-1900,2-1,19));
 		u2.setEnderecoUsuario(e7);
 		u2.setBiblioteca(b2);
-		u2.setId(random.nextLong(10000, 100000000));
+		u2.setId(10002L);
 
 		Usuario u3 = new Usuario("12345678945", "Lucas", "Testoni",
 				"4564897", "13231", TipoPerfil.LEITOR, true, new Date(1999-1900,2-1,19));
 		u3.setEnderecoUsuario(e8);
 		u3.setBiblioteca(b3);
-		u3.setId(random.nextLong(10000, 100000000));
+		u3.setId(10003L);
 
 		Usuario u4 = new Usuario("12345678945", "Veri", "Berti",
 				"4715457", "13231", TipoPerfil.LEITOR, true, new Date(1999-1900,2-1,19));
 		u4.setEnderecoUsuario(e9);
 		u4.setBiblioteca(b4);
-		u4.setId(random.nextLong(10000, 100000000));
+		u4.setId(10004L);
 
 		//CADASTRO DE LIVROS DA BIBLIOTECA
 		LivroBiblioteca lb1 = new LivroBiblioteca(l1, b1, 6);
