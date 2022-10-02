@@ -120,4 +120,44 @@ public class Livro {
     public void setImagem(byte[] imagem) {
         this.imagem = imagem;
     }
+
+    public String getClassificacaoEtaria() {
+        return classificacaoEtaria;
+    }
+
+    public void setClassificacaoEtaria(String classificacaoEtaria) {
+        this.classificacaoEtaria = classificacaoEtaria;
+    }
+
+    public String getEditora() {
+        return editora;
+    }
+
+    public void setEditora(String editora) {
+        this.editora = editora;
+    }
+
+    public String getISDB() {
+        return ISDB;
+    }
+
+    public void setISDB(String ISDB) {
+        this.ISDB = ISDB;
+    }
+
+    public String getEdicao() {
+        return edicao;
+    }
+
+    public void setEdicao(String edicao) {
+        this.edicao = edicao;
+    }
+
+    public Date getDataLancamento() {
+        return dataLancamento;
+    }
+
+    public void setDataLancamento(Date dataLancamento) {
+        this.dataLancamento = dataLancamento;
+    }
 }

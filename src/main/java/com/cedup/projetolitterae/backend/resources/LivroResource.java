@@ -1,5 +1,6 @@
 package com.cedup.projetolitterae.backend.resources;
 
+import com.cedup.projetolitterae.backend.dto.PesquisaLivroDto;
 import com.cedup.projetolitterae.backend.entities.Livro;
 import com.cedup.projetolitterae.backend.services.LivroService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,12 @@ public class LivroResource {
     public ResponseEntity<Livro> pesquisarPorId(@PathVariable int id){
         Livro livro = livroService.pesquisarPorId(id);
         return ResponseEntity.ok().body(livro);
+    }
+
+    @RequestMapping(value = "/pesquisar-por",method = RequestMethod.GET)
+    public ResponseEntity<List<Livro>> pesquisaEspecifica(@RequestBody PesquisaLivroDto pesquisaLivro){
+        List<Livro> livros = livroService.pesquisaLivroEspecifica(pesquisaLivro);
+        return ResponseEntity.ok().body(livros);
     }
 
     @RequestMapping(value = "/all",method = RequestMethod.GET)

@@ -17,7 +17,6 @@ import com.cedup.projetolitterae.backend.repositories.LivroRepository;
 import com.cedup.projetolitterae.backend.repositories.LocacaoRepository;
 import com.cedup.projetolitterae.backend.repositories.ResenhaRepository;
 import com.cedup.projetolitterae.backend.repositories.UsuarioRepository;
-import com.cedup.projetolitterae.backend.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -25,13 +24,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.sql.Date;
 import java.util.List;
-import java.util.Random;
 
 @SpringBootApplication
 public class ProjetolitteraeApplication implements CommandLineRunner {
 
-	@Autowired
-	UsuarioService usuarioService;
 	@Autowired
 	UsuarioRepository usuarioRepository;
 	@Autowired
@@ -46,8 +42,6 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 	LivroBibliotecaRepository livroBibliotecaRepository;
 	@Autowired
 	LocacaoRepository locacaoRepository;
-
-	Random random = new Random();
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjetolitteraeApplication.class, args);
