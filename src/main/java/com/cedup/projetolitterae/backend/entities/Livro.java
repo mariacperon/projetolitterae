@@ -42,9 +42,7 @@ public class Livro {
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date dataLancamento;
 
-    @Lob
-    @Column(name="imagem", columnDefinition="mediumblob")
-    private byte[] imagem;
+    private String imagemPath;
 
     public Livro() {
     }
@@ -113,12 +111,12 @@ public class Livro {
         this.idioma = idioma;
     }
 
-    public byte[] getImagem() {
-        return imagem;
+    public String getImagem() {
+        return imagemPath;
     }
 
-    public void setImagem(byte[] imagem) {
-        this.imagem = imagem;
+    public void setImagem(String imagemPath) {
+        this.imagemPath = imagemPath;
     }
 
     public String getClassificacaoEtaria() {

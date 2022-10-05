@@ -43,6 +43,8 @@ public class Usuario implements Serializable{
     private String telefone1;
     private String telefone2;
 
+    private String imagem;
+
     private int tipoPerfil;
 
     private boolean ativo;
@@ -147,5 +149,13 @@ public class Usuario implements Serializable{
 
     public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
+    }
+
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
     }
 }

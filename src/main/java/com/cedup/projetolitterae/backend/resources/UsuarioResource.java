@@ -1,11 +1,13 @@
 package com.cedup.projetolitterae.backend.resources;
 
+import com.cedup.projetolitterae.backend.dto.ImagemPerfilDto;
 import com.cedup.projetolitterae.backend.dto.LoginUsuarioDto;
 import com.cedup.projetolitterae.backend.entities.Usuario;
 import com.cedup.projetolitterae.backend.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.File;
 import java.util.List;
 
 @RestController
@@ -44,6 +47,12 @@ public class UsuarioResource {
     public ResponseEntity<Usuario> cadastrar(@Validated @RequestBody Usuario usuario){
         Usuario usuarioCadastrado = usuarioService.cadastrarUsuario(usuario);
         return ResponseEntity.ok().body(usuarioCadastrado);
+    }
+
+    @RequestMapping(value = "/salvar-imagem",method = RequestMethod.POST)
+    public ResponseEntity<String> salvarImagem(@ModelAttribute ImagemPerfilDto imagemPerfilDto){
+        String imagemPath = usuarioService.salvaImagem(imagemPerfilDto);
+        return ResponseEntity.ok().body(imagemPath);
     }
 
     @RequestMapping(value = "/alterar",method = RequestMethod.PUT)

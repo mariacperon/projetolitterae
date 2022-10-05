@@ -1,18 +1,26 @@
 package com.cedup.projetolitterae.backend.services;
 
+import com.cedup.projetolitterae.backend.dto.ImagemPerfilDto;
 import com.cedup.projetolitterae.backend.dto.LoginUsuarioDto;
 import com.cedup.projetolitterae.backend.entities.MensagemRetorno;
 import com.cedup.projetolitterae.backend.entities.Usuario;
 import com.cedup.projetolitterae.backend.exceptions.MensagemRetornoException;
 import com.cedup.projetolitterae.backend.repositories.EnderecoRepository;
 import com.cedup.projetolitterae.backend.repositories.UsuarioRepository;
+import com.cedup.projetolitterae.imagens.FileUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Random;
+
+import org.apache.commons.io.FilenameUtils;
 
 @Service
 public class UsuarioService {
@@ -42,15 +50,39 @@ public class UsuarioService {
 
         if(usuario == null){
             throw new MensagemRetornoException(new MensagemRetorno("ERRO",
-                    "O número de cadastro não foi encontrado em nossos registros."));
-        }
-
-        if(!sdf.format(usuario.getDataNascimento()).equals(sdf.format(login.getDataNascimento()))){
-            throw new MensagemRetornoException(new MensagemRetorno("ERRO",
-                    "Data de nascimento inválida."));
+                    "Erro ao fazder login."));
         }
 
         return usuario;
+    }
+
+    public String salvaImagem(ImagemPerfilDto imagem) {
+        try {
+            Usuario usuario = pesquisarPorId(imagem.getIdUsuario());
+            if(usuario != null){
+                String pasta = "src/main/java/com/cedup/projetolitterae/imagens/perfil";
+                String nomeArquivo = usuario.getId() + "." + FilenameUtils.getExtension(imagem.getImagem().getOriginalFilename());
+
+                Path diretorio = Paths.get(pasta + "/" + nomeArquivo);
+
+                if (!Files.exists(diretorio)) {
+                    Files.copy(imagem.getImagem().getInputStream(), diretorio);
+
+                    usuario.setImagem(diretorio.toString());
+                    repository.save(usuario);
+                }
+
+                FileUploadUtil.saveFile(pasta, nomeArquivo, imagem.getImagem());
+
+                return diretorio.toString();
+            }else{
+                throw new MensagemRetornoException(new MensagemRetorno("ERRO", "Houve um erro ao tentar salvar a imagem de perfil."));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     @Transactional
