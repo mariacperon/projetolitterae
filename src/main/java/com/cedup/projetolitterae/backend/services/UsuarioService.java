@@ -61,7 +61,7 @@ public class UsuarioService {
             Usuario usuario = pesquisarPorId(imagem.getIdUsuario());
             if(usuario != null){
                 String pasta = "src/main/java/com/cedup/projetolitterae/imagens/perfil";
-                String nomeArquivo = usuario.getId() + "." + FilenameUtils.getExtension(imagem.getImagem().getOriginalFilename());
+                String nomeArquivo = usuario.getId() + ".jpeg";
 
                 Path diretorio = Paths.get(pasta + "/" + nomeArquivo);
 
