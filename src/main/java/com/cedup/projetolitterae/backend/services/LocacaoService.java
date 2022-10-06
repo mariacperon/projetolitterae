@@ -35,6 +35,7 @@ public class LocacaoService {
 
     @Transactional
     public Locacao locarLivro(Locacao locacao){
+
         locacao.setId(null);
         locacao.setLivro(livroBibliotecaService.pesquisarPorId(locacao.getLivro().getId()));
         validarLocacao(locacao);

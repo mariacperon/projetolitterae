@@ -50,7 +50,7 @@ public class UsuarioResource {
     }
 
     @RequestMapping(value = "/salvar-imagem",method = RequestMethod.POST)
-    public ResponseEntity<String> salvarImagem(@ModelAttribute ImagemPerfilDto imagemPerfilDto){
+    public ResponseEntity<String> salvarImagem(@RequestBody ImagemPerfilDto imagemPerfilDto){
         String imagemPath = usuarioService.salvaImagem(imagemPerfilDto);
         return ResponseEntity.ok().body(imagemPath);
     }
