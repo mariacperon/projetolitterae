@@ -1,10 +1,13 @@
 package com.cedup.projetolitterae.backend.resources;
 
+import com.cedup.projetolitterae.backend.dto.ImagemPerfilDto;
+import com.cedup.projetolitterae.backend.dto.PesquisaLivroDto;
 import com.cedup.projetolitterae.backend.entities.Livro;
 import com.cedup.projetolitterae.backend.services.LivroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +27,18 @@ public class LivroResource {
     public ResponseEntity<Livro> pesquisarPorId(@PathVariable int id){
         Livro livro = livroService.pesquisarPorId(id);
         return ResponseEntity.ok().body(livro);
+    }
+
+    @RequestMapping(value = "/salvar-imagem",method = RequestMethod.POST)
+    public ResponseEntity<String> salvarImagem(@RequestBody ImagemPerfilDto imagemPerfilDto){
+        String imagemPath = livroService.salvaImagem(imagemPerfilDto);
+        return ResponseEntity.ok().body(imagemPath);
+    }
+
+    @RequestMapping(value = "/pesquisar-por",method = RequestMethod.GET)
+    public ResponseEntity<List<Livro>> pesquisaEspecifica(@RequestBody PesquisaLivroDto pesquisaLivro){
+        List<Livro> livros = livroService.pesquisaLivroEspecifica(pesquisaLivro);
+        return ResponseEntity.ok().body(livros);
     }
 
     @RequestMapping(value = "/all",method = RequestMethod.GET)

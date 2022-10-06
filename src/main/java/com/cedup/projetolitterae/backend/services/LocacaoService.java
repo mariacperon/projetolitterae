@@ -35,10 +35,15 @@ public class LocacaoService {
 
     @Transactional
     public Locacao locarLivro(Locacao locacao){
-        locacao.setId(null);
-        locacao.setLivro(livroBibliotecaService.pesquisarPorId(locacao.getLivro().getId()));
-        validarLocacao(locacao);
-        return repository.save(locacao);
+        if(repository.qtdLivroLocado(locacao.getLivro().getId()) < locacao.getLivro().getQuantidadeEstoque()){
+            locacao.setId(null);
+            locacao.setLivro(livroBibliotecaService.pesquisarPorId(locacao.getLivro().getId()));
+            validarLocacao(locacao);
+            return repository.save(locacao);
+        }else{
+            throw new MensagemRetornoException(new MensagemRetorno("SEM ESTOQUE",
+                    "Esse livro não está disponível para locação no momento."));
+        }
     }
 
     public Locacao alterarLocacao(Locacao novoLivroUsuario){
@@ -111,9 +116,7 @@ public class LocacaoService {
 
         long diasEmAtraso = TimeUnit.MILLISECONDS.toDays(Math.abs(locacao.getDataDevolvida().getTime() - locacao.getDataDevolucao().getTime()));
 
-        Double multa = (diasEmAtraso * taxaPorDia) + taxaAtraso;
-
-        return multa;
+        return (diasEmAtraso * taxaPorDia) + taxaAtraso;
     }
 
 }

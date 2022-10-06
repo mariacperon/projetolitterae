@@ -1,5 +1,6 @@
 package com.cedup.projetolitterae.backend.resources;
 
+import com.cedup.projetolitterae.backend.dto.LivroBibliotecaDto;
 import com.cedup.projetolitterae.backend.entities.LivroBiblioteca;
 import com.cedup.projetolitterae.backend.services.LivroBibliotecaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +28,13 @@ public class LivroBibliotecaResource {
     }
 
     @RequestMapping(value = "/cadastrar",method = RequestMethod.POST)
-    public ResponseEntity<LivroBiblioteca> cadastrar(@Validated @RequestBody LivroBiblioteca livroBiblioteca){
+    public ResponseEntity<LivroBiblioteca> cadastrar(@Validated @RequestBody LivroBibliotecaDto livroBiblioteca){
         LivroBiblioteca livroBibliotecaCadastrado = livroBibliotecaService.cadastrarLivroBiblioteca(livroBiblioteca);
         return ResponseEntity.ok().body(livroBibliotecaCadastrado);
     }
 
     @RequestMapping(value = "/alterar",method = RequestMethod.PUT)
-    public ResponseEntity<LivroBiblioteca> alterar(@Validated @RequestBody LivroBiblioteca livroBiblioteca){
+    public ResponseEntity<LivroBiblioteca> alterar(@Validated @RequestBody LivroBibliotecaDto livroBiblioteca){
         LivroBiblioteca livroBibliotecaAlterado = livroBibliotecaService.alterarLivroBiblioteca(livroBiblioteca);
         return ResponseEntity.ok().body(livroBibliotecaAlterado);
     }
