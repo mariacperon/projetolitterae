@@ -157,11 +157,11 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 		Usuario u4 = new Usuario("12345678945", "Veri", "Berti",
 				"4715457", "13231", TipoPerfil.LEITOR, true, new Date(1999-1900,2-1,19));
 		u4.setEnderecoUsuario(e9);
-		u4.setBiblioteca(b4);
+		u4.setBiblioteca(b1);
 		u4.setId(10004L);
 
 		//CADASTRO DE LIVROS DA BIBLIOTECA
-		LivroBiblioteca lb1 = new LivroBiblioteca(l1, b1, 6);
+		LivroBiblioteca lb1 = new LivroBiblioteca(l1, b1, 2);
 		LivroBiblioteca lb2 = new LivroBiblioteca(l2, b1, 6);
 		LivroBiblioteca lb3 = new LivroBiblioteca(l3, b1, 6);
 		LivroBiblioteca lb4 = new LivroBiblioteca(l4, b1, 6);
@@ -181,7 +181,7 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 
 		//CDASTRO DE LOCACOES
 		Locacao loc1 = new Locacao(new Date(2022-1900,2-1,19), new Date(2022-1900,4-1,19),
-				StatusLocacao.PENDENTE);
+				StatusLocacao.ANDAMENTO);
 		loc1.setLivro(lb1);
 		loc1.setUsuario(u2);
 
@@ -191,13 +191,18 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 		loc2.setUsuario(u1);
 
 		Locacao loc3 = new Locacao(new Date(2023-1900,2-1,19), new Date(2023-1900,2-1,19),
-				StatusLocacao.PENDENTE);
-		loc3.setLivro(lb5);
-		loc3.setUsuario(u3);
+				StatusLocacao.ANDAMENTO);
+		loc3.setLivro(lb4);
+		loc3.setUsuario(u1);
 
 		Locacao loc4 = new Locacao(new Date(2023-1900,2-1,19), new Date(2023-1900,2-1,19),
 				StatusLocacao.ANDAMENTO);
 		loc4.setLivro(lb6);
+		loc4.setUsuario(u4);
+
+		Locacao loc5 = new Locacao(new Date(2023-1900,2-1,19), new Date(2023-1900,2-1,19),
+				StatusLocacao.ANDAMENTO);
+		loc4.setLivro(lb1);
 		loc4.setUsuario(u4);
 
 		//CADASTRO DE RESENHAS
@@ -228,7 +233,7 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 		usuarioRepository.saveAll(List.of(u1, u2, u3, u4));
 		resenhaRepository.saveAll(List.of(r1, r2, r3, r4, r5));
 		livroBibliotecaRepository.saveAll(List.of(lb1, lb2, lb3, lb4, lb5, lb6, lb7, lb8, lb9, lb10, lb11, lb12, lb13, lb14, lb15));
-		locacaoRepository.saveAll(List.of(loc1, loc2, loc3, loc4));
+		locacaoRepository.saveAll(List.of(loc1, loc2, loc3, loc4, loc5));
 	}
 
 }
