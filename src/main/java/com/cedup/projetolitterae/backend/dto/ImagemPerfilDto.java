@@ -4,20 +4,20 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class ImagemPerfilDto {
 
-    private Long idUsuario;
+    private Long id;
     private MultipartFile imagem;
 
     public ImagemPerfilDto(Long idUsuario, MultipartFile imagem) {
-        this.idUsuario = idUsuario;
+        this.id = idUsuario;
         this.imagem = imagem;
     }
 
-    public Long getIdUsuario() {
-        return idUsuario;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public MultipartFile getImagem() {

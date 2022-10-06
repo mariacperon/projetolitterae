@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -20,15 +21,13 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Random;
 
-import org.apache.commons.io.FilenameUtils;
-
 @Service
-public class UsuarioService {
+public class UsuarioService{
 
     @Autowired
     private UsuarioRepository repository;
     @Autowired
-    private EnderecoRepository enderecoRepository;
+    private EnderecoService enderecoService;
 
     public Usuario pesquisarPorId(Long id){
         return repository.findById(id).orElse(null);
@@ -57,8 +56,9 @@ public class UsuarioService {
     }
 
     public String salvaImagem(ImagemPerfilDto imagem) {
+        String path = null;
         try {
-            Usuario usuario = pesquisarPorId(imagem.getIdUsuario());
+            Usuario usuario = pesquisarPorId(imagem.getId());
             if(usuario != null){
                 String pasta = "src/main/java/com/cedup/projetolitterae/imagens/perfil";
                 String nomeArquivo = usuario.getId() + ".jpeg";
@@ -74,7 +74,7 @@ public class UsuarioService {
 
                 FileUploadUtil.saveFile(pasta, nomeArquivo, imagem.getImagem());
 
-                return diretorio.toString();
+                path = diretorio.toString();
             }else{
                 throw new MensagemRetornoException(new MensagemRetorno("ERRO", "Houve um erro ao tentar salvar a imagem de perfil."));
             }
@@ -82,28 +82,30 @@ public class UsuarioService {
             e.printStackTrace();
         }
 
-        return null;
+        return path;
     }
 
     @Transactional
     public Usuario cadastrarUsuario(Usuario usuario){
         Random random = new Random();
         usuario.setId(random.nextLong(1000L, 100000L));
-        enderecoRepository.save(usuario.getEnderecoUsuario());
+        enderecoService.cadastrarEndereco(usuario.getEnderecoUsuario());
         return repository.save(usuario);
     }
 
     public Usuario alterarUsuario(Usuario novoUsuario){
         Usuario oldUsuario = pesquisarPorId(novoUsuario.getId());
         novoUsuario.getEnderecoUsuario().setId(oldUsuario.getEnderecoUsuario().getId());
-        enderecoRepository.save(novoUsuario.getEnderecoUsuario());
+        enderecoService.cadastrarEndereco(novoUsuario.getEnderecoUsuario());
         repository.save(novoUsuario);
         return novoUsuario;
     }
 
     public void excluirUsuario(Long id){
-        Integer idEndereco = repository.findById(id).get().getEnderecoUsuario().getId();
+        Usuario usuario = pesquisarPorId(id);
         repository.deleteById(id);
-        enderecoRepository.deleteById(idEndereco);
+        enderecoService.excluirEndereco(usuario.getEnderecoUsuario().getId());
+        File imagem = new File(usuario.getImagem());
+        imagem.delete();
     }
 }
