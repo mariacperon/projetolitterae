@@ -101,14 +101,20 @@ form {
 	padding: 0 50px;
 	height: 100%;
 	text-align: center;
-}
 
-input {
+}
+#input-data,#input-codcadastro{
+	margin-top: 8px;
+}
+#btnLogin{
+	margin-top: 2px;
+}
+ input{
 	background-color: #eee;
 	border-radius: 10px;
 	border: none;
 	padding: 12px 15px;
-	margin: 8px 0;
+	margin-bottom: 4px;
 	width: 100%;
 }
 
@@ -219,9 +225,24 @@ input {
 .container.right-panel-active .overlay-right {
 	transform: translateX(20%);
 }
-#SenhaErro{
-	color:#eee;
+#alertaEr{
+	color: #fd1d1d;
 	margin-top: 0px;
-	margin-bottom: 2px;
+	font-size: 9px;
+	font-weight: 100;
+	background-color: antiquewhite;
+	border-radius: 6px;
+	width: 270px;
+	height: 30px;
+	justify-content: center;
+	padding-top: 3px;
+	margin-block-end: 0em;
 
 }
+
+#container-er{
+	opacity: 0;
+	transition: opacity 2.5s;
+}
+
+

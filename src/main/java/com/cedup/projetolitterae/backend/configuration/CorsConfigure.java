@@ -22,7 +22,7 @@ public class CorsConfigure {
                 registry.addMapping("/**")
                         .allowedMethods("GET","POST","PUT","DELETE")
                         .allowedHeaders("*")
-                        .allowedOrigins("*");
+                        .allowedOrigins("localhost:80","*");
             }
         };
     }

@@ -158,7 +158,7 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 				"4564897", "13231", TipoPerfil.LEITOR, true, new Date(1999-1900,2-1,19));
 		u3.setEnderecoUsuario(e8);
 		u3.setBiblioteca(b3);
-		u3.setId(random.nextLong(10000, 100000000));
+		u3.setId(Long.valueOf("4501375140"));
 
 		Usuario u4 = new Usuario("12345678945", "Veri", "Berti",
 				"4715457", "13231", TipoPerfil.LEITOR, true, new Date(1999-1900,2-1,19));

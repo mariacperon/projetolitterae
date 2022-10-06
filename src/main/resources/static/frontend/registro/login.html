@@ -4,36 +4,47 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script src="/frontend/literaiUtil.js"/>
-	<script src="../bibliotecas/jquery-3.6.1.min.js"></script>
-	<script src="login.js"></script>
+	<script src="/frontend/litteraeUtil.js"/>
+	<script src="../frameworks/jquery/jquery-3.6.1.min.js"></script>
+	<!--Biblioteca AJax Jquery-->
+	<script src="/webjars/jquery/jquery.min.js"></script>
 	<link rel = "stylesheet" href = "stylelogin.css"/>
+
+
 </head>
 
 <body>
+
 	<div class="container" id="container">
 		<div class="form-container sign-up-container">
 		</div>
 		<div class="form-container sign-in-container">
-			<form action="#">
+
+			<form action="">
 				<h1>Login</h1>
-			
-				<input name="CodCadastro"type="text"  maxlength="4"  placeholder="Número de Cadastro"  />
-				<input type="text" placeholder="Data de Nascimento"
-						onfocus="(this.type='date')">
-						<p id="SenhaErro"></p>
-				<button>entrar</button>
+
+				<input type="text"  id="input-codcadastro" name="codcastro" maxlength="10"  placeholder="Número de Cadastro" />
+				<input id="input-data" name="data" type="text" placeholder="Data de Nascimento"
+						maxlength="8" onfocus="(this.type='date')">
+				<div id="container-er">
+					<h5 id="alertaEr"></h5>
+				</div>
+				<button type="button" id="btnLogin" value="Entrar" onclick=" loginbtn($('#input-codcadastro').val(), $('#input-data').val())">Entrar</button>
 			</form>
+
+
+
 		</div>
 		<div class="overlay-container">
 				<div class="overlay-panel overlay-right">
-					<h1>Hello, Friend!</h1>
-					<p>Enter your personal details and start journey with us</p>
+					<h1>Seja Bem vindo!</h1>
+					<p class="msg">Um clássico é algo que todos queriam ter lido mas que ninguém quer ler. </p>
 				</div>
 			</div>
 		</div>
 	</div>
 
+	<script src="login.js"></script>
 
 </body>
 
