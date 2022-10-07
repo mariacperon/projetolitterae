@@ -45,7 +45,7 @@ public class LocacaoService {
     @Transactional
     public Locacao locarLivro(LocacaoDto locacaoDto){
         Locacao locacao = fromDto(locacaoDto);
-        if(repository.qtdLivroLocado(locacao.getLivro().getId()) < locacao.getLivro().getQuantidadeEstoque()){
+        if(validaEstoque(locacao)){
             locacao.setId(null);
             locacao.setDataDevolvida(null);
             locacao.setStatusLocacao(StatusLocacao.ANDAMENTO);
@@ -57,9 +57,12 @@ public class LocacaoService {
         }
     }
 
+    private Boolean validaEstoque(Locacao locacao){
+        return repository.qtdLivroLocado(locacao.getLivro().getId()) < locacao.getLivro().getQuantidadeEstoque();
+    }
+
     public Locacao alterarLocacao(LocacaoDto novoLivroUsuarioDto){
         Locacao locacao = fromDto(novoLivroUsuarioDto);
-
         return repository.save(locacao);
     }
 
