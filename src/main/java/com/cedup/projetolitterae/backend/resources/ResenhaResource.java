@@ -1,5 +1,6 @@
 package com.cedup.projetolitterae.backend.resources;
 
+import com.cedup.projetolitterae.backend.dto.ResenhaDto;
 import com.cedup.projetolitterae.backend.entities.Resenha;
 import com.cedup.projetolitterae.backend.services.ResenhaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,13 +40,13 @@ public class ResenhaResource {
     }
 
     @RequestMapping(value = "/cadastrar",method = RequestMethod.POST)
-    public ResponseEntity<Resenha> cadastrar(@Validated @RequestBody Resenha resenha){
+    public ResponseEntity<Resenha> cadastrar(@Validated @RequestBody ResenhaDto resenha){
         Resenha resenhaCadastrado = resenhaService.cadastrarResenha(resenha);
         return ResponseEntity.ok().body(resenhaCadastrado);
     }
 
     @RequestMapping(value = "/alterar",method = RequestMethod.PUT)
-    public ResponseEntity<Resenha> alterar(@Validated @RequestBody Resenha resenha){
+    public ResponseEntity<Resenha> alterar(@Validated @RequestBody ResenhaDto resenha){
         Resenha resenhaAlterado = resenhaService.alterarResenha(resenha);
         return ResponseEntity.ok().body(resenhaAlterado);
     }
