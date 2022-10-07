@@ -1,5 +1,6 @@
 package com.cedup.projetolitterae.backend.resources;
 
+import com.cedup.projetolitterae.backend.dto.LocacaoDto;
 import com.cedup.projetolitterae.backend.entities.Locacao;
 import com.cedup.projetolitterae.backend.services.LocacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,13 +40,13 @@ public class LocacaoResource {
     }
 
     @RequestMapping(value = "/cadastrar",method = RequestMethod.POST)
-    public ResponseEntity<Locacao> cadastrar(@Validated @RequestBody Locacao locacao){
+    public ResponseEntity<Locacao> cadastrar(@Validated @RequestBody LocacaoDto locacao){
         Locacao locacaoCadastrado = locacaoService.locarLivro(locacao);
         return ResponseEntity.ok().body(locacaoCadastrado);
     }
 
     @RequestMapping(value = "/alterar",method = RequestMethod.PUT)
-    public ResponseEntity<Locacao> alterar(@Validated @RequestBody Locacao locacao){
+    public ResponseEntity<Locacao> alterar(@Validated @RequestBody LocacaoDto locacao){
         Locacao locacaoAlterado = locacaoService.alterarLocacao(locacao);
         return ResponseEntity.ok().body(locacaoAlterado);
     }
