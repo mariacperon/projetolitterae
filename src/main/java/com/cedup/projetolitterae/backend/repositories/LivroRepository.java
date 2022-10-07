@@ -33,6 +33,12 @@ public interface LivroRepository extends JpaRepository<Livro, Integer> {
             , nativeQuery = true)
     List<Livro> findLivroClassificacaoEtaria(String value, Long idBiblioteca);
 
+    @Query(value = "select l.* from livro l " +
+            "inner join livro_biblioteca lb on lb.id_biblioteca = :idBiblioteca and lb.id_livro = l.id " +
+            "inner join livro_genero lg  on lg.livro_id = l.id and lg.genero = :value"
+            , nativeQuery = true)
+    List<Livro> findLivroGenero(@Param("value") Integer value, @Param("idBiblioteca") Long idBiblioteca);
+
 
 
 }

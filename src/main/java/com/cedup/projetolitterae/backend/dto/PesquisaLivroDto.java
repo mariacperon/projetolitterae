@@ -11,7 +11,8 @@ public class PesquisaLivroDto {
         isdb
         editora
         classificacao_etaria
-     */
+        genero
+    */
     private String campo;
 
     private String value;

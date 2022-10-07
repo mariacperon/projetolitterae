@@ -39,14 +39,13 @@ public class LivroService {
     public List<Livro> pesquisaLivroEspecifica(PesquisaLivroDto pesquisaLivro){
         Long idBiblioteca = usuarioService.pesquisarPorId(pesquisaLivro.getIdUsuario()).getBiblioteca().getId();
 
-        pesquisaLivro.setValue("%"+pesquisaLivro.getValue()+"%");
-
         return switch (pesquisaLivro.getCampo()) {
-            case "nome" -> repository.findLivroNome(pesquisaLivro.getValue(), idBiblioteca);
-            case "autor" -> repository.findLivroAutor(pesquisaLivro.getValue(), idBiblioteca);
-            case "isdb" -> repository.findLivroIsdb(pesquisaLivro.getValue(), idBiblioteca);
-            case "editora" -> repository.findLivroEditora(pesquisaLivro.getValue(), idBiblioteca);
-            case "classificacao_etaria" -> repository.findLivroClassificacaoEtaria(pesquisaLivro.getValue(), idBiblioteca);
+            case "nome" -> repository.findLivroNome("%"+pesquisaLivro.getValue()+"%", idBiblioteca);
+            case "autor" -> repository.findLivroAutor("%"+pesquisaLivro.getValue()+"%", idBiblioteca);
+            case "isdb" -> repository.findLivroIsdb("%"+pesquisaLivro.getValue()+"%", idBiblioteca);
+            case "editora" -> repository.findLivroEditora("%"+pesquisaLivro.getValue()+"%", idBiblioteca);
+            case "classificacao_etaria" -> repository.findLivroClassificacaoEtaria("%"+pesquisaLivro.getValue()+"%", idBiblioteca);
+            case "genero" -> repository.findLivroGenero(Integer.parseInt(pesquisaLivro.getValue()), idBiblioteca);
             default -> null;
         };
     }

@@ -35,7 +35,7 @@ public class LivroResource {
         return ResponseEntity.ok().body(imagemPath);
     }
 
-    @RequestMapping(value = "/pesquisar-por",method = RequestMethod.GET)
+    @RequestMapping(value = "/pesquisarpor",method = RequestMethod.GET)
     public ResponseEntity<List<Livro>> pesquisaEspecifica(@RequestBody PesquisaLivroDto pesquisaLivro){
         List<Livro> livros = livroService.pesquisaLivroEspecifica(pesquisaLivro);
         return ResponseEntity.ok().body(livros);
