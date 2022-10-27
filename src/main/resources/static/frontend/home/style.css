@@ -119,7 +119,7 @@ body {
 }
 .sidebar {
   height: 100%;
-  width: 0;
+  width:0;
   position: fixed;
   z-index: 3;
   top: 0;
@@ -138,11 +138,16 @@ body {
   display: block;
   transition: 0.3s;
 }
+#mySidebar.sidebar{
+  overflow-x: hidden;
+}
 #mySidebar a:hover{
   color: black;
 }
 
-
+.closebtn{
+  cursor: pointer;
+}
 .sidebar .closebtn {
   position: absolute;
   top: 0;
@@ -195,7 +200,7 @@ body {
 }
 
 .sidepanel  {
-  width: 100px;
+  width: 200px;
   position: fixed;
   z-index: 1;
   height: 220px;
