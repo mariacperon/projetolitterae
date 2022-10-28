@@ -2,6 +2,7 @@ package com.cedup.projetolitterae.backend.resources;
 
 import com.cedup.projetolitterae.backend.dto.ImagemPerfilDto;
 import com.cedup.projetolitterae.backend.dto.LoginUsuarioDto;
+import com.cedup.projetolitterae.backend.dto.UsuarioDto;
 import com.cedup.projetolitterae.backend.entities.Usuario;
 import com.cedup.projetolitterae.backend.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,7 @@ public class UsuarioResource {
     }
 
     @RequestMapping(value = "/cadastrar",method = RequestMethod.POST)
-    public ResponseEntity<Usuario> cadastrar(@Validated @RequestBody Usuario usuario){
+    public ResponseEntity<Usuario> cadastrar(@Validated @RequestBody UsuarioDto usuario){
         Usuario usuarioCadastrado = usuarioService.cadastrarUsuario(usuario);
         return ResponseEntity.ok().body(usuarioCadastrado);
     }

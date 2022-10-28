@@ -2,6 +2,7 @@ package com.cedup.projetolitterae.backend.services;
 
 import com.cedup.projetolitterae.backend.dto.LivroBibliotecaDto;
 import com.cedup.projetolitterae.backend.dto.LocacaoDto;
+import com.cedup.projetolitterae.backend.emails.MandarEmail;
 import com.cedup.projetolitterae.backend.entities.Biblioteca;
 import com.cedup.projetolitterae.backend.entities.Livro;
 import com.cedup.projetolitterae.backend.entities.LivroBiblioteca;
@@ -16,9 +17,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 @Service
 public class LocacaoService {
@@ -29,6 +32,8 @@ public class LocacaoService {
     private LivroBibliotecaService livroBibliotecaService;
     @Autowired
     private UsuarioService usuarioService;
+    @Autowired
+    private MandarEmail mandarEmail;
 
     public Locacao pesquisarPorId(Integer id){
         return (repository.findById(id)).orElse(null);
@@ -42,6 +47,10 @@ public class LocacaoService {
         return repository.findLocacaoByUsuarioId(id);
     }
 
+    public List<Locacao> ultimasLocacoes(Long idUsuario){
+        return pesquisarPorUsuario(idUsuario).stream().sorted(Comparator.comparing(Locacao::getDataLocacao)).collect(Collectors.toList());
+    }
+
     @Transactional
     public Locacao locarLivro(LocacaoDto locacaoDto){
         Locacao locacao = fromDto(locacaoDto);
@@ -50,7 +59,9 @@ public class LocacaoService {
             locacao.setDataDevolvida(null);
             locacao.setStatusLocacao(StatusLocacao.ANDAMENTO);
             validarLocacao(locacao);
-            return repository.save(locacao);
+            repository.save(locacao);
+            //mandarEmail.emailLivroLocado(locacao);
+            return locacao;
         }else{
             throw new MensagemRetornoException(new MensagemRetorno("SEM ESTOQUE",
                     "Esse livro não está disponível para locação no momento."));
@@ -107,7 +118,7 @@ public class LocacaoService {
     private void validarLocacao(Locacao locacao) {
         List<Locacao> locacoes = pesquisarPorUsuario(locacao.getUsuario().getId());
         for (Locacao l : locacoes) {
-            if(new Date().after(l.getDataDevolucao()) || l.getStatusLocacao().equals(StatusLocacao.PENDENTE)){
+            if((new Date().after(l.getDataDevolucao()) && l.getStatusLocacao().equals(StatusLocacao.ANDAMENTO)) || l.getStatusLocacao().equals(StatusLocacao.PENDENTE)){
                 throw new MensagemRetornoException(new MensagemRetorno("ERRO",
                         "Erro ao locar livro, este usuário possui pendências."));
             }

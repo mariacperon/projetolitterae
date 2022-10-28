@@ -47,8 +47,6 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 	@Autowired
 	LocacaoRepository locacaoRepository;
 
-	Random random = new Random();
-
 	public static void main(String[] args) {
 		SpringApplication.run(ProjetolitteraeApplication.class, args);
 	}
@@ -119,19 +117,19 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 		//CADASTRO DE LIVROS
 		Livro l1 = new Livro("Rainha Vermelha","victoria aveyard", "ansdjbf",
 				"portugues", "livre", "seila", "sdfasdf", "1º", new Date(1999-1900,2-1,19));
-		l1.setGeneros(List.of(GeneroLivro.FICCAO, GeneroLivro.AVENTURA));
+		l1.setGeneros(List.of(GeneroLivro.FICCAO_CIENTIFICA, GeneroLivro.ACAO_E_AVENTURA));
 
 		Livro l2 = new Livro("Espada de Vidro","victoria aveyard","ansdjbf",
 				"portugues", "livre", "seila", "sdfasdf", "1º", new Date(1999-1900,2-1,19));
-		l2.setGeneros(List.of(GeneroLivro.FICCAO, GeneroLivro.AVENTURA));
+		l2.setGeneros(List.of(GeneroLivro.FICCAO_CIENTIFICA, GeneroLivro.ACAO_E_AVENTURA));
 
 		Livro l3 = new Livro("A Sombra do Vento","luis carlos zafon","ansdjbf",
 				"portugues", "livre", "seila", "sdfasdf", "1º", new Date(1999-1900,2-1,19));
-		l3.setGeneros(List.of(GeneroLivro.DRAMA, GeneroLivro.FICCAO));
+		l3.setGeneros(List.of(GeneroLivro.ROMANCE, GeneroLivro.FICCAO_CIENTIFICA));
 
 		Livro l4 = new Livro("Jogos Vorazes","suzanne collins", "ansdjbf",
 				"portugues", "livre", "seila", "sdfasdf", "1º", new Date(1999-1900,2-1,19));
-		l4.setGeneros(List.of(GeneroLivro.FICCAO, GeneroLivro.AVENTURA));
+		l4.setGeneros(List.of(GeneroLivro.FICCAO_CIENTIFICA, GeneroLivro.ACAO_E_AVENTURA));
 
 		Livro l5 = new Livro("Os Sete Maridos de Evelyn Hugo","tyalor jenkins", "ansdjbf",
 				"portugues", "livre", "seila", "sdfasdf", "1º", new Date(1999-1900,2-1,19));
@@ -139,28 +137,28 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 
 		Livro l6 = new Livro("Daisy Jones & The Six","taylor jenkis", "ansdjbf",
 				"portugues", "livre", "seila", "sdfasdf", "1º", new Date(1999-1900,2-1,19));
-		l6.setGeneros(List.of(GeneroLivro.DRAMA, GeneroLivro.ROMANCE));
+		l6.setGeneros(List.of(GeneroLivro.ROMANCE, GeneroLivro.ROMANCE));
 
 		//CADASTRO DE USUARIOS
-		Usuario u1 = new Usuario("12345678945", "Maria Clara", "Peron Gonçalves",
+		Usuario u1 = new Usuario("12345678945", "Maria Clara", "Peron Gonçalves", "mariaclaraperon@gmail.com",
 				"1474147", "13231", TipoPerfil.LEITOR, true, new Date(1999-1900,2-1,19));
 		u1.setEnderecoUsuario(e6);
 		u1.setBiblioteca(b1);
 		u1.setId(100001L);
 
-		Usuario u2 = new Usuario("65432198745", "Joca Luis", "Peron Gonçalves",
+		Usuario u2 = new Usuario("65432198745", "Joca Luis", "Peron Gonçalves", "teste",
 				"4561234", "dfasd", TipoPerfil.LEITOR,true, new Date(1999-1900,2-1,19));
 		u2.setEnderecoUsuario(e7);
 		u2.setBiblioteca(b2);
 		u2.setId(100002L);
 
-		Usuario u3 = new Usuario("12345678945", "Lucas", "Testoni",
+		Usuario u3 = new Usuario("12345678945", "Lucas", "Testoni", "teste",
 				"4564897", "13231", TipoPerfil.LEITOR, true, new Date(1999-1900,2-1,19));
 		u3.setEnderecoUsuario(e8);
 		u3.setBiblioteca(b3);
 		u3.setId(100003L);
 
-		Usuario u4 = new Usuario("12345678945", "Veri", "Berti",
+		Usuario u4 = new Usuario("12345678945", "Veri", "Berti", "teste",
 				"4715457", "13231", TipoPerfil.LEITOR, true, new Date(1999-1900,2-1,19));
 		u4.setEnderecoUsuario(e9);
 		u4.setBiblioteca(b4);
@@ -186,12 +184,12 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 		LivroBiblioteca lb15 = new LivroBiblioteca(l5, b4, 6);
 
 		//CDASTRO DE LOCACOES
-		Locacao loc1 = new Locacao(new Date(2022-1900,2-1,19), new Date(2022-1900,4-1,19),
+		Locacao loc1 = new Locacao(new Date(2022-1900,2-1,19), new Date(2022-1900,12-1,19),
 				StatusLocacao.PENDENTE);
 		loc1.setLivro(lb1);
 		loc1.setUsuario(u2);
 
-		Locacao loc2 = new Locacao(new Date(2022-1900,2-1,19), new Date(2022-1900,5-1,19),
+		Locacao loc2 = new Locacao(new Date(2022-1900,2-1,19), new Date(2022-1900,11-1,19),
 				StatusLocacao.ANDAMENTO);
 		loc2.setLivro(lb3);
 		loc2.setUsuario(u1);

@@ -2,6 +2,7 @@ package com.cedup.projetolitterae.backend.entities;
 
 import com.cedup.projetolitterae.backend.enums.TipoPerfil;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +24,7 @@ public class Biblioteca implements Serializable {
     private String nome;
     private String email;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "endereco_id")
     private Endereco enderecoBiblioteca;
 

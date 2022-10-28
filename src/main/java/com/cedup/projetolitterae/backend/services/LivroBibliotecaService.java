@@ -1,6 +1,7 @@
 package com.cedup.projetolitterae.backend.services;
 
 import com.cedup.projetolitterae.backend.dto.LivroBibliotecaDto;
+import com.cedup.projetolitterae.backend.dto.QuantidadesLocadosBibliotecaDto;
 import com.cedup.projetolitterae.backend.entities.Biblioteca;
 import com.cedup.projetolitterae.backend.entities.Livro;
 import com.cedup.projetolitterae.backend.entities.LivroBiblioteca;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class LivroBibliotecaService {
@@ -24,6 +26,14 @@ public class LivroBibliotecaService {
 
     public LivroBiblioteca pesquisarPorId(Integer id){
         return (repository.findById(id)).orElse(null);
+    }
+
+    public List<LivroBiblioteca> pesquisarPorBibliotecaId(Long idBiblioteca){
+        return repository.findLivroBibliotecaByBibliotecaId(idBiblioteca);
+    }
+
+    public List<QuantidadesLocadosBibliotecaDto> quantidadeLocacoesLivro(Long idBiblioteca){
+        return repository.quantidadeLocacoesLivrosPorBibliotecaId(idBiblioteca);
     }
 
     @Transactional

@@ -2,9 +2,10 @@ package com.cedup.projetolitterae.backend.services;
 
 import com.cedup.projetolitterae.backend.dto.ImagemPerfilDto;
 import com.cedup.projetolitterae.backend.dto.PesquisaLivroDto;
+import com.cedup.projetolitterae.backend.dto.QuantidadesLocadosBibliotecaDto;
 import com.cedup.projetolitterae.backend.entities.Livro;
+import com.cedup.projetolitterae.backend.entities.Locacao;
 import com.cedup.projetolitterae.backend.entities.MensagemRetorno;
-import com.cedup.projetolitterae.backend.entities.Usuario;
 import com.cedup.projetolitterae.backend.exceptions.MensagemRetornoException;
 import com.cedup.projetolitterae.backend.repositories.LivroRepository;
 import com.cedup.projetolitterae.imagens.FileUploadUtil;
@@ -18,7 +19,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class LivroService {
@@ -27,6 +30,8 @@ public class LivroService {
     private LivroRepository repository;
     @Autowired
     private UsuarioService usuarioService;
+    @Autowired
+    private LivroBibliotecaService livroBibliotecaService;
 
     public Livro pesquisarPorId(Integer id){
         return (repository.findById(id)).orElse(null);
@@ -49,6 +54,18 @@ public class LivroService {
             default -> null;
         };
     }
+
+    public List<Livro> maisLocados(Long idBiblioteca){
+        List<Livro> livrosMaisLocados = new ArrayList<>();
+
+        List<QuantidadesLocadosBibliotecaDto> qtdLocacoesLivros = livroBibliotecaService.quantidadeLocacoesLivro(idBiblioteca);
+        qtdLocacoesLivros.stream().sorted(Comparator.comparing(QuantidadesLocadosBibliotecaDto::getQtdLocacoes)).collect(Collectors.toList());
+
+        qtdLocacoesLivros.forEach(x -> livrosMaisLocados.add(pesquisarPorId(x.getIdLivro())));
+
+        return livrosMaisLocados;
+    }
+
 
     @Transactional
     public Livro cadastrarLivro(Livro livro){

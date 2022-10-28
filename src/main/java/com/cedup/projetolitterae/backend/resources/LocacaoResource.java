@@ -39,6 +39,12 @@ public class LocacaoResource {
         return ResponseEntity.ok().body(locacoes);
     }
 
+    @RequestMapping(value = "/ultimas-locacoes/{id}",method = RequestMethod.GET)
+    public ResponseEntity<List<Locacao>> ultimasLocacoes(@PathVariable Long id){
+        List<Locacao> locacoes = locacaoService.ultimasLocacoes(id);
+        return ResponseEntity.ok().body(locacoes);
+    }
+
     @RequestMapping(value = "/cadastrar",method = RequestMethod.POST)
     public ResponseEntity<Locacao> cadastrar(@Validated @RequestBody LocacaoDto locacao){
         Locacao locacaoCadastrado = locacaoService.locarLivro(locacao);

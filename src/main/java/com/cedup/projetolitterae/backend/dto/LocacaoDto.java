@@ -1,6 +1,7 @@
 package com.cedup.projetolitterae.backend.dto;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.lang.Nullable;
 
 import java.sql.Date;
 
@@ -14,6 +15,8 @@ public class LocacaoDto {
     private Date dataLocacao;
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date dataDevolucao;
+
+    @Nullable
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date dataDevolvida;
 

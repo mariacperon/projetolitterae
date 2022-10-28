@@ -3,6 +3,7 @@ package com.cedup.projetolitterae.backend.entities;
 import com.cedup.projetolitterae.backend.enums.TipoPerfil;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,13 +30,15 @@ public class Usuario implements Serializable{
     @Column(columnDefinition ="varchar(50)")
     private String sobrenome;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "id_endereco")
     private Endereco enderecoUsuario;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_biblioteca")
     private Biblioteca biblioteca;
+
+    private String email;
 
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date dataNascimento;
@@ -52,10 +55,11 @@ public class Usuario implements Serializable{
     public Usuario() {
     }
 
-    public Usuario(String cpf, String nome, String sobrenome, String telefone1, String telefone2, TipoPerfil tipoPerfil, boolean ativo, Date dataNascimento) {
+    public Usuario(String cpf, String nome, String sobrenome, String email,String telefone1, String telefone2, TipoPerfil tipoPerfil, boolean ativo, Date dataNascimento) {
         this.cpf = cpf;
         this.nome = nome;
         this.sobrenome = sobrenome;
+        this.email = email;
         this.telefone1 = telefone1;
         this.telefone2 = telefone2;
         this.tipoPerfil = (tipoPerfil == null) ? null : tipoPerfil.getCod();
@@ -93,6 +97,14 @@ public class Usuario implements Serializable{
 
     public void setSobrenome(String sobrenome) {
         this.sobrenome = sobrenome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Endereco getEnderecoUsuario() {

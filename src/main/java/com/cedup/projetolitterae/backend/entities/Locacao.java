@@ -2,6 +2,7 @@ package com.cedup.projetolitterae.backend.entities;
 
 import com.cedup.projetolitterae.backend.enums.StatusLocacao;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,6 +31,8 @@ public class Locacao {
     private Date dataLocacao;
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date dataDevolucao;
+
+    @Nullable
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date dataDevolvida;
 
@@ -69,6 +72,7 @@ public class Locacao {
     }
 
     public Date getDataLocacao() {
+        dataLocacao.setDate(dataLocacao.getDate() + 1);
         return dataLocacao;
     }
 
@@ -77,6 +81,7 @@ public class Locacao {
     }
 
     public Date getDataDevolucao() {
+        dataDevolucao.setDate(dataDevolucao.getDate() + 1);
         return dataDevolucao;
     }
 
@@ -85,6 +90,7 @@ public class Locacao {
     }
 
     public Date getDataDevolvida() {
+        if(dataDevolvida != null) dataDevolvida.setDate(dataDevolvida.getDate() + 1);
         return dataDevolvida;
     }
 

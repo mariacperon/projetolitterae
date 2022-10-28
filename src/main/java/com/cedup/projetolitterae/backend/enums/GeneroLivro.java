@@ -2,24 +2,25 @@ package com.cedup.projetolitterae.backend.enums;
 
 public enum GeneroLivro {
 
-    ROMANCE(0, "Romance"),
-    AVENTURA(1, "Aventura"),
-    AÇÃO(2, "Ação"),
-    FICCAO(3, "Ficção"),
-    FANTASIA(4, "Fantasia"),
-    TERROR(5, "Terror"),
-    SUSPENSE(6, "Suspense"),
-    COMEDIA(7, "Comédia"),
-    AUTOAJUDA(8, "Autoajuda"),
-    AUTOBIOGRAFIA(9, "Autobiografia"),
-    BIOGRAFIA(10, "Biografia"),
-    INFANTIL(11, "Infantil"),
-    INFANTOJUVENIL(11, "InfantoJuvenil"),
-    HISTORIA(11, "História"),
-    HQ(11, "HQ"),
-    GASTRONOMIA(11, "Gatronomia"),
-    DRAMA(11, "Drama");
-
+    FICCAO_CIENTIFICA(0, "Ficção Científica"),
+    FANTASIA(1, "Fantasia"),
+    SUSPENSE(2, "Suspense"),
+    HORROR(3, "Horror"),
+    POESIA(4, "Poesia"),
+    ROMANCE(5, "Romance"),
+    DISTOPIA(6, "Distopia"),
+    INFANTIL(7, "Infantil"),
+    BIOGRAFIA(8, "Biografia"),
+    ACAO_E_AVENTURA(9, "Ação e Aventura"),
+    HISTORIA(10, "História"),
+    VIAGEM(11, "Viagem"),
+    AUTO_AJUDA(12, "Auto Ajuda"),
+    JOVEM_ADULTO(13, "Jovem Adulto"),
+    NOVO_ADULTO(14, "Novo Aulto"),
+    TECNOLOGIA_E_CIENCIA(15, "Tecnologia e Ciência"),
+    RELIGIAO(16, "Religião"),
+    NAO_FICCAO(17, "Não Ficção");
+    
     private final int cod;
     private final String descricao;
 

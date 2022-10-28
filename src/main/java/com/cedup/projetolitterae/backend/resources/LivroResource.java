@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -30,7 +31,7 @@ public class LivroResource {
     }
 
     @RequestMapping(value = "/salvar-imagem",method = RequestMethod.POST)
-    public ResponseEntity<String> salvarImagem(@RequestBody ImagemPerfilDto imagemPerfilDto){
+    public ResponseEntity<String> salvarImagem(@ModelAttribute ImagemPerfilDto imagemPerfilDto){
         String imagemPath = livroService.salvaImagem(imagemPerfilDto);
         return ResponseEntity.ok().body(imagemPath);
     }
@@ -38,6 +39,12 @@ public class LivroResource {
     @RequestMapping(value = "/pesquisarpor",method = RequestMethod.GET)
     public ResponseEntity<List<Livro>> pesquisaEspecifica(@RequestBody PesquisaLivroDto pesquisaLivro){
         List<Livro> livros = livroService.pesquisaLivroEspecifica(pesquisaLivro);
+        return ResponseEntity.ok().body(livros);
+    }
+
+    @RequestMapping(value = "/mais-locados/{id}",method = RequestMethod.GET)
+    public ResponseEntity<List<Livro>> maisLocadosPorBiblioteca(@PathVariable Long id){
+        List<Livro> livros = livroService.maisLocados(id);
         return ResponseEntity.ok().body(livros);
     }
 
