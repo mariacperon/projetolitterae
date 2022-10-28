@@ -19,13 +19,12 @@ public class EnderecoService {
 
     @Transactional
     public Endereco cadastrarEndereco(Endereco endereco){
+        endereco.setId(null);
         return repository.save(endereco);
     }
 
     public Endereco alterarEndereco(Endereco novoEndereco){
-        Endereco oldEndereco = pesquisarPorId(novoEndereco.getId());
-        repository.save(oldEndereco);
-        return oldEndereco;
+        return repository.save(novoEndereco);
     }
 
     public void excluirEndereco(Integer id){

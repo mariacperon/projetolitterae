@@ -3,7 +3,6 @@ package com.cedup.projetolitterae.backend.services;
 import com.cedup.projetolitterae.backend.dto.ImagemPerfilDto;
 import com.cedup.projetolitterae.backend.dto.LoginUsuarioDto;
 import com.cedup.projetolitterae.backend.dto.UsuarioDto;
-import com.cedup.projetolitterae.backend.emails.MandarEmail;
 import com.cedup.projetolitterae.backend.entities.Biblioteca;
 import com.cedup.projetolitterae.backend.entities.Locacao;
 import com.cedup.projetolitterae.backend.entities.MensagemRetorno;
@@ -23,7 +22,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 
 @Service
 public class UsuarioService{
@@ -97,8 +99,8 @@ public class UsuarioService{
     @Transactional
     public Usuario cadastrarUsuario(UsuarioDto usuarioDto){
         Usuario usuario = fromDto(usuarioDto);
-        Random random = new Random();
-        usuario.setId(random.nextLong(1000L, 100000L));
+        usuario.setId(gerarIdUsuario());
+        enderecoService.cadastrarEndereco(usuario.getEnderecoUsuario());
         return repository.save(usuario);
     }
 
@@ -127,6 +129,25 @@ public class UsuarioService{
         }
     }
 
+    private Long gerarIdUsuario(){
+        Random random = new Random();
+        final Long[] idUsuario = {null};
+        List<Usuario> todosUsuarios = pesquisarTodos();
+
+        todosUsuarios.stream().map(x -> {
+            long id = random.nextLong(1000L, 100000L);
+
+            if(Objects.equals(x.getId(), id)){
+                id = random.nextLong(1000L, 100000L);
+                idUsuario[0] = id;
+            }
+
+            return idUsuario[0];
+        }).collect(Collectors.toList());
+
+        return idUsuario[0];
+    }
+
     private Usuario fromDto(UsuarioDto usuarioDto){
         Usuario usuario = new Usuario();
         Biblioteca biblioteca = bibliotecaService.pesquisarPorId(usuarioDto.getIdBiblioteca());
@@ -135,7 +156,7 @@ public class UsuarioService{
         usuario.setCpf(usuarioDto.getCpf());
         usuario.setNome(usuarioDto.getNome());
         usuario.setSobrenome(usuarioDto.getSobrenome());
-        usuario.setEnderecoUsuario(enderecoService.cadastrarEndereco(usuarioDto.getEnderecoUsuario()));
+        usuario.setEnderecoUsuario(usuarioDto.getEnderecoUsuario());
         usuario.setBiblioteca(biblioteca != null ? biblioteca : (Biblioteca) lancaExcecaoDto("id biblioteca"));
         usuario.setEmail(usuarioDto.getEmail());
         usuario.setDataNascimento(usuarioDto.getDataNascimento());
