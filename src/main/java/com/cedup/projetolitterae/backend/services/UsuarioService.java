@@ -98,8 +98,9 @@ public class UsuarioService{
 
     @Transactional
     public Usuario cadastrarUsuario(UsuarioDto usuarioDto){
+        Random random = new Random();
         Usuario usuario = fromDto(usuarioDto);
-        usuario.setId(gerarIdUsuario());
+        usuario.setId(random.nextLong(1000L, 1000000L));
         enderecoService.cadastrarEndereco(usuario.getEnderecoUsuario());
         return repository.save(usuario);
     }
@@ -129,24 +130,6 @@ public class UsuarioService{
         }
     }
 
-    private Long gerarIdUsuario(){
-        Random random = new Random();
-        final Long[] idUsuario = {null};
-        List<Usuario> todosUsuarios = pesquisarTodos();
-
-        todosUsuarios.stream().map(x -> {
-            long id = random.nextLong(1000L, 100000L);
-
-            if(Objects.equals(x.getId(), id)){
-                id = random.nextLong(1000L, 100000L);
-                idUsuario[0] = id;
-            }
-
-            return idUsuario[0];
-        }).collect(Collectors.toList());
-
-        return idUsuario[0];
-    }
 
     private Usuario fromDto(UsuarioDto usuarioDto){
         Usuario usuario = new Usuario();
