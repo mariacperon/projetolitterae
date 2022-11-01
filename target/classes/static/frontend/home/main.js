@@ -11,4 +11,3 @@ $(".closebtn").click(function(){
 $('.profile-menu').on('click', function() {
     $('#SidepanelMenu').slideToggle('slow');
 })
-

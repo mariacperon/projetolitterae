@@ -45,7 +45,7 @@ async function loginbtn(idCod, data) {
                     //seta os dados em forma de texto na sessão
                     sessionStorage.setItem('idUsuario', json);
                     //Aciona load da pagina
-                    window.location.href = '../home/home.html';
+                     window.location.href = '../home/home.html';
                 }
             })
     }
