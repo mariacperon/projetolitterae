@@ -1,6 +1,6 @@
 //Pega o id do usuario logado
 var idUsuario = sessionStorage.getItem("idUsuario");
-
+//const idUsuario = 100001;
 'use strict';
 // Limpa os dados de Endereço do Formulário
 const limparFormulario = (endereco) => {
@@ -45,6 +45,7 @@ document.getElementById('cep')
     .addEventListener('focusout', pesquisarCep);
 
 //--------------------------------------------------------------------------
+//Bloqueia a atualização do Site
 const form = document.getElementById('some-form')
 form.addEventListener('submit', e => {
     e.preventDefault()
@@ -114,6 +115,7 @@ async function Cadastrar(nome, sobrenome, data, celular, telefone, cpf, cep, rua
             .then(function (resposta) {
                 //tratamento do erro exibindo mensagem
                 if (resposta.status >= 400 && resposta.status <= 500) {
+                    console.log(resposta.json())
                     document.querySelector('#alertaEr').style.color="Red";
                     document.querySelector("#alertaEr").innerHTML = "Erro no Cadastro, Por Favor Contate um Administrador."
                     $("#alertaEr").fadeIn();
@@ -124,7 +126,6 @@ async function Cadastrar(nome, sobrenome, data, celular, telefone, cpf, cep, rua
             })
             //Executa função de carregamento da pagina e armazenamento de dados
             .then(function (status) {
-                console.log(status)
                 if (status>= 200 && status <= 300 ) {
                     document.querySelector('#alertaEr').style.color = "#0c4900";
                     document.querySelector("#alertaEr").innerHTML = "Cadastrado com Sucesso"

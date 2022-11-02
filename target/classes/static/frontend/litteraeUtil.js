@@ -28,3 +28,5 @@ function usarApi(method, url, json) {
         }
     });
 }
+
+var idUsuario = sessionStorage.getItem("idUsuario");
