@@ -1,6 +1,5 @@
 //Pega o id do usuario logado
 var idUsuario = sessionStorage.getItem("idUsuario");
-//const idUsuario = 100001;
 'use strict';
 // Limpa os dados de Endereço do Formulário
 const limparFormulario = (endereco) => {
@@ -25,7 +24,8 @@ const cepValido = (cep) => cep.length == 8 && eNumero(cep);
 
 const pesquisarCep = async () => {
     limparFormulario();
-
+//------------------------------------------------------------------------------
+    //Chama Api do via cep e Valida ela
     const cep = document.getElementById('cep').value.replace("-", "");
     const url = `https://viacep.com.br/ws/${cep}/json/`;
     if (cepValido(cep)) {
@@ -52,9 +52,18 @@ form.addEventListener('submit', e => {
 })
 //--------------------------------------------------------------------------
 //Chama a função onclick do botão
-function btnEnviar() {
-    Cadastrar();
+function btnEnviar(cont) {
+    cont = 0
+    $('.input-form').each(function(){
+        if(this.value != ''){
+            cont = cont + 1
+            if (cont == 12){
+            Cadastrar();
+            }
+        }
+    });
 }
+
 //Função Assíncrona de Cadastro
 async function Cadastrar(nome, sobrenome, data, celular, telefone, cpf, cep, rua, numero, bairro, cidade, estado) {
     //passando os parametros dos inputs para as variaveis
@@ -87,9 +96,9 @@ async function Cadastrar(nome, sobrenome, data, celular, telefone, cpf, cep, rua
             "numero": numero,
             "complemento": ""
         },
-        "idBiblioteca":idUsuario ,
+        "idBiblioteca": idUsuario,
         "email": "",
-        "dataNascimento": data ,
+        "dataNascimento": data,
         "telefone1": celular,
         "telefone2": telefone,
         "imagem": null,
@@ -99,46 +108,52 @@ async function Cadastrar(nome, sobrenome, data, celular, telefone, cpf, cep, rua
 
     //Chama Função valida Cpf
     validarCPF(cpf)
-    //verifica se o Cpf é valido
-    if (validarCPF(cpf) == true) {
-        //Prepara o tipo de Conexão com seus Respectivos Parametros
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-        var requestOptions = {
-            method: 'POST',
-            headers: myHeaders,
-            body: jsonCadastro,
-            redirect: 'follow'
-        };
-        //faz a chamada da conexão
-        fetch("http://localhost:80/usuario/cadastrar", requestOptions)
-            .then(function (resposta) {
-                //tratamento do erro exibindo mensagem
-                if (resposta.status >= 400 && resposta.status <= 500) {
-                    console.log(resposta.json())
-                    document.querySelector('#alertaEr').style.color="Red";
-                    document.querySelector("#alertaEr").innerHTML = "Erro no Cadastro, Por Favor Contate um Administrador."
-                    $("#alertaEr").fadeIn();
-                    setTimeout(AlertaOut, 5000)
-                }
-                //Envia Status da Resposta
-                return resposta.status
-            })
-            //Executa função de carregamento da pagina e armazenamento de dados
-            .then(function (status) {
-                if (status>= 200 && status <= 300 ) {
-                    document.querySelector('#alertaEr').style.color = "#0c4900";
-                    document.querySelector("#alertaEr").innerHTML = "Cadastrado com Sucesso"
-                    $("#alertaEr").fadeIn();
-                    setTimeout(AlertaOut, 5000)
-                }
-            })
-    }
-    //Mensagem de Erro Cpf
-    else {
-        $("#ErrCPF").fadeIn();
-    }
+        //verifica se o Cpf é valido
+        if (validarCPF(cpf) == true) {
+
+            //Prepara o tipo de Conexão com seus Respectivos Parametros
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: jsonCadastro,
+                redirect: 'follow'
+            };
+            //faz a chamada da conexão
+            fetch("http://localhost:80/usuario/cadastrar", requestOptions)
+                .then(function (resposta) {
+                    //tratamento do erro exibindo mensagem
+                    if (resposta.status >= 400 && resposta.status <= 500) {
+                        console.log(resposta.json())
+                        document.querySelector('#alertaEr').style.color="Red";
+                        document.querySelector("#alertaEr").innerHTML = "Erro no Cadastro, Por Favor Contate um Administrador."
+                        $("#alertaEr").fadeIn();
+                        setTimeout(AlertaOut, 5000)
+                    }
+                    //Envia Status da Resposta
+                    return resposta.status
+                })
+                //Executa função de carregamento da pagina e armazenamento de dados
+                .then(function (status) {
+                    if (status>= 200 && status <= 300 ) {
+                        document.querySelector('#alertaEr').style.color = "#0c4900";
+                        document.querySelector("#alertaEr").innerHTML = "Cadastrado com Sucesso"
+                        $("#alertaEr").fadeIn();
+                        setTimeout(AlertaOut, 5000)
+                    }
+                })
+            setTimeout(reload, 2000)
+        }
+        //Mensagem de Erro Cpf
+        else {
+
+            $("#ErrCPF").fadeIn();
+        }
+
+
 }
+
 //função validação de CPF
 function validarCPF(cpf) {
     //Passa valor do input
@@ -160,17 +175,17 @@ function validarCPF(cpf) {
         cpf == "99999999999")
         return false;
     // Valida 1º digito
-    add = 0;
-    for (i = 0; i < 9; i++)
+    var add = 0;
+    for (let i = 0; i < 9; i++)
         add += parseInt(cpf.charAt(i)) * (10 - i);
-    rev = 11 - (add % 11);
+    let rev = 11 - (add % 11);
     if (rev == 10 || rev == 11)
         rev = 0;
     if (rev != parseInt(cpf.charAt(9)))
         return false;
     // Valida 2º digito
     add = 0;
-    for (i = 0; i < 10; i++)
+    for (let i = 0; i < 10; i++)
         add += parseInt(cpf.charAt(i)) * (11 - i);
     rev = 11 - (add % 11);
     if (rev == 10 || rev == 11) {
@@ -186,4 +201,8 @@ function validarCPF(cpf) {
 //Função assíncrona de saída de mensagem
 async function AlertaOut() {
     $("#alertaEr").fadeOut();
+}
+
+function reload() {
+    document.location.reload(true);
 }

@@ -11,7 +11,7 @@ const attbloqueio = document.getElementById('some-form')
 attbloqueio.addEventListener('submit', e => {
     e.preventDefault()
 })
-nextBtn.addEventListener("click", (qtdLivro, faxaetaria, edicao) => {
+nextBtn.addEventListener("click", () => {
     //verifica se foi informado corretamente os campos quantidade
     if (($("#qtdDisp").val() > 0 && $("#qtdDisp").val() <= 100) && ($("#classificacao").val() > 0 && $("#classificacao").val() <= 18) && ($("#edicao").val() > 0 && $("#edicao").val() <= 15)) {
 
@@ -19,9 +19,7 @@ nextBtn.addEventListener("click", (qtdLivro, faxaetaria, edicao) => {
             var selectLang = document.querySelector('#idioma').value
             var selectGen = document.querySelector('#genero1').value
             if (input.value != "" && selectLang != "" && selectGen != "") {
-                {
-                    form.classList.add('secActive');
-                }
+                form.classList.add('secActive');
             } else {
                 form.classList.remove('secActive')
             }

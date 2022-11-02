@@ -20,7 +20,7 @@ async function loginbtn(idCod, data) {
             dataNascimento: data
         }
         //Prepara a conexão com endpoint do back
-        fetch('/usuario/login', {
+        fetch('http://localhost:80/usuario/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -45,7 +45,7 @@ async function loginbtn(idCod, data) {
                     //seta os dados em forma de texto na sessão
                     sessionStorage.setItem('idUsuario', json);
                     //Aciona load da pagina
-                     window.location.href = '../../home/home.html';
+                     window.location.href = '../../frontend/home/home.html';
                 }
             })
     }
