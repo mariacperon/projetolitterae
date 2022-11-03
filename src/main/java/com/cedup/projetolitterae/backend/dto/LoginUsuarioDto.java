@@ -17,7 +17,6 @@ public class LoginUsuarioDto {
     }
 
     public Date getDataNascimento() {
-        dataNascimento.setDate(dataNascimento.getDate() + 1);
         return dataNascimento;
     }
 

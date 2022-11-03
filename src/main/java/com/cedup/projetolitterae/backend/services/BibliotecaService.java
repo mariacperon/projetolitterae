@@ -2,6 +2,8 @@ package com.cedup.projetolitterae.backend.services;
 
 import com.cedup.projetolitterae.backend.entities.Biblioteca;
 import com.cedup.projetolitterae.backend.entities.MensagemRetorno;
+import com.cedup.projetolitterae.backend.entities.UltimoId;
+import com.cedup.projetolitterae.backend.entities.Usuario;
 import com.cedup.projetolitterae.backend.exceptions.MensagemRetornoException;
 import com.cedup.projetolitterae.backend.repositories.BibliotecaRepository;
 import com.cedup.projetolitterae.backend.repositories.EnderecoRepository;
@@ -13,6 +15,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class BibliotecaService {
@@ -21,6 +24,8 @@ public class BibliotecaService {
     private BibliotecaRepository repository;
     @Autowired
     private EnderecoRepository enderecoRepository;
+    @Autowired
+    private UltimoIdService ultimoIdService;
 
     Random random = new Random();
     UUID randomUUID = UUID.randomUUID();
@@ -38,13 +43,17 @@ public class BibliotecaService {
         String senha = (randomUUID.toString().replaceAll("_", "").
                 replaceAll("-","")).substring(0, 10);
 
-        biblioteca.setId(random.nextLong(10000, 100000000));
+        Long novoId = gerarIdBiblioteca();
+        biblioteca.setId(novoId);
         biblioteca.setSenha(senha);
 
         biblioteca.getEnderecoBiblioteca().setId(null);
         enderecoRepository.save(biblioteca.getEnderecoBiblioteca());
 
-        return repository.save(biblioteca);
+        biblioteca = repository.save(biblioteca);
+        ultimoIdService.salvarUltimoId(new UltimoId(1, "biblioteca", novoId));
+
+        return biblioteca;
     }
 
     public Biblioteca alterarBiblioteca(Biblioteca novaBiblioteca){
@@ -82,6 +91,10 @@ public class BibliotecaService {
         }
 
         return biblioteca;
+    }
+
+    private Long gerarIdBiblioteca(){
+        return ultimoIdService.verificarUltimoId("biblioteca") + 1;
     }
 
 }

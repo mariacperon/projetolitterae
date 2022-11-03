@@ -1,11 +1,13 @@
 package com.cedup.projetolitterae;
 
+import com.cedup.projetolitterae.backend.dto.LivroBibliotecaDto;
 import com.cedup.projetolitterae.backend.entities.Biblioteca;
 import com.cedup.projetolitterae.backend.entities.Endereco;
 import com.cedup.projetolitterae.backend.entities.Livro;
 import com.cedup.projetolitterae.backend.entities.LivroBiblioteca;
 import com.cedup.projetolitterae.backend.entities.Locacao;
 import com.cedup.projetolitterae.backend.entities.Resenha;
+import com.cedup.projetolitterae.backend.entities.UltimoId;
 import com.cedup.projetolitterae.backend.entities.Usuario;
 import com.cedup.projetolitterae.backend.enums.GeneroLivro;
 import com.cedup.projetolitterae.backend.enums.StatusLocacao;
@@ -16,7 +18,9 @@ import com.cedup.projetolitterae.backend.repositories.LivroBibliotecaRepository;
 import com.cedup.projetolitterae.backend.repositories.LivroRepository;
 import com.cedup.projetolitterae.backend.repositories.LocacaoRepository;
 import com.cedup.projetolitterae.backend.repositories.ResenhaRepository;
+import com.cedup.projetolitterae.backend.repositories.UltimoIdRepository;
 import com.cedup.projetolitterae.backend.repositories.UsuarioRepository;
+import com.cedup.projetolitterae.backend.services.LivroBibliotecaService;
 import com.cedup.projetolitterae.backend.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -46,6 +50,10 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 	LivroBibliotecaRepository livroBibliotecaRepository;
 	@Autowired
 	LocacaoRepository locacaoRepository;
+	@Autowired
+	UltimoIdRepository ultimoIdRepository;
+	@Autowired
+	LivroBibliotecaService livroBibliotecaService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjetolitteraeApplication.class, args);
@@ -233,6 +241,10 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 		resenhaRepository.saveAll(List.of(r1, r2, r3, r4, r5));
 		livroBibliotecaRepository.saveAll(List.of(lb1, lb2, lb3, lb4, lb5, lb6, lb7, lb8, lb9, lb10, lb11, lb12, lb13, lb14, lb15));
 		locacaoRepository.saveAll(List.of(loc1, loc2, loc3, loc4));
+
+		UltimoId ultimoIdBiblioteca = new UltimoId(1, "biblioteca", b5.getId());
+		UltimoId ultimoIdUsuario = new UltimoId(2, "usuario", u4.getId());
+		ultimoIdRepository.saveAll(List.of(ultimoIdBiblioteca, ultimoIdUsuario));
 	}
 
 }
