@@ -4,11 +4,9 @@ import com.cedup.projetolitterae.backend.dto.ImagemPerfilDto;
 import com.cedup.projetolitterae.backend.dto.PesquisaLivroDto;
 import com.cedup.projetolitterae.backend.dto.QuantidadesLocadosBibliotecaDto;
 import com.cedup.projetolitterae.backend.entities.Livro;
-import com.cedup.projetolitterae.backend.entities.Locacao;
 import com.cedup.projetolitterae.backend.entities.MensagemRetorno;
 import com.cedup.projetolitterae.backend.exceptions.MensagemRetornoException;
 import com.cedup.projetolitterae.backend.repositories.LivroRepository;
-import com.cedup.projetolitterae.imagens.FileUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -78,7 +76,7 @@ public class LivroService {
         try {
             Livro livro = pesquisarPorId(imagem.getId().intValue());
             if (livro != null) {
-                String pasta = "src/main/java/com/cedup/projetolitterae/imagens/livros";
+                String pasta = "src/main/resources/static/frontend/imagens/livros";
                 String nomeArquivo = livro.getId() + ".jpeg";
 
                 Path diretorio = Paths.get(pasta + "/" + nomeArquivo);

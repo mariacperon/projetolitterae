@@ -1,4 +1,4 @@
-package com.cedup.projetolitterae.imagens;
+package com.cedup.projetolitterae.backend.services;
 
 import java.io.*;
 import java.nio.file.*;

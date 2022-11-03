@@ -12,7 +12,6 @@ import com.cedup.projetolitterae.backend.entities.Usuario;
 import com.cedup.projetolitterae.backend.enums.TipoPerfil;
 import com.cedup.projetolitterae.backend.exceptions.MensagemRetornoException;
 import com.cedup.projetolitterae.backend.repositories.UsuarioRepository;
-import com.cedup.projetolitterae.imagens.FileUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,10 +23,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Objects;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicReference;
-import java.util.stream.Collectors;
 
 @Service
 public class UsuarioService{
@@ -83,7 +78,7 @@ public class UsuarioService{
         try {
             Usuario usuario = pesquisarPorId(imagem.getId());
             if(usuario != null){
-                String pasta = "src/main/java/com/cedup/projetolitterae/imagens/perfil";
+                String pasta = "src/main/resources/static/frontend/imagens/perfil";
                 String nomeArquivo = usuario.getId() + ".jpeg";
 
                 Path diretorio = Paths.get(pasta + "/" + nomeArquivo);
