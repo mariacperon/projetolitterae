@@ -7,7 +7,9 @@ import com.cedup.projetolitterae.backend.entities.Biblioteca;
 import com.cedup.projetolitterae.backend.entities.Locacao;
 import com.cedup.projetolitterae.backend.entities.MensagemRetorno;
 import com.cedup.projetolitterae.backend.entities.Resenha;
+import com.cedup.projetolitterae.backend.entities.UltimoId;
 import com.cedup.projetolitterae.backend.entities.Usuario;
+import com.cedup.projetolitterae.backend.enums.TipoPerfil;
 import com.cedup.projetolitterae.backend.exceptions.MensagemRetornoException;
 import com.cedup.projetolitterae.backend.repositories.UsuarioRepository;
 import com.cedup.projetolitterae.imagens.FileUploadUtil;
@@ -40,6 +42,8 @@ public class UsuarioService{
     private LocacaoService locacaoService;
     @Autowired
     private BibliotecaService bibliotecaService;
+    @Autowired
+    private UltimoIdService ultimoIdService;
 
     public Usuario pesquisarPorId(Long id){
         return repository.findById(id).orElse(null);
@@ -54,13 +58,21 @@ public class UsuarioService{
     }
 
     public Usuario login(LoginUsuarioDto login){
+        login.getDataNascimento().setDate(login.getDataNascimento().getDate() + 1);
         Usuario usuario = pesquisarPorId(login.getId());
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");
+        sdf.format(login.getDataNascimento());
 
         if(usuario == null){
             throw new MensagemRetornoException(new MensagemRetorno("ERRO",
-                    "Erro ao fazder login."));
+                    "Erro ao fazer login."));
+        }
+
+        sdf.format(usuario.getDataNascimento());
+        if(login.getDataNascimento() != usuario.getDataNascimento()){
+            throw new MensagemRetornoException(new MensagemRetorno("ERRO",
+                    "Erro ao fazer login."));
         }
 
         return usuario;
@@ -98,11 +110,13 @@ public class UsuarioService{
 
     @Transactional
     public Usuario cadastrarUsuario(UsuarioDto usuarioDto){
-        Random random = new Random();
+        Long novoId = gerarIdUsuario();
         Usuario usuario = fromDto(usuarioDto);
-        usuario.setId(random.nextLong(1000L, 1000000L));
+        usuario.setId(novoId);
         enderecoService.cadastrarEndereco(usuario.getEnderecoUsuario());
-        return repository.save(usuario);
+        usuario = repository.save(usuario);
+        ultimoIdService.salvarUltimoId(new UltimoId(2, "usuario", novoId));
+        return usuario;
     }
 
     public Usuario alterarUsuario(Usuario novoUsuario){
@@ -130,6 +144,9 @@ public class UsuarioService{
         }
     }
 
+    private Long gerarIdUsuario(){
+        return ultimoIdService.verificarUltimoId("usuario") + 1L;
+    }
 
     private Usuario fromDto(UsuarioDto usuarioDto){
         Usuario usuario = new Usuario();
@@ -146,7 +163,7 @@ public class UsuarioService{
         usuario.setTelefone1(usuarioDto.getTelefone1());
         usuario.setTelefone2(usuarioDto.getTelefone2());
         usuario.setImagem(usuarioDto.getImagem());
-        usuario.setTipoPerfil(usuario.getTipoPerfil());
+        usuario.setTipoPerfil(TipoPerfil.toEnum(usuarioDto.getTipoPerfil()));
         usuario.setAtivo(usuarioDto.isAtivo());
 
         return usuario;
