@@ -53,19 +53,18 @@ public class UsuarioService{
     }
 
     public Usuario login(LoginUsuarioDto login){
-        login.getDataNascimento().setDate(login.getDataNascimento().getDate() + 1);
         Usuario usuario = pesquisarPorId(login.getId());
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");
-        sdf.format(login.getDataNascimento());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String dataNascimentoLogin = sdf.format(login.getDataNascimento());
 
         if(usuario == null){
             throw new MensagemRetornoException(new MensagemRetorno("ERRO",
                     "Erro ao fazer login."));
         }
 
-        sdf.format(usuario.getDataNascimento());
-        if(login.getDataNascimento() != usuario.getDataNascimento()){
+        String dataNascimento = sdf.format(usuario.getDataNascimento());
+        if(!dataNascimento.equals(dataNascimentoLogin)){
             throw new MensagemRetornoException(new MensagemRetorno("ERRO",
                     "Erro ao fazer login."));
         }
