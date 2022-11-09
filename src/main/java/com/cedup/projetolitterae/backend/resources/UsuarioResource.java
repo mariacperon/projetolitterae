@@ -38,6 +38,12 @@ public class UsuarioResource {
         return ResponseEntity.ok().body(usuario);
     }
 
+    @RequestMapping(value = "/nome/{nome}",method = RequestMethod.GET)
+    public ResponseEntity<List<Usuario>> pesquisarPorNome(@PathVariable String nome){
+        List<Usuario> usuarios = usuarioService.pesquisarPorNome(nome);
+        return ResponseEntity.ok().body(usuarios);
+    }
+
     @RequestMapping(value = "/biblioteca/{id}",method = RequestMethod.GET)
     public ResponseEntity<List<Usuario>> pesquisarUsuarioPorBiblioteca(@PathVariable Long id){
         List<Usuario> usuarios = usuarioService.pesquisarUsuariosPorBiblioteca(id);

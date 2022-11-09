@@ -22,6 +22,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -50,6 +51,27 @@ public class UsuarioService{
 
     public List<Usuario> pesquisarTodos(){
         return repository.findAll();
+    }
+
+    public List<Usuario> pesquisarPorNome(String nome){
+        List<Usuario> usuarioNome = repository.buscarUsuariosPorNome(nome);
+        List<Usuario> usuarioSobrenome = repository.buscarUsuariosPorSobrenome(nome);
+
+        List<Usuario> usuarios = new ArrayList<>();
+
+        if(usuarioNome.size() != 0){
+            usuarios = usuarioNome;
+        }
+
+        if(usuarioSobrenome.size() != 0){
+            for(Usuario usuario : usuarioSobrenome){
+                if(!usuarios.contains(usuario)){
+                    usuarios.add(usuario);
+                }
+            }
+        }
+
+        return usuarios;
     }
 
     public Usuario login(LoginUsuarioDto login){
