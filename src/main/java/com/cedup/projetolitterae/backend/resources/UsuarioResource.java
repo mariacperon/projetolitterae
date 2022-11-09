@@ -6,6 +6,7 @@ import com.cedup.projetolitterae.backend.dto.UsuarioDto;
 import com.cedup.projetolitterae.backend.entities.Usuario;
 import com.cedup.projetolitterae.backend.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -38,8 +39,8 @@ public class UsuarioResource {
         return ResponseEntity.ok().body(usuario);
     }
 
-    @RequestMapping(value = "/nome/{nome}",method = RequestMethod.GET)
-    public ResponseEntity<List<Usuario>> pesquisarPorNome(@PathVariable String nome){
+    @RequestMapping(value = "/nome",method = RequestMethod.GET)
+    public ResponseEntity<List<Usuario>> pesquisarPorNome(@Param("nome") String nome){
         List<Usuario> usuarios = usuarioService.pesquisarPorNome(nome);
         return ResponseEntity.ok().body(usuarios);
     }
