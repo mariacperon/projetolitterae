@@ -47,7 +47,7 @@
 
                     <div class="input-field">
                         <label>ISBN</label>
-                        <input id="isbn" type="text" placeholder="Insira o ISBN" required >
+                        <input maxlength="13" minlength="13" id="isbn" type="text" placeholder="Insira o ISBN" required >
                     </div>
 
                     <div class="input-field">
@@ -74,7 +74,7 @@
                     <div class="input-field">
                         <label>Idioma</label>
                         <select required id="idioma" >
-                            <option value=""disabled selected>Selecione o idioma</option>
+                            <option value="" disabled selected>Selecione o idioma</option>
                             <option value="EN">Inglês</option>
                             <option value="PT">Português</option>
                             <option value="FR">Francês</option>
@@ -89,7 +89,7 @@
                     <div class="input-field">
                         <label>Gênero 1</label>
                         <select required id="genero1" >
-                            <option value="" disabled selected>Selecione um gênero</option>
+                            <option selected value="" disabled >Selecione um gênero</option>
                             <option value="0">Ficção Científica</option>
                             <option value="1">Fantasia</option>
                             <option value="2">Suspense</option>
@@ -113,8 +113,8 @@
 
                     <div class="input-field">
                         <label>Gênero 2</label>
-                        <select  id="genero2" >
-                            <option value="null" disabled selected>Selecione um gênero</option>
+                        <select id="genero2" >
+                            <option value="null" disabled  selected>Selecione um gênero</option>
                             <option value="0">Ficção Científica</option>
                             <option value="1">Fantasia</option>
                             <option value="2">Suspense</option>
@@ -139,7 +139,7 @@
                     <div class="input-field">
                         <label>Gênero 3</label>
                         <select  id="genero3" >
-                            <option value="null" disabled selected>Selecione um gênero</option>
+                            <option value="a" disabled selected = "true">Selecione um gênero</option>
                             <option value="0">Ficção Científica</option>
                             <option value="1">Fantasia</option>
                             <option value="2">Suspense</option>
