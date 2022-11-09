@@ -5,6 +5,7 @@ import com.cedup.projetolitterae.backend.dto.PesquisaLivroDto;
 import com.cedup.projetolitterae.backend.dto.QuantidadesLocadosBibliotecaDto;
 import com.cedup.projetolitterae.backend.entities.Livro;
 import com.cedup.projetolitterae.backend.entities.MensagemRetorno;
+import com.cedup.projetolitterae.backend.enums.GeneroLivro;
 import com.cedup.projetolitterae.backend.exceptions.MensagemRetornoException;
 import com.cedup.projetolitterae.backend.repositories.LivroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -68,6 +71,7 @@ public class LivroService {
     @Transactional
     public Livro cadastrarLivro(Livro livro){
         livro.setId(null);
+        validaGeneros(livro);
         return repository.save(livro);
     }
 
@@ -104,6 +108,7 @@ public class LivroService {
 
     public Livro alterarLivro(Livro novoLivro){
         repository.save(novoLivro);
+        validaGeneros(novoLivro);
         return novoLivro;
     }
 
@@ -112,5 +117,16 @@ public class LivroService {
         repository.deleteById(id);
         File imagem = new File(livro.getImagem());
         imagem.delete();
+    }
+
+    private void validaGeneros(Livro livro){
+        Set<Integer> generos = new HashSet<>();
+
+        for(Integer genero : livro.getGeneros()){
+            if(!generos.add(genero)){
+                throw new MensagemRetornoException(new MensagemRetorno("ERRO", "Um gênero foi selecionado mais de uma vez."));
+            }
+        }
+
     }
 }
