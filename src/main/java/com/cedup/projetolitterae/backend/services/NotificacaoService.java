@@ -20,7 +20,7 @@ public class NotificacaoService {
     NotificacaoRepository notificacaoRepository;
 
     public List<Notificacao> pesquisarPorIdBiblioteca(Long idBiblioteca){
-        return notificacaoRepository.findNotificacaoByIdBiblioteca(idBiblioteca);
+        return notificacaoRepository.findNotificacaoByBibliotecaId(idBiblioteca);
     }
 
     public Notificacao cadastrarNotificacao(NotificacaoDto notificacaoDto){
