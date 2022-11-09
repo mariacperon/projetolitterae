@@ -57,7 +57,7 @@ public class UsuarioResource {
     }
 
     @RequestMapping(value = "/alterar",method = RequestMethod.PUT)
-    public ResponseEntity<Usuario> alterar(@Validated @RequestBody Usuario usuario){
+    public ResponseEntity<Usuario> alterar(@Validated @RequestBody UsuarioDto usuario){
         Usuario usuarioAlterado = usuarioService.alterarUsuario(usuario);
         return ResponseEntity.ok().body(usuarioAlterado);
     }

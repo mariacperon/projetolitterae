@@ -17,12 +17,10 @@ public class Resenha {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_livro")
     private Livro livro;

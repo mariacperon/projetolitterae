@@ -113,7 +113,8 @@ public class UsuarioService{
         return usuario;
     }
 
-    public Usuario alterarUsuario(Usuario novoUsuario){
+    public Usuario alterarUsuario(UsuarioDto novoUsuarioDto){
+        Usuario novoUsuario = fromDto(novoUsuarioDto);
         Usuario oldUsuario = pesquisarPorId(novoUsuario.getId());
         novoUsuario.getEnderecoUsuario().setId(oldUsuario.getEnderecoUsuario().getId());
         enderecoService.alterarEndereco(novoUsuario.getEnderecoUsuario());
@@ -130,11 +131,12 @@ public class UsuarioService{
             List<Locacao> locacoes = locacaoService.pesquisarPorUsuario(id);
             locacoes.forEach(x -> locacaoService.excluirLocacao(x.getId()));
 
-            repository.deleteById(id);
-            enderecoService.excluirEndereco(usuario.getEnderecoUsuario().getId());
+            repository.delete(usuario);
 
-            File imagem = new File(usuario.getImagem());
-            imagem.delete();
+            if(usuario.getImagem() != null){
+                File imagem = new File(usuario.getImagem());
+                imagem.delete();
+            }
         }
     }
 

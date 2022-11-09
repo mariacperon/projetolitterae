@@ -34,7 +34,7 @@ public class Usuario implements Serializable{
     @JoinColumn(name = "id_endereco")
     private Endereco enderecoUsuario;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "id_biblioteca")
     private Biblioteca biblioteca;
 
