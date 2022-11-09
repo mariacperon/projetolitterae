@@ -2,12 +2,14 @@ package com.cedup.projetolitterae.backend.services;
 
 import com.cedup.projetolitterae.backend.dto.LivroBibliotecaDto;
 import com.cedup.projetolitterae.backend.dto.LocacaoDto;
+import com.cedup.projetolitterae.backend.dto.NotificacaoDto;
 import com.cedup.projetolitterae.backend.emails.MandarEmail;
 import com.cedup.projetolitterae.backend.entities.Biblioteca;
 import com.cedup.projetolitterae.backend.entities.Livro;
 import com.cedup.projetolitterae.backend.entities.LivroBiblioteca;
 import com.cedup.projetolitterae.backend.entities.Locacao;
 import com.cedup.projetolitterae.backend.entities.MensagemRetorno;
+import com.cedup.projetolitterae.backend.entities.Notificacao;
 import com.cedup.projetolitterae.backend.entities.Usuario;
 import com.cedup.projetolitterae.backend.exceptions.MensagemRetornoException;
 import com.cedup.projetolitterae.backend.enums.StatusLocacao;
@@ -34,6 +36,8 @@ public class LocacaoService {
     private UsuarioService usuarioService;
     @Autowired
     private MandarEmail mandarEmail;
+    @Autowired
+    private NotificacaoService notificacaoService;
 
     public Locacao pesquisarPorId(Integer id){
         return (repository.findById(id)).orElse(null);
@@ -60,6 +64,7 @@ public class LocacaoService {
             locacao.setStatusLocacao(StatusLocacao.ANDAMENTO);
             validarLocacao(locacao);
             repository.save(locacao);
+            notificacaoService.cadastrarNotificacao(gerarNotificacao(locacao));
             //mandarEmail.emailLivroLocado(locacao);
             return locacao;
         }else{
@@ -67,6 +72,22 @@ public class LocacaoService {
                     "Esse livro não está disponível para locação no momento."));
         }
     }
+
+    private NotificacaoDto gerarNotificacao(Locacao locacao){
+        NotificacaoDto notificacao = new NotificacaoDto();
+        notificacao.setId(null);
+        notificacao.setIdBiblioteca(locacao.getLivro().getBiblioteca().getId());
+        notificacao.setTitulo("Livro locado");
+        notificacao.setMensagem(gerarMensagemNotificacaoLivrvoLocado(locacao));
+
+        return notificacao;
+    }
+
+    private String gerarMensagemNotificacaoLivrvoLocado(Locacao locacao){
+        return "Usuário "+ locacao.getUsuario().getId() +" - "
+                + locacao.getUsuario().getNome() +" "+ locacao.getUsuario().getSobrenome()
+                +", locou o livro "+ locacao.getLivro().getLivro().getNome();
+    };
 
     private Boolean validaEstoque(Locacao locacao){
         return repository.qtdLivroLocado(locacao.getLivro().getId()) < locacao.getLivro().getQuantidadeEstoque();
