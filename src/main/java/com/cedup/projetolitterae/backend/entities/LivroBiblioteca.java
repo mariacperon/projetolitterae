@@ -19,7 +19,7 @@ import javax.persistence.SqlResultSetMapping;
         query ="select lb.id_livro as idLivro, count(*) as qtdLocacoes from livro_biblioteca lb " +
                 "inner join locacao l on l.id_livro = lb.id " +
                 "where lb.id_biblioteca = :idbiblioteca " +
-                "group by lb.id;",
+                "group by lb.id",
         resultSetMapping = "qtd_locacoes_livros_dto"
 )
 @SqlResultSetMapping(

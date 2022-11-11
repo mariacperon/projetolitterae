@@ -61,9 +61,9 @@ public class LivroService {
         List<Livro> livrosMaisLocados = new ArrayList<>();
 
         List<QuantidadesLocadosBibliotecaDto> qtdLocacoesLivros = livroBibliotecaService.quantidadeLocacoesLivro(idBiblioteca);
-        qtdLocacoesLivros.stream().sorted(Comparator.comparing(QuantidadesLocadosBibliotecaDto::getQtdLocacoes)).collect(Collectors.toList());
+        List<QuantidadesLocadosBibliotecaDto> maisLocados = qtdLocacoesLivros.stream().sorted(Comparator.comparing(QuantidadesLocadosBibliotecaDto::getQtdLocacoes).reversed()).collect(Collectors.toList());
 
-        qtdLocacoesLivros.forEach(x -> livrosMaisLocados.add(pesquisarPorId(x.getIdLivro())));
+        maisLocados.forEach(x -> livrosMaisLocados.add(pesquisarPorId(x.getIdLivro())));
 
         return livrosMaisLocados;
     }

@@ -210,6 +210,11 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 		loc4.setLivro(lb6);
 		loc4.setUsuario(u4);
 
+		Locacao loc5 = new Locacao(new Date(2023-1900,2-1,19), new Date(2023-1900,2-1,19),
+				StatusLocacao.ANDAMENTO);
+		loc5.setLivro(lb3);
+		loc5.setUsuario(u1);
+
 		//CADASTRO DE RESENHAS
 		Resenha r1 = new Resenha("muito bom");
 		r1.setLivro(l1);
@@ -238,7 +243,7 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 		usuarioRepository.saveAll(List.of(u1, u2, u3, u4));
 		resenhaRepository.saveAll(List.of(r1, r2, r3, r4, r5));
 		livroBibliotecaRepository.saveAll(List.of(lb1, lb2, lb3, lb4, lb5, lb6, lb7, lb8, lb9, lb10, lb11, lb12, lb13, lb14, lb15));
-		locacaoRepository.saveAll(List.of(loc1, loc2, loc3, loc4));
+		locacaoRepository.saveAll(List.of(loc1, loc2, loc3, loc4, loc5));
 
 		UltimoId ultimoIdBiblioteca = new UltimoId(1, "biblioteca", b5.getId());
 		UltimoId ultimoIdUsuario = new UltimoId(2, "usuario", u4.getId());
