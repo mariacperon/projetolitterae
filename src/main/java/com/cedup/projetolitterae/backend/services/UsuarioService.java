@@ -53,9 +53,9 @@ public class UsuarioService{
         return repository.findAll();
     }
 
-    public List<Usuario> pesquisarPorNome(String nome){
-        List<Usuario> usuarioNome = repository.buscarUsuariosPorNome(nome);
-        List<Usuario> usuarioSobrenome = repository.buscarUsuariosPorSobrenome(nome);
+    public List<Usuario> pesquisarPorNome(String nome, Long idBiblioteca){
+        List<Usuario> usuarioNome = repository.buscarUsuariosPorNome(nome, idBiblioteca);
+        List<Usuario> usuarioSobrenome = repository.buscarUsuariosPorSobrenome(nome, idBiblioteca);
 
         List<Usuario> usuarios = new ArrayList<>();
 
