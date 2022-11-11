@@ -1,6 +1,7 @@
+
 //Pega o id do usuario logado
-//var idUsuario = sessionStorage.getItem("idUsuario");
-const idUsuario = 100004;
+var idUsuario = sessionStorage.getItem("idUsuario");
+
 const form = document.querySelector("form"),
     nextBtn = form.querySelector(".nextBtn"),
     backBtn = form.querySelector(".backBtn"),
@@ -12,23 +13,18 @@ attbloqueio.addEventListener('submit', e => {
     e.preventDefault()
 })
 nextBtn.addEventListener("click", () => {
-    //verifica se foi informado corretamente os campos quantidade
-    if (($("#qtdDisp").val() > 0 && $("#qtdDisp").val() <= 100) && ($("#classificacao").val() > 0 && $("#classificacao").val() <= 18) && ($("#edicao").val() > 0 && $("#edicao").val() <= 15)) {
 
-        allInput.forEach((input) => {
-            var selectLang = document.querySelector('#idioma').value
-            var selectGen = document.querySelector('#genero1').value
-            if (input.value != "" && selectLang != "" && selectGen != "") {
-                form.classList.add('secActive');
-            } else {
-                form.classList.remove('secActive')
-            }
-        })
+    allInput.forEach((input) => {
+        var selectLang = document.querySelector('#idioma').value
+        var selectGen = document.querySelector('#genero1').value
+        if (input.value != "" && selectLang != "" && selectGen != "") {
+            form.classList.add('secActive');
+        } else {
+            form.classList.remove('secActive')
+        }
 
-
-    }
+    })
 })
-
 backBtn.addEventListener("click", () => form.classList.remove('secActive'));
 
 //Faz o upload de imagem

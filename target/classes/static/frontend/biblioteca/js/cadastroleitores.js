@@ -1,5 +1,6 @@
 //Pega o id do usuario logado
 var idUsuario = sessionStorage.getItem("idUsuario");
+//var idUsuario = 100001
 'use strict';
 // Limpa os dados de Endereço do Formulário
 const limparFormulario = (endereco) => {
@@ -58,7 +59,9 @@ function btnEnviar(cont) {
         if(this.value != ''){
             cont = cont + 1
             if (cont == 12){
-            Cadastrar();
+                Cadastrar();
+            }else if (cont == 11 && $("#telefone").val() == ""){
+                Cadastrar();
             }
         }
     });
@@ -120,37 +123,33 @@ async function Cadastrar(nome, sobrenome, data, celular, telefone, cpf, cep, rua
                 body: jsonCadastro,
                 redirect: 'follow'
             };
+
             //faz a chamada da conexão
             fetch("http://localhost:80/usuario/cadastrar", requestOptions)
                 .then(function (resposta) {
                     //tratamento do erro exibindo mensagem
-                    if (resposta.status >= 400 && resposta.status <= 500) {
+                    if (resposta.status>= 200 && resposta.status <= 300 ) {
+                        document.querySelector('#alertaEr').style.color = "#0c4900";
+                        document.querySelector("#alertaEr").innerHTML = "    Cadastrado com Sucesso"
+                        $("#alertaEr").fadeIn();
+                        setTimeout(AlertaOut, 5000)
+                        setTimeout(reload, 2000)
+                    }else{
                         console.log(resposta.json())
                         document.querySelector('#alertaEr').style.color="Red";
                         document.querySelector("#alertaEr").innerHTML = "Erro no Cadastro, Por Favor Contate um Administrador."
+                        console.log(resposta.json())
                         $("#alertaEr").fadeIn();
                         setTimeout(AlertaOut, 5000)
-                    }
-                    //Envia Status da Resposta
-                    return resposta.status
-                })
-                //Executa função de carregamento da pagina e armazenamento de dados
-                .then(function (status) {
-                    if (status>= 200 && status <= 300 ) {
-                        document.querySelector('#alertaEr').style.color = "#0c4900";
-                        document.querySelector("#alertaEr").innerHTML = "Cadastrado com Sucesso"
-                        $("#alertaEr").fadeIn();
-                        setTimeout(AlertaOut, 5000)
+
                     }
                 })
-            setTimeout(reload, 2000)
+
         }
         //Mensagem de Erro Cpf
         else {
-
             $("#ErrCPF").fadeIn();
         }
-
 
 }
 
