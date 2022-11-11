@@ -4,6 +4,7 @@ import com.cedup.projetolitterae.backend.dto.ImagemPerfilDto;
 import com.cedup.projetolitterae.backend.dto.PesquisaLivroDto;
 import com.cedup.projetolitterae.backend.dto.QuantidadesLocadosBibliotecaDto;
 import com.cedup.projetolitterae.backend.entities.Livro;
+import com.cedup.projetolitterae.backend.entities.LivroBiblioteca;
 import com.cedup.projetolitterae.backend.entities.MensagemRetorno;
 import com.cedup.projetolitterae.backend.enums.GeneroLivro;
 import com.cedup.projetolitterae.backend.exceptions.MensagemRetornoException;
@@ -67,6 +68,14 @@ public class LivroService {
         return livrosMaisLocados;
     }
 
+    public List<Livro> pesquisarLivrosPorBiblioteca(Long idBiblioteca){
+        List<Livro> livros = new ArrayList<>();
+        List<LivroBiblioteca> livroBibliotecas = livroBibliotecaService.pesquisarPorBibliotecaId(idBiblioteca);
+
+        livroBibliotecas.forEach(x -> livros.add(pesquisarPorId(x.getLivro().getId())));
+
+        return livros;
+    }
 
     @Transactional
     public Livro cadastrarLivro(Livro livro){

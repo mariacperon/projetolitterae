@@ -5,6 +5,7 @@ import com.cedup.projetolitterae.backend.dto.PesquisaLivroDto;
 import com.cedup.projetolitterae.backend.entities.Livro;
 import com.cedup.projetolitterae.backend.services.LivroService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -28,6 +29,12 @@ public class LivroResource {
     public ResponseEntity<Livro> pesquisarPorId(@PathVariable int id){
         Livro livro = livroService.pesquisarPorId(id);
         return ResponseEntity.ok().body(livro);
+    }
+
+    @RequestMapping(value = "/biblioteca",method = RequestMethod.GET)
+    public ResponseEntity<List<Livro>> pesquisarPorIdBiblioteca(@Param("id") Long id){
+        List<Livro> livros = livroService.pesquisarLivrosPorBiblioteca(id);
+        return ResponseEntity.ok().body(livros);
     }
 
     @RequestMapping(value = "/salvar-imagem",method = RequestMethod.POST)
