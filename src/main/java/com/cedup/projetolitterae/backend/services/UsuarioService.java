@@ -128,8 +128,8 @@ public class UsuarioService{
     @Transactional
     public Usuario cadastrarUsuario(UsuarioDto usuarioDto){
         Long novoId = gerarIdUsuario();
+        usuarioDto.setId(novoId);
         Usuario usuario = fromDto(usuarioDto);
-        usuario.setId(novoId);
         enderecoService.cadastrarEndereco(usuario.getEnderecoUsuario());
         usuario = repository.save(usuario);
         ultimoIdService.salvarUltimoId(new UltimoId(2, "usuario", novoId));

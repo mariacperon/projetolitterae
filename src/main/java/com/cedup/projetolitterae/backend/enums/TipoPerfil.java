@@ -3,7 +3,8 @@ package com.cedup.projetolitterae.backend.enums;
 public enum TipoPerfil {
 
     ADMIN(0, "Admin"),
-    LEITOR(1, "Leitor");
+    LEITOR(1, "Leitor"),
+    MASTER(2, "Adm master");
 
     private final int cod;
     private final String descricao;

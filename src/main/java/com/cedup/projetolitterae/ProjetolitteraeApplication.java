@@ -120,6 +120,11 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 		b5.setEnderecoBiblioteca(e5);
 		b5.setId(100005L);
 
+		Biblioteca litterae = new Biblioteca("", "Litteae", "",
+				"", TipoPerfil.MASTER, "1234", true, null,null);
+		litterae.setEnderecoBiblioteca(null);
+		litterae.setId(1L);
+
 		//CADASTRO DE LIVROS
 		Livro l1 = new Livro("Rainha Vermelha","victoria aveyard", "ansdjbf",
 				"portugues", "livre", "seila", "sdfasdf", "1º", new Date(1999-1900,2-1,19));
@@ -238,7 +243,7 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 
 		//SALVANDO NO BANCO
 		enderecoRepository.saveAll(List.of(e1, e2, e3, e4, e5, e6, e7, e8, e9, e10));
-		bibliotecaRepository.saveAll(List.of(b1, b2, b3, b4, b5));
+		bibliotecaRepository.saveAll(List.of(b1, b2, b3, b4, b5, litterae));
 		livroRepository.saveAll(List.of(l1, l2, l3, l4, l5, l6));
 		usuarioRepository.saveAll(List.of(u1, u2, u3, u4));
 		resenhaRepository.saveAll(List.of(r1, r2, r3, r4, r5));
