@@ -35,8 +35,6 @@ import java.util.Random;
 public class ProjetolitteraeApplication implements CommandLineRunner {
 
 	@Autowired
-	UsuarioService usuarioService;
-	@Autowired
 	UsuarioRepository usuarioRepository;
 	@Autowired
 	EnderecoRepository enderecoRepository;

@@ -76,6 +76,7 @@ public class UsuarioService{
 
     public Usuario login(LoginUsuarioDto login){
         Usuario usuario = pesquisarPorId(login.getId());
+        login.getDataNascimento().setDate(login.getDataNascimento().getDate() +1);
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String dataNascimentoLogin = sdf.format(login.getDataNascimento());

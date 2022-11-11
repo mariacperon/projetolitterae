@@ -85,7 +85,7 @@ public class BibliotecaService {
     public Biblioteca login(Long id, String senha){
         Biblioteca biblioteca = pesquisarPorId(id);
 
-        if(biblioteca == null && !Objects.equals(biblioteca.getSenha(), senha)){
+        if(biblioteca == null || !Objects.equals(biblioteca.getSenha(), senha)){
             throw new MensagemRetornoException(new MensagemRetorno("ERRO",
                     "Não foi possível realizar o login."));
         }
