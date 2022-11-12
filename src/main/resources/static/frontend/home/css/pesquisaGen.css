@@ -1,25 +1,4 @@
-/*@font-face {
-  font-family: 'Poppins-Bold';
-  src: url('../../fonts/Poppins-Bold.ttf') format('truetype');
-}
-@font-face {  
-  font-family: 'Poppins-SemiBold';
-  src: url('../../fonts/Poppins-SemiBold.ttf') format('truetype');
-}
-@font-face {  
-  font-family: 'Poppins-light';
-  src: url('../../fonts/Poppins-Light.ttf') format('truetype');
-}
-@font-face {  
-  font-family: 'Poppins-Medium';
-  src: url('../../fonts/Poppins-Medium.ttf') format('truetype');
-}
-@font-face {  
-  font-family: 'Poppins-Regular';
-  src: url('../../fonts/Poppins-Regular.ttf') format('truetype');
---body-font: "Poppins-light", sans-serif;
-}
-*/
+
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
 :root {
   --body-bg-color: #e5f4f9;
@@ -163,7 +142,7 @@ body {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  border: 2px solid var(--theme-bg-color);
+  border: 2px solid;
   right: 12px;
   top: -3px;
   border: 2px solid #fff;
