@@ -1,6 +1,6 @@
 //Pega o id do usuario logado
-var idUsuario = sessionStorage.getItem("idUsuario");
-//var idUsuario = 100001
+//var idUsuario = sessionStorage.getItem("idUsuario");
+var idUsuario = 100001
 'use strict';
 // Limpa os dados de Endereço do Formulário
 const limparFormulario = (endereco) => {

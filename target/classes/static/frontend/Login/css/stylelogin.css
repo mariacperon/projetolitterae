@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
 * {
 	box-sizing: border-box;
 }
@@ -11,7 +10,7 @@ body {
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'Poppins', sans-serif;
 	height: 100vh;
 	margin: -20px 0 50px;
   background: linear-gradient(-45deg, #833ab4, #fd1d1d, #fcb045);
@@ -43,7 +42,7 @@ h2 {
 
 p {
 	font-size: 14px;
-	font-weight: 100;
+	font-weight: 400;
 	line-height: 20px;
 	letter-spacing: 0.5px;
 	margin: 20px 0 30px;
@@ -103,9 +102,10 @@ form {
 	text-align: center;
 
 }
-#input-data,#input-codcadastro{
+#input-data,#input-codcadastro,#input-pass,#input-cod{
 	margin-top: 8px;
 }
+
 #btnLogin{
 	margin-top: 2px;
 }

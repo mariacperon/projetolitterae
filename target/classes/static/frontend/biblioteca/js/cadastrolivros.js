@@ -1,6 +1,7 @@
 
 //Pega o id do usuario logado
-var idUsuario = sessionStorage.getItem("idUsuario");
+//var idUsuario = sessionStorage.getItem("idUsuario");
+var idUsuario = 100001
 
 const form = document.querySelector("form"),
     nextBtn = form.querySelector(".nextBtn"),
@@ -127,13 +128,14 @@ function CadastrarLivro(nome, autor, genero1, genero2, genero3, sinopse, idioma,
             return resposta.json()
                 .then(function (json, JsonBibli) {
                     if (resposta.ok) {
-                        idliv = JSON.stringify(json.id);
+                       var idliv = JSON.stringify(json.id);
                         JsonBibli = JSON.stringify({
                             "id": null,
                             "idLivro": idliv,
                             "idBiblioteca": idUsuario,
                             "quantidadeEstoque": qtdLivro
-                        })
+                        }
+                        )
                         //Captura a file
                         const inputFile = document.querySelector("#picture__input");
                         var formdata = new FormData();
@@ -174,7 +176,7 @@ function CadastrarLivro(nome, autor, genero1, genero2, genero3, sinopse, idioma,
                 })
         })
 
-    setTimeout(reload, 2000)
+    //setTimeout(reload, 2000)
 }
 
 //Função assíncrona de saída de mensagem Avisos
