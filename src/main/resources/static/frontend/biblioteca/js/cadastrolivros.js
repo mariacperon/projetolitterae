@@ -1,4 +1,3 @@
-
 //Pega o id do usuario logado
 //var idUsuario = sessionStorage.getItem("idUsuario");
 var idUsuario = 100001
@@ -118,75 +117,70 @@ function CadastrarLivro(nome, autor, genero1, genero2, genero3, sinopse, idioma,
         "isdb": isbn
     });
     //--------------------------------------------------
-    //Faz conexão com back para cadastro do livro
+    //Endpoint Cadastro do Livro
     fetch('http://localhost:80/livro/cadastrar', {
         method: 'POST', headers: {
             'Content-Type': 'application/json',
         }, body: jsonLivro
-    })
-        .then(function (resposta) {
-            console.log(jsonLivro)
-            return resposta.json()
-                .then(function (json, JsonBibli) {
-                    console.log(idUsuario)
-                    if (resposta.ok) {
-                       var idliv = JSON.stringify(json.id);
-                        JsonBibli = JSON.stringify({
+    }).then(function (resposta) {
+        console.log(jsonLivro)
+        return resposta.json()
+            .then(function (json, JsonBibli) {
+                if (resposta.status >= 200 && resposta.status <= 300) {
+                    var idliv = JSON.stringify(json.id);
+                    JsonBibli = JSON.stringify({
                             "id": null,
                             "idLivro": idliv,
                             "idBiblioteca": idUsuario,
                             "quantidadeEstoque": qtdLivro
                         }
-                        )
-                        //Captura a file
-                        const inputFile = document.querySelector("#picture__input");
-                        var formdata = new FormData();
-                        console.log(JsonBibli)
-                        formdata.append("imagem", inputFile.files[0], inputFile);
-                        formdata.append("id", idliv);
-                        //-------------------------------------------------------------
-                        // Faz conexão com back para cadastro da imagem
-                        fetch("http://localhost:80/livro/salvar-imagem", {method: 'POST', body: formdata})
-                            .then(function (resposta3) {
-                                console.log(resposta3.json())
-                                console.log(inputFile.files[0])
-                                console.log(resposta3.json())
-                                if (resposta3.status>= 200 && resposta3.status <= 300 ){
-                                    console.log("Enviou A imagem")
-                                    console.log(resposta3.json())
-                                }
-                            })
-                            .catch(error => console.log('error', error));
-                        //---------------------------------------------------------
-                        //Faz conexão com back para cadastro do livro com a biblioteca
-                        fetch('http://localhost:80/livro-biblioteca/cadastrar', {
-                            method: 'POST', headers: {
-                                'Content-Type': 'application/json',
-                            }, body: JsonBibli
-                        }).then(function (resposta2) {
-                            console.log(JsonBibli)
-                            if (resposta2.ok) {
-                                document.querySelector('#alertaEr').style.color = "#0c4900";
-                                document.querySelector("#alertaEr").innerHTML = "Cadastrado com Sucesso"
-                                $("#alertaEr").fadeIn();
-                                setTimeout(AlertaOut, 5000)
+                    )
+                    //Captura a file
+                    const inputFile = document.querySelector("#picture__input");
+                    var formdata = new FormData();
+                    formdata.append("imagem", inputFile.files[0], inputFile);
+                    formdata.append("id", idliv);
+                    //-------------------------------------------------------------
+                    // Endpoint cadastro da imagem Livro
+                    fetch("http://localhost:80/livro/salvar-imagem", {method: 'POST', body: formdata})
+                        .then(function (resposta2) {
+                            if (resposta2.status >= 200 && resposta2.status <= 300) {
+                                //Endpoint cadastro do livro com a biblioteca
+                                fetch('http://localhost:80/livro-biblioteca/cadastrar', {
+                                    method: 'POST',
+                                    headers: {'Content-Type': 'application/json',},
+                                    body: JsonBibli
+                                }).then(function (resposta3) {
+                                        if (resposta3.ok) {
+                                            document.querySelector('#alertaEr').style.color = "#0c4900";
+                                            document.querySelector("#alertaEr").innerHTML = "Cadastrado com Sucesso"
+                                            $("#alertaEr").fadeIn();
+                                            setTimeout(AlertaOut, 5000)
+                                            setTimeout(reload, 3000)
+                                        } else {
+                                            console.log("Erro no Cadastro do Livro na Biblioteca " + resposta3.json())
+                                        }
+                                    })
+                                //---------------------------------------------------------
+                                // Else Cadastro Blioteca Livro Livro
                             } else {
                                 document.querySelector('#alertaEr').style.color = "Red";
                                 document.querySelector("#alertaEr").innerHTML = "Erro no Cadastro, Contate um Administrador"
                                 $("#alertaEr").fadeIn();
                                 setTimeout(AlertaOut, 5000)
-                                console.log(resposta2.json())
+                                console.log(resposta3.json())
                             }
                         })
-                    } else {
-                        document.querySelector('#alertaEr').style.color = "Red";
-                        document.querySelector("#alertaEr").innerHTML = "Erro no Cadastro, Contate um Administrador"
-                        $("#alertaEr").fadeIn();
-                        setTimeout(AlertaOut, 5000)
-                        console.log(json)
-                    }
-                })
-        })
+                    //Else Cadastro Livro
+                } else {
+                    document.querySelector('#alertaEr').style.color = "Red";
+                    document.querySelector("#alertaEr").innerHTML = "Erro no Cadastro, Contate um Administrador"
+                    $("#alertaEr").fadeIn();
+                    setTimeout(AlertaOut, 5000)
+                    console.log(json)
+                }
+            })
+    })
 
     //setTimeout(reload, 2000)
 }
