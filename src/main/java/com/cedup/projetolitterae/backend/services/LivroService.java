@@ -36,6 +36,9 @@ public class LivroService {
     @Autowired
     private LivroBibliotecaService livroBibliotecaService;
 
+    @Autowired
+    private FileService fileService;
+
     public Livro pesquisarPorId(Integer id){
         return (repository.findById(id)).orElse(null);
     }
@@ -90,26 +93,10 @@ public class LivroService {
         try {
             Livro livro = pesquisarPorId(imagem.getId().intValue());
             if (livro != null) {
-                String pasta = "src/main/resources/static/frontend/imagens/livros";
-                String nomeArquivo = livro.getId() + ".jpeg";
-
-                Path diretorio = Paths.get(pasta + "/" + nomeArquivo);
-                InputStream img = imagem.getImagem().getInputStream();
-
-                if (!Files.exists(diretorio)) {
-                    File pastaImagens = new File(pasta);
-                    if(!pastaImagens.exists()) {
-                        pastaImagens.mkdirs();
-                    }
-                    Files.copy(img, diretorio);
-
-                    livro.setImagem(diretorio.toString());
-                    repository.save(livro);
-                }
-
-                FileUploadUtil.saveFile(pasta, nomeArquivo, imagem.getImagem());
-
-                path = diretorio.toString();
+                String diretorioArquivo = fileService.salvaArquivo("/livro/"+livro.getId()+"/", imagem.getImagem());
+                livro.setImagem(diretorioArquivo);
+                repository.save(livro);
+                return diretorioArquivo;
             } else {
                 throw new MensagemRetornoException(new MensagemRetorno("ERRO", "Houve um erro ao tentar salvar a imagem de capa."));
             }

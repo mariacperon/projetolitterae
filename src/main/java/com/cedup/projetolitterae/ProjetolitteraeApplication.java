@@ -23,11 +23,16 @@ import com.cedup.projetolitterae.backend.repositories.UsuarioRepository;
 import com.cedup.projetolitterae.backend.services.LivroBibliotecaService;
 import com.cedup.projetolitterae.backend.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.util.CollectionUtils;
 
+import java.io.File;
 import java.sql.Date;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -52,6 +57,19 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 	UltimoIdRepository ultimoIdRepository;
 	@Autowired
 	LivroBibliotecaService livroBibliotecaService;
+
+	@Bean
+	public String getDirBaseArquivo(@Value( "${spring.web.resources.static-locations:/litterae/files}" )
+										List<String> diratorioStatic){
+		if(CollectionUtils.isEmpty(diratorioStatic)){
+			throw new RuntimeException("Pasta de arquivos não definida");
+		}
+		File diratorioPadraoArquivos = new File(diratorioStatic.get(0).replace("file:",""));
+		if(!diratorioPadraoArquivos.exists()){
+			diratorioPadraoArquivos.mkdirs();
+		}
+		return diratorioPadraoArquivos.getAbsolutePath();
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjetolitteraeApplication.class, args);

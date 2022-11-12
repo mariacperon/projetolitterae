@@ -58,7 +58,7 @@ inputFile.addEventListener("change", function (e) {
 });
 
 function btnEnviar() {
-
+    document.getElementById("botaoEnviar").disabled = true;
     var img = document.getElementById('picture__input');
     var fileName = img.value;
     var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
@@ -138,7 +138,7 @@ function CadastrarLivro(nome, autor, genero1, genero2, genero3, sinopse, idioma,
                     //Captura a file
                     const inputFile = document.querySelector("#picture__input");
                     var formdata = new FormData();
-                    formdata.append("imagem", inputFile.files[0], inputFile);
+                    formdata.append("imagem", inputFile.files[0], inputFile.files[0].name);
                     formdata.append("id", idliv);
                     //-------------------------------------------------------------
                     // Endpoint cadastro da imagem Livro
@@ -180,6 +180,7 @@ function CadastrarLivro(nome, autor, genero1, genero2, genero3, sinopse, idioma,
                     console.log(json)
                 }
             })
+
     })
 
 }
