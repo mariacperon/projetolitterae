@@ -1,0 +1,9 @@
+.idea
+
+target
+src/main/resources/static/frontend/imagens/perfil
+src/main/resources/static/frontend/imagens/livros
+src/main/resources/static/frontend/frontend/imagens/perfil
+src/main/resources/static/frontend/frontend/imagens/livros
+
+projectlitterae.iml
