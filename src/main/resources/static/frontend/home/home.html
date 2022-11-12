@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Home</title>
-  <link rel='stylesheet' href='css/flickity.css'><link rel="stylesheet" href="css/style.css">
+  <link rel='stylesheet' href='css/flickity.css'><link rel="stylesheet" href="css/home.css">
  <!--Controle de Eventos da Pagina -->
   <script src='js/flickity.pkgd.js'></script>
   <script src='../frameworks/jquery/jquery-3.6.1.min.js'></script>
@@ -14,26 +14,27 @@
   <!--Campo de Pesquisa-->
   <div class="browse">
    <!--Seletor de Categoria de Livros -->
-    <div id="mySidebar" class="sidebar">
-      <a  class="closebtn" >×</a>
-      <a href="#">Romance</a>
-      <a href="#">Aventura</a>
-      <a href="#">Ação</a>
-      <a href="#">Ficção</a>
-      <a href="#">Fantasia</a>
-      <a href="#">Terror</a>
-      <a href="#">Suspense</a>
-      <a href="#">Comédia</a>
-      <a href="#">AutoAjuda</a>
-      <a href="#">AutoBiografia</a>
-      <a href="#">Biografia</a>
-      <a href="#">Infantil</a>
-      <a href="#">InfantoJuvenil</a>
-      <a href="#">História</a>
-      <a href="#">HQ</a>
-      <a href="#">Gastronomia</a>
-      <a href="#">Drama</a>
-    </div>
+   <div  class="sidebar">
+    <a class="closebtn">×</a>
+    <a id="0">Ficção Cientifica</a>
+    <a id="1">Fantasia</a>
+    <a id="2">Suspense</a>
+    <a id="3">Horror</a>
+    <a id="4">Poesia</a>
+    <a id="5">Romance</a>
+    <a id="6">Distopia</a>
+    <a id="7">Infantil</a>
+    <a id="8">Biografia</a>
+    <a id="9">Ação E Aventura</a>
+    <a id="10">História</a>
+    <a id="11">Viagem</a>
+    <a id="12">AutoAjuda</a>
+    <a id="13">Jovem Adulto</a>
+    <a id="14">Novo Adulto</a>
+    <a id="15">Tecnologia</a>
+    <a id="16">Religiao</a>
+    <a id="17">Não Ficção</a>
+   </div>
    <!--Botão para Abrir seleção de Categorias -->
    <div class="browse-category" >
     Categorias
@@ -61,9 +62,10 @@
    </div>
    <!--Seletor de Opções menu -->
    <div id="SidepanelMenu" class="sidepanel">
+    <a href="home.html"><img class="icon-profile" src="icone/home.svg"/>Home</a>
     <a href="#"><img class="icon-profile" src="icone/profile-user.svg"/> Perfil</a>
     <a href="#"><img class="icon-profile" src="icone/configurações.svg"/>Configuração</a>
-  </div>
+   </div>
   </div>
  </div>
  <!--Div controlado dos campos centrais do Livros -->

@@ -136,12 +136,13 @@ body {
   font-size: 20px;
   color: #fff;
   display: block;
-  transition: 0.3s;
+  cursor: pointer;
 }
-#mySidebar.sidebar{
+.sidebar{
   overflow-x: hidden;
 }
-#mySidebar a:hover{
+.sidebar a:hover{
+  transition: 0.3s;
   color: black;
 }
 
