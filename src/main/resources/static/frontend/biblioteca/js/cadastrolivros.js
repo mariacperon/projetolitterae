@@ -182,7 +182,6 @@ function CadastrarLivro(nome, autor, genero1, genero2, genero3, sinopse, idioma,
             })
     })
 
-    //setTimeout(reload, 2000)
 }
 
 //Função assíncrona de saída de mensagem Avisos
