@@ -44,7 +44,7 @@ public class LivroResource {
     }
 
     @RequestMapping(value = "/pesquisarpor",method = RequestMethod.GET)
-    public ResponseEntity<List<Livro>> pesquisaEspecifica(@RequestBody PesquisaLivroDto pesquisaLivro){
+    public ResponseEntity<List<Livro>> pesquisaEspecifica(PesquisaLivroDto pesquisaLivro){
         List<Livro> livros = livroService.pesquisaLivroEspecifica(pesquisaLivro);
         return ResponseEntity.ok().body(livros);
     }
