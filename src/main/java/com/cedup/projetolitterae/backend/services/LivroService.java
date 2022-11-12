@@ -97,6 +97,10 @@ public class LivroService {
                 InputStream img = imagem.getImagem().getInputStream();
 
                 if (!Files.exists(diretorio)) {
+                    File pastaImagens = new File(pasta);
+                    if(!pastaImagens.exists()) {
+                        pastaImagens.mkdirs();
+                    }
                     Files.copy(img, diretorio);
 
                     livro.setImagem(diretorio.toString());
