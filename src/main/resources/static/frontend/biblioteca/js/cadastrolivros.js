@@ -125,8 +125,10 @@ function CadastrarLivro(nome, autor, genero1, genero2, genero3, sinopse, idioma,
         }, body: jsonLivro
     })
         .then(function (resposta) {
+            console.log(jsonLivro)
             return resposta.json()
                 .then(function (json, JsonBibli) {
+                    console.log(idUsuario)
                     if (resposta.ok) {
                        var idliv = JSON.stringify(json.id);
                         JsonBibli = JSON.stringify({
@@ -139,12 +141,21 @@ function CadastrarLivro(nome, autor, genero1, genero2, genero3, sinopse, idioma,
                         //Captura a file
                         const inputFile = document.querySelector("#picture__input");
                         var formdata = new FormData();
+                        console.log(JsonBibli)
                         formdata.append("imagem", inputFile.files[0], inputFile);
                         formdata.append("id", idliv);
                         //-------------------------------------------------------------
                         // Faz conexão com back para cadastro da imagem
                         fetch("http://localhost:80/livro/salvar-imagem", {method: 'POST', body: formdata})
-                            .then(response => response.text())
+                            .then(function (resposta3) {
+                                console.log(resposta3.json())
+                                console.log(inputFile.files[0])
+                                console.log(resposta3.json())
+                                if (resposta3.status>= 200 && resposta3.status <= 300 ){
+                                    console.log("Enviou A imagem")
+                                    console.log(resposta3.json())
+                                }
+                            })
                             .catch(error => console.log('error', error));
                         //---------------------------------------------------------
                         //Faz conexão com back para cadastro do livro com a biblioteca
@@ -153,6 +164,7 @@ function CadastrarLivro(nome, autor, genero1, genero2, genero3, sinopse, idioma,
                                 'Content-Type': 'application/json',
                             }, body: JsonBibli
                         }).then(function (resposta2) {
+                            console.log(JsonBibli)
                             if (resposta2.ok) {
                                 document.querySelector('#alertaEr').style.color = "#0c4900";
                                 document.querySelector("#alertaEr").innerHTML = "Cadastrado com Sucesso"

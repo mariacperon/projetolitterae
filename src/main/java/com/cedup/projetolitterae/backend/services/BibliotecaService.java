@@ -31,7 +31,7 @@ public class BibliotecaService {
     UUID randomUUID = UUID.randomUUID();
 
     public Biblioteca pesquisarPorId(Long id){
-        return (repository.findById(id)).orElse(null);
+        return (repository.findById(id)).get();
     }
 
     public List<Biblioteca> pesquisarTodas() {

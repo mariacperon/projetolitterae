@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -93,9 +94,10 @@ public class LivroService {
                 String nomeArquivo = livro.getId() + ".jpeg";
 
                 Path diretorio = Paths.get(pasta + "/" + nomeArquivo);
+                InputStream img = imagem.getImagem().getInputStream();
 
                 if (!Files.exists(diretorio)) {
-                    Files.copy(imagem.getImagem().getInputStream(), diretorio);
+                    Files.copy(img, diretorio);
 
                     livro.setImagem(diretorio.toString());
                     repository.save(livro);
