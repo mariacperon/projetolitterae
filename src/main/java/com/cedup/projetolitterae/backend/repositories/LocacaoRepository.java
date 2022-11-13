@@ -17,4 +17,11 @@ public interface LocacaoRepository extends JpaRepository<Locacao, Integer> {
     @Query(value = "select count(id) from locacao where id_livro = :id and status_locacao != 1", nativeQuery = true)
     Integer qtdLivroLocado(@Param("id") Integer idLivro);
 
+    @Query(value = "select * from locacao l " +
+            "inner join livro_biblioteca lb " +
+            "on lb.id = l.id_livro " +
+            "and lb.id_biblioteca = :id " +
+            "where l.status_locacao = 2", nativeQuery = true)
+    List<Locacao> locacoesPendentes(@Param("id") Long id);
+
 }

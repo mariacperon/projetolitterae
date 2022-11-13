@@ -55,6 +55,10 @@ public class LocacaoService {
         return pesquisarPorUsuario(idUsuario).stream().sorted(Comparator.comparing(Locacao::getDataLocacao)).collect(Collectors.toList());
     }
 
+    public List<Locacao> locacoesPendentes(Long idBiblioteca){
+        return repository.locacoesPendentes(idBiblioteca);
+    }
+
     @Transactional
     public Locacao locarLivro(LocacaoDto locacaoDto){
         Locacao locacao = fromDto(locacaoDto);
