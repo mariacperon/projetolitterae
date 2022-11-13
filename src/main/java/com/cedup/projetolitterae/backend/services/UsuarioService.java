@@ -23,6 +23,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -53,24 +54,30 @@ public class UsuarioService{
         return repository.findAll();
     }
 
-    public List<Usuario> pesquisarPorNome(String nome, Long idBiblioteca){
-        List<Usuario> usuarioNome = repository.buscarUsuariosPorNome(nome, idBiblioteca);
-        List<Usuario> usuarioSobrenome = repository.buscarUsuariosPorSobrenome(nome, idBiblioteca);
-
+    public List<Usuario> pesquisarPorNome(String campo, Long idBiblioteca){
         List<Usuario> usuarios = new ArrayList<>();
+        if(campo != null){
+            try {
+                Long id = Long.parseLong(campo);
+                usuarios.addAll(repository.findAllById(Collections.singleton(id)));
+            } catch (NumberFormatException nfe) {
+                List<Usuario> usuarioNome = repository.buscarUsuariosPorNome(campo, idBiblioteca);
+                List<Usuario> usuarioSobrenome = repository.buscarUsuariosPorSobrenome(campo, idBiblioteca);
 
-        if(usuarioNome.size() != 0){
-            usuarios = usuarioNome;
-        }
-
-        if(usuarioSobrenome.size() != 0){
-            for(Usuario usuario : usuarioSobrenome){
-                if(!usuarios.contains(usuario)){
-                    usuarios.add(usuario);
+                if(usuarioNome.size() != 0){
+                    usuarios = usuarioNome;
                 }
+
+                if(usuarioSobrenome.size() != 0){
+                    for(Usuario usuario : usuarioSobrenome){
+                        if(!usuarios.contains(usuario)){
+                            usuarios.add(usuario);
+                        }
+                    }
+                }
+
             }
         }
-
         return usuarios;
     }
 
