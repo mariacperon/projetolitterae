@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Administração</title>
+  <link rel="shortcut icon" href="../litterae-logo.ico"/>
+  <link rel="stylesheet" href="css/crudtable.css">
+  <link rel="stylesheet" href="css/main-admindash.css">
+
+  <!----===== JavaScript jquery manipulação de dados===== -->
+  <script src="../frontend/frameworks/jquery/jquery-3.6.1.min.js"></script>
+
+  <!----===== JavaScript mask inputs ===== -->
+  <script src="../frontend/frameworks/jquery/jquery.mask.js"></script>
+</head>
+
+<body>
+  <!---- Classe Principal -->
+  <div class="app-container">
+    <!---- Classe Header -->
+    <div class="app-header">
+      <!---- Classe Lado Esquerdo Header ---->
+      <div class="app-header-left">
+        <span class="app-icon">
+        </span>
+        <p class="app-name">Litterae</p>
+        <!---- Classe Input de Pesquisa ---->
+        <div class="search-wrapper">
+          <input onkeyup="search_users()" class="search-input" type="text" placeholder="Search">
+          <select id="Search-Select">
+            <option value="" disabled selected>Tipo de Pesquisa</option>
+            <option value="leitor">Leitor</option>
+            <option value="livros">Livros</option>
+            <option value="pendencia">Pendência</option>
+            <option value="locacao">Locação</option>
+          </select>
+        </div>
+      </div>
+      <!---- Classe Lado Direito Header ---->
+      <div class="app-header-right">
+        <!---- Alterar Tema Pagina ---->
+        <button class="mode-switch" title="Switch Theme">
+          <svg class="moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+            stroke-width="2" width="24" height="24" viewBox="0 0 24 24">
+            <defs></defs>
+            <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+          </svg>
+        </button>
+        <!---- Controle Profile ---->
+        <button class="profile-btn"></button>
+        <div id="profileImage">
+          <p id="txtImage"></p>
+        </div>
+        <span>Lucas Testoni</span>
+        </button>
+      </div>
+    </div>
+    <!---- Classe Principal Content ---->
+    <div class="app-content">
+      <!---- SlideBar ---->
+      <div class="app-sidebar">
+        <!---- SlideBar Active ---->
+        <div id="mySidenav" class="sidenav">
+          <a href="#">
+            <svg version="1.1" id="home" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+              x="0px" y="0px" width="25px" height="25px" viewBox="394.5 418.584 212 206.25"
+              enable-background="new 394.5 418.584 212 206.25" xml:space="preserve">
+              <path
+                d="M600.116,503.301l-88.955-77.062c-0.298-0.254-0.656-0.472-1.059-0.639c-5.693-4.32-13.557-4.119-19.049,0.639
+                l-88.956,77.053c-6.376,5.519-7.181,15.313-1.784,21.839c3.411,4.128,9.069,4.075,13.408,3.2v82.834
+                c0,6.253,5.02,11.344,11.195,11.344h53.586c2.414,0,4.374-1.96,4.374-4.373v-72.242h36.471v72.242c0,2.413,1.959,4.373,4.372,4.373
+                h53.587c6.175,0,11.195-5.091,11.195-11.344v-82.834c4.355,0.857,9.996,0.919,13.407-3.2
+                C607.297,518.606,606.492,508.802,600.116,503.301z M595.166,519.551c-0.9,1.058-5.563,0.48-9.288-1.146
+                c-1.355-0.595-2.93-0.454-4.146,0.351c-1.233,0.805-1.985,2.187-1.985,3.655v88.746c0,1.435-1.103,2.598-2.449,2.598h-49.214
+                v-72.242c0-2.414-1.959-4.373-4.373-4.373h-45.217c-2.414,0-4.373,1.959-4.373,4.373v72.242h-49.214
+                c-1.347,0-2.449-1.163-2.449-2.598V522.41c0-1.478-0.744-2.859-1.985-3.664c-1.233-0.796-2.799-0.919-4.155-0.342
+                c-3.306,1.461-8.334,2.283-9.279,1.138c-2.388-2.887-2.046-7.207,0.77-9.647l88.956-77.061c2.432-2.099,5.956-2.099,8.388,0
+                c0.314,0.28,0.674,0.507,1.05,0.674l88.186,76.405C597.213,512.344,597.553,516.664,595.166,519.551L595.166,519.551z" />
+            </svg>
+            <p>Home</p>
+          </a>
+          <a href="#">
+            <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#000000"
+              viewBox="0 0 32.000000 32.000000" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+              stroke-width="2" class="icons">
+              <g transform="translate(0.000000,32.000000) scale(0.100000,-0.100000)" stroke="none">
+                <path d="M120 270 c-11 -11 -20 -29 -20 -40 0 -26 34 -60 60 -60 26 0 60 34
+                    60 60 0 11 -9 29 -20 40 -11 11 -29 20 -40 20 -11 0 -29 -9 -40 -20z m70 -15
+                    c26 -32 -13 -81 -47 -59 -23 14 -28 41 -13 59 16 19 44 19 60 0z" />
+                <path d="M88 134 c-47 -20 -58 -49 -29 -78 32 -31 170 -31 202 0 29 30 18 58
+                -32 78 -49 20 -93 20 -141 0z m137 -18 c43 -19 45 -41 4 -55 -63 -22 -169 -6
+                -169 25 0 19 55 43 98 44 18 0 48 -7 67 -14z" />
+              </g>
+            </svg>
+            <p>Cadastro de Leitor</p>
+          </a>
+          <a href="#">
+            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24" height="24"
+              viewBox="0 0 455.978 455.978" stroke="currentColor">
+              <g>
+                <path
+                  d="M335.954,169.698V58.679H144.918v111.02H335.954z M159.918,73.679h161.036v81.02H159.918V73.679z" />
+                <rect x="175.939" y="89.519" width="128.993" height="15" />
+                <rect x="175.939" y="119.517" width="128.993" height="15" />
+                <path d="M391.076,0H104.224C82.542,0,64.902,17.64,64.902,39.323c0,0,0.003,332.512,0.003,332.514
+                c0,21.68,17.638,39.318,39.318,39.318h22.913v44.823h55.897v-44.823h208.037L391.076,0z M376.076,332.506H111.724V15h264.352
+                V332.506z M96.724,16.189v317.032c-6.142,1.18-11.883,3.811-16.822,7.715V39.323C79.902,28.528,86.973,19.358,96.724,16.189z
+                  M104.223,396.155c-13.409,0-24.318-10.909-24.318-24.318c0-6.505,2.529-12.617,7.122-17.209
+                c4.592-4.592,10.699-7.121,17.196-7.121h22.913v48.648H104.223z M142.136,440.978v-93.472h25.897v93.472H142.136z M376.071,396.155
+                H183.034v-48.648h193.037V396.155z" />
+              </g>
+            </svg>
+            <p>Cadastro de Livro</p>
+          </a>
+          <a href="#">
+            <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+              viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
+
+              <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" stroke="none">
+                <path d="M1065 4935 c-25 -24 -25 -24 -25 -240 l0 -215 320 0 320 0 0 215 c0
+                    216 0 216 -25 240 l-24 25 -271 0 -271 0 -24 -25z" />
+                <path d="M3465 4935 l-25 -24 0 -936 0 -935 320 0 320 0 0 935 0 936 -25 24
+                    -24 25 -271 0 -271 0 -24 -25z" />
+                <path d="M1865 4695 l-25 -24 0 -816 0 -815 320 0 320 0 0 815 0 816 -25 24
+                    -24 25 -271 0 -271 0 -24 -25z" />
+                <path d="M2665 4455 c-25 -24 -25 -24 -25 -240 l0 -215 320 0 320 0 0 215 c0
+                    216 0 216 -25 240 l-24 25 -271 0 -271 0 -24 -25z" />
+                <path d="M1040 4240 l0 -80 320 0 320 0 0 80 0 80 -320 0 -320 0 0 -80z" />
+                <path d="M320 4147 c-49 -16 -133 -102 -148 -153 -17 -59 -18 -2968 0 -3026
+                        16 -55 78 -121 137 -147 l50 -21 2213 2 2213 3 40 22 c52 28 89 68 114 123 20
+                        45 21 58 21 1524 0 1132 -3 1488 -12 1520 -16 55 -99 138 -154 154 -28 8 -126
+                        12 -298 12 l-256 0 0 -160 0 -160 175 0 c173 0 176 0 200 -25 l25 -24 0 -1149
+                        c0 -1117 -1 -1150 -19 -1173 l-19 -24 -2042 0 -2042 0 -19 24 c-18 23 -19 56
+                        -19 1173 l0 1149 25 24 c24 25 27 25 200 25 l175 0 0 160 0 160 -262 -1 c-161
+                        -1 -277 -5 -298 -12z m2447 -2882 c46 -32 33 -125 -19 -139 -30 -8 -346 -8
+                        -376 0 -52 14 -65 107 -19 139 31 22 383 22 414 0z" />
+                <path d="M1040 3120 l0 -880 320 0 320 0 0 880 0 880 -320 0 -320 0 0 -880z" />
+                <path d="M2640 3760 l0 -80 320 0 320 0 0 80 0 80 -320 0 -320 0 0 -80z" />
+                <path d="M2640 2880 l0 -640 320 0 320 0 0 640 0 640 -320 0 -320 0 0 -640z" />
+                <path d="M1840 2800 l0 -80 320 0 320 0 0 80 0 80 -320 0 -320 0 0 -80z" />
+                <path d="M3440 2800 l0 -80 320 0 320 0 0 80 0 80 -320 0 -320 0 0 -80z" />
+                <path d="M1840 2400 l0 -160 320 0 320 0 0 160 0 160 -320 0 -320 0 0 -160z" />
+                <path d="M3440 2400 l0 -160 320 0 320 0 0 160 0 160 -320 0 -320 0 0 -160z" />
+                <path d="M825 2055 c-24 -23 -25 -31 -25 -135 0 -104 1 -112 25 -135 l24 -25
+                  1711 0 1711 0 24 25 c24 23 25 31 25 135 0 104 -1 112 -25 135 l-24 25 -1711
+                        0 -1711 0 -24 -25z" />
+                <path d="M1976 557 c-25 -45 -73 -117 -107 -160 l-60 -77 -118 0 c-105 0 -121
+                    -2 -145 -21 -37 -29 -37 -89 0 -118 27 -21 30 -21 1016 -21 l989 0 24 25 c33
+                     32 33 78 0 110 -23 24 -30 25 -144 25 l-120 0 -60 77 c-34 43 -82 115 -107
+                     160 l-46 83 -538 0 -538 0 -46 -83z" />
+              </g>
+            </svg>
+            <p>Cadastro Biblioteca</p>
+          </a>
+        </div>
+        <!---- SlideBar Icons ---->
+        <!---- Home ---->
+        <a href="" class="app-sidebar-link active">
+          <svg version="1.1" id="home" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px" y="0px" width="25px" height="25px" viewBox="394.5 418.584 212 206.25" xml:space="preserve">
+            <path
+              d="M600.116,503.301l-88.955-77.062c-0.298-0.254-0.656-0.472-1.059-0.639c-5.693-4.32-13.557-4.119-19.049,0.639
+              l-88.956,77.053c-6.376,5.519-7.181,15.313-1.784,21.839c3.411,4.128,9.069,4.075,13.408,3.2v82.834
+              c0,6.253,5.02,11.344,11.195,11.344h53.586c2.414,0,4.374-1.96,4.374-4.373v-72.242h36.471v72.242c0,2.413,1.959,4.373,4.372,4.373
+              h53.587c6.175,0,11.195-5.091,11.195-11.344v-82.834c4.355,0.857,9.996,0.919,13.407-3.2
+              C607.297,518.606,606.492,508.802,600.116,503.301z M595.166,519.551c-0.9,1.058-5.563,0.48-9.288-1.146
+              c-1.355-0.595-2.93-0.454-4.146,0.351c-1.233,0.805-1.985,2.187-1.985,3.655v88.746c0,1.435-1.103,2.598-2.449,2.598h-49.214
+              v-72.242c0-2.414-1.959-4.373-4.373-4.373h-45.217c-2.414,0-4.373,1.959-4.373,4.373v72.242h-49.214
+              c-1.347,0-2.449-1.163-2.449-2.598V522.41c0-1.478-0.744-2.859-1.985-3.664c-1.233-0.796-2.799-0.919-4.155-0.342
+              c-3.306,1.461-8.334,2.283-9.279,1.138c-2.388-2.887-2.046-7.207,0.77-9.647l88.956-77.061c2.432-2.099,5.956-2.099,8.388,0
+              c0.314,0.28,0.674,0.507,1.05,0.674l88.186,76.405C597.213,512.344,597.553,516.664,595.166,519.551L595.166,519.551z" />
+          </svg>
+        </a>
+        <!---- Usuário ---->
+        <a href="" class="app-sidebar-link">
+          <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#000000"
+            viewBox="0 0 32.000000 32.000000" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+            stroke-width="2" class="icons">
+            <g transform="translate(0.000000,32.000000) scale(0.100000,-0.100000)" stroke="none">
+              <path d="M120 270 c-11 -11 -20 -29 -20 -40 0 -26 34 -60 60 -60 26 0 60 34
+              60 60 0 11 -9 29 -20 40 -11 11 -29 20 -40 20 -11 0 -29 -9 -40 -20z m70 -15
+              c26 -32 -13 -81 -47 -59 -23 14 -28 41 -13 59 16 19 44 19 60 0z" />
+              <path d="M88 134 c-47 -20 -58 -49 -29 -78 32 -31 170 -31 202 0 29 30 18 58
+                -32 78 -49 20 -93 20 -141 0z m137 -18 c43 -19 45 -41 4 -55 -63 -22 -169 -6
+                -169 25 0 19 55 43 98 44 18 0 48 -7 67 -14z" />
+            </g>
+          </svg>
+        </a>
+        <!---- Livros ---->
+        <a href="" class="app-sidebar-link">
+          <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px" y="0px" width="24" height="24" viewBox="0 0 455.978 455.978" stroke="currentColor">
+            <g>
+              <path d="M335.954,169.698V58.679H144.918v111.02H335.954z M159.918,73.679h161.036v81.02H159.918V73.679z" />
+              <rect x="175.939" y="89.519" width="128.993" height="15" />
+              <rect x="175.939" y="119.517" width="128.993" height="15" />
+              <path d="M391.076,0H104.224C82.542,0,64.902,17.64,64.902,39.323c0,0,0.003,332.512,0.003,332.514
+               c0,21.68,17.638,39.318,39.318,39.318h22.913v44.823h55.897v-44.823h208.037L391.076,0z M376.076,332.506H111.724V15h264.352
+              V332.506z M96.724,16.189v317.032c-6.142,1.18-11.883,3.811-16.822,7.715V39.323C79.902,28.528,86.973,19.358,96.724,16.189z
+                M104.223,396.155c-13.409,0-24.318-10.909-24.318-24.318c0-6.505,2.529-12.617,7.122-17.209
+              c4.592-4.592,10.699-7.121,17.196-7.121h22.913v48.648H104.223z M142.136,440.978v-93.472h25.897v93.472H142.136z M376.071,396.155
+              H183.034v-48.648h193.037V396.155z" />
+            </g>
+          </svg>
+        </a>
+        <!---- Biblioteca ---->
+        <a href="" class="app-sidebar-link">
+          <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+            viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
+            <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" stroke="none">
+              <path d="M1065 4935 c-25 -24 -25 -24 -25 -240 l0 -215 320 0 320 0 0 215 c0
+                  216 0 216 -25 240 l-24 25 -271 0 -271 0 -24 -25z" />
+              <path d="M3465 4935 l-25 -24 0 -936 0 -935 320 0 320 0 0 935 0 936 -25 24
+                  -24 25 -271 0 -271 0 -24 -25z" />
+              <path d="M1865 4695 l-25 -24 0 -816 0 -815 320 0 320 0 0 815 0 816 -25 24
+                  -24 25 -271 0 -271 0 -24 -25z" />
+              <path d="M2665 4455 c-25 -24 -25 -24 -25 -240 l0 -215 320 0 320 0 0 215 c0
+                  216 0 216 -25 240 l-24 25 -271 0 -271 0 -24 -25z" />
+              <path d="M1040 4240 l0 -80 320 0 320 0 0 80 0 80 -320 0 -320 0 0 -80z" />
+              <path d="M320 4147 c-49 -16 -133 -102 -148 -153 -17 -59 -18 -2968 0 -3026
+                  16 -55 78 -121 137 -147 l50 -21 2213 2 2213 3 40 22 c52 28 89 68 114 123 20
+                  45 21 58 21 1524 0 1132 -3 1488 -12 1520 -16 55 -99 138 -154 154 -28 8 -126
+                  12 -298 12 l-256 0 0 -160 0 -160 175 0 c173 0 176 0 200 -25 l25 -24 0 -1149
+                  c0 -1117 -1 -1150 -19 -1173 l-19 -24 -2042 0 -2042 0 -19 24 c-18 23 -19 56
+                  -19 1173 l0 1149 25 24 c24 25 27 25 200 25 l175 0 0 160 0 160 -262 -1 c-161
+                  -1 -277 -5 -298 -12z m2447 -2882 c46 -32 33 -125 -19 -139 -30 -8 -346 -8
+                  -376 0 -52 14 -65 107 -19 139 31 22 383 22 414 0z" />
+              <path d="M1040 3120 l0 -880 320 0 320 0 0 880 0 880 -320 0 -320 0 0 -880z" />
+              <path d="M2640 3760 l0 -80 320 0 320 0 0 80 0 80 -320 0 -320 0 0 -80z" />
+              <path d="M2640 2880 l0 -640 320 0 320 0 0 640 0 640 -320 0 -320 0 0 -640z" />
+              <path d="M1840 2800 l0 -80 320 0 320 0 0 80 0 80 -320 0 -320 0 0 -80z" />
+              <path d="M3440 2800 l0 -80 320 0 320 0 0 80 0 80 -320 0 -320 0 0 -80z" />
+              <path d="M1840 2400 l0 -160 320 0 320 0 0 160 0 160 -320 0 -320 0 0 -160z" />
+              <path d="M3440 2400 l0 -160 320 0 320 0 0 160 0 160 -320 0 -320 0 0 -160z" />
+              <path d="M825 2055 c-24 -23 -25 -31 -25 -135 0 -104 1 -112 25 -135 l24 -25
+                  1711 0 1711 0 24 25 c24 23 25 31 25 135 0 104 -1 112 -25 135 l-24 25 -1711
+                        0 -1711 0 -24 -25z" />
+              <path d="M1976 557 c-25 -45 -73 -117 -107 -160 l-60 -77 -118 0 c-105 0 -121
+                    -2 -145 -21 -37 -29 -37 -89 0 -118 27 -21 30 -21 1016 -21 l989 0 24 25 c33
+                     32 33 78 0 110 -23 24 -30 25 -144 25 l-120 0 -60 77 c-34 43 -82 115 -107
+                     160 l-46 83 -538 0 -538 0 -46 -83z" />
+            </g>
+          </svg>
+        </a>
+      </div>
+      <div class="projects-section">
+        <div id="main-title">
+          <h3 id="th1"></h3>
+          <h3 id="th2"></h3>
+          <h3 id="th3"></h3>
+          <h3 id="th4"></h3>
+          <h3 id="th5"></h3>
+          <h3 id="acao"></h3>
+        </div>
+        <main id="main">
+          <!---- Tabela de Dados ---->
+          <table class="records">
+            <!---- Tbody Inserção de Dados ---->
+            <tbody id="users_table">
+
+            </tbody>
+          </table>
+        </main>
+        <!---- Modal Editar Usuário ---->
+        <div class="modal" id="modal">
+          <div class="modal-content">
+            <header class="modal-header">
+              <h2 id="msg-edituser">Editar Usuário</h2>
+              <span class="modal-close" id="modalClose-edituser">&#10006;</span>
+            </header>
+            <form id="form-user" class="modal-form">
+              <div class="details personal">
+                <span class="title">Informações pessoais</span>
+
+                <div class="fields">
+                  <!--Nome-->
+                  <div class="input-field">
+                    <label>Nome</label>
+                    <input class="input-form" id="nome" type="text" placeholder="Insira o Nome">
+                  </div>
+                  <!--Sobrenome-->
+                  <div class="input-field">
+                    <label>Sobrenome</label>
+                    <input class="input-form" id="sobrenome" type="text" placeholder="Insira o sobrenome">
+                  </div>
+
+                  <!--Data de Nascimento-->
+                  <div class="input-field">
+                    <label>Data de nascimento</label>
+                    <input class="input-form" id="data" type="date" placeholder="Insira a data de nascimento">
+                  </div>
+
+                  <!--Celular-->
+                  <div class="input-field">
+                    <label>Celular</label>
+                    <input class="input-form" name="celular" id="celular" type="text"
+                      placeholder="Insira o número de celular">
+                  </div>
+
+                  <!--Telefone-->
+                  <div class="input-field">
+                    <label>Telefone</label>
+                    <input class="input-form" name="telefone" id="telefone" type="text"
+                      placeholder="Insira um número de telefone fixo">
+                  </div>
+
+                  <!--Cpf-->
+                  <div class="input-field">
+                    <label id="AvisoCpf">CPF</label>
+                    <input class="input-form" name="cpf" id="cpf" type="text" placeholder="Insira o CPF">
+                  </div>
+                  <!--Email-->
+                  <div class="input-field">
+                    <label>Email</label>
+                    <input class="input-form" name="email" id="email" type="email" placeholder="Insira o Email">
+                  </div>
+
+                </div>
+              </div>
+              <div class="endereco">
+                <div id="ContTitle">
+                  <span id="title" class="title">Endreço</span>
+                </div>
+
+                <div class="fields">
+                  <!--Cep-->
+                  <div class="input-field">
+                    <label for="cep">CEP</label>
+                    <input class="input-form" name="cep" id="cep" type="text" placeholder="Insira o CEP">
+                  </div>
+
+                  <!--Rua-->
+                  <div class="input-field">
+                    <label for="rua">Rua</label>
+                    <input class="input-form" name="rua" id="rua" type="text" placeholder="Insira a rua">
+                  </div>
+
+                  <!--Número-->
+                  <div class="input-field">
+                    <label for="numero">Número</label>
+                    <input class="input-form" id="numero" type="text" placeholder="insira o número">
+                  </div>
+
+                  <!--Bairro-->
+                  <div class="input-field">
+                    <label for="bairro">Bairro</label>
+                    <input class="input-form" id="bairro" type="text" placeholder="Insira o bairro">
+                  </div>
+
+                  <!--Cidade-->
+                  <div class="input-field">
+                    <label for="cidade">Cidade</label>
+                    <input class="input-form" id="cidade" type="text" placeholder="Insira a cidade">
+                  </div>
+
+                  <!--Estado-->
+                  <div class="input-field">
+                    <label for="estado">Estado</label>
+                    <input class="input-form" id="estado" type="text" placeholder="insira o estado">
+                  </div>
+                </div>
+              </div>
+              <!---- Armazena Dados ---->
+              <input id="idendereco" class="invisivel">
+              <input id="idbiblioteca" class="invisivel">
+              <input id="scrImagem" class="invisivel">
+              <!--Footer Modal-->
+              <footer class="modal-footer">
+                <button Value="Enviar" type="submit" type="SalvarUser()" id="Btn-Confirm"
+                  class="button green">Salvar</button>
+                <button id="Btn-Cancel" class="button blue">Cancelar</button>
+              </footer>
+            </form>
+          </div>
+        </div>
+        <!---- Modal Delete usuario ---->
+        <div class="modal" id="modalDel">
+          <div class="modal-content">
+            <header class="modal-header">
+              <h3 id="msgDelete">Você deseja Realmente deletar esse Usúario?</h3>
+              <span class="modal-close" id="modalClose-del">&#10006;</span>
+            </header>
+            <footer class="modal-footer">
+              <button id="Btn-Confirm-del" class="button green">Confirmar</button>
+              <button id="Btn-Canc-Del" class="button blue">Cancelar</button>
+            </footer>
+          </div>
+        </div>
+        <!-- ============================= -->
+        <!-- Modal Edit Livro-->
+        <div class="modal" id="modalBok">
+          <div class="modal-content">
+            <header class="modal-header">
+              <h2 id="msg-editlivro">Editar Livro</h2>
+              <span class="modal-close" id="modalClose-book">&#10006;</span>
+            </header>
+            <form id="form-book" class="modal-form">
+              <div class="details personal">
+
+                <!--Titulo-->
+                <span class="title">Informações Livro</span>
+                <div class="container">
+                  <div id="Header">
+
+                    <!--Form 1-->
+                    <div class="form first">
+                      <div class="details personal">
+                        <div class="fields">
+                          <div class="input-field">
+                            <label>Título</label>
+                            <input id="nomeTitulo" maxlength="50" type="text" placeholder="Insira o título">
+                          </div>
+
+                          <!--Autor-->
+                          <div class="input-field">
+                            <label>Autor</label>
+                            <input id="autor" maxlength="50" type="text" placeholder="Insira o autor">
+                          </div>
+                          <!--Editora-->
+                          <div class="input-field">
+                            <label>Editora</label>
+                            <input id="editora" maxlength="30" type="text" placeholder="Insira a editora">
+                          </div>
+                          <!--Classificação Indicativa-->
+                          <div class="input-field">
+                            <label>Classificação Indicativa</label>
+                            <input id="classificacao" max="18" min="1" type="number"
+                              placeholder="Insira a classificação indicativa">
+                          </div>
+                          <!--ISBN-->
+                          <div class="input-field">
+                            <label>ISBN</label>
+                            <input maxlength="13" id="isbn" type="text" placeholder="Insira o ISBN">
+                          </div>
+                          <!--Edição-->
+                          <div class="input-field">
+                            <label>Edição</label>
+                            <input id="edicao" min="1" max="15" type="number" placeholder="Insira a edição">
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="fields">
+                        <!--Ano de Lançamento-->
+                        <div class="input-field">
+                          <label>Ano de Lançamento</label>
+                          <input id="datalanc" type="date" placeholder="Insira o ano de lançamento">
+                        </div>
+
+                        <!--Quantidade Disponiveis-->
+                        <div class="input-field">
+                          <label>Quantidade Disponível</label>
+                          <input id="qtdDisp" max="100" min="1" type="number"
+                            placeholder="Insira a quanidade disponível">
+                        </div>
+
+                        <!--Idioma-->
+                        <div class="input-field">
+                          <label>Idioma</label>
+                          <select id="idioma">
+                            <option value="" disabled selected>Selecione o idioma</option>
+                            <option value="EN">Inglês</option>
+                            <option value="PT">Português</option>
+                            <option value="FR">Francês</option>
+                            <option value="AL">Alemão</option>
+                            <option value="ES">Espanhol</option>
+                            <option value="AR">Árabe</option>
+                            <option value="RU">Russo</option>
+                            <option value="JP">Japonês</option>
+                          </select>
+                        </div>
+
+                        <!--Genero 1-->
+                        <div class="input-field">
+                          <label>Gênero 1</label>
+                          <select id="genero1">
+                            <option selected value="" disabled>Selecione um gênero</option>
+                            <option value="0">Ficção Científica</option>
+                            <option value="1">Fantasia</option>
+                            <option value="2">Suspense</option>
+                            <option value="3">Horror</option>
+                            <option value="4">Poesia</option>
+                            <option value="5">Romance</option>
+                            <option value="6">Distopia</option>
+                            <option value="7">Infantil</option>
+                            <option value="8">Biografia</option>
+                            <option value="9">Ação e Aventura</option>
+                            <option value="10">História</option>
+                            <option value="11">Viagem</option>
+                            <option value="12">Auto Ajuda</option>
+                            <option value="13">Jovem Adulto</option>
+                            <option value="14">Novo Aulto</option>
+                            <option value="15">Tecnologia e Ciência</option>
+                            <option value="16">Religião</option>
+                            <option value="17">Não Ficção</option>
+                          </select>
+                        </div>
+
+                        <!-- Genero 2-->
+                        <div class="input-field">
+                          <label>Gênero 2</label>
+                          <select id="genero2">
+                            <option value="null" disabled selected>Selecione um gênero</option>
+                            <option value="0">Ficção Científica</option>
+                            <option value="1">Fantasia</option>
+                            <option value="2">Suspense</option>
+                            <option value="3">Horror</option>
+                            <option value="4">Poesia</option>
+                            <option value="5">Romance</option>
+                            <option value="6">Distopia</option>
+                            <option value="7">Infantil</option>
+                            <option value="8">Biografia</option>
+                            <option value="9">Ação e Aventura</option>
+                            <option value="10">História</option>
+                            <option value="11">Viagem</option>
+                            <option value="12">Auto Ajuda</option>
+                            <option value="13">Jovem Adulto</option>
+                            <option value="14">Novo Aulto</option>
+                            <option value="15">Tecnologia e Ciência</option>
+                            <option value="16">Religião</option>
+                            <option value="17">Não Ficção</option>
+                          </select>
+                        </div>
+
+                        <!-- Genero 3 -->
+                        <div class="input-field">
+                          <label>Gênero 3</label>
+                          <select id="genero3">
+                            <option value="a" disabled selected="true">Selecione um gênero</option>
+                            <option value="0">Ficção Científica</option>
+                            <option value="1">Fantasia</option>
+                            <option value="2">Suspense</option>
+                            <option value="3">Horror</option>
+                            <option value="4">Poesia</option>
+                            <option value="5">Romance</option>
+                            <option value="6">Distopia</option>
+                            <option value="7">Infantil</option>
+                            <option value="8">Biografia</option>
+                            <option value="9">Ação e Aventura</option>
+                            <option value="10">História</option>
+                            <option value="11">Viagem</option>
+                            <option value="12">Auto Ajuda</option>
+                            <option value="13">Jovem Adulto</option>
+                            <option value="14">Novo Aulto</option>
+                            <option value="15">Tecnologia e Ciência</option>
+                            <option value="16">Religião</option>
+                            <option value="17">Não Ficção</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!--Form Segundário-->
+                    <div class="form second">
+                      <div class="details address">
+                        <!--Imagem-->
+                        <div class="fields">
+                          <div class="input-field">
+                            <section class="form-group">
+                              <label id="image-label"></label>
+                              <label class="picture" for="picture__input" tabIndex="0">
+                                <span class="picture__image"></span>
+                              </label>
+                              <input accept="image/png,image/jpeg" type="file" name="picture__input"
+                                id="picture__input">
+                            </section>
+                          </div>
+
+                        </div>
+                      </div>
+                      <!--Sinopse-->
+                      <span class="title">Sinopse</span>
+                      <div class="fields">
+                        <div class="input-field">
+                          <section class="form-group">
+                            <label for="txtarea" id="txtarea-label">
+                            </label>
+                            <textarea maxlength="500" class="input-txtarea" id="txtarea"
+                              placeholder="Insira aqui a sinopse do livro"></textarea>
+                            <div id="charNum"></div>
+                          </section>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!---- Armazena Dados ---->
+                <input value="null" id="scrImagemLivro" class="invisivel">
+                <input id="idLivroBibli" class="invisivel">
+                <input id="idLivro" class="invisivel">
+
+                <footer class="modal-footer-leitor">
+                  <div class="Btn-footer">
+                    <div id="backbnt" class="btnText">
+                      <span>Voltar</span>
+                    </div>
+                    <button id="nextBtn" class="btnText" required>
+                      <span id="Span-Next">Próximo</span>
+                    </button>
+                  </div>
+                  <div>
+                    <button Value="Enviar" type="submit" id="Btn-Salvar-book" class="button green">Salvar</button>
+                    <button id="Btn-Cancel-book" class="button blue">Cancelar</button>
+                  </div>
+                </footer>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- Modal delete Livro-->
+
+        <div class="modal" id="modalDel-livro">
+          <div class="modal-content">
+            <header class="modal-header">
+              <h3 id="msgDelete-book">Você deseja Realmente deletar esse Livro?</h3>
+              <span class="modal-close" id="modalClose-Bok">&#10006;</span>
+            </header>
+            <footer class="modal-footer">
+              <button id="Btn-Confirm-del-book" class="button green">Confirmar</button>
+              <button  id="Btn-CancelD-book" class="button blue">Cancelar</button>
+            </footer>
+          </div>
+        </div>
+        <!--==============================================================-->
+      </div>
+      <!- Div de Notificações ---->
+      <div class="messages-section">
+        <div class="projects-section-header">
+          <p>Notificações Biblioteca</p>
+
+        </div>
+        <p id="msg-Notific"></p>
+        <!---- Div de Mensagens ---->
+        <div class="messages">
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--============================================-->
+  <!-- Controle de Eventos -->
+  <script src="js/main-dash.js"></script>
+  <!----===== JavaScript Manipulação===== -->
+  <script src="js/Crudtable.js"></script>
+</body>
+
+</html>
