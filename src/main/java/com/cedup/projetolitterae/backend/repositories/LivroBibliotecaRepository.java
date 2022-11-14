@@ -13,6 +13,7 @@ import java.util.List;
 public interface LivroBibliotecaRepository extends JpaRepository<LivroBiblioteca, Integer> {
 
     List<LivroBiblioteca> findLivroBibliotecaByBibliotecaId(Long id);
+    List<LivroBiblioteca> findLivroBibliotecaByLivroId(Integer id);
 
     @Query(name = "qtd_locacoes_livros", nativeQuery = true)
     List<QuantidadesLocadosBibliotecaDto> quantidadeLocacoesLivrosPorBibliotecaId(@Param("idbiblioteca") Long idBiblioteca);

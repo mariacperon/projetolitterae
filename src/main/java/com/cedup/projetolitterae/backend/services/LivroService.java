@@ -6,6 +6,7 @@ import com.cedup.projetolitterae.backend.dto.QuantidadesLocadosBibliotecaDto;
 import com.cedup.projetolitterae.backend.entities.Livro;
 import com.cedup.projetolitterae.backend.entities.LivroBiblioteca;
 import com.cedup.projetolitterae.backend.entities.MensagemRetorno;
+import com.cedup.projetolitterae.backend.entities.Resenha;
 import com.cedup.projetolitterae.backend.enums.GeneroLivro;
 import com.cedup.projetolitterae.backend.exceptions.MensagemRetornoException;
 import com.cedup.projetolitterae.backend.repositories.LivroRepository;
@@ -35,6 +36,8 @@ public class LivroService {
     private UsuarioService usuarioService;
     @Autowired
     private LivroBibliotecaService livroBibliotecaService;
+    @Autowired
+    private ResenhaService resenhaService;
 
     @Autowired
     private FileService fileService;
@@ -115,10 +118,17 @@ public class LivroService {
     }
 
     public void excluirLivro(Integer id){
+        List<Resenha> resenhas = resenhaService.pesquisarResenhaPorIdLivro(id);
+        resenhas.forEach(x -> resenhaService.excluirResenha(x.getId()));
+        List<LivroBiblioteca> livroBibliotecas = livroBibliotecaService.pesquisarPorLivroId(id);
+        //livroBibliotecaService.excluirLivroBiblioteca(livroBibliotecas.get(0).getId());
+        livroBibliotecas.forEach(x ->livroBibliotecaService.excluirLivroBiblioteca(x.getId()));
         Livro livro = pesquisarPorId(id);
         repository.deleteById(id);
-        File imagem = new File(livro.getImagem());
-        imagem.delete();
+        if(livro.getImagem() != null){
+            File imagem = new File(livro.getImagem());
+            imagem.delete();
+        }
     }
 
     private void validaGeneros(Livro livro){
