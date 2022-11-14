@@ -5,6 +5,7 @@ import com.cedup.projetolitterae.backend.dto.QuantidadesLocadosBibliotecaDto;
 import com.cedup.projetolitterae.backend.entities.Biblioteca;
 import com.cedup.projetolitterae.backend.entities.Livro;
 import com.cedup.projetolitterae.backend.entities.LivroBiblioteca;
+import com.cedup.projetolitterae.backend.entities.Locacao;
 import com.cedup.projetolitterae.backend.entities.MensagemRetorno;
 import com.cedup.projetolitterae.backend.exceptions.MensagemRetornoException;
 import com.cedup.projetolitterae.backend.repositories.LivroBibliotecaRepository;
@@ -23,6 +24,8 @@ public class LivroBibliotecaService {
     private LivroService livroService;
     @Autowired
     private BibliotecaService bibliotecaService;
+    @Autowired
+    private LocacaoService locacaoService;
 
     public LivroBiblioteca pesquisarPorId(Integer id){
         return (repository.findById(id)).orElse(null);
@@ -30,6 +33,10 @@ public class LivroBibliotecaService {
 
     public List<LivroBiblioteca> pesquisarPorBibliotecaId(Long idBiblioteca){
         return repository.findLivroBibliotecaByBibliotecaId(idBiblioteca);
+    }
+
+    public List<LivroBiblioteca> pesquisarPorLivroId(Integer idLivro){
+        return repository.findLivroBibliotecaByLivroId(idLivro);
     }
 
     public List<QuantidadesLocadosBibliotecaDto> quantidadeLocacoesLivro(Long idBiblioteca){
@@ -49,6 +56,8 @@ public class LivroBibliotecaService {
     }
 
     public void excluirLivroBiblioteca(Integer id){
+        List<Locacao> locacoes = locacaoService.pesquisarPorLivro(id);
+        locacoes.forEach(x -> locacaoService.excluirLocacao(x.getId()));
         repository.deleteById(id);
     }
 
