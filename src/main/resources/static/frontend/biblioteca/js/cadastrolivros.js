@@ -123,7 +123,6 @@ function CadastrarLivro(nome, autor, genero1, genero2, genero3, sinopse, idioma,
             'Content-Type': 'application/json',
         }, body: jsonLivro
     }).then(function (resposta) {
-        console.log(jsonLivro)
         return resposta.json()
             .then(function (json, JsonBibli) {
                 if (resposta.status >= 200 && resposta.status <= 300) {
@@ -140,11 +139,12 @@ function CadastrarLivro(nome, autor, genero1, genero2, genero3, sinopse, idioma,
                     var formdata = new FormData();
                     formdata.append("imagem", inputFile.files[0], inputFile.files[0].name);
                     formdata.append("id", idliv);
+
                     //-------------------------------------------------------------
                     // Endpoint cadastro da imagem Livro
                     fetch("http://localhost:80/livro/salvar-imagem", {method: 'POST', body: formdata})
                         .then(function (resposta2) {
-                            if (resposta2.status >= 200 && resposta2.status <= 300) {
+                            if (resposta2.ok) {
                                 //Endpoint cadastro do livro com a biblioteca
                                 fetch('http://localhost:80/livro-biblioteca/cadastrar', {
                                     method: 'POST',
@@ -156,7 +156,7 @@ function CadastrarLivro(nome, autor, genero1, genero2, genero3, sinopse, idioma,
                                             document.querySelector("#alertaEr").innerHTML = "Cadastrado com Sucesso"
                                             $("#alertaEr").fadeIn();
                                             setTimeout(AlertaOut, 5000)
-                                            setTimeout(reload, 3000)
+                                            //setTimeout(reload, 3000)
                                         } else {
                                             console.log("Erro no Cadastro do Livro na Biblioteca " + resposta3.json())
                                         }
@@ -168,7 +168,7 @@ function CadastrarLivro(nome, autor, genero1, genero2, genero3, sinopse, idioma,
                                 document.querySelector("#alertaEr").innerHTML = "Erro no Cadastro, Contate um Administrador"
                                 $("#alertaEr").fadeIn();
                                 setTimeout(AlertaOut, 5000)
-                                console.log(resposta3.json())
+                                console.log(resposta2.json())
                             }
                         })
                     //Else Cadastro Livro
@@ -189,7 +189,6 @@ function CadastrarLivro(nome, autor, genero1, genero2, genero3, sinopse, idioma,
 async function AlertaOut() {
     $("#alertaEr").fadeOut();
 }
-
 //Faz Reload na pagina
 function reload() {
     document.location.reload(true);
