@@ -41,7 +41,7 @@ function loginadm(idCod, senha) {
                     //seta os dados em forma de texto na sessão
                     sessionStorage.setItem('idUsuario', json);
                     //Aciona load da pagina
-                    window.location.href = '../../frontend/biblioteca/';
+                    window.location.href = '../../frontend/biblioteca/Admin-dash.html';
                 }
             })
     }
