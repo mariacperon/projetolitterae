@@ -47,6 +47,10 @@ public class LocacaoService {
         return repository.findLocacaoByLivroId(id);
     }
 
+    public List<Locacao> pesquisarPorBiblioteca(Long id){
+        return repository.locacoesPorBiblioteca(id);
+    }
+
     public List<Locacao> pesquisarPorUsuario(Long id){
         return repository.findLocacaoByUsuarioId(id);
     }

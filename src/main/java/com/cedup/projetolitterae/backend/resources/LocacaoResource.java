@@ -33,6 +33,12 @@ public class LocacaoResource {
         return ResponseEntity.ok().body(locacoes);
     }
 
+    @RequestMapping(value = "/biblioteca/{id}",method = RequestMethod.GET)
+    public ResponseEntity<List<Locacao>> pesquisarPorBibliotecaId(@PathVariable Long id){
+        List<Locacao> locacoes = locacaoService.pesquisarPorBiblioteca(id);
+        return ResponseEntity.ok().body(locacoes);
+    }
+
     @RequestMapping(value = "/pendentes/{id}",method = RequestMethod.GET)
     public ResponseEntity<List<Locacao>> locacoesPendentes(@PathVariable Long id){
         List<Locacao> locacoes = locacaoService.locacoesPendentes(id);
