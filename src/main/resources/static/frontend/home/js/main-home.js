@@ -27,20 +27,23 @@ $('.popular-books').scroll(function (event) {
     event.preventDefault()
     var scroll = $(this).scrollTop();
     if (scroll > 0){
-        $('.book-slide').fadeOut('500');
+        $('.book-slide').fadeOut('slow');
         document.querySelector(".main-wrapper").style.marginTop='0';
     }else if (scroll == 0){
-        $('.book-slide').fadeIn('500');
+        $('.book-slide').fadeIn('slow');
         document.querySelector(".main-wrapper").style.marginTop='100px';
     }
 });
-
+//Carrega a Pagina de Pesquisa Por Genero
 document.querySelectorAll(".sidebar").forEach( function(button) {
     button.addEventListener("click", function(event) {
         const select = event.target || event.srcElement;
         const id = select.id;
-        if(id >=0 && id <=17)
-            sessionStorage.setItem('tipoGenero', id);
-             window.location.href = 'pesquisaGen.html';
+        if(id >=0 && id <=17){
+            if (id  !=""){
+                sessionStorage.setItem('tipoGenero', id);
+                window.location.href = 'pesquisaGen.html';
+            }
+        }
     });
 })
