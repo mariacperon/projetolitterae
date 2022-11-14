@@ -19,25 +19,29 @@ $('.profile-menu').on('click', function () {
 })
 //-------------------------------------------------
 /*Eventos Pagina Responsiva*/
-
 document.querySelectorAll(".sidebar").forEach( function(button) {
     button.addEventListener("click", function(event) {
         const select = event.target || event.srcElement;
         const id = select.id;
-        if(id >=0 && id <=17)
-        sessionStorage.setItem('tipoGenero', id);
-        location.reload()
+        if(id >=0 && id <=17) {
+            if (id  !=""){
+                sessionStorage.setItem('tipoGenero', id);
+                location.reload()
+            }
+        }
     });
 })
+carrega()
+async function carrega(){
 //window.location.href = '';
-fetch(`http://localhost:80/livro/pesquisarpor?idUsuario=${idUsuario}&campo=genero&value=${IdGenero}`, {method: 'GET',})
+fetch(`http://localhost:80/livro/pesquisarpor?idUsuario=${idUsuario}&campo=${campo}&value=${IdGenero}`, {method: 'GET',})
     .then(response => response.text())
     .then(function resultado(result) {
         var bd_result = JSON.parse(result)
         createElementBook(bd_result)
     })
     .catch(error => console.log('error', error));
-
+}
 
 function createElementBook(bd_result) {
     var leiamais_limit = 60;
@@ -47,8 +51,7 @@ function createElementBook(bd_result) {
     let cont = 0
     //Incia Color
     let color = ""
-    
-    
+
     for (let i = 0; i < bd_result.length; i++) {
         
         if (bd_result[i].sinopse.length > 90){

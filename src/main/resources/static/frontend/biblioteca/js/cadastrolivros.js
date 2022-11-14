@@ -90,6 +90,7 @@ function CadastrarLivro(nome, autor, genero1, genero2, genero3, sinopse, idioma,
     isbn = $("#isbn").val();
     qtdLivro = $("#qtdDisp").val();
     //Json de Cadastro do Livro
+    qtdLivro = parseInt(qtdLivro)
     var generos
     if (genero2 == null || genero3 == null) {
         generos = [genero1];
@@ -123,17 +124,17 @@ function CadastrarLivro(nome, autor, genero1, genero2, genero3, sinopse, idioma,
             'Content-Type': 'application/json',
         }, body: jsonLivro
     }).then(function (resposta) {
-        console.log(jsonLivro)
         return resposta.json()
-            .then(function (json, JsonBibli) {
+            .then(function (json) {
                 if (resposta.status >= 200 && resposta.status <= 300) {
                     var idliv = JSON.stringify(json.id);
                     JsonBibli = JSON.stringify({
                             "id": null,
                             "idLivro": idliv,
                             "idBiblioteca": idUsuario,
-                            "quantidadeEstoque": qtdLivro
+                            "qtdEstoque": qtdLivro
                         }
+
                     )
                     //Captura a file
                     const inputFile = document.querySelector("#picture__input");
@@ -144,7 +145,8 @@ function CadastrarLivro(nome, autor, genero1, genero2, genero3, sinopse, idioma,
                     // Endpoint cadastro da imagem Livro
                     fetch("http://localhost:80/livro/salvar-imagem", {method: 'POST', body: formdata})
                         .then(function (resposta2) {
-                            if (resposta2.status >= 200 && resposta2.status <= 300) {
+
+                            if (resposta2.ok) {
                                 //Endpoint cadastro do livro com a biblioteca
                                 fetch('http://localhost:80/livro-biblioteca/cadastrar', {
                                     method: 'POST',
@@ -168,7 +170,7 @@ function CadastrarLivro(nome, autor, genero1, genero2, genero3, sinopse, idioma,
                                 document.querySelector("#alertaEr").innerHTML = "Erro no Cadastro, Contate um Administrador"
                                 $("#alertaEr").fadeIn();
                                 setTimeout(AlertaOut, 5000)
-                                console.log(resposta3.json())
+                                console.log(resposta2.json())
                             }
                         })
                     //Else Cadastro Livro
@@ -189,7 +191,6 @@ function CadastrarLivro(nome, autor, genero1, genero2, genero3, sinopse, idioma,
 async function AlertaOut() {
     $("#alertaEr").fadeOut();
 }
-
 //Faz Reload na pagina
 function reload() {
     document.location.reload(true);
