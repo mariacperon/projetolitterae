@@ -22,9 +22,15 @@ public class NotificacaoResource {
     @Autowired
     NotificacaoService notificacaoService;
 
-    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/biblioteca/{id}",method = RequestMethod.GET)
     public ResponseEntity<List<Notificacao>> pesquisarPorIdBiblioteca(@PathVariable Long id){
         List<Notificacao> notificacao = notificacaoService.pesquisarPorIdBiblioteca(id);
         return ResponseEntity.ok().body(notificacao);
+    }
+
+    @RequestMapping(value = "/excluir/{id}",method = RequestMethod.DELETE)
+    public ResponseEntity<Void> excluirNotificacao(@PathVariable Integer id){
+        notificacaoService.excluirNotificacao(id);
+        return ResponseEntity.noContent().build();
     }
 }
