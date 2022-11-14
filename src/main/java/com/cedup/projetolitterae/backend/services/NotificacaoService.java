@@ -29,6 +29,10 @@ public class NotificacaoService {
         return notificacaoRepository.save(notificacao);
     }
 
+    public void excluirNotificacao(Integer id){
+        notificacaoRepository.delete(notificacaoRepository.getById(id));
+    }
+
     private Notificacao fromDto(NotificacaoDto notificacaoDto){
         Notificacao notificacao = new Notificacao();
         Biblioteca biblioteca = bibliotecaService.pesquisarPorId(notificacaoDto.getIdBiblioteca());
