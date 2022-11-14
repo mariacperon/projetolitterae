@@ -90,6 +90,7 @@ function CadastrarLivro(nome, autor, genero1, genero2, genero3, sinopse, idioma,
     isbn = $("#isbn").val();
     qtdLivro = $("#qtdDisp").val();
     //Json de Cadastro do Livro
+    qtdLivro = parseInt(qtdLivro)
     var generos
     if (genero2 == null || genero3 == null) {
         generos = [genero1];
@@ -124,26 +125,27 @@ function CadastrarLivro(nome, autor, genero1, genero2, genero3, sinopse, idioma,
         }, body: jsonLivro
     }).then(function (resposta) {
         return resposta.json()
-            .then(function (json, JsonBibli) {
+            .then(function (json) {
                 if (resposta.status >= 200 && resposta.status <= 300) {
                     var idliv = JSON.stringify(json.id);
                     JsonBibli = JSON.stringify({
                             "id": null,
                             "idLivro": idliv,
                             "idBiblioteca": idUsuario,
-                            "quantidadeEstoque": qtdLivro
+                            "qtdEstoque": qtdLivro
                         }
+
                     )
                     //Captura a file
                     const inputFile = document.querySelector("#picture__input");
                     var formdata = new FormData();
                     formdata.append("imagem", inputFile.files[0], inputFile.files[0].name);
                     formdata.append("id", idliv);
-
                     //-------------------------------------------------------------
                     // Endpoint cadastro da imagem Livro
                     fetch("http://localhost:80/livro/salvar-imagem", {method: 'POST', body: formdata})
                         .then(function (resposta2) {
+
                             if (resposta2.ok) {
                                 //Endpoint cadastro do livro com a biblioteca
                                 fetch('http://localhost:80/livro-biblioteca/cadastrar', {
@@ -156,7 +158,7 @@ function CadastrarLivro(nome, autor, genero1, genero2, genero3, sinopse, idioma,
                                             document.querySelector("#alertaEr").innerHTML = "Cadastrado com Sucesso"
                                             $("#alertaEr").fadeIn();
                                             setTimeout(AlertaOut, 5000)
-                                            //setTimeout(reload, 3000)
+                                            setTimeout(reload, 3000)
                                         } else {
                                             console.log("Erro no Cadastro do Livro na Biblioteca " + resposta3.json())
                                         }
