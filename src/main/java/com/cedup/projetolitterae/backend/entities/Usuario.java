@@ -22,7 +22,7 @@ public class Usuario implements Serializable{
     @Id
     private Long id;
 
-    @Column(columnDefinition ="varchar(11)")
+    @Column(columnDefinition ="varchar(14)")
     private String cpf;
 
     @Column(columnDefinition ="varchar(20)")

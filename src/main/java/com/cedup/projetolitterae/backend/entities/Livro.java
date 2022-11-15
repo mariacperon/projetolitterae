@@ -32,7 +32,7 @@ public class Livro {
     @Column(name = "genero")
     private List<Integer> generos = new ArrayList<>();
 
-    @Column(length = 500)
+    @Column(length = 1000)
     private String sinopse;
 
     private String idioma;

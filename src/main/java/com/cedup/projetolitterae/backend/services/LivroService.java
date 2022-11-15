@@ -95,7 +95,7 @@ public class LivroService {
         String path = null;
         try {
             Livro livro = pesquisarPorId(imagem.getId().intValue());
-            if (livro != null) {
+            if (livro != null && imagem.getImagem() != null) {
                 String diretorioArquivo = fileService.salvaArquivo("/livro/"+livro.getId()+"/", imagem.getImagem());
                 livro.setImagem(diretorioArquivo);
                 repository.save(livro);

@@ -83,7 +83,7 @@ public class LocacaoService {
             locacao.setStatusLocacao(StatusLocacao.ANDAMENTO);
             validarLocacao(locacao);
             repository.save(locacao);
-            notificacaoService.cadastrarNotificacao(gerarNotificacao(locacao));
+            notificacaoService.cadastrarNotificacao(gerarNotificacaoLivroLocado(locacao));
             //mandarEmail.emailLivroLocado(locacao);
             return locacao;
         }else{
@@ -92,7 +92,7 @@ public class LocacaoService {
         }
     }
 
-    private NotificacaoDto gerarNotificacao(Locacao locacao){
+    private NotificacaoDto gerarNotificacaoLivroLocado(Locacao locacao){
         NotificacaoDto notificacao = new NotificacaoDto();
         notificacao.setId(null);
         notificacao.setIdBiblioteca(locacao.getLivro().getBiblioteca().getId());
@@ -105,16 +105,38 @@ public class LocacaoService {
     private String gerarMensagemNotificacaoLivrvoLocado(Locacao locacao){
         return "Usuário "+ locacao.getUsuario().getId() +" - "
                 + locacao.getUsuario().getNome() +" "+ locacao.getUsuario().getSobrenome()
-                +", locou o livro "+ locacao.getLivro().getLivro().getNome();
-    };
+                +", locou o livro "+ locacao.getLivro().getLivro().getNome()
+                +" no dia "+ locacao.getDataLocacao();
+    }
 
     private Boolean validaEstoque(Locacao locacao){
         return repository.qtdLivroLocado(locacao.getLivro().getId()) < locacao.getLivro().getQuantidadeEstoque();
     }
 
     public Locacao alterarLocacao(LocacaoDto novoLivroUsuarioDto){
+        Locacao oldLocacao = pesquisarPorId(novoLivroUsuarioDto.getId());
         Locacao locacao = fromDto(novoLivroUsuarioDto);
-        return repository.save(locacao);
+        locacao = repository.save(locacao);
+        if(oldLocacao.getDataDevolucao() != novoLivroUsuarioDto.getDataDevolucao()){
+            notificacaoService.cadastrarNotificacao(gerarNotificacaoLivroRenovado(locacao, oldLocacao));
+        }
+        return locacao;
+    }
+
+    private NotificacaoDto gerarNotificacaoLivroRenovado(Locacao locacao, Locacao oldLocacao){
+        NotificacaoDto notificacao = new NotificacaoDto();
+        notificacao.setId(null);
+        notificacao.setIdBiblioteca(locacao.getLivro().getBiblioteca().getId());
+        notificacao.setTitulo("Livro renovado");
+        notificacao.setMensagem(gerarMensagemNotificacaoLivrvoRenovado(locacao, oldLocacao));
+
+        return notificacao;
+    }
+
+    private String gerarMensagemNotificacaoLivrvoRenovado(Locacao locacao, Locacao oldLocacao){
+        return "Livro "+ locacao.getLivro().getLivro().getNome() +" locado pelo usuário "+
+                locacao.getUsuario().getNome() +" "+ locacao.getUsuario().getSobrenome() +" renovado para o dia "+
+                locacao.getDataDevolucao();
     }
 
     public void devolver(Integer id) {

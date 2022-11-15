@@ -41,6 +41,8 @@ public class UsuarioService{
     private BibliotecaService bibliotecaService;
     @Autowired
     private UltimoIdService ultimoIdService;
+    @Autowired
+    private FileService fileService;
 
     public Usuario pesquisarPorId(Long id){
         return repository.findById(id).orElse(null);
@@ -106,22 +108,11 @@ public class UsuarioService{
         String path = null;
         try {
             Usuario usuario = pesquisarPorId(imagem.getId());
-            if(usuario != null){
-                String pasta = "src/main/resources/static/frontend/imagens/perfil";
-                String nomeArquivo = usuario.getId() + ".jpeg";
-
-                Path diretorio = Paths.get(pasta + "/" + nomeArquivo);
-
-                if (!Files.exists(diretorio)) {
-                    Files.copy(imagem.getImagem().getInputStream(), diretorio);
-
-                    usuario.setImagem(diretorio.toString());
-                    repository.save(usuario);
-                }
-
-                FileUploadUtil.saveFile(pasta, nomeArquivo, imagem.getImagem());
-
-                path = diretorio.toString();
+            if(usuario != null && imagem.getImagem() != null){
+                String diretorioArquivo = fileService.salvaArquivo("/usuario/"+usuario.getId()+"/", imagem.getImagem());
+                usuario.setImagem(diretorioArquivo);
+                repository.save(usuario);
+                return diretorioArquivo;
             }else{
                 throw new MensagemRetornoException(new MensagemRetorno("ERRO", "Houve um erro ao tentar salvar a imagem de perfil."));
             }

@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 @Service
 public class FileService {
@@ -19,14 +20,21 @@ public class FileService {
 
     public String salvaArquivo(String relativePath, MultipartFile file) throws IOException {
         File diretorio = new File(dirBaseArquivo + relativePath);
-        if (!diretorio.exists()) {
-            diretorio.mkdirs();
+
+        if(diretorio.exists()){
+            File[] arquivos = diretorio.listFiles();
+            for(File arquivo : arquivos){
+                arquivo.delete();
+            }
+            diretorio.delete();
         }
 
-        Path pathFile = Path.of(diretorio.getAbsolutePath(), file.getOriginalFilename());
+        diretorio.mkdirs();
+
+        Path pathFile = Path.of(diretorio.getAbsolutePath(), file.getOriginalFilename().replace(" ", ""));
         Files.copy(file.getInputStream(), pathFile);
 
-        return relativePath+file.getOriginalFilename();
+        return relativePath+file.getOriginalFilename().replace(" ", "");
     }
 
 }

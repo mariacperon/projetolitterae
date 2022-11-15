@@ -22,9 +22,10 @@ public class Notificacao {
     private String titulo;
     private String mensagem;
 
-    public Notificacao(Integer id, Biblioteca biblioteca, String mensagem) {
+    public Notificacao(Integer id, Biblioteca biblioteca, String titulo, String mensagem) {
         this.id = id;
         this.biblioteca = biblioteca;
+        this.titulo = titulo;
         this.mensagem = mensagem;
     }
 
