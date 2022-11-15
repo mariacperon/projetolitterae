@@ -484,7 +484,7 @@ function editarBook(id) {
             "edicao": $("#edicao").val(),
             "dataLancamento": $("#datalanc").val(),
             "imagem": $("#scrImagemLivro").val(),
-            "isdb": $("#txtarea").val(),
+            "isdb": $("#isbn").val(),
         });
 
         var jsonlivroBlib = JSON.stringify({
@@ -531,7 +531,7 @@ function editarBook(id) {
                             } else {
                                 document.querySelector('#msg-editlivro').style.color = "#0c4900";
                                 document.querySelector('#msg-editlivro').innerHTML = 'Dados Alterados com Sucesso'
-                                setTimeout(reload, 3000)
+                                docu
                             }
                         }
                     })
