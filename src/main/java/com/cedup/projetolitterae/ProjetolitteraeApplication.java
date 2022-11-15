@@ -213,8 +213,8 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 		LivroBiblioteca lb15 = new LivroBiblioteca(l5, b4, 6);
 
 		//CDASTRO DE LOCACOES
-		Locacao loc1 = new Locacao(new Date(2022-1900,2-1,19), new Date(2022-1900,12-1,19),
-				StatusLocacao.PENDENTE);
+		Locacao loc1 = new Locacao(new Date(2022-1900,2-1,19), new Date(2022-1900,8-1,19),
+				StatusLocacao.ANDAMENTO);
 		loc1.setLivro(lb1);
 		loc1.setUsuario(u2);
 
