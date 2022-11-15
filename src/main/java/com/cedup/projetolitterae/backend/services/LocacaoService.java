@@ -60,7 +60,18 @@ public class LocacaoService {
     }
 
     public List<Locacao> locacoesPendentes(Long idBiblioteca){
-        return repository.locacoesPendentes(idBiblioteca);
+        List<Locacao> locacoes = repository.locacoesPendentes(idBiblioteca);
+        Date data = new Date();
+
+        List<Locacao> locacoesBiblioteca = repository.locacoesPorBiblioteca(idBiblioteca);
+        locacoesBiblioteca.forEach(x ->{
+            if(x.getStatusLocacao().getCod() == 0 && data.after(x.getDataDevolucao())){
+                x.setStatusLocacao(StatusLocacao.PENDENTE);
+                locacoes.add(x);
+            }
+        });
+
+        return locacoes;
     }
 
     @Transactional
