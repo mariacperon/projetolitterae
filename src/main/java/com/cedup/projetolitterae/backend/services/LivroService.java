@@ -7,6 +7,7 @@ import com.cedup.projetolitterae.backend.entities.Livro;
 import com.cedup.projetolitterae.backend.entities.LivroBiblioteca;
 import com.cedup.projetolitterae.backend.entities.MensagemRetorno;
 import com.cedup.projetolitterae.backend.entities.Resenha;
+import com.cedup.projetolitterae.backend.entities.Usuario;
 import com.cedup.projetolitterae.backend.enums.GeneroLivro;
 import com.cedup.projetolitterae.backend.exceptions.MensagemRetornoException;
 import com.cedup.projetolitterae.backend.repositories.LivroRepository;
@@ -21,6 +22,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
@@ -48,6 +50,36 @@ public class LivroService {
 
     public List<Livro> pesquisarTodos(){
         return repository.findAll() ;
+    }
+
+    public List<Livro> pesquisarPorCampos(String campo, Long idBiblioteca){
+        List<Livro> livros = new ArrayList<>();
+        if(campo != null){
+            List<Livro> livrosIsdb = repository.buscarLivroPorIsdb(idBiblioteca, campo);
+            List<Livro> livrosNome = repository.buscarLivroPorNome(idBiblioteca, campo);
+            List<Livro> livrosAutor = repository.buscarLivroPorAutor(idBiblioteca, campo);
+
+            if(livrosIsdb.size() != 0){
+                livros = livrosIsdb;
+            }
+
+            if(livrosNome.size() != 0){
+                for(Livro livro : livrosNome){
+                    if(!livros.contains(livro)){
+                        livros.add(livro);
+                    }
+                }
+            }
+
+            if(livrosAutor.size() != 0){
+                for(Livro livro : livrosAutor){
+                    if(!livros.contains(livro)){
+                        livros.add(livro);
+                    }
+                }
+            }
+        }
+        return livros;
     }
 
     public List<Livro> pesquisaLivroEspecifica(PesquisaLivroDto pesquisaLivro){

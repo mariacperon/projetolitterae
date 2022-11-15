@@ -37,6 +37,12 @@ public class LivroResource {
         return ResponseEntity.ok().body(livros);
     }
 
+    @RequestMapping(value = "/campo",method = RequestMethod.GET)
+    public ResponseEntity<List<Livro>> pesquisarPorCampo(@Param("id") Long id, @Param("campo") String campo){
+        List<Livro> livros = livroService.pesquisarPorCampos(campo, id);
+        return ResponseEntity.ok().body(livros);
+    }
+
     @RequestMapping(value = "/salvar-imagem",method = RequestMethod.POST)
     public ResponseEntity<String> salvarImagem(@ModelAttribute ImagemPerfilDto imagemPerfilDto){
         String imagemPath = livroService.salvaImagem(imagemPerfilDto);

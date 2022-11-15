@@ -68,6 +68,7 @@ public class LocacaoService {
             if(x.getStatusLocacao().getCod() == 0 && data.after(x.getDataDevolucao())){
                 x.setStatusLocacao(StatusLocacao.PENDENTE);
                 locacoes.add(x);
+                notificacaoService.cadastrarNotificacao(gerarNotificacaoLivroPendente(x));
             }
         });
 
@@ -152,14 +153,47 @@ public class LocacaoService {
             repository.save(locacao);
 
             if(!pendencia){
+                notificacaoService.cadastrarNotificacao(gerarNotificacaoLivroPendente(locacao));
                 throw new MensagemRetornoException(new MensagemRetorno("PENDÊNCIA ABERTA",
                         "O livro foi devolvido, mas uma pendência foi aberta pelo atraso na devolução. Este usuário deve pagar R$"+
                                 calculaMulta(locacao)+" de multa."));
+            }else{
+                notificacaoService.cadastrarNotificacao(gerarNotificacaoLivroDevlvido(locacao));
             }
         }else{
             throw new MensagemRetornoException(new MensagemRetorno("ERRO",
                     "Esta locação não pode ser devolvida, pois seu status é "+ locacao.getStatusLocacao()));
         }
+    }
+
+    private NotificacaoDto gerarNotificacaoLivroPendente(Locacao locacao){
+        NotificacaoDto notificacao = new NotificacaoDto();
+        notificacao.setId(null);
+        notificacao.setIdBiblioteca(locacao.getLivro().getBiblioteca().getId());
+        notificacao.setTitulo("Pendência");
+        notificacao.setMensagem(gerarMensagemNotificacaoLivrvoPendente(locacao));
+
+        return notificacao;
+    }
+
+    private String gerarMensagemNotificacaoLivrvoPendente(Locacao locacao){
+        return "Usuário "+ locacao.getUsuario().getId() +" - "+ locacao.getUsuario().getNome() +" "+
+                locacao.getUsuario().getSobrenome()+ " possui uma pêndencia na locação "+ locacao.getId();
+    }
+
+    private NotificacaoDto gerarNotificacaoLivroDevlvido(Locacao locacao){
+        NotificacaoDto notificacao = new NotificacaoDto();
+        notificacao.setId(null);
+        notificacao.setIdBiblioteca(locacao.getLivro().getBiblioteca().getId());
+        notificacao.setTitulo("Livro devolvido");
+        notificacao.setMensagem(gerarMensagemNotificacaoLivrvoDevolvido(locacao));
+
+        return notificacao;
+    }
+
+    private String gerarMensagemNotificacaoLivrvoDevolvido(Locacao locacao){
+        return "Livro "+ locacao.getLivro().getLivro().getNome() +" locacado pelo usuário"+ locacao.getUsuario().getId()
+                +" - "+ locacao.getUsuario().getNome() +" "+ locacao.getUsuario().getSobrenome() +" devolvido.";
     }
 
     public void excluirLocacao(Integer id){

@@ -401,7 +401,7 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 		loc4.setLivro(lb6);
 		loc4.setUsuario(u3);
 
-		Locacao loc5 = new Locacao(new Date(2022-1900,10-1,20), new Date(2022-1900,11-1,20),
+		Locacao loc5 = new Locacao(new Date(2022-1900,9-1,20), new Date(2022-1900,10-1,20),
 				StatusLocacao.ANDAMENTO);
 		loc5.setLivro(lb3);
 		loc5.setUsuario(u4);
