@@ -566,10 +566,8 @@ button, a {
   margin-right: 4px;
 }
 #profileImage p{
-  font-weight: 300;
   font-size: 23px;
-  margin-left: 5px;
-  margin-top: 3px;
+  text-align: center;
 }
 
 /*Records*/

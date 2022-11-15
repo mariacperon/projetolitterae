@@ -27,13 +27,18 @@ MenuIcon.addEventListener('click', function () {
 })
 //Evento Setar Nome Icon Profile
 $(document).ready(function () {
-    //var firstName = $('#firstName').text();
-    //var lastName = $('#lastName').text();
-    var Pnome = "Lucas"
-    var Snome = "Testoni"
-    //var intials = $('#firstName').text().charAt(0) + $('#lastName').text().charAt(0);
-    var intials = Pnome.charAt(0) + Snome.charAt(0)
-    $('#txtImage').text(intials);
+    fetch("http://localhost:80/biblioteca/"+idUsuario, {headers: {
+            'Content-Type': 'application/json'
+        },method: 'GET',})
+        .then(response => response.text())
+        .then(function(result) {
+            var nomeBlib = JSON.parse(result)
+            $('#nomeblib').text(nomeBlib.nome);
+            var intials = nomeBlib.nome.charAt(0)
+            $('#txtImage').text(intials);
+        })
+        .catch(error => console.log('error', error));
+
 });
 
 
@@ -43,7 +48,7 @@ const nextBtn = document.querySelector("#nextBtn"),
 
 nextBtn.addEventListener("click", () => {
    if ($("#nomeTitulo").val()!="" && $("#autor").val()!="" && $("#editora").val()!="" && $("#edicao").val()!="" && $("#datalanc").val()!="" && $("#qtdDisp").val()!="" && $("#idioma").val()!= null && $("#genero1").val()!= null){
-       if ($("#classificacao").val() > 0 && $("#classificacao").val() <= 18 && $("#edicao").val() > 0 &&  $("#edicao").val() <=15){
+       if ($("#classificacao").val() > 0 && $("#classificacao").val() <= 18){
            $(".form.second").toggleClass('secActive')
            $(".form.first").toggleClass('secClear')
            $("#backbnt").toggleClass('ativar')
