@@ -398,6 +398,7 @@ function CreatElementBook(bd_result) {
 
 //Função para Deletar Livro
 function deletBook(id) {
+    document.querySelector('#msgDelete-book').style.color = "#1f1d2b";
     document.getElementById('modalDel-livro').classList.add('active')
     const delconf = document.querySelector('#Btn-Confirm-del-book');
     delconf.addEventListener('click', function () {
@@ -411,11 +412,9 @@ function deletBook(id) {
                 document.querySelector('#msgDelete-book').style.color = "#0c4900";
                 document.querySelector('#msgDelete-book').innerHTML = 'Livro Deletado Com Sucesso'
                 setTimeout(reload, 3000)
-                document.querySelector('#msgDelete-book').style.color = "#1f1d2b";
             } else {
                 document.querySelector('#msgDelete-book').style.color = "#FF0000";
                 document.querySelector('#msgDelete-book').innerHTML = 'Erro Contate Um administrador'
-
             }
         }).catch(error => console.log('error', error));
     });
@@ -423,6 +422,7 @@ function deletBook(id) {
 
 //Função Para Editar Livro
 function editarBook(id) {
+    document.querySelector('#msg-editlivro').style.color = "#1f1d2b";
     openMBook()
     fetch("http://localhost:80/livro-biblioteca/" + id, {
         method: 'GET', headers: {
@@ -526,14 +526,12 @@ function editarBook(id) {
                                             document.querySelector('#msg-editlivro').style.color = "#0c4900";
                                             document.querySelector('#msg-editlivro').innerHTML = 'Dados Alterados com Sucesso'
                                             setTimeout(reload, 3000)
-                                            document.querySelector('#msg-editlivro').style.color = "#1f1d2b";
                                         }
                                     })
                             } else {
                                 document.querySelector('#msg-editlivro').style.color = "#0c4900";
                                 document.querySelector('#msg-editlivro').innerHTML = 'Dados Alterados com Sucesso'
                                 setTimeout(reload, 3000)
-                                document.querySelector('#msg-editlivro').style.color = "#1f1d2b";
                             }
                         }
                     })
@@ -543,7 +541,6 @@ function editarBook(id) {
                     document.querySelector('#msg-editlivro').style.color = "#0c4900";
                     document.querySelector('#msg-editlivro').innerHTML = 'Erro no Cadastro do Livro'
                     setTimeout(reload, 3000)
-                    document.querySelector('#msg-editlivro').style.color = "#1f1d2b";
                 }
             }).catch(error => console.log('error', error));
         }

@@ -38,36 +38,28 @@ $(document).ready(function () {
 
 
 const nextBtn = document.querySelector("#nextBtn"),
-    backBtn = document.querySelector("#backbnt"),
-    allInput = document.querySelectorAll("#form-book>input");
+    backBtn = document.querySelector("#backbnt")
 
 
 nextBtn.addEventListener("click", () => {
-    var cont = 0
+   if ($("#nomeTitulo").val()!="" && $("#autor").val()!="" && $("#editora").val()!="" && $("#edicao").val()!="" && $("#datalanc").val()!="" && $("#qtdDisp").val()!="" && $("#idioma").val()!= null && $("#genero1").val()!= null){
+       if ($("#classificacao").val() > 0 && $("#classificacao").val() <= 18 && $("#edicao").val() > 0 &&  $("#edicao").val() <=15){
+           $(".form.second").toggleClass('secActive')
+           $(".form.first").toggleClass('secClear')
+           $("#backbnt").toggleClass('ativar')
+           $("#nextBtn").toggleClass('clear')
+           $("#Btn-Cancel-book").toggleClass('clear')
+           $("#Btn-Salvar-book").toggleClass('ativar')
+           $('.input-form').each(function(){})
+           document.querySelector('#title-book').innerHTML = 'Imagem Capa'
+       }
+   }
 
-
-    var selectLang = document.querySelector('#idioma').value
-    var selectGen = document.querySelector('#genero1').value
-
-    allInput.forEach((input) => {
-                console.log(cont++)
-
-    })
 })
-/*
-$(".form.second").toggleClass('secActive')
-$(".form.first").toggleClass('secClear')
-$("#backbnt").toggleClass('ativar')
-$("#nextBtn").toggleClass('clear')
-$("#Btn-Cancel-book").toggleClass('clear')
-$("#Btn-Salvar-book").toggleClass('ativar')
-$('.input-form').each(function(){})
-document.querySelector('.title').innerHTML = 'Imagem Capa'
 
- */
 backBtn.addEventListener("click", () => {
     console.log("Click")
-    document.querySelector('.title').innerHTML = 'Informações Livro'
+    document.querySelector('#title-book').innerHTML = 'Informações Livro'
     $(".form.second").toggleClass('secActive')
     $(".form.first").toggleClass('secClear')
     $("#backbnt").toggleClass('ativar')
