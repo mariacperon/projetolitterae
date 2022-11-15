@@ -88,3 +88,4 @@ function createElementBook(bd_result) {
     }
     $(".book-list").append(product);
 }
+

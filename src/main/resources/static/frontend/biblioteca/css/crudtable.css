@@ -277,6 +277,18 @@ button.deletar{
     transition: box-shadow .6s ease;
     border-radius: 5px;
 }
+button.devolver{
+    background-color: #13CE66;
+    margin-left: 4px;
+    border-style: none;
+    width: 40%;
+    padding: 3px;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    transition: box-shadow .6s ease;
+    border-radius: 5px;
+}
 
 .button:hover{
     box-shadow: inset 200px 0 0 #00000055;
@@ -334,3 +346,10 @@ button.deletar{
     min-width: 140px;
     text-align: center;
   }
+.status {
+    border: none;
+    border-radius: 20px;
+    width: 15px;
+    height: 20px;
+    pointer-events: none;
+}

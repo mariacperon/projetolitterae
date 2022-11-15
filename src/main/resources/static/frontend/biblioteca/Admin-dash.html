@@ -9,10 +9,10 @@
   <link rel="stylesheet" href="css/main-admindash.css">
 
   <!----===== JavaScript jquery manipulação de dados===== -->
-  <script src="../frontend/frameworks/jquery/jquery-3.6.1.min.js"></script>
+  <script src="../frameworks/jquery/jquery-3.6.1.js"></script>
 
   <!----===== JavaScript mask inputs ===== -->
-  <script src="../frontend/frameworks/jquery/jquery.mask.js"></script>
+  <script src="../frameworks/jquery/jquery.mask.js"></script>
 </head>
 
 <body>
@@ -52,7 +52,7 @@
         <div id="profileImage">
           <p id="txtImage"></p>
         </div>
-        <span>Lucas Testoni</span>
+        <span id="nomeblib">Lucas Testoni</span>
         </button>
       </div>
     </div>
@@ -62,7 +62,7 @@
       <div class="app-sidebar">
         <!---- SlideBar Active ---->
         <div id="mySidenav" class="sidenav">
-          <a href="#">
+          <a href="Admin-dash.html">
             <svg version="1.1" id="home" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
               x="0px" y="0px" width="25px" height="25px" viewBox="394.5 418.584 212 206.25"
               enable-background="new 394.5 418.584 212 206.25" xml:space="preserve">
@@ -80,7 +80,7 @@
             </svg>
             <p>Home</p>
           </a>
-          <a href="#">
+          <a href="cadastroleitores.html">
             <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#000000"
               viewBox="0 0 32.000000 32.000000" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
               stroke-width="2" class="icons">
@@ -95,7 +95,7 @@
             </svg>
             <p>Cadastro de Leitor</p>
           </a>
-          <a href="#">
+          <a href="cadastrolivros.html">
             <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24" height="24"
               viewBox="0 0 455.978 455.978" stroke="currentColor">
@@ -157,7 +157,7 @@
         </div>
         <!---- SlideBar Icons ---->
         <!---- Home ---->
-        <a href="" class="app-sidebar-link active">
+        <a href="Admin-dash.html" class="app-sidebar-link active">
           <svg version="1.1" id="home" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
             x="0px" y="0px" width="25px" height="25px" viewBox="394.5 418.584 212 206.25" xml:space="preserve">
             <path
@@ -174,7 +174,7 @@
           </svg>
         </a>
         <!---- Usuário ---->
-        <a href="" class="app-sidebar-link">
+        <a href="cadastroleitores.html" class="app-sidebar-link">
           <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#000000"
             viewBox="0 0 32.000000 32.000000" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
             stroke-width="2" class="icons">
@@ -189,7 +189,7 @@
           </svg>
         </a>
         <!---- Livros ---->
-        <a href="" class="app-sidebar-link">
+        <a href="cadastrolivros.html" class="app-sidebar-link">
           <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
             x="0px" y="0px" width="24" height="24" viewBox="0 0 455.978 455.978" stroke="currentColor">
             <g>
@@ -264,7 +264,7 @@
           </table>
         </main>
         <!---- Modal Editar Usuário ---->
-        <div class="modal" id="modal">
+        <div class="modal" id="modaluser">
           <div class="modal-content">
             <header class="modal-header">
               <h2 id="msg-edituser">Editar Usuário</h2>
@@ -376,7 +376,7 @@
           </div>
         </div>
         <!---- Modal Delete usuario ---->
-        <div class="modal" id="modalDel">
+        <div class="modal" id="modalDel-user">
           <div class="modal-content">
             <header class="modal-header">
               <h3 id="msgDelete">Você deseja Realmente deletar esse Usúario?</h3>
@@ -405,39 +405,39 @@
                   <div id="Header">
 
                     <!--Form 1-->
-                    <div class="form first">
+                    <div id="form-input" class="form first">
                       <div class="details personal">
                         <div class="fields">
                           <div class="input-field">
                             <label>Título</label>
-                            <input id="nomeTitulo" maxlength="50" type="text" placeholder="Insira o título">
+                            <input id="nomeTitulo" maxlength="50" type="text" placeholder="Insira o título" required>
                           </div>
 
                           <!--Autor-->
                           <div class="input-field">
                             <label>Autor</label>
-                            <input id="autor" maxlength="50" type="text" placeholder="Insira o autor">
+                            <input id="autor" maxlength="50" type="text" placeholder="Insira o autor" required>
                           </div>
                           <!--Editora-->
                           <div class="input-field">
                             <label>Editora</label>
-                            <input id="editora" maxlength="30" type="text" placeholder="Insira a editora">
+                            <input id="editora" maxlength="30" type="text" placeholder="Insira a editora"  required>
                           </div>
                           <!--Classificação Indicativa-->
                           <div class="input-field">
                             <label>Classificação Indicativa</label>
                             <input id="classificacao" max="18" min="1" type="number"
-                              placeholder="Insira a classificação indicativa">
+                              placeholder="Insira a classificação indicativa" required>
                           </div>
                           <!--ISBN-->
                           <div class="input-field">
                             <label>ISBN</label>
-                            <input maxlength="13" id="isbn" type="text" placeholder="Insira o ISBN">
+                            <input maxlength="13" id="isbn" type="text" placeholder="Insira o ISBN" required>
                           </div>
                           <!--Edição-->
                           <div class="input-field">
                             <label>Edição</label>
-                            <input id="edicao" min="1" max="15" type="number" placeholder="Insira a edição">
+                            <input id="edicao" min="1" max="15" type="number" placeholder="Insira a edição" required>
                           </div>
                         </div>
                       </div>
@@ -446,20 +446,20 @@
                         <!--Ano de Lançamento-->
                         <div class="input-field">
                           <label>Ano de Lançamento</label>
-                          <input id="datalanc" type="date" placeholder="Insira o ano de lançamento">
+                          <input id="datalanc" type="date" placeholder="Insira o ano de lançamento" required>
                         </div>
 
                         <!--Quantidade Disponiveis-->
                         <div class="input-field">
                           <label>Quantidade Disponível</label>
                           <input id="qtdDisp" max="100" min="1" type="number"
-                            placeholder="Insira a quanidade disponível">
+                            placeholder="Insira a quanidade disponível" required>
                         </div>
 
                         <!--Idioma-->
                         <div class="input-field">
                           <label>Idioma</label>
-                          <select id="idioma">
+                          <select required id="idioma">
                             <option value="" disabled selected>Selecione o idioma</option>
                             <option value="EN">Inglês</option>
                             <option value="PT">Português</option>
@@ -475,7 +475,7 @@
                         <!--Genero 1-->
                         <div class="input-field">
                           <label>Gênero 1</label>
-                          <select id="genero1">
+                          <select required id="genero1">
                             <option selected value="" disabled>Selecione um gênero</option>
                             <option value="0">Ficção Científica</option>
                             <option value="1">Fantasia</option>
@@ -501,7 +501,7 @@
                         <!-- Genero 2-->
                         <div class="input-field">
                           <label>Gênero 2</label>
-                          <select id="genero2">
+                          <select  id="genero2">
                             <option value="null" disabled selected>Selecione um gênero</option>
                             <option value="0">Ficção Científica</option>
                             <option value="1">Fantasia</option>
@@ -577,7 +577,7 @@
                           <section class="form-group">
                             <label for="txtarea" id="txtarea-label">
                             </label>
-                            <textarea maxlength="500" class="input-txtarea" id="txtarea"
+                            <textarea required maxlength="500" class="input-txtarea" id="txtarea"
                               placeholder="Insira aqui a sinopse do livro"></textarea>
                             <div id="charNum"></div>
                           </section>
@@ -610,7 +610,6 @@
           </div>
         </div>
         <!-- Modal delete Livro-->
-
         <div class="modal" id="modalDel-livro">
           <div class="modal-content">
             <header class="modal-header">
@@ -623,13 +622,138 @@
             </footer>
           </div>
         </div>
+
         <!--==============================================================-->
+        <div class="modal" id="modalLoc">
+          <div class="modal-content">
+            <header class="modal-header">
+              <h2 id="msg-titleDev" >Locação de Livro</h2>
+              <span class="modal-close" id="modalClose-dev">&#10006;</span>
+            </header>
+            <form id="form-loc" class="modal-form">
+              <div class="details personal">
+                <span id="msg-editDev"  class="title">Informações</span>
+
+                <div class="fields">
+                  <!--Nome-->
+                  <div class="input-field">
+                    <label>Usúario</label>
+                    <input style="pointer-events:none ;" class="input-form" id="nome-user" type="text" placeholder="">
+                  </div>
+
+                  <!--Autor-->
+                  <div class="input-field">
+                    <label>Autor</label>
+                    <input style="pointer-events:none ;" class="input-form" id="autorliv" type="text"
+                           placeholder="">
+                  </div>
+
+                  <!--Data Entrada-->
+                  <div class="input-field">
+                    <label>Data Entrada</label>
+                    <input style="pointer-events:none ;" class="input-form"  id="dataEnt" type="date" placeholder="">
+                  </div>
+
+                  <!--Data de Lançamento-->
+                  <div class="input-field">
+                    <label>Data de Locação </label>
+                    <input style="pointer-events:none ;" style="pointer-events:none ;" class="input-form" id="dataLoc" type="date"
+                           placeholder="">
+                  </div>
+
+                  <!--Status-->
+                  <div class="input-field">
+                    <label>Status</label>
+                    <input style="pointer-events:none ;" class="input-form"  id="status" type="text"
+                           placeholder="">
+                  </div>
+
+                  <!--Data Devolvida-->
+                  <div class="input-field">
+                    <label >Data Devolvida</label>
+                    <input style="pointer-events:none ;" class="input-form"  id="datadev" type="date" placeholder="">
+                  </div>
+
+                </div>
+              </div>
+              <footer class="modal-footer">
+                <button Value="Enviar" type="submit" id="Btn-devolver"
+                        class="button green">Devolver</button>
+                <button id="Btn-Cancel-dev" class="button blue">Cancelar</button>
+              </footer>
+            </form>
+          </div>
+        </div>
+
+        <div class="modal" id="modalAlt-Loc">
+          <div class="modal-content">
+            <header class="modal-header">
+              <h2 id="msg-titleAlt" >Alterar Locação</h2>
+              <span class="modal-close" id="modalClose-dev-Alt">&#10006;</span>
+            </header>
+            <form id="form-loc-alt" class="modal-form">
+              <div class="details personal">
+                <span id="msg-edit-Alt"  class="title">Informações</span>
+
+                <div class="fields">
+                  <!--Nome-->
+                  <div class="input-field">
+                    <label>Usúario</label>
+                    <input style="pointer-events:none ;" class="input-form" id="nome-user-alt" type="text" placeholder="">
+                  </div>
+
+                  <!--Autor-->
+                  <div class="input-field">
+                    <label>Autor</label>
+                    <input style="pointer-events:none ;" class="input-form" id="autorliv-alt" type="text"
+                           placeholder="">
+                  </div>
+
+                  <!--Data Entrada-->
+                  <div class="input-field">
+                    <label>Data Entrada</label>
+                    <input style="pointer-events:none ;" class="input-form"  id="dataEnt-alt" type="date" placeholder="">
+                  </div>
+
+                  <!--Data de Devolução-->
+                  <div class="input-field">
+                    <label>Data de Devolução </label>
+                    <input class="input-form" id="dataLoc-alt" type="date"
+                           placeholder="">
+                  </div>
+
+                  <!--Status-->
+                  <div class="input-field">
+                    <label>Status</label>
+                    <input style="pointer-events:none ;" class="input-form"  id="status-alt" type="text"
+                           placeholder="">
+                  </div>
+
+                  <!--Data Devolvida-->
+                  <div class="input-field">
+                    <label >Data Devolvida</label>
+                    <input style="pointer-events:none ;" class="input-form" id="datadev-alt" type="date" placeholder="">
+                  </div>
+                  <!---- Armazena Dados ---->
+                  <input id="idLivroBibli-alt" class="invisivel">
+                  <input id="idUser-alt" class="invisivel">
+
+                </div>
+              </div>
+              <footer class="modal-footer">
+                <button Value="Enviar" type="submit"  id="SalvarDev-alt"
+                        class="button green">Salvar</button>
+                <button id="Btn-Cancel-dev-alt" class="button blue">Cancelar</button>
+              </footer>
+            </form>
+          </div>
+        </div>
+
       </div>
       <!- Div de Notificações ---->
       <div class="messages-section">
         <div class="projects-section-header">
           <p>Notificações Biblioteca</p>
-
         </div>
         <p id="msg-Notific"></p>
         <!---- Div de Mensagens ---->

@@ -39,28 +39,32 @@ $(document).ready(function () {
 
 const nextBtn = document.querySelector("#nextBtn"),
     backBtn = document.querySelector("#backbnt"),
-    allInput = document.querySelectorAll(".first input");
+    allInput = document.querySelectorAll("#form-book>input");
 
-//Evita Reload da pagina
 
 nextBtn.addEventListener("click", () => {
+    var cont = 0
 
-    document.querySelector('.title').innerHTML = 'Imagem Capa'
+
+    var selectLang = document.querySelector('#idioma').value
+    var selectGen = document.querySelector('#genero1').value
+
     allInput.forEach((input) => {
-
-        var selectLang = document.querySelector('#idioma').value
-        var selectGen = document.querySelector('#genero1').value
-        if (input.value != "" && selectLang != "" && selectGen != "") {
-            $(".form.second").toggleClass('secActive')
-            $(".form.first").toggleClass('secClear')
-            $("#backbnt").toggleClass('ativar')
-            $("#nextBtn").toggleClass('clear')
-            $("#Btn-Cancel-book").toggleClass('clear')
-            $("#Btn-Salvar-book").toggleClass('ativar')
-        }
+                console.log(cont++)
 
     })
 })
+/*
+$(".form.second").toggleClass('secActive')
+$(".form.first").toggleClass('secClear')
+$("#backbnt").toggleClass('ativar')
+$("#nextBtn").toggleClass('clear')
+$("#Btn-Cancel-book").toggleClass('clear')
+$("#Btn-Salvar-book").toggleClass('ativar')
+$('.input-form').each(function(){})
+document.querySelector('.title').innerHTML = 'Imagem Capa'
+
+ */
 backBtn.addEventListener("click", () => {
     console.log("Click")
     document.querySelector('.title').innerHTML = 'Informações Livro'
@@ -107,22 +111,28 @@ inputFile.addEventListener("change", function (e) {
 //Evento Modal Open/exit
 
 //-------------------------------------------------
-const openModal = () => document.getElementById('modal')
-    .classList.add('active')
 
+//
 const openMBook = () => document.getElementById('modalBok')
     .classList.add('active')
 
-const closeModal = () => document.getElementById('modal')
+const closeModal = () => document.getElementById('modaluser')
     .classList.remove('active')
-
-const closeModalDel = () => document.getElementById('modalDel')
+//Modal delete User
+const closeModalDel = () => document.getElementById('modalDel-user')
     .classList.remove('active')
-
+//Modal book close
 const closeMBook = () => document.getElementById('modalBok')
     .classList.remove('active')
-
+//Delete Book close
 const closeMDbook = () => document.getElementById('modalDel-livro')
+    .classList.remove('active')
+
+//Modal Devolução close
+const closeMDev = () => document.getElementById('modalLoc')
+    .classList.remove('active')
+//Modal Alterar Devolução close
+const closeAltDev = () => document.getElementById('modalAlt-Loc')
     .classList.remove('active')
 //-------------------------------------------------
 
@@ -147,3 +157,14 @@ document.getElementById('modalClose-book').addEventListener('click', closeMBook)
 document.getElementById('modalClose-Bok').addEventListener('click', closeMDbook)
 
 document.getElementById('Btn-CancelD-book').addEventListener('click', closeMDbook)
+
+
+//Modal Devolução Book
+document.getElementById('Btn-Cancel-dev').addEventListener('click',closeMDev )
+
+document.getElementById('modalClose-dev').addEventListener('click',closeMDev )
+
+//Modal Altera Devolução Book
+document.getElementById('modalClose-dev-Alt').addEventListener('click',closeAltDev )
+
+document.getElementById('Btn-Cancel-dev-alt').addEventListener('click',closeAltDev )
