@@ -196,7 +196,11 @@ public class LocacaoService {
     }
 
     private Boolean validaEstoque(Locacao locacao){
-        return repository.qtdLivroLocado(locacao.getLivro().getId()) < locacao.getLivro().getQuantidadeEstoque();
+        return qtdEstoque(locacao.getLivro().getId()) < locacao.getLivro().getQuantidadeEstoque();
+    }
+
+    public Integer qtdEstoque(Integer idLivro){
+        return repository.qtdLivroLocado(idLivro);
     }
 
     public Locacao alterarLocacao(LocacaoDto novoLivroUsuarioDto){

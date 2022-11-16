@@ -358,7 +358,7 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 		u2.setId(100002L);
 
 		Usuario u3 = new Usuario("388.985.320-08", "Lucas", "Testoni", "testoni@email.com",
-				"47854124785", "4763215896", TipoPerfil.LEITOR, true, new Date(2003-1900, 0,1));
+				"47854124785", "4763215896", TipoPerfil.LEITOR, true, new Date(2004-1900, 0,1));
 		u3.setEnderecoUsuario(e4);
 		u3.setBiblioteca(b1);
 		u3.setImagem("/usuario/100003/download.jpg");
@@ -384,7 +384,7 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 				StatusLocacao.DEVOLVIDO);
 		loc1.setLivro(lb1);
 		loc1.setDataDevolvida(new Date(2022-1900,8-1,19));
-		loc1.setUsuario(u1);
+		loc1.setUsuario(u2);
 
 		Locacao loc2 = new Locacao(new Date(2022-1900,10-1,29), new Date(2022-1900,11-1,29),
 				StatusLocacao.ANDAMENTO);
