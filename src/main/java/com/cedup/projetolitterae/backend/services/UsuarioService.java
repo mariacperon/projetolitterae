@@ -62,16 +62,28 @@ public class UsuarioService{
             try {
                 Long id = Long.parseLong(campo);
                 usuarios.addAll(repository.findAllById(Collections.singleton(id)));
-            } catch (NumberFormatException nfe) {
+                if(usuarios.isEmpty()){
+                    throw  new MensagemRetornoException(new MensagemRetorno("erro", "não encontrou cpf."));
+                }
+            } catch (NumberFormatException | MensagemRetornoException msg) {
                 List<Usuario> usuarioNome = repository.buscarUsuariosPorNome(campo, idBiblioteca);
                 List<Usuario> usuarioSobrenome = repository.buscarUsuariosPorSobrenome(campo, idBiblioteca);
+                List<Usuario> usuarioCpf = repository.buscarUsuariosPorCpf(campo, idBiblioteca);
 
-                if(usuarioNome.size() != 0){
+                if(!usuarioNome.isEmpty()){
                     usuarios = usuarioNome;
                 }
 
-                if(usuarioSobrenome.size() != 0){
+                if(!usuarioSobrenome.isEmpty()){
                     for(Usuario usuario : usuarioSobrenome){
+                        if(!usuarios.contains(usuario)){
+                            usuarios.add(usuario);
+                        }
+                    }
+                }
+
+                if(!usuarioCpf.isEmpty()){
+                    for(Usuario usuario : usuarioCpf){
                         if(!usuarios.contains(usuario)){
                             usuarios.add(usuario);
                         }

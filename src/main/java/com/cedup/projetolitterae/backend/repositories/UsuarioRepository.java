@@ -18,4 +18,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
     @Query(value = "select * from usuario u where u.sobrenome like %:nome% and u.id_biblioteca = :id", nativeQuery = true)
     List<Usuario> buscarUsuariosPorSobrenome(@Param("nome") String nome, @Param("id") Long idBiblioteca);
+
+    @Query(value = "select * from usuario u where u.cpf like %:cpf% and u.id_biblioteca = :id", nativeQuery = true)
+    List<Usuario> buscarUsuariosPorCpf(@Param("cpf") String nome, @Param("id") Long idBiblioteca);
 }
