@@ -47,18 +47,18 @@ const nextBtn = document.querySelector("#nextBtn"),
 
 
 nextBtn.addEventListener("click", () => {
-   if ($("#nomeTitulo").val()!="" && $("#autor").val()!="" && $("#editora").val()!="" && $("#edicao").val()!="" && $("#datalanc").val()!="" && $("#qtdDisp").val()!="" && $("#idioma").val()!= null && $("#genero1").val()!= null){
-       if ($("#classificacao").val() > 0 && $("#classificacao").val() <= 18){
-           $(".form.second").toggleClass('secActive')
-           $(".form.first").toggleClass('secClear')
-           $("#backbnt").toggleClass('ativar')
-           $("#nextBtn").toggleClass('clear')
-           $("#Btn-Cancel-book").toggleClass('clear')
-           $("#Btn-Salvar-book").toggleClass('ativar')
-           $('.input-form').each(function(){})
-           document.querySelector('#title-book').innerHTML = 'Imagem Capa'
-       }
-   }
+    if ($("#nomeTitulo").val()!="" && $("#autor").val()!="" && $("#editora").val()!="" && $("#edicao").val()!="" && $("#datalanc").val()!="" && $("#qtdDisp").val()!="" && $("#idioma").val()!= null && $("#genero1").val()!= null){
+        if ($("#classificacao").val() > 0 && $("#classificacao").val() <= 18){
+            $(".form.second").toggleClass('secActive')
+            $(".form.first").toggleClass('secClear')
+            $("#backbnt").toggleClass('ativar')
+            $("#nextBtn").toggleClass('clear')
+            $("#Btn-Cancel-book").toggleClass('clear')
+            $("#Btn-Salvar-book").toggleClass('ativar')
+            $('.input-form').each(function(){})
+            document.querySelector('#title-book').innerHTML = 'Imagem Capa'
+        }
+    }
 
 })
 
