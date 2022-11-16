@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Pesquisa por Genero</title>
     <link rel="stylesheet" href="css/pesquisaGen.css">
-    <link rel="shortcut icon" href="../litterae-logo.ico" />
+    <link rel="shortcut icon" href="../litterae-logo.ico"/>
     <!--Controle de Eventos da Pagina -->
     <script src='../frameworks/jquery/jquery-3.6.1.min.js'></script>
 
@@ -15,7 +15,7 @@
         <!--Campo de Pesquisa-->
         <div class="browse">
             <!--Seletor de Categoria de Livros -->
-            <div  class="sidebar">
+            <div class="sidebar">
                 <a class="closebtn">×</a>
                 <a id="0">Ficção Cientifica</a>
                 <a id="1">Fantasia</a>
@@ -52,8 +52,8 @@
         <div class="profile">
             <!--Imagem do usuário -->
             <div class="user-profile">
-                <div  ></div>
-                <img class="user-img" src="" alt="" >
+                <div></div>
+                <img class="user-img" src="" alt="">
             </div>
             <!--Botão de menu-->
             <div class="profile-menu">
@@ -73,7 +73,60 @@
     <div class="book-list">
     </div>
 </div>
-<footer> </footer>
+<div class="modal" id="modal">
+    <!--modal-Loc-->
+    <div class="modal-content">
+        <header class="modal-header">
+            <h2 id="msg-edituser">Confirmar Locação </h2>
+            <span class="modal-close" id="modalClose">&#10006;</span>
+        </header>
+
+        <div id="container-aviso">
+            <h4 id="aviso-loc"></h4>
+        </div>
+
+        <div class="content-locacao">
+            <div class="input-field">
+                <img id="imagemCapa"
+                     height="200px" width="150px">
+            </div>
+
+            <div id="detalhes-book">
+                <div id="content-title">
+                    <div class="input-field">
+                        <h3 id="tituloLivro">Título do livro</h3>
+                    </div>
+                    <div class="input-field">
+                        <h4 id="nomeAutor">Autor</h4>
+                    </div>
+                </div>
+
+                <div id="content-data">
+
+                    <div style="pointer-events: none;" class="input-field">
+                        <label>Data de Locação: <br>
+                            <input type="date" id="dataLocacao"/></label>
+                    </div>
+                    <div class="input-field">
+                        <label>Data de devolução
+                            <br>
+                            <input type="date" id="dataDevolucao"/></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="modal-footer">
+            <div>
+                <button id="btn-loc-enviar"><a>Alugar</a></button>
+                <button id="button-loc-canc"><a>Cancelar</a></button>
+            </div>
+
+        </footer>
+    </div>
+</div>
+</div>
+</div>
+<footer></footer>
 <!-- importação de Eventos-->
 <script src="js/pesquisaGen.js"></script>
 </body>

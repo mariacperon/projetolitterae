@@ -1,7 +1,8 @@
 //Pega o id do usuario logado
 //var idUsuario = sessionStorage.getItem("idUsuario");
 var idUsuario = 100001
-'use strict';
+
+$('#cep').mask('00000-000');
 // Limpa os dados de Endereço do Formulário
 const limparFormulario = (endereco) => {
     document.getElementById('rua').value = '';
@@ -68,42 +69,28 @@ function btnEnviar(cont) {
 }
 
 //Função Assíncrona de Cadastro
-async function Cadastrar(nome, sobrenome, data, celular, telefone, cpf, cep, rua, numero, bairro, cidade, estado) {
-    //passando os parametros dos inputs para as variaveis
-    nome = $("#nome").val();
-    sobrenome = $("#sobrenome").val();
-    data = $("#data").val();
-    celular = $("#celular").val();
-    telefone = $("#telefone").val();
-    cpf = $("#cpf").val();
-    cpf = cpf.replace(/[^\d]+/g, '');
-    cep = $("#cep").val();
-    rua = $("#rua").val();
-    numero = $("#numero").val();
-    bairro = $("#bairro").val();
-    cidade = $("#cidade").val();
-    estado = $("#estado").val();
+async function Cadastrar() {
     //Preparando o Body para Envio ao Servidor
     var jsonCadastro = JSON.stringify({
         "id": null,
-        "cpf": cpf,
-        "nome": nome,
-        "sobrenome": sobrenome,
+        "cpf": $("#cpf").val(),
+        "nome": $("#nome").val(),
+        "sobrenome": $("#sobrenome").val(),
         "enderecoUsuario": {
             "id": null,
-            "cep": cep,
-            "estado": estado,
-            "cidade": cidade,
-            "bairro": bairro,
-            "rua": rua,
-            "numero": numero,
+            "cep": $("#cep").val(),
+            "estado": $("#estado").val(),
+            "cidade": $("#cidade").val(),
+            "bairro": $("#bairro").val(),
+            "rua": $("#numero").val(),
+            "numero": $("#rua").val(),
             "complemento": ""
         },
         "idBiblioteca": idUsuario,
         "email": "",
-        "dataNascimento": data,
-        "telefone1": celular,
-        "telefone2": telefone,
+        "dataNascimento": $("#data").val(),
+        "telefone1": $("#celular").val(),
+        "telefone2": $("#telefone").val(),
         "imagem": null,
         "tipoPerfil": 1,
         "ativo": true
@@ -114,18 +101,9 @@ async function Cadastrar(nome, sobrenome, data, celular, telefone, cpf, cep, rua
         //verifica se o Cpf é valido
         if (validarCPF(cpf) == true) {
 
-            //Prepara o tipo de Conexão com seus Respectivos Parametros
-            var myHeaders = new Headers();
-            myHeaders.append("Content-Type", "application/json");
-            var requestOptions = {
-                method: 'POST',
-                headers: myHeaders,
-                body: jsonCadastro,
-                redirect: 'follow'
-            };
-
             //faz a chamada da conexão
-            fetch("http://localhost:80/usuario/cadastrar", requestOptions)
+            fetch("http://localhost:80/usuario/cadastrar", {method: 'POST',headers:{'Content-Type': 'application/json'}, body: jsonCadastro
+            })
                 .then(function (resposta) {
                     //tratamento do erro exibindo mensagem
                     if (resposta.status>= 200 && resposta.status <= 300 ) {
@@ -150,7 +128,6 @@ async function Cadastrar(nome, sobrenome, data, celular, telefone, cpf, cep, rua
         else {
             $("#ErrCPF").fadeIn();
         }
-
 }
 
 //função validação de CPF

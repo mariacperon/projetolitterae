@@ -1,6 +1,6 @@
 //var idUsuario = sessionStorage.getItem("idUsuario"); 
 var idUsuario = 100001
-
+var paginaatual = 0
 //------------------- Notificação ----------------------------
 createElementNotif(idUsuario,)
 
@@ -85,56 +85,64 @@ function deletNotifc(id) {
 //------------------- Input Pesuisa Controler ----------------------------
 //input Select
 $('#Search-Select').change(function (inputsearch) {
+    document.getElementById('title-table').innerText = ""
+    var thead = document.getElementById('title-table')
+    //Cria Elemento Linha da tabela
+    let tr = thead.insertRow();
+    //Cria a coluna da tabela
+    let td_1 = tr.insertCell();
+    let td_2 = tr.insertCell();
+    let td_3 = tr.insertCell();
+    let td_4 = tr.insertCell();
+    let td_5 = tr.insertCell();
+    let td_6 = tr.insertCell();
     if ($('select#Search-Select').val() == "leitor") {
         clearTable();
-        document.querySelector('#main-title').style.display = 'flex'
         document.querySelector('#main').style.display = 'flex'
         $('.search-input').attr('placeholder', 'Digite Nome ou ID do Leitor');
-        document.querySelector('#th1').innerHTML = 'ID'
-        document.querySelector('#th2').innerHTML = 'Nome Usuario'
-        document.querySelector('#th3').innerHTML = 'Celular'
-        document.querySelector('#th4').innerHTML = 'Email'
-        document.querySelector('#th5').innerHTML = 'Cpf'
-        document.querySelector('#acao').innerHTML = 'Ação'
+        td_1.innerText = "ID"
+        td_2.innerText = "Nome"
+        td_3.innerText = "Celular"
+        td_4.innerText = "Email"
+        td_5.innerText = "CPF"
+        td_6.innerText = "AÇÃO"
         PesqUser()
     } else if ($('#Search-Select').val() == "livros") {
         clearTable();
-        document.querySelector('#main-title').style.display = 'flex'
         document.querySelector('#main').style.display = 'flex'
         $('.search-input').attr('placeholder', 'Digite Nome ou ID de um Livro');
-        document.querySelector('#th1').innerHTML = 'ISBN'
-        document.querySelector('#th2').innerHTML = 'Livro'
-        document.querySelector('#th3').innerHTML = 'Autor'
-        document.querySelector('#th4').innerHTML = 'Idioma'
-        document.querySelector('#th5').innerHTML = 'QTD'
-        document.querySelector('#acao').innerHTML = 'Ação'
+        td_1.innerText = "ISBN"
+        td_2.innerText = "Livro"
+        td_3.innerText = "Autor"
+        td_4.innerText = "Idioma"
+        td_5.innerText = "QTD"
+        td_6.innerText = "Ação"
         PesqBook()
     } else if ($('#Search-Select').val() == "pendencia") {
         clearTable();
-        document.querySelector('#main-title').style.display = 'flex'
+
         document.querySelector('#main').style.display = 'flex'
         $('.search-input').attr('placeholder', 'Digite id da Pendência');
-        document.querySelector('#th1').innerHTML = 'Nome Usuario'
-        document.querySelector('#th2').innerHTML = 'Nome do Livro'
-        document.querySelector('#th3').innerHTML = 'Data Devolução'
-        document.querySelector('#th4').innerHTML = 'Valor Multa'
-        document.querySelector('#th5').innerHTML = 'Status'
-        document.querySelector('#acao').innerHTML = 'Ação'
-
+        td_1.innerText = "Nome Usuario"
+        td_2.innerText = "Nome do Livro"
+        td_3.innerText = "Data Devolução"
+        td_4.innerText = "Valor Multa"
+        td_5.innerText = "Status"
+        td_6.innerText = "Ação"
     } else if ($('#Search-Select').val() == "locacao") {
         clearTable();
-        document.querySelector('#main-title').style.display = 'flex'
         document.querySelector('#main').style.display = 'flex'
         $('.search-input').attr('placeholder', 'Digite Nome ou ID de um Livro');
-        document.querySelector('#th1').innerHTML = 'Nome Usuario'
-        document.querySelector('#th2').innerHTML = 'Nome do Livro'
-        document.querySelector('#th3').innerHTML = 'Data Entrada'
-        document.querySelector('#th4').innerHTML = 'Data Devolução'
-        document.querySelector('#th5').innerHTML = 'Status'
-        document.querySelector('#acao').innerHTML = 'Ação'
+        td_1.innerText = "Nome Usuario"
+        td_2.innerText = "Nome do Livro"
+        td_3.innerText = "Data Locação"
+        td_4.innerText = "Valor Devolução"
+        td_5.innerText = "Status"
+        td_6.innerText = "Ação"
         Pesqloc()
     }
 });
+
 
 //Input Pesquisa
 function search_users() {
@@ -159,16 +167,6 @@ document.querySelector('#form-user').addEventListener('submit', e => {
 })
 
 
-
-function PesqUsuarioTD() {
-    fetch("http://localhost:80/usuario/all", {method: 'GET',})
-        .then(response => response.text())
-        .then(function resultado(result) {
-            var bd_result = JSON.parse(result)
-            CreatElementUser(bd_result)
-        }).catch(error => console.log('error', error));
-}
-
 //Funcition Conexão com banco chamada Key Press
 function PesqUser(inputsearch) {
     inputsearch = $(".search-input").val()
@@ -181,12 +179,32 @@ function PesqUser(inputsearch) {
         .catch(error => console.log('error', error));
 }
 
+function PesqUserBilib() {
+    fetch("http://localhost:80/usuario/biblioteca/" + idUsuario, {
+        headers: {'Content-Type': 'application/json'},
+        method: 'GET',
+    })
+        .then(response => response.text())
+        .then(function resultado(result) {
+            var bd_result = JSON.parse(result)
+            CreatElementUser(bd_result)
+            console.log(bd_result)
+        })
+        .catch(error => console.log('error', error));
+}
+
 //Funcition Botão de Editar Leitor
 function editarUser(id) {
+
     $('#cpf').mask('000.000.000-00');
     $('#celular').mask('(00) 00000-0000');
     $('#telefone').mask('0000-0000');
+    $('#cep').mask('00000-000');
+
+    document.getElementById('msg-edituser').style.color = "#1f1d2b"
+    document.getElementById('msg-edituser').innerHTML = "Editar Usuário"
     document.getElementById('modaluser').classList.add('active')
+
     //Chamada Api fetch conexão com banco para setar dados nos inputs
     fetch("http://localhost:80/usuario/" + id, {method: 'GET',})
         .then(response => response.text())
@@ -209,6 +227,48 @@ function editarUser(id) {
             document.getElementById('idbiblioteca').value = data.biblioteca.id
             document.getElementById('scrImagem').value = data.imagem
         }).catch(error => console.log('error', error));
+
+    // Limpa os dados de Endereço do Formulário
+    const limparFormulario = (endereco) => {
+        document.getElementById('rua').value = '';
+        document.getElementById('bairro').value = '';
+        document.getElementById('cidade').value = '';
+        document.getElementById('estado').value = '';
+    }
+
+//Preenche os Dados do Endereço Conforme a resposta do Viacep
+    const preencherFormulario = (endereco) => {
+        document.getElementById('rua').value = endereco.logradouro;
+        document.getElementById('bairro').value = endereco.bairro;
+        document.getElementById('cidade').value = endereco.localidade;
+        document.getElementById('estado').value = endereco.uf;
+    }
+
+    const eNumero = (numero) => /^[0-9]+$/.test(numero);
+
+    const cepValido = (cep) => cep.length == 8 && eNumero(cep);
+
+    const pesquisarCep = async () => {
+        limparFormulario();
+        //Chama Api do via cep e Valida ela
+        const cep = document.getElementById('cep').value.replace("-", "");
+        const url = `https://viacep.com.br/ws/${cep}/json/`;
+        if (cepValido(cep)) {
+            const dados = await fetch(url);
+            const endereco = await dados.json();
+            if (endereco.hasOwnProperty('erro')) {
+                document.getElementById('endereco').value = 'CEP não encontrado!';
+            } else {
+                preencherFormulario(endereco);
+            }
+        } else {
+            document.getElementById('endereco').value = 'CEP incorreto!';
+        }
+
+    }
+
+    document.getElementById('cep')
+        .addEventListener('focusout', pesquisarCep);
 
     //Evento de Confirmação botão confirmar modal Edit user
     const btnconfirm = document.querySelector('#Btn-Confirm');
@@ -243,6 +303,7 @@ function editarUser(id) {
             if (validateEmail(result) == true) {
                 AlteraDt()
             }
+            console.log($("#cpf").val())
 
             function AlteraDt() {
 
@@ -254,12 +315,15 @@ function editarUser(id) {
                     if (result.status >= 200 && result.status <= 300) {
                         document.querySelector('#msg-edituser').style.color = "#0c4900";
                         document.querySelector('#msg-edituser').innerHTML = 'Dados Alterados com Sucesso'
-                        setTimeout(reload, 3000)
-                        document.querySelector('#msg-edituse').style.color = "#1f1d2b";
+                        setTimeout(function () {
+                            document.getElementById('modaluser').classList.remove('active')
+                        }, 2000)
+                        clearTable()
+                    } else {
+
+                        console.log(result.json())
                     }
-                    console.log(result.text)
-                    console.log("--------------------")
-                    console.log(result.json())
+
                 }).catch(error => console.log('error', error));
             }
         } else {
@@ -269,6 +333,7 @@ function editarUser(id) {
                 document.querySelector('#AvisoCpf').style.color = "#333";
                 document.querySelector('#AvisoCpf').innerHTML = 'CPF'
             }, 4000);
+
         }
 
     });
@@ -276,6 +341,8 @@ function editarUser(id) {
 
 //Função Deletar User
 function deletLeitor(id) {
+    document.querySelector('#msgDelete').innerHTML = 'Você deseja Realmente deletar esse Usúario?'
+    document.querySelector('#msgDelete').style.color = "#1f1d2b";
     document.getElementById('modalDel-user').classList.add('active')
     const delconf = document.querySelector('#Btn-Confirm-del');
     delconf.addEventListener('click', function () {
@@ -288,8 +355,10 @@ function deletLeitor(id) {
                 if (result.status >= 200 && result.status <= 300) {
                     document.querySelector('#msgDelete').style.color = "#0c4900";
                     document.querySelector('#msgDelete').innerHTML = 'Dados Alterados com Sucesso'
-                    setTimeout(reload, 3000)
-                    document.querySelector('#msgDelete').style.color = "#1f1d2b";
+                    setTimeout(function () {
+                        document.getElementById('modalDel-user').classList.remove('active')
+                    }, 2000)
+                    clearTable()
                 }
             })
             .catch(error => console.log('error', error));
@@ -321,7 +390,7 @@ function CreatElementUser(bd_result) {
         $('<button onclick="deletLeitor' + "(" + bd_result[i].id + ")" + '" class="button deletar" type="button">Excluir</button>').appendTo(td_acoes);
 
     }
-
+    carregaPage(bd_result)
 }
 
 //Função para Validar Email
@@ -393,13 +462,15 @@ function CreatElementBook(bd_result) {
         $('<button onclick="deletBook' + "(" + bd_result[i].id + ")" + '" class="button deletar" type="button">Excluir</button>').appendTo(td_acoes);
 
     }
-
+    carregaPage(bd_result)
 }
 
 //Função para Deletar Livro
 function deletBook(id) {
     document.querySelector('#msgDelete-book').style.color = "#1f1d2b";
     document.getElementById('modalDel-livro').classList.add('active')
+    document.querySelector('#msgDelete-book').innerHTML = 'Editar Livro'
+
     const delconf = document.querySelector('#Btn-Confirm-del-book');
     delconf.addEventListener('click', function () {
         fetch("http://localhost:80/livro/excluir/" + id, {
@@ -411,7 +482,11 @@ function deletBook(id) {
             if (result.status >= 200 && result.status <= 300) {
                 document.querySelector('#msgDelete-book').style.color = "#0c4900";
                 document.querySelector('#msgDelete-book').innerHTML = 'Livro Deletado Com Sucesso'
-                setTimeout(reload, 3000)
+
+                setTimeout(function () {
+                    document.getElementById('modalDel-livro').classList.remove('active')
+                }, 3000)
+                clearTable()
             } else {
                 document.querySelector('#msgDelete-book').style.color = "#FF0000";
                 document.querySelector('#msgDelete-book').innerHTML = 'Erro Contate Um administrador'
@@ -422,7 +497,9 @@ function deletBook(id) {
 
 //Função Para Editar Livro
 function editarBook(id) {
+
     document.querySelector('#msg-editlivro').style.color = "#1f1d2b";
+    document.querySelector('#msg-editlivro').innerHTML = 'Editar Livro'
     openMBook()
     fetch("http://localhost:80/livro-biblioteca/" + id, {
         method: 'GET', headers: {
@@ -451,7 +528,7 @@ function editarBook(id) {
             document.getElementById('idLivro').value = bd_result.livro.id
 
             const img = document.createElement("img");
-            img.src = "http://localhost/" + bd_result.livro.imagem;
+            img.src = "http://localhost" + bd_result.livro.imagem;
             img.classList.add("picture__img");
             pictureImage.innerHTML = "";
             pictureImage.appendChild(img);
@@ -525,13 +602,19 @@ function editarBook(id) {
                                         if (resposta.ok) {
                                             document.querySelector('#msg-editlivro').style.color = "#0c4900";
                                             document.querySelector('#msg-editlivro').innerHTML = 'Dados Alterados com Sucesso'
-                                            setTimeout(reload, 3000)
+                                            setTimeout(function () {
+                                                document.getElementById('modalBok').classList.remove('active')
+                                            }, 3000)
+                                            clearTable()
                                         }
                                     })
                             } else {
                                 document.querySelector('#msg-editlivro').style.color = "#0c4900";
                                 document.querySelector('#msg-editlivro').innerHTML = 'Dados Alterados com Sucesso'
-                                docu
+                                setTimeout(function () {
+                                    document.getElementById('modalBok').classList.remove('active')
+                                }, 3000)
+                                clearTable()
                             }
                         }
                     })
@@ -547,6 +630,7 @@ function editarBook(id) {
     })
 }
 
+//Pesquisa Livros Pelo Id da Bliblioteca
 function PesqBook() {
 
     fetch("http://localhost:80/livro-biblioteca/biblioteca/" + idUsuario, {
@@ -570,6 +654,7 @@ document.querySelector('#form-loc').addEventListener('submit', e => {
 document.querySelector('#form-loc-alt').addEventListener('submit', e => {
     e.preventDefault()
 })
+
 //Função Para Criar Tabela de Resultados Locação
 function CreatElementloc(bd_result) {
 
@@ -585,58 +670,64 @@ function CreatElementloc(bd_result) {
         let td_Status = tr.insertCell();
         let td_acoes = tr.insertCell();
         var dataDev = new Date(bd_result[i].dataDevolucao);
-        var dataLoc = new Date(bd_result[i].dataLocacao);
+
         function zeroFill(n) {
             return n < 9 ? `0${n}` : `${n}`;
         }
+
         //Formata a Data a data Atual no padrão Mundial
         function formatDev(dataDev) {
             const d = zeroFill(dataDev.getDate() + 1);
             const mo = zeroFill(dataDev.getMonth() + 1);
             const y = zeroFill(dataDev.getFullYear());
-            return  `${d}/${mo}/${y}`;
+            return `${d}/${mo}/${y}`;
         }
-        function formatLoc(dataLoc) {
-            const d = zeroFill(dataLoc.getDate()+1);
-            const mo = zeroFill(dataLoc.getMonth() + 1);
-            const y = zeroFill(dataLoc.getFullYear());
-            return  `${d}/${mo}/${y}`;
-        }
+
+        var Strdate = bd_result[i].dataLocacao
+        var Rdate = Strdate.split("-")
+        var   y = Rdate[0]
+        var   m = Rdate[1]
+        var   d = Rdate[2]
+        var dataLoc = d+"/"+m+"/"+y
+
         //Atribuindo valores
         td_nomeU.innerText = bd_result[i].usuario.nome;
         td_NomeL.innerText = bd_result[i].livro.livro.nome;
         td_DataD.innerText = formatDev(dataDev);
-        td_DataE.innerText = formatLoc(dataLoc)
+        td_DataE.innerText = dataLoc
         var status = bd_result[i].statusLocacao;
         if (status == "ANDAMENTO") {
             let statusEl = '';
             statusEl += `<a  style="background-color:#FAF89D;color: transparent;margin-left: 2px;" class="status">an</a>`;
             $(td_Status).append(statusEl);
-        }else if(status == "PENDENTE"){
+        } else if (status == "PENDENTE") {
             let statusEl = '';
             statusEl += `<a  style="background-color:#FF4843;color: transparent;margin-left: 2px;" class="status">an</a>`;
             $(td_Status).append(statusEl);
-        }else if(status == "DEVOLVIDO"){
+        } else if (status == "DEVOLVIDO") {
             let statusEl = '';
             statusEl += `<a  style="background-color:#04D950;color: transparent;margin-left: 2px;" class="status">an</a>`;
             $(td_Status).append(statusEl);
-        }else if(status == "FINALIZADO"){
+        } else if (status == "FINALIZADO") {
             let statusEl = '';
             statusEl += `<a  style="background-color:#73706A;color: transparent;margin-left: 2px;" class="status">an</a>`;
             $(td_Status).append(statusEl);
         }
         //Cria os Botões e atribui eles ao td ações
-        $('<button onclick="devolucao' +  "(" + bd_result[i].id + ")" + '" value = ' + " " + bd_result[i].id + " " + 'class="button editar" type="button">Devolver</button>').appendTo(td_acoes);
+        $('<button onclick="devolucao' + "(" + bd_result[i].id + ")" + '" value = ' + " " + bd_result[i].id + " " + 'class="button editar" type="button">Devolver</button>').appendTo(td_acoes);
         $('<button onclick="alteraLoc' + "(" + bd_result[i].id + ")" + '" class="button devolver" type="button">alterar</button>').appendTo(td_acoes);
     }
+    carregaPage(bd_result)
+
 }
+
 //Função Para pesquisa pelo id Blibioteca
 function Pesqloc() {
     var requestOptions = {
         method: 'GET',
         redirect: 'follow'
     };
-    fetch("http://localhost:80/locacao/biblioteca/"+idUsuario, requestOptions)
+    fetch("http://localhost:80/locacao/biblioteca/" + idUsuario, requestOptions)
         .then(response => response.text())
         .then(function resultado(result) {
             var bd_result = JSON.parse(result)
@@ -644,12 +735,19 @@ function Pesqloc() {
         })
         .catch(error => console.log('error', error));
 }
+
 //Função para fazer devolução Blibioteca
-function devolucao(id){
+
+function devolucao(id) {
+    console.log($('#ResulStatDev').val())
+    document.getElementById('Btn-devolver').style.pointerEvents = "auto"
+    document.getElementById('msg-titleDev').style.color = "#1f1c2e"
+    document.getElementById('msg-titleDev').innerHTML = "Locação de Livro"
     document.getElementById('modalLoc').classList.add('active')
     document.getElementById('msg-editDev').innerHTML = "Informações"
     document.getElementById('msg-editDev').style.color = "#1f1c2e"
-    fetch("http://localhost:80/locacao/"+id, {method:'GET'})
+
+    fetch("http://localhost:80/locacao/" + id, {method: 'GET'})
         .then(response => response.text())
         .then(function (result) {
             var bd_result = JSON.parse(result)
@@ -663,27 +761,50 @@ function devolucao(id){
 
         }).catch(error => console.log('error', error));
     document.getElementById('Btn-devolver').addEventListener('click', function () {
-        fetch("http://localhost:80/locacao/devolver/"+id, {method:'POST'})
-            .then(function resposta(response,){
-             if(response.status >= 400 && response.status <= 500) {
-                 document.getElementById('msg-editDev').style.color = "red"
-                 document.getElementById('msg-editDev').innerHTML = "Esta locação não pode ser devolvida, Verifique Status de Pendência"
-             }else{
-                     document.getElementById('msg-titleDev').style.color = "#0c4900"
-                     document.getElementById('msg-titleDev').innerHTML = "Livro Devolvido Com sucesso"
-                     document.getElementById('Btn-devolver').style.pointerEvents = 'none'
-                    setTimeout(reload,3000)
-                 }
+        fetch("http://localhost:80/locacao/devolver/" + id, {method: 'POST'})
+            .then(function (response) {
+                document.getElementById('ResulStatDev').value = response.status
+                return response.text()
+            })
+            .then(function resposta(response,) {
 
+                if ($('#ResulStatDev').val() == 409) {
+                    document.getElementById('msg-editDev').style.color = "#FF0000"
+                    var mensagemR = ""
+
+                    mensagemR = JSON.parse(response)
+                    console.log(mensagemR.mensagem)
+                    if (mensagemR.mensagem == "Esta locação não pode ser devolvida, pois seu status é PENDENTE") {
+                        document.getElementById('msg-editDev').innerHTML = "Essa Locação Não pode ser devolvida, Status Pendente"
+                    }
+                }
+
+                else if ($('#ResulStatDev').val() >= 400 && $('#ResulStatDev').val() < 409 && $('#ResulStatDev').val() >= 410 && $('#ResulStatDev').val() <= 500) {
+                    document.getElementById('msg-editDev').style.color = "#FF0000"
+                    document.getElementById('msg-editDev').innerHTML = "Erro, Contate um Administrador"
+                }
+
+                else if ($('#ResulStatDev').val() >= 200 && $('#ResulStatDev').val() < 300) {
+                    document.getElementById('msg-titleDev').style.color = "#0c4900"
+                    document.getElementById('msg-titleDev').innerHTML = "Livro Devolvido Com sucesso"
+                    setTimeout(function () {
+                        document.getElementById('modalLoc').classList.remove('active')
+                    }, 3000)
+                    clearTable()
+                }
+                document.getElementById('Btn-devolver').style.pointerEvents = "none"
+                document.getElementById('ResulStatDev').value =0
             }).catch(error => console.log('error', error));
     })
 }
+
 //Função altera data devolução Blibioteca
-function alteraLoc(id){
+function alteraLoc(id) {
+
     document.getElementById('modalAlt-Loc').classList.add('active')
     document.getElementById('msg-editDev').innerHTML = "Informações"
     document.getElementById('msg-editDev').style.color = "#1f1c2e"
-    fetch("http://localhost:80/locacao/"+id, {method:'GET'})
+    fetch("http://localhost:80/locacao/" + id, {method: 'GET'})
         .then(response => response.text())
         .then(function (result) {
             var bd_result = JSON.parse(result)
@@ -700,14 +821,14 @@ function alteraLoc(id){
 
         }).catch(error => console.log('error', error));
 
-    document.getElementById('SalvarDev-alt').addEventListener('click', function (){
+    document.getElementById('SalvarDev-alt').addEventListener('click', function () {
         var idSatus
-        if ($("#status-alt").val() == "ANDAMENTO"){
+        if ($("#status-alt").val() == "ANDAMENTO") {
             idSatus = 0
-        }else if($("#status-alt").val() == "DEVOLVIDO"){
+        } else if ($("#status-alt").val() == "DEVOLVIDO") {
             idSatus = 1
-        }else if ($("#status-alt").val() == "PENDENTE"){
-            idSatus =2
+        } else if ($("#status-alt").val() == "PENDENTE") {
+            idSatus = 2
         }
         var JsonLoc = JSON.stringify({
             "id": id,
@@ -719,21 +840,92 @@ function alteraLoc(id){
             "statusLocacao": idSatus
         });
 
-        fetch("http://localhost:80/locacao/alterar", { headers: {'Content-Type': 'application/json'},method: 'PUT', body:JsonLoc  })
-            .then(function (result){
-                if(result.status >= 400 && result.status <= 500) {
+        fetch("http://localhost:80/locacao/alterar", {
+            headers: {'Content-Type': 'application/json'},
+            method: 'PUT',
+            body: JsonLoc
+        })
+            .then(function (result) {
+                if (result.status >= 400 && result.status <= 500) {
                     document.getElementById('SalvarDev-alt').style.pointerEvents = 'none'
                     document.getElementById('msg-edit-Alt').style.color = "red"
                     document.getElementById('msg-edit-Alt').innerHTML = "Erro ao Fazer Alteração, Contate um Administrador"
-                }else{
+                } else {
                     document.getElementById('msg-titleAlt').style.color = "#0c4900"
                     document.getElementById('msg-titleAlt').innerHTML = "Data de Devolução Alterada"
-                    setTimeout(reload, 3000)
+                    setTimeout(function () {
+                        document.getElementById('modalAlt-Loc').classList.remove('active')
+                    }, 3000)
                 }
+                clearAltable()
+
             })
             .catch(error => console.log('error', error));
     })
 }
+//--------------Pendencia----------
+
+function CreatElementPen(bd_result) {
+
+    var tbody = document.getElementById('users_table')
+    for (var i = 0; i < bd_result.length; i++) {
+        //Cria Elemento Linha da tabela
+        let tr = tbody.insertRow();
+        //Cria a coluna da tabela
+
+        let td_nomeU = tr.insertCell();
+        let td_NomeL = tr.insertCell();
+        let td_DataD = tr.insertCell();
+        let td_Valor = tr.insertCell();
+        let td_Status = tr.insertCell();
+        let td_acoes = tr.insertCell();
+        var dataDev = new Date(bd_result[i].dataDevolucao);
+        var dataLoc = new Date(bd_result[i].dataLocacao);
+
+        function zeroFill(n) {
+            return n < 9 ? `0${n}` : `${n}`;
+        }
+
+        //Formata a Data a data Atual no padrão Mundial
+        function formatDev(dataDev) {
+            const d = zeroFill(dataDev.getDate() + 1);
+            const mo = zeroFill(dataDev.getMonth() + 1);
+            const y = zeroFill(dataDev.getFullYear());
+            return `${d}/${mo}/${y}`;
+        }
+
+        //Atribuindo valores
+        td_nomeU.innerText = bd_result[i].usuario.nome;
+        td_NomeL.innerText = bd_result[i].livro.livro.nome;
+        td_DataD.innerText = formatDev(dataDev);
+        td_Valor.innerText = `R$ ${bd_result[i]}`
+        var status = bd_result[i].statusLocacao;
+
+        if (status == "ANDAMENTO") {
+            let statusEl = '';
+            statusEl += `<a  style="background-color:#FAF89D;color: transparent;margin-left: 2px;" class="status">an</a>`;
+            $(td_Status).append(statusEl);
+        } else if (status == "PENDENTE") {
+            let statusEl = '';
+            statusEl += `<a  style="background-color:#FF4843;color: transparent;margin-left: 2px;" class="status">an</a>`;
+            $(td_Status).append(statusEl);
+        } else if (status == "DEVOLVIDO") {
+            let statusEl = '';
+            statusEl += `<a  style="background-color:#04D950;color: transparent;margin-left: 2px;" class="status">an</a>`;
+            $(td_Status).append(statusEl);
+        } else if (status == "FINALIZADO") {
+            let statusEl = '';
+            statusEl += `<a  style="background-color:#73706A;color: transparent;margin-left: 2px;" class="status">an</a>`;
+            $(td_Status).append(statusEl);
+        }
+        //Cria os Botões e atribui eles ao td ações
+        $('<button onclick="devolucao' + "(" + bd_result[i].id + ")" + '" value = ' + " " + bd_result[i].id + " " + 'class="button editar" type="button">Devolver</button>').appendTo(td_acoes);
+        $('<button onclick="alteraLoc' + "(" + bd_result[i].id + ")" + '" class="button devolver" type="button">alterar</button>').appendTo(td_acoes);
+    }
+    carregaPage(bd_result)
+}
+
+
 //--------------Eventos----------
 const clsTableElement = (i) => {
     var tbody = document.getElementById('users_table')
@@ -742,13 +934,66 @@ const clsTableElement = (i) => {
 
 //Função para Limpar todos os Elementos da Tabela
 const clearTable = () => {
-    // const rows = document.querySelectorAll('#users_table')
-    // rows.forEach(row => row.parentNode.removeChild(row))
     var tbody = document.getElementById('users_table');
     tbody.innerHTML = "";
+}
+const clearAltable = () => {
+    const rows = document.querySelectorAll('#users_table')
+    rows.forEach(row => row.parentNode.removeChild(row))
+    var tbody = document.getElementById('users_table')
+    let tr = tbody.insertRow();
 }
 
 //Função para Recarregar a pagina
 function reload() {
     document.location.reload(true);
 }
+
+function carregaPage(bd_result){
+    document.getElementById('pagination').innerHTML = ""
+    var rowsShown = 8;
+    var rowsTotal = bd_result.length;
+    var numPages = rowsTotal/rowsShown;
+
+    $('#pagination').append('<a class="button-anterior" id="btn-anterior" value="">Anterior</a> ');
+    for(i = 0;i < numPages;i++) {
+        var pageNum = i + 1;
+        $('#pagination').append('<a class="button-num" id="bt-pagina'+i+'" value="'+i+'">'+pageNum+'</a> ');
+    }
+    $('#pagination').append('<a class="button-proximo" id="btn-prox" value="">Próximo</a> ');
+
+    $('#bt-pagina0').addClass('active')
+
+    document.getElementById('btn-prox').addEventListener("click", function( event ) {
+        var pagina = document.getElementById('bt-pagina'+(paginaatual+1));
+        if(pagina){
+            paginaatual += 1;
+            pagina.click();
+        }
+    })
+
+    document.getElementById('btn-anterior').addEventListener("click", function( event ) {
+        var pagina = document.getElementById('bt-pagina'+(paginaatual-1));
+        if(pagina){
+            paginaatual -= 1;
+            pagina.click();
+        }
+    })
+
+    $('#users_table tr').hide();
+    $('#users_table tr').slice(0, rowsShown).show();
+    $('#pagination a:first').addClass('active');
+    $('#pagination a.button-num').bind('click', function(){
+
+        $('#pagination a').removeClass('active');
+        $(this).addClass('active');
+
+        var currPage = $(this).attr('value');
+        paginaatual=Number.parseInt(currPage);
+        var startItem = currPage * rowsShown;
+        var endItem = startItem + rowsShown;
+        $('#users_table tr').css('opacity','0.0').hide().slice(startItem, endItem).
+        css('display','table-row').animate({opacity:1}, 300);
+
+    });
+};

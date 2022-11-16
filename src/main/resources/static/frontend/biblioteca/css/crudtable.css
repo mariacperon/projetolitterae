@@ -13,7 +13,7 @@ header{
 }
 
 .header-title{
-    
+
     color: black;
     font-size: 2rem;
 }
@@ -23,7 +23,7 @@ main{
     flex-direction: column;
     align-items: flex-start;
     gap: 20px;
-    overflow: auto;
+    overflow: hidden;
     display: none;
 }
 
@@ -81,7 +81,7 @@ footer{
         margin:10px 0;
     }
 
-    .records tr:hover{
+    #users_table tr:hover{
         background-color: inherit;
     }
 }
@@ -253,9 +253,8 @@ form .fields .input-field {
 
 button.editar{
     background-color: #B275DA;
-    border-style: none;  
+    border-style: none;
     margin-left: 2px;
-    width: 40%;
     padding: 3px;
     color: white;
     font-size: 15px;
@@ -312,44 +311,68 @@ button.devolver{
         width:100%;
         height:100%;
     }
-}
 
-#main-title{
-    display: none;
-    flex-wrap:wrap;
-    background-color: var(--tdcolor);
+    #main-title h3:last-child,
+    #main-title h3:last-child{
+        padding: 0;
+        min-width: 140px;
+        text-align: center;
+    }
 }
-  
-  #main-title h3{
-    margin-top: 20px;
-    color: #dbf6fd;
-    font-size: 1.2rem;  
-    font-weight: 400; 
-    
-  }
- #th1{
-    flex: 1;
-    text-align: center;
- }
- #acao{
-    flex: 1;
-
- }
-  #th2,#th3,#th4,#th5{
-    text-align: center;
-    flex:auto ;
-    margin-right: auto;
-  }
-  #main-title h3:last-child,
-  #main-title h3:last-child{
-    padding: 0;
-    min-width: 140px;
-    text-align: center;
-  }
 .status {
     border: none;
     border-radius: 20px;
     width: 15px;
     height: 20px;
     pointer-events: none;
+}
+#pagination{
+    margin-left: 30em;
+    position: fixed;
+    margin-top: 30em;
+    display: flex;
+}
+#title-table{
+    text-align: center;
+    height: 40px;
+    background-color: var(--tdcolor);
+    margin-top: 20px;
+    color: #dbf6fd;
+    font-size: 1.2rem;
+    font-weight: 800;
+}
+#nav {
+    text-align: center;
+    margin-bottom: 5px;
+}
+#pagination .button-num{
+    color: #FFF;
+    margin-left: 3px;
+    text-align: center;
+    height: 25px;
+    width: 20px;
+    max-width: 100%;
+    border-radius: 50px;
+    background-color: #B275DA;
+    margin-left: 2px;
+    text-decoration: none;
+}
+#pagination .button-num.active{
+    background-color: #13CE66;
+}
+
+#btn-prox{
+    margin-left: 0.8em;
+}
+
+#pagination .button-proximo{
+    width: auto;
+}
+#pagination .button-anterior{
+    width: auto;
+    margin-right: 0.8em;
+}
+#pagination a:hover{
+    transition: 0.5s;
+    color: #333;
 }

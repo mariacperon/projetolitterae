@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
 *{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
 :root {
@@ -128,7 +128,7 @@ button, a {
   background-color: var(--main-color);
   left: 50%;
   transform: translatex(-50%);
-  
+
 }
 .app-icon:before {
   top: -6px;
@@ -282,27 +282,27 @@ button, a {
   fill: var(--svg);
   margin-top: 5px;
 }
- #Search-Select{
+#Search-Select{
   border: none;
   background-color: var(--search-area-bg);
   color: var(--main-color);
- }
- .sidenav svg{
+}
+.sidenav svg{
   fill: var(--svg);
- }
- /*Div Principal*/
+}
+/*Div Principal*/
 .projects-section {
   background-color: var(--projects-section);
+  margin-top: 0.5em;
   border-radius: 32px;
   overflow: hidden;
   width: 71%;
   max-width: 71%;
-  height: 100%;
+  height: 95%;
   display: flex;
   flex-direction: column;
-  box-shadow: 2px 2px 10px var(--shadow-color);
+  box-shadow: 1px 1px 10px var(--shadow-color);
 }
-
 
 .projects-section-header {
   display: flex;
@@ -375,7 +375,7 @@ button, a {
 .message-box img {
   border-radius: 50%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   width: 40px;
   height: 40px;
 }
@@ -453,11 +453,11 @@ button, a {
     display: none;
   }
 
-   .mode-switch {
+  .mode-switch {
     width: 20px;
     height: 20px;
   }
-   .mode-switch svg {
+  .mode-switch svg {
     width: 16px;
     height: 16px;
   }
@@ -508,7 +508,7 @@ button, a {
   }
 
   .projects-section-header p,
-.projects-section-header .time {
+  .projects-section-header .time {
     font-size: 18px;
   }
 
@@ -561,7 +561,7 @@ button, a {
   height: 32px;
   border-radius: 50%;
   background: #B275DA;
-  
+
   color: #111827;
   margin-right: 4px;
 }
@@ -581,10 +581,10 @@ button, a {
   height: 40px;
   text-align: center;
   color: #dbf6fd;
-  font-size: 1.2rem;  
-  font-weight: 400;  
+  font-size: 1.2rem;
+  font-weight: 400;
 }
-.records td{
+#users_table td{
   height: 50px;
   padding-left: 10px;
   color: var(--link-color);
@@ -597,9 +597,9 @@ button, a {
   text-align: center;
 }
 
-.records tr:hover{
+#users_table tr:hover{
   background-color: var(--bkgtd);
-  
+
 }
 /*Modal Livro*/
 #alertaEr {
@@ -682,19 +682,19 @@ form button:hover{
 
 @media (max-width: 750px) {
   .container form{
-      overflow-y: scroll;
+    overflow-y: scroll;
   }
   .container form::-webkit-scrollbar{
-     display: none;
+    display: none;
   }
   form .fields .input-field{
-      width: calc(100% / 2 - 15px);
+    width: calc(100% / 2 - 15px);
   }
 }
 
 @media (max-width: 550px) {
   form .fields .input-field{
-      width: 100%;
+    width: 100%;
   }
 }
 
