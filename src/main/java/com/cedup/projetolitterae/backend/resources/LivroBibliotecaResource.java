@@ -4,6 +4,7 @@ import com.cedup.projetolitterae.backend.dto.LivroBibliotecaDto;
 import com.cedup.projetolitterae.backend.entities.LivroBiblioteca;
 import com.cedup.projetolitterae.backend.services.LivroBibliotecaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +25,12 @@ public class LivroBibliotecaResource {
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
     public ResponseEntity<LivroBiblioteca> pesquisarPorId(@PathVariable int id){
         LivroBiblioteca livroBiblioteca = livroBibliotecaService.pesquisarPorId(id);
+        return ResponseEntity.ok().body(livroBiblioteca);
+    }
+
+    @RequestMapping(value = "",method = RequestMethod.GET)
+    public ResponseEntity<LivroBiblioteca> pesquisarPorIdBibliotecaELivro(@Param("idBiblioteca") Long idBiblioteca, @Param("idLivro") Integer idLivro){
+        LivroBiblioteca livroBiblioteca = livroBibliotecaService.pesquisarPorBibliotecaELivroId(idLivro, idBiblioteca);
         return ResponseEntity.ok().body(livroBiblioteca);
     }
 

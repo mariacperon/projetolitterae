@@ -31,6 +31,10 @@ public class LivroBibliotecaService {
         return (repository.findById(id)).orElse(null);
     }
 
+    public LivroBiblioteca pesquisarPorBibliotecaELivroId(Integer idLivro, Long idBiblioteca){
+        return repository.findLivroBibliotecaByBibliotecaIdAndLivroId(idBiblioteca, idLivro);
+    }
+
     public List<LivroBiblioteca> pesquisarPorBibliotecaId(Long idBiblioteca){
         return repository.findLivroBibliotecaByBibliotecaId(idBiblioteca);
     }

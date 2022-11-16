@@ -19,6 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
@@ -54,6 +56,76 @@ public class LocacaoService {
     public List<Locacao> pesquisarPorUsuario(Long id){
         return repository.findLocacaoByUsuarioId(id);
     }
+
+    public List<Locacao> pesquisaCampos(String campo, Long idBiblioteca){
+        List<Locacao> locacoes = new ArrayList<>();
+
+        try{
+            List<Locacao> locacoesId = repository.findAllById(Collections.singleton(Integer.parseInt(campo)));
+            locacoes.addAll(locacoesId);
+        }catch(NumberFormatException nfe){
+            List<Locacao> locacoesNome = repository.locacoesPorNomeUsuario(idBiblioteca, campo);
+            List<Locacao> locacoesSobrenome = repository.locacoesPorSobrenomeUsuario(idBiblioteca, campo);
+            List<Locacao> locacoesNomeLivro = repository.locacoesPorNomeLivro(idBiblioteca, campo);
+
+            if(!locacoesNome.isEmpty()){
+                locacoes.addAll(locacoesNome);
+            }
+
+            if(!locacoesSobrenome.isEmpty()){
+                for(Locacao locacao : locacoesSobrenome){
+                    if(!locacoes.contains(locacao)){
+                        locacoes.add(locacao);
+                    }
+                }
+            }
+
+            if(!locacoesNomeLivro.isEmpty()){
+                for(Locacao locacao : locacoesNomeLivro){
+                    if(!locacoes.contains(locacao)){
+                        locacoes.add(locacao);
+                    }
+                }
+            }
+        }
+
+        return locacoes;
+    }
+
+    public List<Locacao> pesquisaCamposPendentes(String campo, Long idBiblioteca){
+        List<Locacao> locacoes = new ArrayList<>();
+
+        try{
+            List<Locacao> locacoesId = repository.findAllById(Collections.singleton(Integer.parseInt(campo)));
+            locacoes.addAll(locacoesId);
+        }catch(NumberFormatException nfe){
+            List<Locacao> locacoesNome = repository.locacoesPorNomeUsuarioPendentes(idBiblioteca, campo);
+            List<Locacao> locacoesSobrenome = repository.locacoesPorSobrenomeUsuarioPendentes(idBiblioteca, campo);
+            List<Locacao> locacoesNomeLivro = repository.locacoesPorNomeLivroPendentes(idBiblioteca, campo);
+
+            if(!locacoesNome.isEmpty()){
+                locacoes.addAll(locacoesNome);
+            }
+
+            if(!locacoesSobrenome.isEmpty()){
+                for(Locacao locacao : locacoesSobrenome){
+                    if(!locacoes.contains(locacao)){
+                        locacoes.add(locacao);
+                    }
+                }
+            }
+
+            if(!locacoesNomeLivro.isEmpty()){
+                for(Locacao locacao : locacoesNomeLivro){
+                    if(!locacoes.contains(locacao)){
+                        locacoes.add(locacao);
+                    }
+                }
+            }
+        }
+
+        return locacoes;
+    };
 
     public List<Locacao> ultimasLocacoes(Long idUsuario){
         return pesquisarPorUsuario(idUsuario).stream().sorted(Comparator.comparing(Locacao::getDataLocacao)).collect(Collectors.toList());

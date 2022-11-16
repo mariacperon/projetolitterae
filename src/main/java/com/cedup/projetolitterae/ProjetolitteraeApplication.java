@@ -269,7 +269,7 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 				"87", "Ao lado do posto.");
 
 		//CADASTRO DE BIBLIOTECAS
-		Biblioteca b1 = new Biblioteca("12365478965412", "Cheiro de livro", "cheirodelivro@email.com",
+		Biblioteca b1 = new Biblioteca("91.024.520/0001-90", "Cheiro de livro", "cheirodelivro@email.com",
 				"45987412365",  TipoPerfil.ADMIN, "1234", true, 10.00,2.00);
 		b1.setEnderecoBiblioteca(e1);
 		b1.setId(100001L);
@@ -343,28 +343,28 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 				"412", "Em frente ao batalhão.");
 
 		//CADASTRO DE USUARIOS
-		Usuario u1 = new Usuario("12345678945", "Maria Clara", "Peron", "mariaclara@email.com",
+		Usuario u1 = new Usuario("581.780.119-13", "Maria Clara", "Peron", "mariaclara@email.com",
 				"47521452145", null, TipoPerfil.LEITOR, true, new Date(2005-1900,2-1,19));
 		u1.setEnderecoUsuario(e2);
 		u1.setBiblioteca(b1);
 		u1.setImagem("/usuario/100001/images(1).jpeg");
 		u1.setId(100001L);
 
-		Usuario u2 = new Usuario("65432198745", "Veridiana", "Berti", "veriberti@email.com",
+		Usuario u2 = new Usuario("347.497.177-89", "Veridiana", "Berti", "veriberti@email.com",
 				"47569852145", null, TipoPerfil.LEITOR,true, new Date(2005-1900,5-1,2));
 		u2.setEnderecoUsuario(e3);
 		u2.setBiblioteca(b1);
 		u2.setImagem("/usuario/100002/images.png");
 		u2.setId(100002L);
 
-		Usuario u3 = new Usuario("12345678945", "Lucas", "Testoni", "testoni@email.com",
+		Usuario u3 = new Usuario("388.985.320-08", "Lucas", "Testoni", "testoni@email.com",
 				"47854124785", "4763215896", TipoPerfil.LEITOR, true, new Date(2003-1900, 0,1));
 		u3.setEnderecoUsuario(e4);
 		u3.setBiblioteca(b1);
 		u3.setImagem("/usuario/100003/download.jpg");
 		u3.setId(100003L);
 
-		Usuario u4 = new Usuario("12345678945", "Jeniffer", "Cristina", "jeniffer@email.com",
+		Usuario u4 = new Usuario("784.736.017-93", "Jeniffer", "Cristina", "jeniffer@email.com",
 				"47552362145", "47258712587", TipoPerfil.LEITOR, true, new Date(2004-1900,8-1,15));
 		u4.setEnderecoUsuario(e5);
 		u4.setBiblioteca(b1);

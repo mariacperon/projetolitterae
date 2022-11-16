@@ -1,9 +1,11 @@
 package com.cedup.projetolitterae.backend.resources;
 
 import com.cedup.projetolitterae.backend.dto.LocacaoDto;
+import com.cedup.projetolitterae.backend.entities.LivroBiblioteca;
 import com.cedup.projetolitterae.backend.entities.Locacao;
 import com.cedup.projetolitterae.backend.services.LocacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +27,18 @@ public class LocacaoResource {
     public ResponseEntity<Locacao> pesquisarPorId(@PathVariable int id){
         Locacao locacao = locacaoService.pesquisarPorId(id);
         return ResponseEntity.ok().body(locacao);
+    }
+
+    @RequestMapping(value = "/campo",method = RequestMethod.GET)
+    public ResponseEntity<List<Locacao>> pesquisarPorCampo(@Param("id") Long id, @Param("campo") String campo){
+        List<Locacao> locacoes = locacaoService.pesquisaCampos(campo, id);
+        return ResponseEntity.ok().body(locacoes);
+    }
+
+    @RequestMapping(value = "/campo/pendentes",method = RequestMethod.GET)
+    public ResponseEntity<List<Locacao>> pesquisarPorCampoPendentes(@Param("id") Long id, @Param("campo") String campo){
+        List<Locacao> locacoes = locacaoService.pesquisaCamposPendentes(campo, id);
+        return ResponseEntity.ok().body(locacoes);
     }
 
     @RequestMapping(value = "/usuario/{id}",method = RequestMethod.GET)
