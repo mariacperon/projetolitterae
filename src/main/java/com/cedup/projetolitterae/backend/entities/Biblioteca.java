@@ -18,7 +18,7 @@ public class Biblioteca implements Serializable {
     @Id
     private Long id;
 
-    @Column(columnDefinition ="varchar(16)")
+    @Column(columnDefinition ="varchar(18)")
     private String cnpj;
 
     private String nome;

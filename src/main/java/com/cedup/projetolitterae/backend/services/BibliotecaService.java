@@ -27,11 +27,10 @@ public class BibliotecaService {
     @Autowired
     private UltimoIdService ultimoIdService;
 
-    Random random = new Random();
     UUID randomUUID = UUID.randomUUID();
 
     public Biblioteca pesquisarPorId(Long id){
-        return (repository.findById(id)).get();
+        return (repository.findById(id)).orElse(null);
     }
 
     public List<Biblioteca> pesquisarTodas() {
@@ -85,7 +84,12 @@ public class BibliotecaService {
     public Biblioteca login(Long id, String senha){
         Biblioteca biblioteca = pesquisarPorId(id);
 
-        if(biblioteca == null || !Objects.equals(biblioteca.getSenha(), senha)){
+        if(biblioteca == null){
+            throw new MensagemRetornoException(new MensagemRetorno("ERRO",
+                    "Não foi possível realizar o login."));
+        }
+
+        if(!Objects.equals(biblioteca.getSenha(), senha)){
             throw new MensagemRetornoException(new MensagemRetorno("ERRO",
                     "Não foi possível realizar o login."));
         }
