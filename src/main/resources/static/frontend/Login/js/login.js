@@ -77,6 +77,7 @@ function loginbtn(idCod, data) {
             body: jsoniD
         })  //retorna uma resposta do servidor
             .then(function (resposta) {
+                console.log(jsoniD)
                 //tratamento do erro exibindo mensagem
                 if (resposta.status >= 400 && resposta.status <= 500) {
                     document.querySelector("#alertaEr").innerHTML = "Ops.. Código de Cadastro ou Data de Nascimento Inválido. <br> Por favor Tente Novamente!"
@@ -89,9 +90,11 @@ function loginbtn(idCod, data) {
             .then(function (json) {
                 if (json.id == idCod && json.dataNascimento == data) {
                     //converte parametro de json para texto
-                    json = JSON.stringify(json.id);
+                    var idUsuario = JSON.stringify(json.id);
+                    var IdBlibUser = JSON.stringify(json.biblioteca.id)
                     //seta os dados em forma de texto na sessão
-                    sessionStorage.setItem('idUsuario', json);
+                    sessionStorage.setItem('idUsuario', idUsuario);
+                    sessionStorage.setItem('IdBlibUser', IdBlibUser);
                     //Aciona load da pagina
                     window.location.href = '../../frontend/home/home.html';
                 }

@@ -1,5 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+
 :root {
   --body-bg-color: #e5f4f9;
   --body-color-light: #8b939c;
@@ -273,3 +274,205 @@ img.icon-profile{
   margin-top: 5px;
 }
 
+/*Modal*/
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #00000090;
+  opacity: 0;
+  z-index: -1;
+}
+
+.modal.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  width: 50vw;
+  margin-left: 18em;
+  margin-top: 1.5em;
+  padding-bottom: 20px;
+  background-color: white;
+  box-shadow: 1px 1px 10px black;
+}
+
+.modal-header {
+  border-radius: 5px;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  height: 40px;
+  line-height: 40px;
+}
+
+#msg-edituser {
+  font-weight: 500;
+}
+
+.modal-close {
+  position: absolute;
+  right: 0;
+  display: block;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  user-select: none;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  background-color: #FF4949;
+  color: white;
+}
+
+.modal-field {
+  width: calc(50% - 10px);
+  height: 40px;
+  outline-style: none;
+  border-style: none;
+  box-shadow: 0 0 2px black;
+  padding: 0 10px;
+  font-size: 1rem;
+}
+
+.modal-field:focus {
+  border: 2px solid var(--primary-color);
+  box-shadow: 0 0 3px var(--primary-color);
+}
+
+.modal-footer {
+  margin-top: 0.5em;
+  background-color: inherit;
+  text-align: right;
+  padding: 0 20px;
+}
+
+.input-field input {
+  outline: none;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  padding: 0 15px;
+  height: 37px;
+  margin: 8px 0;
+}
+
+.fields .input-field {
+  display: flex;
+  width: calc(100% / 3 - 15px);
+  flex-direction: column;
+  margin: 4px 0;
+  display: inline-flex;
+}
+
+.input-field label {
+  margin-left: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #2e2e2e;
+}
+
+
+#detalhes-book {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 1.5em;
+}
+
+#content-data input {
+  margin-left: 3em;
+}
+
+#content-data {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 2em
+}
+
+.content-locacao {
+  margin-top: 0.5em;
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 2em;
+}
+
+#imagemCapa {
+  border-radius: 10px;
+}
+
+#imagemCapa img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+#content-title {
+  width: 400px;
+  height: 70px;
+  margin-left: 1em;
+}
+
+#btn-loc-enviar {
+  background-color: #13CE66;
+  text-align: center;
+  border-style: none;
+  padding: 5px;
+  padding-left: 10px;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  transition: box-shadow .6s ease;
+  border-radius: 5px;
+}
+
+#btn-loc-enviar a {
+  margin-right: 5px;
+}
+
+#button-loc-canc {
+  background-color: #FF4949;
+  margin-left: 4px;
+  border-style: none;
+  padding: 5px;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  transition: box-shadow .6s ease;
+  border-radius: 5px;
+}
+
+#btn-loc-enviar:hover {
+  box-shadow: inset 200px 0 0 #00000055;
+}
+
+#button-loc-canc:hover {
+  box-shadow: inset 200px 0 0 #00000055;
+}
+
+#container-aviso {
+  text-align: center;
+  opacity: 0;
+  transition: opacity 1.5s;
+  height: 35px;
+}
+
+#aviso-loc {
+  color: #FF4949;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+#tituloLivro{
+  margin: 0;
+}
