@@ -39,6 +39,25 @@ public interface LivroRepository extends JpaRepository<Livro, Integer> {
             , nativeQuery = true)
     List<Livro> findLivroGenero(@Param("value") Integer value, @Param("idBiblioteca") Long idBiblioteca);
 
+    @Query(value = "select * from livro l " +
+            "inner join livro_biblioteca lb " +
+            " on lb.id_livro = l.id " +
+            " and lb.id_biblioteca = :id " +
+            "where l.isdb like %:isdb%", nativeQuery = true)
+    List<Livro> buscarLivroPorIsdb(@Param("id") Long id, @Param("isdb") String isdb);
 
+    @Query(value = "select * from livro l " +
+            "inner join livro_biblioteca lb " +
+            " on lb.id_livro = l.id " +
+            " and lb.id_biblioteca = :id " +
+            "where l.nome like %:nome%", nativeQuery = true)
+    List<Livro> buscarLivroPorNome(@Param("id") Long id, @Param("nome") String nome);
+
+    @Query(value = "select * from livro l " +
+            "inner join livro_biblioteca lb " +
+            " on lb.id_livro = l.id " +
+            " and lb.id_biblioteca = :id " +
+            "where l.autor like %:autor%", nativeQuery = true)
+    List<Livro> buscarLivroPorAutor(@Param("id") Long id, @Param("autor") String autor);
 
 }
