@@ -125,7 +125,20 @@ public class LocacaoService {
         }
 
         return locacoes;
-    };
+    }
+
+    public Boolean usuarioJaLocouLivro(Long idUsuario, Integer idLivro){
+        Usuario usuario = usuarioService.pesquisarPorId(idUsuario);
+        LivroBiblioteca livroBiblioteca = livroBibliotecaService.pesquisarPorBibliotecaELivroId(idLivro, usuario.getBiblioteca().getId());
+
+        Locacao locacao = repository.verificarUsuarioJaLocouLivro(usuario.getId(), livroBiblioteca.getId());
+
+        if(locacao == null){
+            return false;
+        }
+
+        return true;
+    }
 
     public List<Locacao> ultimasLocacoes(Long idUsuario){
         return pesquisarPorUsuario(idUsuario).stream().sorted(Comparator.comparing(Locacao::getDataLocacao)).collect(Collectors.toList());

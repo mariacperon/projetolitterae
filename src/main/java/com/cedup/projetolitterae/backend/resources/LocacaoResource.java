@@ -41,6 +41,12 @@ public class LocacaoResource {
         return ResponseEntity.ok().body(locacoes);
     }
 
+    @RequestMapping(value = "",method = RequestMethod.GET)
+    public ResponseEntity<Boolean> pesquisarUsuarioJaLocouLivro(@Param("idUsuario") Long idUsuario, @Param("idLivro") Integer idLivro){
+        Boolean jaLocou = locacaoService.usuarioJaLocouLivro(idUsuario, idLivro);
+        return ResponseEntity.ok().body(jaLocou);
+    }
+
     @RequestMapping(value = "/usuario/{id}",method = RequestMethod.GET)
     public ResponseEntity<List<Locacao>> pesquisarPorUsuarioId(@PathVariable Long id){
         List<Locacao> locacoes = locacaoService.pesquisarPorUsuario(id);

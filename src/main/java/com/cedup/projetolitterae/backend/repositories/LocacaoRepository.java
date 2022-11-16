@@ -87,4 +87,15 @@ public interface LocacaoRepository extends JpaRepository<Locacao, Integer> {
             "where l.status_locacao = 2", nativeQuery = true)
     List<Locacao> locacoesPorNomeLivroPendentes(@Param("id") Long idBiblioteca, @Param("nome") String sobrenome);
 
+    @Query(value = "select * from locacao l " +
+            "inner join usuario u " +
+            "on u.id = l.id_usuario " +
+            "inner join livro_biblioteca lb " +
+            "on lb.id = l.id_livro " +
+            "where l.id_usuario = :idusuario " +
+            "and l.id_livro = :idlivro " +
+            "and l.status_locacao = 1",
+            nativeQuery = true)
+    Locacao verificarUsuarioJaLocouLivro(@Param("idusuario")Long idUsuario, @Param("idlivro")Integer idlivro);
+
 }

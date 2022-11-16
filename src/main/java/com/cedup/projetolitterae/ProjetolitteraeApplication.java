@@ -384,7 +384,7 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 				StatusLocacao.DEVOLVIDO);
 		loc1.setLivro(lb1);
 		loc1.setDataDevolvida(new Date(2022-1900,8-1,19));
-		loc1.setUsuario(u2);
+		loc1.setUsuario(u1);
 
 		Locacao loc2 = new Locacao(new Date(2022-1900,10-1,29), new Date(2022-1900,11-1,29),
 				StatusLocacao.ANDAMENTO);
