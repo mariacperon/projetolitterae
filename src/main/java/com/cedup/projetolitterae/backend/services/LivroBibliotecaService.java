@@ -47,6 +47,11 @@ public class LivroBibliotecaService {
         return repository.quantidadeLocacoesLivrosPorBibliotecaId(idBiblioteca);
     }
 
+    public Integer qtdEstoqueDisponivel(Integer idLivroBiblioteca){
+        LivroBiblioteca livroBiblioteca = pesquisarPorId(idLivroBiblioteca);
+        return livroBiblioteca.getQuantidadeEstoque() - locacaoService.qtdEstoque(livroBiblioteca.getId());
+    }
+
     @Transactional
     public LivroBiblioteca cadastrarLivroBiblioteca(LivroBibliotecaDto livroBibliotecaDto){
         LivroBiblioteca livroBiblioteca = fromDto(livroBibliotecaDto);

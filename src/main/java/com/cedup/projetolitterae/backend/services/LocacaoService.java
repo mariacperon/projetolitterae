@@ -164,8 +164,13 @@ public class LocacaoService {
     public Locacao locarLivro(LocacaoDto locacaoDto){
         Locacao locacao = fromDto(locacaoDto);
         if(validaEstoque(locacao)){
+            Date dataLocacao = new Date();
+            Date dataDevolucao = new Date();
+            dataDevolucao.setDate(dataLocacao.getDate() + 15);
             locacao.setId(null);
             locacao.setDataDevolvida(null);
+            locacao.setDataLocacao(new java.sql.Date(dataLocacao.getTime()));
+            locacao.setDataDevolucao(new java.sql.Date(dataDevolucao.getTime()));
             locacao.setStatusLocacao(StatusLocacao.ANDAMENTO);
             validarLocacao(locacao);
             repository.save(locacao);
@@ -196,7 +201,11 @@ public class LocacaoService {
     }
 
     private Boolean validaEstoque(Locacao locacao){
-        return repository.qtdLivroLocado(locacao.getLivro().getId()) < locacao.getLivro().getQuantidadeEstoque();
+        return qtdEstoque(locacao.getLivro().getId()) < locacao.getLivro().getQuantidadeEstoque();
+    }
+
+    public Integer qtdEstoque(Integer idLivro){
+        return repository.qtdLivroLocado(idLivro);
     }
 
     public Locacao alterarLocacao(LocacaoDto novoLivroUsuarioDto){

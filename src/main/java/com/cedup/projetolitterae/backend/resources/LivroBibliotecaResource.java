@@ -28,6 +28,12 @@ public class LivroBibliotecaResource {
         return ResponseEntity.ok().body(livroBiblioteca);
     }
 
+    @RequestMapping(value = "/estoque/{id}",method = RequestMethod.GET)
+    public ResponseEntity<Integer> qtdEstoqueDisponivel(@PathVariable Integer id){
+        Integer qtdEstoque = livroBibliotecaService.qtdEstoqueDisponivel(id);
+        return ResponseEntity.ok().body(qtdEstoque);
+    }
+
     @RequestMapping(value = "",method = RequestMethod.GET)
     public ResponseEntity<LivroBiblioteca> pesquisarPorIdBibliotecaELivro(@Param("idBiblioteca") Long idBiblioteca, @Param("idLivro") Integer idLivro){
         LivroBiblioteca livroBiblioteca = livroBibliotecaService.pesquisarPorBibliotecaELivroId(idLivro, idBiblioteca);
