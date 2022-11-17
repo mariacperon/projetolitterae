@@ -83,65 +83,6 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 	}
 
 	private void initializeDatabase(){
-		/*
-		//CADASTRO DE ENDEREÇOS
-		Endereco e2 = new Endereco("98765432", "sp", "ouro preto", "sul", "rua abububle",
-				"87", "perto da casa do caralho");
-
-		Endereco e3 = new Endereco("12345789", "sc", "blumenau", "velha", "rua pipipororo",
-				"87", "perto da casa do caralho");
-
-		Endereco e4 = new Endereco("98765432", "ba", "salvador", "nordeeeste", "rua abububle",
-				"87", "perto da casa do caralho");
-
-		Endereco e5 = new Endereco("98765432", "parana", "curitiba", "sul", "rua abububle",
-				"87", "perto da casa do caralho");
-
-		Endereco e6 = new Endereco("98765432", "tocantins", "palmas", "nordeeeste", "rua abububle",
-				"87", "perto da casa do caralho");
-
-		Endereco e7 = new Endereco("98765432", "rio de janeiro", "rio de janeiro", "centroeste", "rua abububle",
-				"87", "perto da casa do caralho");
-
-		Endereco e8 = new Endereco("98765432", "bh", "espirito santo", "nordeeeste", "rua abububle",
-				"87", "perto da casa do caralho");
-
-		Endereco e9 = new Endereco("98765432", "amazonas", "manaus", "nordeeeste", "rua abububle",
-				"87", "perto da casa do caralho");
-
-		Endereco e10 = new Endereco("98765432", "paraiba", "joao pessoa", "nordeeeste", "rua abububle",
-				"87", "perto da casa do caralho");
-
-		//CADASTRO DE BIBLIOTECAS
-		Biblioteca b2 = new Biblioteca("645657", "Saraiva", "sad@",
-				"852221", TipoPerfil.ADMIN, "1234", true, 10.00,2.00);
-		b2.setEnderecoBiblioteca(e2);
-		b2.setId(100002L);
-
-		Biblioteca b3 = new Biblioteca("789", "Catarinense", "fghdfgh@",
-				"5546", TipoPerfil.ADMIN, "1234", true, 10.00,2.00);
-		b3.setEnderecoBiblioteca(e3);
-		b3.setId(100003L);
-
-		Biblioteca b4 = new Biblioteca("678", "BluLivros", "AaE@",
-				"5154", TipoPerfil.ADMIN, "1234", true, 10.00,2.00);
-		b4.setEnderecoBiblioteca(e4);
-		b4.setId(100004L);
-
-		Biblioteca b5 = new Biblioteca("5645", "BookCenter", "hryty@",
-				"548454", TipoPerfil.ADMIN, "1234", true, 10.00,2.00);
-		b5.setEnderecoBiblioteca(e5);
-		b5.setId(100005L);
-
-		//SALVANDO NO BANCO
-		enderecoRepository.saveAll(List.of(e1, e2, e3, e4, e5, e6, e7, e8, e9, e10));
-		bibliotecaRepository.saveAll(List.of(b1, b2, b3, b4, b5, litterae));
-		livroRepository.saveAll(List.of(l1, l2, l3, l4, l5, l6));
-		usuarioRepository.saveAll(List.of(u1, u2, u3, u4));
-		resenhaRepository.saveAll(List.of(r1, r2, r3, r4, r5));
-		livroBibliotecaRepository.saveAll(List.of(lb1, lb2, lb3, lb4, lb5, lb6, lb7, lb8, lb9, lb10, lb11, lb12, lb13, lb14, lb15));
-		locacaoRepository.saveAll(List.of(loc1, loc2, loc3, loc4, loc5));
-		 */
 		gerarBase1();
 
 		Biblioteca litterae = new Biblioteca("", "Litteae", "",
