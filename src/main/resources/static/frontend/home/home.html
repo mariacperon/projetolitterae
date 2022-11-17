@@ -6,8 +6,7 @@
   <title>Home</title>
   <link rel='stylesheet' href='css/flickity.css'>
  <link rel="stylesheet" href="css/home.css">
- <!--Controle de Eventos da Pagina -->
-  <script src='js/flickity.pkgd.js'></script>
+
   <script src='../frameworks/jquery/jquery-3.6.1.min.js'></script>
 </head>
 <body>
@@ -73,20 +72,8 @@
  <!--Div controlado dos campos centrais do Livros -->
  <div class="book-slide">
   <!--Div controlado de Eventos Slide Books  -->
-  <div class="book js-flickity" data-flickity-options='{ "wrapAround": true }'>
-   <div class="book-cell">
-    <!--Book imagem -->
-    <div class="book-img">
-     <img src="https://images-na.ssl-images-amazon.com/images/I/81WcnNQ-TBL.jpg" alt="" class="book-photo">
-    </div>
-    <!--Controlador do Campo dos livros -->
-    <div class="book-content">
-     <div class="book-title">BIG MAGIC</div>
-     <div class="book-author">by Elizabeth Gilbert</div>
-     <div class="book-sum">Readers of all ages and walks of life have drawn inspiration and empowerment from Elizabeth Gilbert’s books for years. </div>
-     <div class="book-see">Reservar</div>
-    </div>
-   </div>
+  <div class="book js-flickity" >
+
   </div>
  </div>
  <!--Div Principal Controlador Parte de baixo do Site -->
@@ -94,12 +81,10 @@
   <!--Controlador Div Principais Autores-->
   <div class="books-of">
    <div class="week">
-
     <div class="author-title"><a>Livros mais alugados</a></div>
    </div>
 
    <div class="week year">
-
    </div>
    <div class="overlay"></div>
   </div>
@@ -123,59 +108,76 @@
 
  </div>
 </div>
-<div class="modal" id="modal">
+<div  class="modal" id="modal">
  <!--modal-Loc-->
  <div class="modal-content">
-  <header class="modal-header">
-   <h2 id="msg-edituser">Confirmar Locação </h2>
-   <span class="modal-close" id="modalClose">&#10006;</span>
-  </header>
 
-  <div id="container-aviso">
-   <h4 id="aviso-loc"></h4>
-  </div>
+  <!--CONTAINER-->
+  <div class="product_container">
 
-  <div class="content-locacao">
-   <div class="input-field">
-    <img id="imagemCapa"
-         height="200px" width="150px">
+   <div class="Capa-book">
+    <img src="">
    </div>
 
-   <div id="detalhes-book">
-    <div id="content-title">
-     <div class="input-field">
-      <h3 id="tituloLivro">Título do livro</h3>
-     </div>
-     <div class="input-field">
-      <h4 id="nomeAutor">Autor</h4>
-     </div>
-    </div>
+   <div class="details">
+    <h1 id="name-book" class="title"></h1>
+    <span id="autor"></span>
 
-    <div id="content-data">
+    <ul class="sub-details">
+     <li id="Editora"> </li>
+     <li id="qtd-disponivel"></li>
+     <li id="idioma"></li>
+    </ul>
+    <table>
+     <tr>
+      <td id="td-bnt-enviar"><button class="Btn-Princ" id="btn-loc-enviar">Alugar</button></td>
+      <td><button class="Btn-Princ" id="btn-voltar">Voltar</button></td>
+     </tr>
+    </table>
 
-     <div style="pointer-events: none;" class="input-field">
-      <label>Data de Locação: <br>
-       <input type="date" id="dataLocacao"/></label>
-     </div>
-     <div class="input-field">
-      <label>Data de devolução
-       <br>
-       <input type="date" id="dataDevolucao"/></label>
-     </div>
-    </div>
    </div>
   </div>
-  <footer class="modal-footer">
-   <div>
-    <button id="btn-loc-enviar"><a>Alugar</a></button>
-    <button id="button-loc-canc"><a>Cancelar</a></button>
+
+  <div class="Botao-select">
+   <div class="review_sidebar">
+    <button id="btn-sinopse" class="btn-content active_button">Sinopse</button>
+    <button id="btn-resenha" class="btn-content">Resenha</button>
+
    </div>
 
-  </footer>
+   <div id="Sinopse" class="container-sinopse">
+    <h2>Sinopse</h2>
+    <p id="Sinopse-text"></p>
+   </div>
+
+   <div id="Resenha" class="container-resenha" style="display:none">
+    <div class="resenhas-results">
+     <h3>Resenhas</h3>
+     <section class="Section-Resenha">
+      <ul>
+       <li>
+        <img src="https://source.unsplash.com/50x50/?person" alt="User"> <b>Albert</b>
+
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+         et dolore magna aliqua.</p>
+       </li>
+      </ul>
+     </section>
+     <a id="msg-vis" class="btn-leiaM">Visualizar todas as Resenhas</a>
+    </div>
+    <div class="Section-env-Resenha">
+     <h1 class="title">Adicione Uma Resenha</h1>
+
+     <textarea id="msg-resenha" placeholder="Oque achou do Livro?" required></textarea>
+     <button id="btn-enviar-rese">Enviar</button>
+    </div>
+   </div>
+
+  </div>
  </div>
 </div>
 
-<!-- importação de Eventos-->
+<!--Controle de Eventos da Pagina -->
 <script src="js/main-home.js"></script>
 </body>
 </html>

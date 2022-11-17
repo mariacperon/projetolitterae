@@ -13,7 +13,9 @@ http://flickity.metafizzy.co
   position: relative;
   height: 100%;
 }
-
+.book.js-flickity{
+  display: flex;
+}
 .flickity-slider {
   position: absolute;
   width: 100%;

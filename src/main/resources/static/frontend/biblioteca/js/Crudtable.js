@@ -72,7 +72,8 @@ function deletNotifc(id) {
         .then(function (result) {
             console.log(result.status)
             if (result.status >= 200 && result.status <= 300) {
-                window.reload()
+                document.querySelector('.messages').innerHTML = ""
+                createElementNotif(idUsuario)
                 console.log(result)
             } else {
                 document.getElementById('msg-Notific').style.color = "#FF0000"
@@ -179,6 +180,7 @@ function PesqUser(inputsearch) {
         .catch(error => console.log('error', error));
 }
 
+//Pesquisa o Usuário pelo id Biblioteca
 function PesqUserBilib() {
     fetch("http://localhost:80/usuario/biblioteca/" + idUsuario, {
         headers: {'Content-Type': 'application/json'},
@@ -186,7 +188,7 @@ function PesqUserBilib() {
     })
         .then(response => response.text())
         .then(function resultado(result) {
-            var bd_result = JSON.parse(result)
+             bd_result = JSON.parse(result)
             CreatElementUser(bd_result)
             console.log(bd_result)
         })
@@ -958,7 +960,9 @@ function carregaPage(bd_result){
     $('#pagination').append('<a class="button-anterior" id="btn-anterior" value="">Anterior</a> ');
     for(i = 0;i < numPages;i++) {
         var pageNum = i + 1;
-        $('#pagination').append('<a class="button-num" id="bt-pagina'+i+'" value="'+i+'">'+pageNum+'</a> ');
+        if (numPages<5){
+            $('#pagination').append('<a class="button-num" id="bt-pagina'+i+'" value="'+i+'">'+pageNum+'</a> ');
+        }
     }
     $('#pagination').append('<a class="button-proximo" id="btn-prox" value="">Próximo</a> ');
 
