@@ -30,7 +30,7 @@ var idUsuario = "100001"
                     <div class="book-title">${bd_result[i].nome}</div>
                     <div class="book-author">Autor: ${bd_result[i].autor}</div>
                     <div class="book-sum">${bd_result[i].sinopse} </div>
-                    <div onclick="BtnRerservar(${bd_result[i].id})" class="book-see">Reservar</div>
+                    <div onclick="BtnRerservar(${bd_result[i].id})"  class="book-see">Reservar</div>
                 </div>
               </div>
         `;
@@ -251,9 +251,9 @@ $("#btn-enviar-rese").click(function(){
 $("#btn-voltar").click(function(){
     document.getElementById('modal').classList.remove('active')
 })
-function BtnRerservar() {
+function BtnRerservar(id) {
     document.getElementById('modal').classList.add('active')
-    /*
+
         fetch("http://localhost:80/livro/" + id, {
             Headers: {
                 "Content-Type": "application/json"
@@ -263,9 +263,12 @@ function BtnRerservar() {
             .then(function (result) {
                 var bd_result = JSON.parse(result)
                 console.log(bd_result)
-                document.getElementById('tituloLivro').innerHTML = bd_result.nome
-                document.getElementById('nomeAutor').innerHTML = bd_result.autor
-                document.getElementById('imagemCapa').src = bd_result.imagem
+                document.getElementById('name-book').innerHTML = bd_result.nome
+                document.getElementById('autor').innerHTML = bd_result.autor
+                document.getElementById('img-book').src = bd_result.imagem
+                document.getElementById('Editora').src = bd_result.editora
+                document.getElementById('idioma').src = bd_result.idioma
+                document.getElementById('Sinopse-text').src = bd_result.sinopse
             })
             .catch(error => console.log('error', error));
         document.getElementById('btn-anterior').addEventListener("click", function (event) {
@@ -280,7 +283,7 @@ function BtnRerservar() {
             });
 
         })
-        */
+
 }
 
 
