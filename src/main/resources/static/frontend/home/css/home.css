@@ -404,7 +404,7 @@ h1 {
   width: 100%;
   display: flex;
   flex-grow: 1;
-  margin-top: 30px;
+  margin-top: 80px;
   overflow: hidden;
 }
 
@@ -753,20 +753,13 @@ h1 {
   display: none;
 }
 /*Modal*/
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
-body {
-  margin: 0;
-  overflow-x: hidden;
-  font-family: 'Poppins', sans-serif;
-}
-
 
 a {
   text-decoration: none;
 }
 
 .title {
-  font-size: 1em;
+  font-size: 2em;
   font-family: 'Poppins', sans-serif;
 }
 
@@ -796,17 +789,21 @@ button {
 }
 #btn-loc-enviar {
   background-color: #13CE66;
-
+  pointer-events: auto;
+}
+#btn-loc-enviar.block{
+  pointer-events: none;
 }
 .Btn-Princ{
   text-align: center;
   border-style: none;
-  padding: 12px 30px;
+  padding: 5px;
+  width: 90px;
   color: white;
-  font-size: 20px;
+  font-size: 15px;
   cursor: pointer;
   transition: box-shadow .6s ease;
-  border-radius: 5px;
+  border-radius: 20px;
 }
 .Btn-Princ:hover {
   box-shadow: inset 200px 0 0 #00000055;
@@ -842,18 +839,12 @@ button {
 /*PRODUCT CONTAINER*/
 .product_container {
   display: flex;
-  max-height: 530px;
+  margin-left: 10em;
 }
 
-.details {
-  margin-top: 5em;
-}
-
-#autor {
-  font-size: 1.5em;
-}
 .sub-details{
   padding-inline-start: 0;
+  margin-block-end: 0;
 }
 .sub-details li {
   padding: 10px 0;
@@ -880,17 +871,6 @@ table td {
     min-width: 95%;
     width: 100%;
   }
-
-  .Product_tumbnail {
-    width: 100%;
-    margin: auto;
-  }
-
-  .Product_tumbnail img {
-    max-width: 100%;
-    margin: auto;
-  }
-
   .details {
     width: 100%;
     position: static;
@@ -929,6 +909,7 @@ table td {
 
 li img{
   border-radius: 40px;
+  max-width: 5%;
 }
 li p{
   max-width: 1000px;
@@ -937,24 +918,36 @@ li p{
   flex: 1;
   max-width: 55%;
 }
+.tittle-resenha{
+  margin-block-end: 2px;
+}
 
 @media (max-width:1000px) {
   .container-resenha{
     flex-direction: column;
   }
 }
+.Capa-book {
+  width: 250px;
+  max-width: 300px;
+}
+
 
 .Capa-book img {
-  max-height: 550px;
+  max-height: 300px;
+  border-radius: 20px;
 }
 
 textarea {
   border-radius: 20px;
+  font-weight: bolder;
+  font-style: oblique;
   padding: 5%;
   height: 150px;
   resize: none;
   outline: none;
   width: 400px;
+  margin-right: 1em;
 }
 
 .Section-env-Resenha {
@@ -980,7 +973,7 @@ textarea {
   width: 100%;
   height: 100%;
   background: #00000090;
-  overflow: auto;
+  overflow: hidden;
   opacity: 0;
   z-index: -1;
 }
@@ -994,9 +987,9 @@ textarea {
   display: flex;
   border-radius: 5px;
   flex-direction: column;
-  height: 48em;
-  width: 70em;
-  margin-left: 18em;
+  margin-left: 10em;
+  max-width: 70%;
+  height: 37em;
   margin-top: 1em;
   padding-bottom: 20px;
   background-color: white;
@@ -1038,8 +1031,12 @@ textarea {
   padding: 0 10px;
   font-size: 1rem;
 }
-
-.modal-field:focus {
-  border: 2px solid var(--primary-color);
-  box-shadow: 0 0 3px var(--primary-color);
+#msg-reserva{
+  opacity: 0;
+  font-size: 1em;
+  text-align: center;
+}
+#msg-reserva.activetext{
+  opacity: 1;
+  transition: 0.5s;
 }

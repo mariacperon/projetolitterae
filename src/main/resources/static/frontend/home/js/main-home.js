@@ -4,24 +4,24 @@ var IdBlibUser = "100001"
 var idUsuario = "100001"
 
 
-    fetch("http://localhost:80/livro/biblioteca?id="+IdBlibUser, {method: 'GET'})
-        .then(response => response.text())
-        .then(function resultado(result) {
-            var bd_result = JSON.parse(result)
-            //
-            createElementSlider(bd_result)
-        })
-        .catch(error => console.log('error', error));
+fetch("http://localhost:80/livro/biblioteca?id=" + IdBlibUser, {method: 'GET'})
+    .then(response => response.text())
+    .then(function resultado(result) {
+        var bd_result = JSON.parse(result)
+        //
+        createElementSlider(bd_result)
+    })
+    .catch(error => console.log('error', error));
 
-    function createElementSlider(bd_result) {
+function createElementSlider(bd_result) {
 
-        //Variavel Comando Div
-        let BookPrincipal = '';
-        for (let i = 0; i < 3; i++) {
-            if (bd_result[i].sinopse.length > 90) {
-                bd_result[i].sinopse = bd_result[i].sinopse.substring(0, 90) + "...";
-            }
-            BookPrincipal += `
+    //Variavel Comando Div
+    let BookPrincipal = '';
+    for (let i = 0; i < 3; i++) {
+        if (bd_result[i].sinopse.length > 90) {
+            bd_result[i].sinopse = bd_result[i].sinopse.substring(0, 90) + "...";
+        }
+        BookPrincipal += `
              <div class="book-cell">
                <div class="book-img">
                 <img  src="${bd_result[i].imagem}" alt="" class="book-photo">
@@ -34,11 +34,10 @@ var idUsuario = "100001"
                 </div>
               </div>
         `;
-        }
-
-        $(".book.js-flickity").append(BookPrincipal);
     }
 
+    $(".book.js-flickity").append(BookPrincipal);
+}
 
 
 CarregarElement()
@@ -156,7 +155,7 @@ function createElementBook(bd_result) {
 
 //-----------------------------------------
 function PesquisaMAlugado() {
-    fetch("http://localhost:80/livro/biblioteca?id="+IdBlibUser, {method: 'GET'})
+    fetch("http://localhost:80/livro/biblioteca?id=" + IdBlibUser, {method: 'GET'})
         .then(response => response.text())
         .then(function resultado(result) {
             var bd_result = JSON.parse(result)
@@ -219,74 +218,162 @@ document.querySelectorAll(".sidebar").forEach(function (button) {
 //Reservar Livro
 
 //Evento Sinopse
-$("#btn-sinopse").click(function(){
+$("#btn-sinopse").click(function () {
     $("#btn-sinopse").addClass('active_button')
     $("#btn-resenha").removeClass('active_button')
     document.getElementById('Sinopse').style.display = "block"
     document.getElementById('Resenha').style.display = "none"
 });
 //Evento Resenha
-$("#btn-resenha").click(function(){
+$("#btn-resenha").click(function () {
     $("#btn-sinopse").removeClass('active_button')
     $("#btn-resenha").addClass('active_button')
     document.getElementById('Sinopse').style.display = "none"
     document.getElementById('Resenha').style.display = "flex"
 });
-var cont =0
-$(".btn-leiaM").click(function(){
+var cont = 0
+$(".btn-leiaM").click(function () {
     cont++
     document.getElementById('msg-vis').innerHTML = "Visualizar Menos"
 
     $('.Section-Resenha').toggleClass('show')
-    if(cont==2){
+    if (cont == 2) {
         document.getElementById('msg-vis').innerHTML = "Visualizar todas as Resenhas"
         cont = 0
     }
 })
 //Botão Reserva
-$("#btn-enviar-rese").click(function(){
 
-})
 
-$("#btn-voltar").click(function(){
+$("#btn-voltar").click(function () {
     document.getElementById('modal').classList.remove('active')
 })
+
 function BtnRerservar(id) {
+    $('#btn-loc-enviar').removeClass('block')
+    document.getElementById('btn-loc-enviar').style.cursor = "pointer"
+    document.getElementById('msg-reserva').style.color = "#3d4954"
+    document.getElementById('msg-reserva').innerText = ""
     document.getElementById('modal').classList.add('active')
 
-        fetch("http://localhost:80/livro/" + id, {
-            Headers: {
-                "Content-Type": "application/json"
-            }, method: 'GET'
+    fetch("http://localhost:80/livro/" + id, {
+        Headers: {
+            "Content-Type": "application/json"
+        }, method: 'GET'
+    })
+        .then(response => response.text())
+        .then(function (result) {
+            var bd_result = JSON.parse(result)
+            document.getElementById('name-book').innerHTML = bd_result.nome
+            document.getElementById('autor').innerHTML = "Autor: " + bd_result.autor
+            document.getElementById('img-book').src = bd_result.imagem
+            document.getElementById('Editora').innerHTML = "Editora: " + bd_result.editora
+            document.getElementById('idioma').innerHTML = "Idioma:" + bd_result.idioma
+            document.getElementById('Sinopse-text').innerHTML = bd_result.sinopse
+            fetch(`http://localhost:80/livro-biblioteca?idBiblioteca=${IdBlibUser}&idLivro=${id}`, {method: 'GET'})
+                .then(response => response.text())
+                .then(function (result) {
+                    result = JSON.parse(result)
+                    document.getElementById('idlivroBlib').value = result.livro.id
+                    var idblib = result.livro.id
+                    qtdlivros(idblib)
+                })
         })
-            .then(response => response.text())
+        .catch(error => console.log('error', error));
+
+    function qtdlivros(idblib) {
+        fetch("http://localhost:80/livro-biblioteca/estoque/" + idblib, {method: 'GET'})
+            .then(response => response.json())
             .then(function (result) {
-                var bd_result = JSON.parse(result)
-                console.log(bd_result)
-                document.getElementById('name-book').innerHTML = bd_result.nome
-                document.getElementById('autor').innerHTML = bd_result.autor
-                document.getElementById('img-book').src = bd_result.imagem
-                document.getElementById('Editora').src = bd_result.editora
-                document.getElementById('idioma').src = bd_result.idioma
-                document.getElementById('Sinopse-text').src = bd_result.sinopse
+                if (result <= 0) {
+                    document.getElementById('qtd-disponivel').innerHTML = "Sem Livros em Estoque "
+                } else {
+                    document.getElementById('qtd-disponivel').innerHTML = "Quantidade Disponivel: " + result
+                }
             })
             .catch(error => console.log('error', error));
-        document.getElementById('btn-anterior').addEventListener("click", function (event) {
-            var raw = JSON.stringify({
-                "id": null,
-                "idLivroBiblioteca": id,
-                "idUsuario": idUsuario,
-                "dataLocacao": null,
-                "dataDevolucao": null,
-                "dataDevolvida": null,
-                "statusLocacao": null
-            });
+    }
 
+
+    fetch("http://localhost:80/resenha/livro/2", { method: 'GET'})
+        .then(response => response.text())
+        .then(function (result){
+          var  bd_result = JSON.parse(result)
+            createElementRes(bd_result)
         })
+        .catch(error => console.log('error', error));
 
+    function createElementRes(bd_result) {
+        //Variavel Comando Div
+        let resenha = '';
+        //Inciar Contado Para Definir Cor
+
+        for (let i = 0; i < bd_result.length; i++) {
+            resenha += `
+        <li>
+          <img src="${bd_result[i].usuario.imagem}" alt="User"> <b>${bd_result[i].usuario.nome}</b>
+          <p>${bd_result[i].resenha}</p>
+        </li>           
+            `;
+        }
+        $("#ul-resenha").append(resenha);
+    }
+
+    document.getElementById('btn-loc-enviar').addEventListener("click", function (event) {
+        var LocacaoJson = JSON.stringify({
+            "id": null,
+            "idLivroBiblioteca": $('#idlivroBlib').val(),
+            "idUsuario": idUsuario,
+            "dataLocacao": null,
+            "dataDevolucao": null,
+            "dataDevolvida": null,
+            "statusLocacao": 0
+        });
+        fetch("http://localhost:80/locacao/cadastrar", {
+            method: 'POST',
+            body: LocacaoJson,
+            headers: {'Content-Type': 'application/json'}
+        })
+            .then(function (response) {
+                if (response.status >= 200 && response.status <= 300) {
+                    document.getElementById('msg-reserva').style.color = "#0c4900"
+                    $('#msg-reserva').addClass('activetext')
+                    document.getElementById('msg-reserva').innerText = "Livro Locado Com Sucesso"
+                    $('#btn-loc-enviar').addClass('block')
+                    setTimeout(function () {
+                        document.getElementById('modal').classList.remove('active')
+                        $('#msg-reserva').removeClass('activetext')
+                    }, 3000)
+                }
+                return response.json()
+            }).then(function (result) {
+            if (result.mensagem == "Esse livro não está disponível para locação no momento.") {
+                $('#msg-reserva').addClass('activetext')
+                document.getElementById('msg-reserva').innerText = "Sem Estoque de Livro no Momento."
+                $('#btn-loc-enviar').addClass('block')
+                setTimeout(function () {
+                    document.getElementById('modal').classList.remove('active')
+                    $('#msg-reserva').removeClass('activetext')
+                }, 3000)
+            }
+        })
+            .catch(error => {
+                document.getElementById('msg-reserva').style.color = "#FF0000"
+                $('#msg-reserva').addClass('activetext')
+                document.getElementById('msg-reserva').innerText = "Erro Contate um Administrador."
+
+                setTimeout(function () {
+                    document.getElementById('modal').classList.remove('active')
+                    $('#msg-reserva').removeClass('activetext')
+                }, 3000)
+                console.log(error)
+            })
+    })
+
+    $("#btn-enviar-rese").click(function () {
+        $('#msg-resenha').val()
+    })
 }
-
-
 
 //Eventos
 const closeModal = () => document.getElementById('modal')
