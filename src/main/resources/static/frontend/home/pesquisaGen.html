@@ -76,54 +76,70 @@
 <div class="modal" id="modal">
     <!--modal-Loc-->
     <div class="modal-content">
-        <header class="modal-header">
-            <h2 id="msg-edituser">Confirmar Locação </h2>
-            <span class="modal-close" id="modalClose">&#10006;</span>
-        </header>
+        <h1 id="msg-reserva"> </h1>
+        <!--CONTAINER-->
+        <div class="product_container">
 
-        <div id="container-aviso">
-            <h4 id="aviso-loc"></h4>
-        </div>
-
-        <div class="content-locacao">
-            <div class="input-field">
-                <img id="imagemCapa"
-                     height="200px" width="150px">
+            <div class="Capa-book">
+                <img id="img-book" src="">
             </div>
 
-            <div id="detalhes-book">
-                <div id="content-title">
-                    <div class="input-field">
-                        <h3 id="tituloLivro">Título do livro</h3>
-                    </div>
-                    <div class="input-field">
-                        <h4 id="nomeAutor">Autor</h4>
-                    </div>
-                </div>
+            <div class="details">
+                <h1 id="name-book" class="title"></h1>
+                <ul class="sub-details">
+                    <li id="autor"></li>
+                    <li id="Editora"></li>
+                    <li id="qtd-disponivel"></li>
+                    <li id="idioma"></li>
+                </ul>
+                <table>
+                    <tr>
+                        <td id="td-bnt-enviar">
+                            <button class="Btn-Princ" id="btn-loc-enviar">Alugar</button>
+                        </td>
+                        <td>
+                            <button class="Btn-Princ" id="btn-voltar">Voltar</button>
+                        </td>
+                    </tr>
+                </table>
 
-                <div id="content-data">
-
-                    <div style="pointer-events: none;" class="input-field">
-                        <label>Data de Locação: <br>
-                            <input type="date" id="dataLocacao"/></label>
-                    </div>
-                    <div class="input-field">
-                        <label>Data de devolução
-                            <br>
-                            <input type="date" id="dataDevolucao"/></label>
-                    </div>
-                </div>
             </div>
         </div>
-        <footer class="modal-footer">
-            <div>
-                <button id="btn-loc-enviar"><a>Alugar</a></button>
-                <button id="button-loc-canc"><a>Cancelar</a></button>
+
+        <div class="Botao-select">
+            <div class="review_sidebar">
+                <button id="btn-sinopse" class="btn-content active_button">Sinopse</button>
+                <button id="btn-resenha" class="btn-content">Resenha</button>
+
             </div>
 
-        </footer>
+            <div id="Sinopse" class="container-sinopse">
+                <h2>Sinopse</h2>
+                <p id="Sinopse-text"></p>
+            </div>
+
+            <div id="Resenha" class="container-resenha" style="display:none">
+                <div class="resenhas-results">
+                    <h3>Resenhas</h3>
+                    <section class="Section-Resenha">
+                        <ul id="ul-resenha">
+
+                        </ul>
+                    </section>
+                    <a id="msg-vis" class="btn-leiaM">Visualizar todas as Resenhas</a>
+                </div>
+                <div class="Section-env-Resenha">
+                    <h4 class="tittle-resenha">Adicione Uma Resenha</h4>
+
+                    <textarea id="msg-resenha" placeholder="Oque achou do Livro?" required></textarea>
+                    <button id="btn-enviar-rese">Enviar</button>
+                </div>
+            </div>
+        </div>
     </div>
+    <input id="idlivroBlib" class="invisivel">
 </div>
+
 </div>
 </div>
 <footer></footer>
