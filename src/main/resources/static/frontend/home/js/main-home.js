@@ -1,7 +1,5 @@
-//var idUsuario = sessionStorage.getItem("idUsuario")
-//var IdBlibUser = sessionStorage.getItem("IdBlibUser")
-var IdBlibUser = "100001"
-var idUsuario = "100001"
+var idUsuario = sessionStorage.getItem("idUsuario")
+var IdBlibUser = sessionStorage.getItem("IdBlibUser")
 
 
 fetch("http://localhost:80/livro/biblioteca?id=" + IdBlibUser, {method: 'GET'})
@@ -293,15 +291,16 @@ function BtnRerservar(id) {
             })
             .catch(error => console.log('error', error));
     }
-
-
-    fetch("http://localhost:80/resenha/livro/2", { method: 'GET'})
-        .then(response => response.text())
-        .then(function (result){
-          var  bd_result = JSON.parse(result)
-            createElementRes(bd_result)
-        })
-        .catch(error => console.log('error', error));
+    CarregaResenha()
+    function CarregaResenha() {
+        fetch("http://localhost:80/resenha/livro/2", {method: 'GET'})
+            .then(response => response.text())
+            .then(function (result) {
+                var bd_result = JSON.parse(result)
+                createElementRes(bd_result)
+            })
+            .catch(error => console.log('error', error));
+    }
 
     function createElementRes(bd_result) {
         //Variavel Comando Div
@@ -371,7 +370,35 @@ function BtnRerservar(id) {
     })
 
     $("#btn-enviar-rese").click(function () {
-        $('#msg-resenha').val()
+        var resenha = $('#msg-resenha').val()
+        console.log(resenha)
+        var ReseJson = JSON.stringify({
+            "id": null,
+            "idUsuario": idUsuario,
+            "idLivro": id,
+            "resenha": resenha
+        });
+        if ($('#msg-resenha').val() == "") {
+            $('#msg-resenha').attr('placeholder', 'Insira uma Resenha!');
+        } else {
+            fetch("http://localhost:80/resenha/cadastrar", {
+                method: 'POST',
+                body: ReseJson,
+                headers: {'Content-Type': 'application/json'}
+            })
+                .then(function (response) {
+                    console.log()
+                    if (response.status >= 200 && response.status <= 300) {
+                        document.getElementById('msg-resenha').value = ""
+                        document.getElementById('ul-resenha').innerHTML = ""
+                        CarregaResenha()
+                        $('#msg-resenha').attr('placeholder', 'Resenha Enviada Com seucesso');
+                    }else{
+                        $('#msg-resenha').attr('placeholder', 'Erro ao Enviar');
+                    }
+                })
+                .catch(error => console.log('error', error));
+        }
     })
 }
 
