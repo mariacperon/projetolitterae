@@ -1,8 +1,7 @@
-//var idUsuario = sessionStorage.getItem("idUsuario"); 
-var idUsuario = 100001
+var idUsuario = sessionStorage.getItem("idUsuario");
 var paginaatual = 0
 //------------------- Notificação ----------------------------
-createElementNotif(idUsuario,)
+createElementNotif(idUsuario)
 
 //Função para Criar as Notificaçãoes Biblioteca
 function createElementNotif(idUsuario) {
@@ -172,10 +171,12 @@ document.querySelector('#form-user').addEventListener('submit', e => {
 //Funcition Conexão com banco chamada Key Press
 function PesqUser() {
    var inputsearch = $(".search-input").val()
-    fetch("localhost:80/locacao/campo/pendentes?id=100001&campo=a", requestOptions)
+    fetch(`http://localhost:80/usuario/nome?nome=${inputsearch}&idbiblioteca=${idUsuario}`, {method: 'GET'})
         .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
+        .then(function resultado(result) {
+            var bd_result = JSON.parse(result)
+            CreatElementUser(bd_result)
+        })
 }
 
 //Pesquisa o Usuário pelo id Biblioteca

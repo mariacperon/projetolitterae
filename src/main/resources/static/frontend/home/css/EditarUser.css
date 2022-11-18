@@ -47,7 +47,7 @@ body {
 header {
   display: flex;
   flex-wrap: wrap;
-  height: 70px;
+  height: 60px;
   width: 100%;
   background-color: #ffffff;
   padding: 0 30px;
@@ -174,9 +174,8 @@ img.icon-profile{
 
 .card{
   width: 310px;
-  height: 627px;
-  margin-top: 20px;
-  margin-left: 600px;
+  margin-top: 10px;
+  margin-left: 500px;
   border-radius: 25px;
   display: flex;
   justify-content: center;
