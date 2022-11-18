@@ -100,6 +100,7 @@ $('#Search-Select').change(function (inputsearch) {
     if ($('select#Search-Select').val() == "leitor") {
         clearTable();
         document.querySelector('#main').style.display = 'flex'
+        document.querySelector('#legenda').style.display = 'none'
         $('.search-input').attr('placeholder', 'Digite Nome ou ID do Leitor');
         td_1.innerText = "ID"
         td_2.innerText = "Nome"
@@ -111,6 +112,7 @@ $('#Search-Select').change(function (inputsearch) {
     } else if ($('#Search-Select').val() == "livros") {
         clearTable();
         document.querySelector('#main').style.display = 'flex'
+        document.querySelector('#legenda').style.display = 'none'
         $('.search-input').attr('placeholder', 'Digite Nome ou ID de um Livro');
         td_1.innerText = "ISBN"
         td_2.innerText = "Livro"
@@ -123,6 +125,7 @@ $('#Search-Select').change(function (inputsearch) {
         clearTable();
 
         document.querySelector('#main').style.display = 'flex'
+        document.querySelector('#legenda').style.display = 'none'
         $('.search-input').attr('placeholder', 'Digite id da Pendência');
         td_1.innerText = "Nome Usuario"
         td_2.innerText = "Nome do Livro"
@@ -133,6 +136,7 @@ $('#Search-Select').change(function (inputsearch) {
     } else if ($('#Search-Select').val() == "locacao") {
         clearTable();
         document.querySelector('#main').style.display = 'flex'
+        document.querySelector('#legenda').style.display = 'block'
         $('.search-input').attr('placeholder', 'Digite Nome ou ID de um Livro');
         td_1.innerText = "Nome Usuario"
         td_2.innerText = "Nome do Livro"
