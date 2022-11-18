@@ -297,7 +297,7 @@ public class LocacaoService {
     public Double pesquisaMulta(Integer id){
         Locacao locacao = pesquisarPorId(id);
 
-        if(StatusLocacao.PENDENTE.equals(locacao.getStatusLocacao())){
+        if(!StatusLocacao.PENDENTE.equals(locacao.getStatusLocacao())){
             throw new MensagemRetornoException(new MensagemRetorno("ERRO",
                     "Esta locação não está pendente."));
         }
@@ -328,7 +328,9 @@ public class LocacaoService {
         Double taxaAtraso = locacao.getLivro().getBiblioteca().getTaxaAtraso();
         Double taxaPorDia = locacao.getLivro().getBiblioteca().getTaxaPorDia();
 
-        long diasEmAtraso = TimeUnit.MILLISECONDS.toDays(Math.abs(locacao.getDataDevolvida().getTime() - locacao.getDataDevolucao().getTime()));
+        Date dataAtual = new Date();
+
+        long diasEmAtraso = TimeUnit.MILLISECONDS.toDays(Math.abs(dataAtual.getTime() - locacao.getDataDevolucao().getTime()));
 
         return (diasEmAtraso * taxaPorDia) + taxaAtraso;
     }
