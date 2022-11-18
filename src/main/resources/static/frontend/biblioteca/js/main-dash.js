@@ -131,6 +131,9 @@ const closeMDev = () => document.getElementById('modalLoc')
 //Modal Alterar Devolução close
 const closeAltDev = () => document.getElementById('modalAlt-Loc')
     .classList.remove('active')
+
+const closeMpen = () => document.getElementById('modalDel-pen')
+    .classList.remove('active')
 //-------------------------------------------------
 
 //Modal Edit User
@@ -165,3 +168,9 @@ document.getElementById('modalClose-dev').addEventListener('click',closeMDev )
 document.getElementById('modalClose-dev-Alt').addEventListener('click',closeAltDev )
 
 document.getElementById('Btn-Cancel-dev-alt').addEventListener('click',closeAltDev )
+
+//Modal Pendencia
+
+document.getElementById('Btn-Canc-Del-pen').addEventListener('click',closeMpen )
+
+document.getElementById('modalClose-pen').addEventListener('click',closeMpen )

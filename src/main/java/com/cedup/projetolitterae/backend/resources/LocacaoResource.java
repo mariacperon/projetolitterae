@@ -101,7 +101,7 @@ public class LocacaoResource {
         return ResponseEntity.noContent().build();
     }
 
-    @RequestMapping(value = "/multa/{id}",method = RequestMethod.POST)
+    @RequestMapping(value = "/multa/{id}",method = RequestMethod.GET)
     public ResponseEntity<Double> pesquisaMulta(@PathVariable Integer id){
         Double multa = locacaoService.pesquisaMulta(id);
         return ResponseEntity.ok().body(multa);

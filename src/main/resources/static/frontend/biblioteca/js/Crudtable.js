@@ -123,7 +123,6 @@ $('#Search-Select').change(function (inputsearch) {
         PesqBook()
     } else if ($('#Search-Select').val() == "pendencia") {
         clearTable();
-
         document.querySelector('#main').style.display = 'flex'
         document.querySelector('#legenda').style.display = 'none'
         $('.search-input').attr('placeholder', 'Digite id da Pendência');
@@ -131,8 +130,9 @@ $('#Search-Select').change(function (inputsearch) {
         td_2.innerText = "Nome do Livro"
         td_3.innerText = "Data Devolução"
         td_4.innerText = "Valor Multa"
-        td_5.innerText = "Status"
-        td_6.innerText = "Ação"
+        td_5.innerText = "Ação"
+        td_6.remove()
+        pesqPen()
     } else if ($('#Search-Select').val() == "locacao") {
         clearTable();
         document.querySelector('#main').style.display = 'flex'
@@ -158,12 +158,9 @@ function search_users() {
     } else if ($('select#Search-Select').val() == "leitor") {
         PesqUser()
     } else if ($('#Search-Select').val() == "livros") {
-        console.log($('select#Search-Select').val())
     } else if ($('#Search-Select').val() == "pendencia") {
-        console.log($('select#Search-Select').val())
     }
 }
-
 //------------------- User Table ----------------------------
 
 //Evita Reload da pagina
@@ -173,14 +170,11 @@ document.querySelector('#form-user').addEventListener('submit', e => {
 
 
 //Funcition Conexão com banco chamada Key Press
-function PesqUser(inputsearch) {
-    inputsearch = $(".search-input").val()
-    fetch(`http://localhost:80/usuario/nome?nome=${inputsearch}&idbiblioteca=${idUsuario}`, {method: 'GET'})
+function PesqUser() {
+   var inputsearch = $(".search-input").val()
+    fetch("localhost:80/locacao/campo/pendentes?id=100001&campo=a", requestOptions)
         .then(response => response.text())
-        .then(function resultado(result) {
-            var bd_result = JSON.parse(result)
-            CreatElementUser(bd_result)
-        })
+        .then(result => console.log(result))
         .catch(error => console.log('error', error));
 }
 
@@ -360,7 +354,7 @@ function deletLeitor(id) {
             .then(function (result) {
                 if (result.status >= 200 && result.status <= 300) {
                     document.querySelector('#msgDelete').style.color = "#0c4900";
-                    document.querySelector('#msgDelete').innerHTML = 'Dados Alterados com Sucesso'
+                    document.querySelector('#msgDelete').innerHTML = 'Usuário Deletardo Com Sucesso'
                     setTimeout(function () {
                         document.getElementById('modalDel-user').classList.remove('active')
                     }, 2000)
@@ -475,7 +469,7 @@ function CreatElementBook(bd_result) {
 function deletBook(id) {
     document.querySelector('#msgDelete-book').style.color = "#1f1d2b";
     document.getElementById('modalDel-livro').classList.add('active')
-    document.querySelector('#msgDelete-book').innerHTML = 'Editar Livro'
+    document.querySelector('#msgDelete-book').innerHTML = 'Você deseja Realmente deletar esse Livro?'
 
     const delconf = document.querySelector('#Btn-Confirm-del-book');
     delconf.addEventListener('click', function () {
@@ -708,6 +702,7 @@ function CreatElementloc(bd_result) {
             $(td_Status).append(statusEl);
         } else if (status == "PENDENTE") {
             let statusEl = '';
+            console.log(bd_result[i].id)
             statusEl += `<a  style="background-color:#FF4843;color: transparent;margin-left: 2px;" class="status">an</a>`;
             $(td_Status).append(statusEl);
         } else if (status == "DEVOLVIDO") {
@@ -870,11 +865,22 @@ function alteraLoc(id) {
     })
 }
 //--------------Pendencia----------
+function pesqPen(){
+    fetch("http://localhost:80/locacao/pendentes/"+idUsuario, {method:'GET'})
+        .then(response => response.text())
+        .then(function (result){
+            var bd_result = JSON.parse(result)
+            CreatElementPen(bd_result)
+        })
+        .catch(error => console.log('error', error));
+}
 
-function CreatElementPen(bd_result) {
+function CreatElementPen(bd_result,multa) {
 
     var tbody = document.getElementById('users_table')
     for (var i = 0; i < bd_result.length; i++) {
+
+
         //Cria Elemento Linha da tabela
         let tr = tbody.insertRow();
         //Cria a coluna da tabela
@@ -883,7 +889,6 @@ function CreatElementPen(bd_result) {
         let td_NomeL = tr.insertCell();
         let td_DataD = tr.insertCell();
         let td_Valor = tr.insertCell();
-        let td_Status = tr.insertCell();
         let td_acoes = tr.insertCell();
         var dataDev = new Date(bd_result[i].dataDevolucao);
         var dataLoc = new Date(bd_result[i].dataLocacao);
@@ -901,41 +906,58 @@ function CreatElementPen(bd_result) {
         }
 
         //Atribuindo valores
-        td_nomeU.innerText = bd_result[i].usuario.nome;
+        td_nomeU.innerText = bd_result[i].usuario.nome+" "+bd_result[i].usuario.sobrenome;
         td_NomeL.innerText = bd_result[i].livro.livro.nome;
         td_DataD.innerText = formatDev(dataDev);
-        td_Valor.innerText = `R$ ${bd_result[i]}`
-        var status = bd_result[i].statusLocacao;
+        fetch("http://localhost:80/locacao/multa/"+bd_result[i].id, {method: 'GET'})
+            .then(response => response.text())
+            .then(function (result){
+                td_Valor.innerText = `R$ ${result}`
+            })
+            .catch(error => console.log('error', error));
 
-        if (status == "ANDAMENTO") {
-            let statusEl = '';
-            statusEl += `<a  style="background-color:#FAF89D;color: transparent;margin-left: 2px;" class="status">an</a>`;
-            $(td_Status).append(statusEl);
-        } else if (status == "PENDENTE") {
-            let statusEl = '';
-            statusEl += `<a  style="background-color:#FF4843;color: transparent;margin-left: 2px;" class="status">an</a>`;
-            $(td_Status).append(statusEl);
-        } else if (status == "DEVOLVIDO") {
-            let statusEl = '';
-            statusEl += `<a  style="background-color:#04D950;color: transparent;margin-left: 2px;" class="status">an</a>`;
-            $(td_Status).append(statusEl);
-        } else if (status == "FINALIZADO") {
-            let statusEl = '';
-            statusEl += `<a  style="background-color:#73706A;color: transparent;margin-left: 2px;" class="status">an</a>`;
-            $(td_Status).append(statusEl);
-        }
+
         //Cria os Botões e atribui eles ao td ações
-        $('<button onclick="devolucao' + "(" + bd_result[i].id + ")" + '" value = ' + " " + bd_result[i].id + " " + 'class="button editar" type="button">Devolver</button>').appendTo(td_acoes);
-        $('<button onclick="alteraLoc' + "(" + bd_result[i].id + ")" + '" class="button devolver" type="button">alterar</button>').appendTo(td_acoes);
+        $('<button onclick="ExcluiPen' + "(" + bd_result[i].id + ")" + '" class="button deletar" type="button">Excluir</button>').appendTo(td_acoes);
     }
     carregaPage(bd_result)
 }
 
+function ExcluiPen(id){
+    document.querySelector('#msgDelete-pen').innerHTML = 'Você deseja Realmente deletar esse Usúario?'
+    document.querySelector('#msgDelete-pen').style.color = "#1f1d2b";
+    document.getElementById('modalDel-pen').classList.add('active')
 
+     document.querySelector('#Btn-Confirm-del-pen').addEventListener('click', function () {
+        fetch("http://localhost:80/locacao/zerar-pendencia/" + id, {
+            method: 'POST'
+        }).then(function (result) {
+                if (result.status >= 200 && result.status <= 300) {
+                    document.querySelector('#msgDelete').style.color = "#0c4900";
+                    document.querySelector('#msgDelete').innerHTML = 'Pendência Deletada'
+                    setTimeout(function () {
+                        document.getElementById('modalDel-user').classList.remove('active')
+                    }, 2000)
+                    clearTable()
+                }
+            })
+            .catch(error => console.log('error', error));
+    });
+}
+
+function pesPenkey(){
+    var inputsearch = $(".search-input").val()
+fetch(`http://localhost:80/locacao/campo?id=${idUsuario}&campo=${inputsearch}`,{method: 'GET'})
+    .then(response => response.text())
+    .then(function (result){
+        var bd_result = JSON.parse(result)
+        CreatElementPen(bd_result)
+    })
+    .catch(error => console.log('error', error));
+}
 //--------------Eventos----------
 const clsTableElement = (i) => {
-    var tbody = document.getElementById('users_table')
-    tbody.deleteRow(i);
+    document.getElementById('users_table').deleteRow(i);
 }
 
 //Função para Limpar todos os Elementos da Tabela
