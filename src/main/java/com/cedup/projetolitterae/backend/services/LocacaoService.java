@@ -353,4 +353,11 @@ public class LocacaoService {
         throw new MensagemRetornoException(new MensagemRetorno("ERRO", "Campo "+ campo +" não existe."));
     }
 
+    public Locacao zerarPendencia(Integer idLocacao){
+        Locacao locacao = pesquisarPorId(idLocacao);
+        locacao.setStatusLocacao(StatusLocacao.DEVOLVIDO);
+        repository.save(locacao);
+        return locacao;
+    }
+
 }

@@ -234,5 +234,17 @@ textarea{
     max-width: 100%;
   }
 
+  .voltar-button {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: #fff;
+    cursor: pointer;
+  }
+
+  #styled-element:hover {
+    stroke: #833ab8;
+  }
+
 
 

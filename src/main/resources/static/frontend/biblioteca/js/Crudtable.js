@@ -121,6 +121,7 @@ $('#Search-Select').change(function (inputsearch) {
         PesqBook()
     } else if ($('#Search-Select').val() == "pendencia") {
         clearTable();
+
         document.querySelector('#main').style.display = 'flex'
         $('.search-input').attr('placeholder', 'Digite id da Pendência');
         td_1.innerText = "Nome Usuario"

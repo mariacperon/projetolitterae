@@ -83,65 +83,6 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 	}
 
 	private void initializeDatabase(){
-		/*
-		//CADASTRO DE ENDEREÇOS
-		Endereco e2 = new Endereco("98765432", "sp", "ouro preto", "sul", "rua abububle",
-				"87", "perto da casa do caralho");
-
-		Endereco e3 = new Endereco("12345789", "sc", "blumenau", "velha", "rua pipipororo",
-				"87", "perto da casa do caralho");
-
-		Endereco e4 = new Endereco("98765432", "ba", "salvador", "nordeeeste", "rua abububle",
-				"87", "perto da casa do caralho");
-
-		Endereco e5 = new Endereco("98765432", "parana", "curitiba", "sul", "rua abububle",
-				"87", "perto da casa do caralho");
-
-		Endereco e6 = new Endereco("98765432", "tocantins", "palmas", "nordeeeste", "rua abububle",
-				"87", "perto da casa do caralho");
-
-		Endereco e7 = new Endereco("98765432", "rio de janeiro", "rio de janeiro", "centroeste", "rua abububle",
-				"87", "perto da casa do caralho");
-
-		Endereco e8 = new Endereco("98765432", "bh", "espirito santo", "nordeeeste", "rua abububle",
-				"87", "perto da casa do caralho");
-
-		Endereco e9 = new Endereco("98765432", "amazonas", "manaus", "nordeeeste", "rua abububle",
-				"87", "perto da casa do caralho");
-
-		Endereco e10 = new Endereco("98765432", "paraiba", "joao pessoa", "nordeeeste", "rua abububle",
-				"87", "perto da casa do caralho");
-
-		//CADASTRO DE BIBLIOTECAS
-		Biblioteca b2 = new Biblioteca("645657", "Saraiva", "sad@",
-				"852221", TipoPerfil.ADMIN, "1234", true, 10.00,2.00);
-		b2.setEnderecoBiblioteca(e2);
-		b2.setId(100002L);
-
-		Biblioteca b3 = new Biblioteca("789", "Catarinense", "fghdfgh@",
-				"5546", TipoPerfil.ADMIN, "1234", true, 10.00,2.00);
-		b3.setEnderecoBiblioteca(e3);
-		b3.setId(100003L);
-
-		Biblioteca b4 = new Biblioteca("678", "BluLivros", "AaE@",
-				"5154", TipoPerfil.ADMIN, "1234", true, 10.00,2.00);
-		b4.setEnderecoBiblioteca(e4);
-		b4.setId(100004L);
-
-		Biblioteca b5 = new Biblioteca("5645", "BookCenter", "hryty@",
-				"548454", TipoPerfil.ADMIN, "1234", true, 10.00,2.00);
-		b5.setEnderecoBiblioteca(e5);
-		b5.setId(100005L);
-
-		//SALVANDO NO BANCO
-		enderecoRepository.saveAll(List.of(e1, e2, e3, e4, e5, e6, e7, e8, e9, e10));
-		bibliotecaRepository.saveAll(List.of(b1, b2, b3, b4, b5, litterae));
-		livroRepository.saveAll(List.of(l1, l2, l3, l4, l5, l6));
-		usuarioRepository.saveAll(List.of(u1, u2, u3, u4));
-		resenhaRepository.saveAll(List.of(r1, r2, r3, r4, r5));
-		livroBibliotecaRepository.saveAll(List.of(lb1, lb2, lb3, lb4, lb5, lb6, lb7, lb8, lb9, lb10, lb11, lb12, lb13, lb14, lb15));
-		locacaoRepository.saveAll(List.of(loc1, loc2, loc3, loc4, loc5));
-		 */
 		gerarBase1();
 
 		Biblioteca litterae = new Biblioteca("", "Litteae", "",
@@ -221,6 +162,181 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 		l6.setGeneros(List.of(GeneroLivro.ROMANCE, GeneroLivro.ROMANCE));
 		l6.setImagem("/livro/6/91zeDTttzKL.jpg");
 
+		Livro l7 = new Livro("Harry Potter e a Pedra Filosofal: 1","J.K. Rowling", "Harry Potter é um " +
+				"garoto cujos pais, feiticeiros, foram assassinados por um poderosíssimo bruxo quando ele ainda era um bebê. " +
+				"Ele foi levado, então, para a casa dos tios que nada tinham a ver com o sobrenatural. Pelo contrário. " +
+				"Até os 10 anos, Harry foi uma espécie de gata borralheira: maltratado pelos tios, herdava roupas velhas " +
+				"do primo gorducho, tinha óculos remendados e era tratado como um estorvo. No dia de seu aniversário de " +
+				"11 anos, entretanto, ele parece deslizar por um buraco sem fundo, como o de Alice no país das maravilhas, " +
+				"que o conduz a um mundo mágico. Descobre sua verdadeira história e seu destino: ser um aprendiz de feiticeiro " +
+				"até o dia em que terá que enfrentar a pior força do mal, o homem que assassinou seus pais. O menino de " +
+				"olhos verde, magricela e desengonçado, tão habituado à rejeição, descobre, também, que é um herói no " +
+				"universo dos magos. Potter fica sabendo que é a única pessoa a ter sobrevivido a um ataque do tal bruxo " +
+				"do mal e essa é a causa da marca em forma de raio que ele carrega na testa. Ele não é um garoto qualquer, " +
+				"ele sequer é um feiticeiro qualquer ele é Harry Potter, símbolo de poder, resistência e um líder natural " +
+				"entre os sobrenaturais. A fábula, recheada de fantasmas, paredes que falam, caldeirões, sapos, unicórnios," +
+				" dragões e gigantes, não é, entretanto, apenas um passatempo.",
+				"PT", "12", "Rocco", "8532530788", "Capa Duta", new Date(2017-1900,8-1,17));
+		l7.setGeneros(List.of(GeneroLivro.FANTASIA, GeneroLivro.FICCAO_CIENTIFICA, GeneroLivro.ACAO_E_AVENTURA));
+		l7.setImagem("/livro/7/hpeapedrafilosofal.jpg");
+
+		Livro l8 = new Livro("O Homem de Giz","C. J. Tudor", "Em 1986, Eddie e os amigos passam a " +
+				"maior parte dos dias andando de bicicleta pela pacata vizinhança em busca de aventuras. Os desenhos a giz " +
+				"são seu código secreto: homenzinhos rabiscados no asfalto; mensagens que só eles entendem. Mas um desenho " +
+				"misterioso leva o grupo de crianças até um corpo desmembrado e espalhado em um bosque. Depois disso, " +
+				"nada mais é como antes. Em 2016, Eddie se esforça para superar o passado, até que um dia ele e os amigos " +
+				"de infância recebem um mesmo aviso: o desenho de um homem de giz enforcado. Quando um dos amigos aparece " +
+				"morto, Eddie tem certeza de que precisa descobrir o que de fato aconteceu trinta anos atrás. Alternando " +
+				"habilidosamente entre presente e passado, O Homem de Giz traz o melhor do suspense: personagens maravilhosamente " +
+				"construídos, mistérios de prender o fôlego e reviravoltas que vão impressionar até os leitores mais escaldados.",
+				"PT", "14", "Intrínseca", "8551002937", "Capa Dura", new Date(2015-1900,3-1,15));
+		l8.setGeneros(List.of(GeneroLivro.SUSPENSE, GeneroLivro.FICCAO_CIENTIFICA, GeneroLivro.FANTASIA));
+		l8.setImagem("/livro/8/homemdegiz.jpg");
+
+		Livro l9 = new Livro("It: A coisa","Stephen King", "Nesse clássico que inspirou os filmes da Warner, " +
+				"um grupo de amigos conhecido como Clube dos Otários aprende o real sentido da amizade, do amor, da confiança..." +
+				" e do medo. O mais profundo e tenebroso medo. Durante as férias de 1958, em uma pacata cidadezinha chamada " +
+				"Derry, um grupo de sete amigos começa a ver coisas estranhas. Um conta que viu um palhaço, outro que viu " +
+				"uma múmia. Finalmente, acabam descobrindo que estavam todos vendo a mesma coisa: um ser sobrenatural e " +
+				"maligno que pode assumir várias formas. É assim que Bill, Beverly, Eddie, Ben, Richie, Mike e Stan " +
+				"enfrentam a Coisa pela primeira vez. Quase trinta anos depois, o grupo volta a se encontrar. Mike, o " +
+				"único que permaneceu em Derry, dá o sinal ― uma nova onda de terror tomou a pequena cidade. É preciso " +
+				"unir forças novamente. Só eles têm a chave do enigma. Só eles sabem o que se esconde nas entranhas de " +
+				"Derry. Só eles podem vencer a Coisa.",
+				"PT", "16", "Suma", "8560280944", "Padrão", new Date(2014-1900,7-1,24));
+		l9.setGeneros(List.of(GeneroLivro.HORROR, GeneroLivro.SUSPENSE, GeneroLivro.DISTOPIA));
+		l9.setImagem("/livro/9/itacoisa.jpg");
+
+		Livro l10 = new Livro("Outros jeitos de usar a boca","Rupi Kaur", "Outros jeitos de usar a boca " +
+				"é um livro de poemas sobre a sobrevivência. Sobre a experiência de violência, o abuso, o amor, a perda e " +
+				"a feminilidade. O volume é dividido em quatro partes, e cada uma delas serve a um propósito diferente. " +
+				"Lida com um tipo diferente de dor. Cura uma mágoa diferente. Outros jeitos de usar a boca transporta o " +
+				"leitor por uma jornada pelos momentos mais amargos da vida e encontra uma maneira de tirar delicadeza deles. " +
+				"Publicado inicialmente de forma independente por Rupi Kaur, poeta, artista plástica e performer canadense " +
+				"nascida na Índia e que também assina as ilustrações presentes neste volume , o livro se tornou o maior " +
+				"fenômeno do gênero nos últimos anos nos Estados Unidos, com mais de 1 milhão de exemplares vendidos.",
+				"PT", "10", "Planeta", "8542209303", "Padrão", new Date(2017-1900,2-1,1));
+		l10.setGeneros(List.of(GeneroLivro.POESIA, GeneroLivro.ROMANCE));
+		l10.setImagem("/livro/10/outrosjeitosdeusaraboca.jpg");
+
+		Livro l11 = new Livro("O pequeno príncipe","Antoine de Saint-Exupéry", "Nesta clássica história " +
+				"que marcou gerações de leitores em todo o mundo, um piloto cai com seu avião no deserto do Saara e encontra " +
+				"um pequeno príncipe, que o leva a uma jornada filosófica e poética através de planetas que encerram a " +
+				"solidão humana. A edição conta com a clássica tradução do poeta imortal dom Marcos Barbosa, e é a " +
+				"versão mais consagrada da obra, publicada no Brasil desde 1952.",
+				"PT", "0", "HarperCollins", "8542209303", "Padrão", new Date(2018-1900,8-1,27));
+		l11.setGeneros(List.of(GeneroLivro.INFANTIL, GeneroLivro.ROMANCE));
+		l11.setImagem("/livro/11/opequenoprincipe.jpg");
+
+		Livro l12 = new Livro("O diário de Anne Frank","Anne Frank", "O diário de Anne Frank, o depoimento " +
+				"da pequena Anne, morta pelos nazistas após passar anos escondida no sótão de uma casa em Amsterdã, " +
+				"ainda hoje emociona leitores no mundo inteiro. Suas anotações narram os sentimentos, os medos e as " +
+				"pequenas alegrias de uma menina judia que, como sua família, lutou em vão para sobreviver ao Holocausto. " +
+				"Uma poderosa lembrança dos horrores de uma guerra, um testemunho eloquente do espírito humano. Assim " +
+				"podemos descrever os relatos feitos por Anne em seu diário. Isolados do mundo exterior, os Frank enfrentaram " +
+				"a fome, o tédio e a terrível realidade do confinamento, além da ameaça constante de serem descobertos. Nas" +
+				" páginas de seu diário, Anne Frank registra as impressões sobre esse longo período no esconderijo. Alternando" +
+				" momentos de medo e alegria, as anotações se mostram um fascinante relato sobre a coragem e a fraqueza humanas " +
+				"e, sobretudo, um vigoroso autorretrato de uma menina sensível e determinada.",
+				"PT", "10", "Record", "8501044458", "96º", new Date(1995-1900,9-1,29));
+		l12.setGeneros(List.of(GeneroLivro.HISTORIA, GeneroLivro.BIOGRAFIA));
+		l12.setImagem("/livro/12/diariodeannefrank.jpg");
+
+		Livro l13 = new Livro("Sapiens - Uma Breve História da Humanidade","Yuval Noah Harari", "O que " +
+				"possibilitou ao Homo sapiens subjugar as demais espécies? O que nos torna capazes das mais belas obras de " +
+				"arte, dos avanços científicos mais impensáveis e das mais horripilantes guerras? Nossa capacidade imaginativa. " +
+				"Somos a única espécie que acredita em coisas que não existem na natureza, como Estados, dinheiro e direitos " +
+				"humanos. Partindo dessa ideia, Yuval Noah Harari, doutor em história pela Universidade de Oxford, aborda " +
+				"em Sapiens a história da humanidade sob uma perspectiva inovadora. Explica que o capitalismo é a mais " +
+				"bem-sucedida religião, que o imperialismo é o sistema político mais lucrativo, que nós, humanos modernos, " +
+				"embora sejamos muito mais poderosos que nossos ancestrais, provavelmente não somos mais felizes. Um relato " +
+				"eletrizante sobre a aventura de nossa extraordinária espécie ? de primatas insignificantes a senhores do mundo.",
+				"PT", "14", "L&PM", "8525432180", "Padrãoº", new Date(2015-1900,3-1,2));
+		l13.setGeneros(List.of(GeneroLivro.HISTORIA, GeneroLivro.TECNOLOGIA_E_CIENCIA, GeneroLivro.NAO_FICCAO));
+		l13.setImagem("/livro/13/umabrevehistoriasobrehmomosapiens.jpg");
+
+		Livro l14 = new Livro("Cem dias entre céu e mar","Amyr Klink", "Navegando ao lado dos peixes, " +
+				"entretendo conversas com gaivotas e tubarões, remando no meio de uma creche de baleias, Cem dias entre " +
+				"céu e mar é o relato de uma travessia absolutamente incomum: mais de 3500 milhas (cerca de 6500 quilômetros) " +
+				"desde o porto de Lüderitz, no sul da África, até a praia da Espera no litoral baiano, a bordo de um " +
+				"minúsculo barco a remo. Verdadeira odisséia moderna, neste livro Amyr Klink transporta o leitor para a " +
+				"superfície ora cinzenta, ora azulada do Atlântico Sul, tornando-o cúmplice de suas alegrias e seus temores, " +
+				"ao mesmo tempo em que narra, passo a passo, os preparativos, as lutas, os obstáculos e os presságios que " +
+				"cercaram a extraordinária viagem.",
+				"PT", "0", "Companhia de bolso", "8535906428", "Padrão", new Date(2005-1900,5-1,6));
+		l14.setGeneros(List.of(GeneroLivro.VIAGEM, GeneroLivro.TECNOLOGIA_E_CIENCIA, GeneroLivro.NAO_FICCAO));
+		l14.setImagem("/livro/14/cemdiasentreceuemar.jpg");
+
+		Livro l15 = new Livro("O poder do hábito","Charles Duhigg", "Durante os últimos dois anos, " +
+				"uma jovem transformou quase todos os aspectos de sua vida. Parou de fumar, correu uma maratona e foi " +
+				"promovida. Em um laboratório, neurologistas descobriram que os padrões dentro do cérebro dela mudaram d" +
+				"e maneira fundamental. Publicitários da Procter & Gamble observaram vídeos de pessoas fazendo a cama. " +
+				"Tentavam desesperadamente descobrir como vender um novo produto chamado Febreze, que estava prestes a se t" +
+				"ornar um dos maiores fracassos na história da empresa. De repente, um deles detecta um padrão quase imperc" +
+				"eptível - e, com uma sutil mudança na campanha publicitária, Febreze começa a vender um bilhão de dólares p" +
+				"or anos. Um diretor executivo pouco conhecido assume uma das maiores empresas norte-americanas. Seu primeiro " +
+				"passo é atacar um único padrão entre os funcionários - a maneira como lidam com a segurança no ambiente " +
+				"de trabalho -, e logo a empresa começa a ter o melhor desempenho no índice Dow Jones. O que todas" +
+				" essas pessoas tem em comum? Conseguiram ter sucesso focando em padrões que moldam cada aspecto de no" +
+				"ssas vidas. Tiveram êxito transformando hábitos. Com perspicácia e habilidade, Charles Duhigg apresenta um" +
+				" novo entendimento da natureza humana e seu potencial para a transformação.",
+				"PT", "0", "Objetiva", "8535906428", "Padrão", new Date(2012-1900,9-1,24));
+		l15.setGeneros(List.of(GeneroLivro.AUTO_AJUDA, GeneroLivro.NAO_FICCAO));
+		l15.setImagem("/livro/15/opoderdohabito.jpg");
+
+		Livro l16 = new Livro("Quando Ninguém Está Olhando","Alyssa Cole", "Sydney Green nasceu e foi" +
+				" criada no Brooklyn, em Nova York, mas cada vez que ela pisca os olhos seu amado bairro parece mudar. " +
+				"Condomínios se espalham como erva daninha, placas de “vende-se” surgem da noite para o dia e os vizinhos " +
+				"que ela conhece a vida toda estão sumindo. Para manter de pé tanto o passado quanto o presente da comunidade, " +
+				"Sydney decide canalizar sua frustração planejando um passeio guiado em que pretende contar a verdadeira " +
+				"história do local. Só que, para tornar o projeto realidade, vai precisar aturar seu novo vizinho, Theo, " +
+				"como assistente. A pesquisa dos dois, entretanto, logo se transforma. O que era apenas uma distração " +
+				"vira uma história de paranoia e medo. No fim das contas, talvez os vizinhos não tenham se mudado para " +
+				"outros bairros e a revitalização do lugar seja mais mortal do que eles imaginaram. Seriam apenas " +
+				"coincidências ou sinais de uma grande conspiração? Sydney pode confiar em Theo, ou ela também corre " +
+				"o risco de desaparecer? Quando ninguém está olhando nos conduz por um enredo hipnotizante e surpreendente, " +
+				"que aborda com perspicácia a violência racial e as assimetrias sociais, em uma sequência de eventos " +
+				"instigantes que aos poucos dão forma a um cenário de completo horror.",
+				"PT", "14", "Intrínseca", "6555602090", "Padrão", new Date(2021-1900,11-1,19));
+		l16.setGeneros(List.of(GeneroLivro.JOVEM_ADULTO, GeneroLivro.SUSPENSE));
+		l16.setImagem("/livro/16/quandoninguemestaolhando.jpg");
+
+		Livro l17 = new Livro("Querido John","Sparks Nicholas", "“Querido John”, dizia a carta que partiu " +
+				"um coração e transformou duas vidas para sempre. Quando John Tyree conhece Savannah Lynn Curtis, descobre " +
+				"estar pronto para recomeçar sua vida. Com um futuro sem grandes perspectivas, ele, um jovem rebelde, decide a" +
+				"listar-se no exército, após concluir o ensino médio. Durante sua licença, conhece a garota de seus sonhos, " +
+				"Savannah. A atração mútua cresce rapidamente e logo transforma-se em um tipo de amor que faz com que Savannah p" +
+				"rometa esperá-lo concluir seus deveres militares. Porém ninguém previa o que estava para acontecer, os at" +
+				"entados de 11 de setembro mudariam suas vidas e do mundo todo. E assim como muitos homens e mulheres co" +
+				"rajosos, John deveria escolher entre seu país e seu amor por Savannah. Agora, quando ele finalmente retorna p" +
+				"ara Carolina do Norte, ele descobre como o amor pode nos transformar de uma forma que jamais poderíamos imaginar.",
+				"PT", "14", "Novo Conceito", "9788563219022", "Padrão", new Date(2010-1900,4-1,8));
+		l17.setGeneros(List.of(GeneroLivro.JOVEM_ADULTO, GeneroLivro.SUSPENSE));
+		l17.setImagem("/livro/17/queridojohn.jpg");
+
+		Livro l18 = new Livro("Uma Breve História do Tempo","Stephen Hawking", "Marco definitivo da " +
+				"literatura de divulgação científica, Uma breve história do tempo é relançado em edição revista e atualizada. " +
+				"Uma das mentes mais geniais do mundo moderno, Stephen Hawking guia o leitor na busca por respostas a algumas das" +
+				" maiores dúvidas da humanidade: Qual a origem do universo? Ele é infinito? E o tempo? Sempre existiu, ou" +
+				" houve um começo e haverá um fim? Existem outras dimensões além das três espaciais? E o que vai acontecer " +
+				"quando tudo terminar? Com ilustrações criativas e texto lúcido e bem-humorado, Hawking desvenda desde " +
+				"os mistérios da física de partículas até a dinâmica que movimenta centenas de milhões de galáxias por t" +
+				"odo o universo. Para o iniciado, Uma breve história do tempo é uma bela representação de conceitos complexos; " +
+				"para o leigo, é um vislumbre dos segredos mais profundos da criação.",
+				"PT", "14", "Intrínseca", "8580576466", "Padrão", new Date(2015-1900, 0,13));
+		l18.setGeneros(List.of(GeneroLivro.TECNOLOGIA_E_CIENCIA, GeneroLivro.NAO_FICCAO));
+		l18.setImagem("/livro/18/umabrevehistoriadotempo.jpg");
+
+		Livro l19 = new Livro("CAFÉ COM DEUS PAI 2023","JUNIOR ROSTIROLA", "Todo pensamento gera uma" +
+				" decisão que aponta para um destino. E a nossa mente define os nossos parâmetros para esse caminho." +
+				" Com base nisso, para onde você está indo? Este livro levará você a um momento diário de renovação, " +
+				"pautado na Palavra de Deus, que é a bússola para uma vida bem-sucedida em todas as áreas. Decidir por " +
+				"uma mente renovada é decidir pela vida! Deus pai te convida para uma jornada de fé, esperança e renovação" +
+				". E, ao aceitar esse convite, sua vida nunca mais será a mesma!",
+				"PT", "12", "EDITORA VIDA\n", "6555843144", "Padrão", new Date(2022-1900, 9,24));
+		l19.setGeneros(List.of(GeneroLivro.RELIGIAO, GeneroLivro.NAO_FICCAO));
+		l19.setImagem("/livro/19/cafecomdeuspai.jpg");
+
 		//ENDERECOS USUARIOS
 		Endereco e2 = new Endereco("98765432", "SC", "Blumenau", "Itoupavazinha", "Rua Araxá",
 				"542", "Última casa da rua.");
@@ -270,6 +386,19 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 		LivroBiblioteca lb4 = new LivroBiblioteca(l4, b1, 5);
 		LivroBiblioteca lb5 = new LivroBiblioteca(l5, b1, 5);
 		LivroBiblioteca lb6 = new LivroBiblioteca(l6, b1, 5);
+		LivroBiblioteca lb7 = new LivroBiblioteca(l7, b1, 5);
+		LivroBiblioteca lb8 = new LivroBiblioteca(l8, b1, 5);
+		LivroBiblioteca lb9 = new LivroBiblioteca(l9, b1, 5);
+		LivroBiblioteca lb10 = new LivroBiblioteca(l10, b1, 5);
+		LivroBiblioteca lb11 = new LivroBiblioteca(l11, b1, 5);
+		LivroBiblioteca lb12 = new LivroBiblioteca(l12, b1, 5);
+		LivroBiblioteca lb13 = new LivroBiblioteca(l13, b1, 5);
+		LivroBiblioteca lb14 = new LivroBiblioteca(l14, b1, 5);
+		LivroBiblioteca lb15 = new LivroBiblioteca(l15, b1, 5);
+		LivroBiblioteca lb16 = new LivroBiblioteca(l16, b1, 5);
+		LivroBiblioteca lb17 = new LivroBiblioteca(l17, b1, 5);
+		LivroBiblioteca lb18 = new LivroBiblioteca(l18, b1, 5);
+		LivroBiblioteca lb19 = new LivroBiblioteca(l19, b1, 5);
 
 		//CDASTRO DE LOCACOES
 		Locacao loc1 = new Locacao(new Date(2022-1900,5-1,20), new Date(2022-1900,8-1,19),
@@ -387,10 +516,10 @@ public class ProjetolitteraeApplication implements CommandLineRunner {
 		//SALVANDO NO BANCO
 		enderecoRepository.saveAll(List.of(e1, e2, e3, e4, e5));
 		bibliotecaRepository.save(b1);
-		livroRepository.saveAll(List.of(l1, l2, l3, l4, l5, l6));
+		livroRepository.saveAll(List.of(l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12, l13, l14, l15, l16, l17, l18, l19));
 		usuarioRepository.saveAll(List.of(u1, u2, u3, u4));
 		resenhaRepository.saveAll(List.of(r1, r2, r3, r4, r5, r6, r7 ,r8, r9, r10, r11, r12, r13));
-		livroBibliotecaRepository.saveAll(List.of(lb1, lb2, lb3, lb4, lb5, lb6));
+		livroBibliotecaRepository.saveAll(List.of(lb1, lb2, lb3, lb4, lb5, lb6, lb7, lb8, lb9, lb10, lb11, lb12, lb13, lb14, lb15, lb16, lb17, lb18, lb19));
 		locacaoRepository.saveAll(List.of(loc1, loc2, loc3, loc4, loc5, loc6));
 		notificacaoRepository.saveAll(List.of(n1, n2, n3, n4, n5, n6));
 	}

@@ -106,4 +106,10 @@ public class LocacaoResource {
         Double multa = locacaoService.pesquisaMulta(id);
         return ResponseEntity.ok().body(multa);
     }
+
+    @RequestMapping(value = "/zerar-pendencia/{id}",method = RequestMethod.POST)
+    public ResponseEntity<Locacao> zerarMulta(@PathVariable Integer id){
+        Locacao locacao = locacaoService.zerarPendencia(id);
+        return ResponseEntity.ok().body(locacao);
+    }
 }

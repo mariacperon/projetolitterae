@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pesquisa por Genero</title>
+    <link rel="stylesheet" href="css/EditarUser.css">
+    <link rel="shortcut icon" href="../litterae-logo.ico" />
+    <!--Controle de Eventos da Pagina -->
+   <!-- <script src='../frameworks/jquery/jquery-3.6.1.min.js'></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+        <header>
+        <!--Titulo Central -->
+        <div class="header-title">Litterae</div>
+        <!--Div controladora campo profile -->
+        <div class="profile">
+            <!--Imagem do usuário -->
+            <div class="user-profile">
+                <div  ></div>
+                <img class="user-img" src="" alt="" >
+            </div>
+            <!--Botão de menu-->
+            <div class="profile-menu">
+                <a id="MenuIco"> ☰ </a>
+                Menu
+            </div>
+            <!--Seletor de Opções menu -->
+            <div id="SidepanelMenu" class="sidepanel">
+                <a href="home.html"><img class="icon-profile" src="icone/home.svg"/>Home</a>
+                <a href="#"><img class="icon-profile" src="icone/profile-user.svg"/> Perfil</a>
+                <a href="#"><img class="icon-profile" src="icone/configuracoes.svg"/>Configuração</a>
+            </div>
+        </div>
+    </header>
+ 
+    <div id="root">
+        <div>
+          <div class="card">
+            <form>
+              <h1>Editar Perfil</h1>
+              <label for="photo-upload" class="custom-file-upload fas">
+                <div class="img-wrap img-upload">
+                  <img
+                    id="photo-up"
+                    for="photo-upload"
+                    src="Resources/profileIcon.jpg"
+                  />
+                </div>
+                <input id="photo-upload" type="file" />
+              </label>
+              <div class="field">
+                <label for="name">Nome de usuário:</label>
+                <input
+                  id="name"
+                  type="text"
+                  maxlength="25"
+                  placeholder="Insira"
+                  required
+                />
+              </div>
+              <div class="field">
+                <label for="email">E-mail</label>
+                <input
+                  id="email"
+                  type="email"
+                  maxlength="35"
+                  placeholder="Insira"
+                  required
+                />
+              </div>
+              <button type="submit" class="save">Save</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+<footer> </footer>
+<!-- importação de Eventos-->
+<script src="js/EditarUser.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-router/5.0.1/react-router.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.6/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.8.6/umd/react.production.min.js"></script>
+<script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
+</body>
+</html>
