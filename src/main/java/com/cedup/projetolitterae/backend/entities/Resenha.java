@@ -34,7 +34,7 @@ public class Resenha {
         this.resenha = resenha;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
