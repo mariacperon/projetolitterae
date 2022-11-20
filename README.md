@@ -59,7 +59,7 @@ Agora apenas Inicialize o main do nosso Projeto **ProjetolitteraeApplication**
 </div>
 <h1 align="center">Contribuição</h1>
 
-**Maria Clara Peron** | Backend
+**<a style="text-decoration:none;color:#ffff" href="https://example.com">Maria Clara Peron</a>** | Backend
 
 **Veridiana Berti da Silva** | Monografia
 
