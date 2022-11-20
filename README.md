@@ -58,11 +58,12 @@ Agora apenas Inicialize o main do nosso Projeto **ProjetolitteraeApplication**
 <br>
 </div>
 <h1 align="center">Contribuição</h1>
+  
+<a href="https://github.com/mariacperon"><img align="left" style="padding-right:5px"  alt="litterae-Spring" height="30" width="40" src="https://user-images.githubusercontent.com/48250598/202899575-13930d27-e00c-4cae-afa3-1224ac48de99.png"></a>**Maria Clara Peron** | Backend
 
-**<a style="text-decoration:none;color:#ffff" href="https://example.com">Maria Clara Peron</a>** | Backend
+<a href="https://www.instagram.com/nanaberti_/"><img align="left" style="padding-right:5px"  alt="litterae-Monografia" height="30" width="40" src="https://user-images.githubusercontent.com/48250598/202899899-489c2195-099f-4c8d-8b63-4b7a5023f89c.png"></a>**Veridiana Berti da Silva** | Monografia
+ 
+<a href="https://www.instagram.com/jeniffersteilein/"><img align="left" style="padding-right:5px"  alt="litterae-FrontEnd" height="30" width="40" src="https://user-images.githubusercontent.com/48250598/202900049-5c97349a-dbfe-4da7-96f5-86ed98d3991d.png"></a>**Jeniffer Cristina Steilein** | FrontEnd
+  
+<a href="https://github.com/lucaseduardotestoni"><img align="left" style="padding-right:5px"  alt="litterae-FrontEnd" height="30" width="40" src="https://user-images.githubusercontent.com/48250598/202900442-06b98c2a-d64c-4028-8199-6a0be7532692.png"></a>**Lucas Eduardo Testoni** | FullStack
 
-**Veridiana Berti da Silva** | Monografia
-
-**Jeniffer Cristina Steilein** | FrontEnd
-
-**Lucas Eduardo Testoni** | FullStack
